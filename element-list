@@ -1,0 +1,9 @@
+be.uantwerpen.fi.ei.spaceinvaders
+be.uantwerpen.fi.ei.spaceinvaders.game
+be.uantwerpen.fi.ei.spaceinvaders.game.entity
+be.uantwerpen.fi.ei.spaceinvaders.game.entity.projectile
+be.uantwerpen.fi.ei.spaceinvaders.game.factory
+be.uantwerpen.fi.ei.spaceinvaders.game.filecontroller
+be.uantwerpen.fi.ei.spaceinvaders.game.input
+be.uantwerpen.fi.ei.spaceinvaders.gfx.console
+be.uantwerpen.fi.ei.spaceinvaders.gfx.j2d
