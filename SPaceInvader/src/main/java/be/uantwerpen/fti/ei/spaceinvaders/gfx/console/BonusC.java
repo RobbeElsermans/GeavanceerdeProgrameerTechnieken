@@ -1,8 +1,9 @@
-package be.uantwerpen.fi.ei.spaceinvaders.gfx.console;
+package be.uantwerpen.fti.ei.spaceinvaders.gfx.console;
 
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.projectile.ABonusEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.projectile.ABonusEntity;
 
 public class BonusC extends ABonusEntity {
+
     @Override
     public void update() {
 

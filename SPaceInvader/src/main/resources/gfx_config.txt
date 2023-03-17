@@ -1,0 +1,4 @@
+width_game=500
+height_game=500
+width_sprite=50
+height_sprite=50

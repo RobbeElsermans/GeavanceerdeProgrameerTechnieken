@@ -1,4 +1,4 @@
-package be.uantwerpen.fi.ei.spaceinvaders.game.entity.interfaces;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces;
 
 public interface ILivable {
     int getLife();

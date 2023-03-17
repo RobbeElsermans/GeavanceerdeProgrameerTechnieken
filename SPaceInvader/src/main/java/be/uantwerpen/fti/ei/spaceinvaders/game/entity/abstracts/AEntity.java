@@ -1,4 +1,4 @@
-package be.uantwerpen.fi.ei.spaceinvaders.game.entity.abstracts;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 
 /**
  * de moeder van de entiteiten

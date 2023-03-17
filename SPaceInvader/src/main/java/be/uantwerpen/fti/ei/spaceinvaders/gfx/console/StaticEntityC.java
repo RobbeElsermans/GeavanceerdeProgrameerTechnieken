@@ -1,4 +1,4 @@
-package be.uantwerpen.fi.ei.spaceinvaders.gfx.console;
+package be.uantwerpen.fti.ei.spaceinvaders.gfx.console;
 
 public class StaticEntityC {
 }

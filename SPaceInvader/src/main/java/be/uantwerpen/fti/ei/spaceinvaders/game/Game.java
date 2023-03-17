@@ -1,10 +1,11 @@
-package be.uantwerpen.fi.ei.spaceinvaders.game;
+package be.uantwerpen.fti.ei.spaceinvaders.game;
 
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.enemy.AEnemyEntity;
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.obstacle.AObstacleEntity;
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.player.APlayerEntity;
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.projectile.AProjectileEntity;
-import be.uantwerpen.fi.ei.spaceinvaders.game.factory.AFactory;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.enemy.AEnemyEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.obstacle.AObstacleEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.player.APlayerEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.projectile.AProjectileEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,25 @@ public class Game {
 
     private void Initialize() {
         playerEntitieList.add(this.gfxFactory.getPlayerEntity());
-        enemyEntityList.add(this.gfxFactory.getEnemyEntity());
-
     }
 
+    public void start(){
+        //update
+        update();
+        //visualize entitys
+        visualize();
+        //render screen
+        render();
+    }
 
+    private void update(){
+        playerEntitieList.forEach(AEntity::update);
+    }
+    private void visualize(){
+        playerEntitieList.forEach(AEntity::visualize);
+    }
+
+    private void render(){
+        gfxFactory.render();
+    }
 }

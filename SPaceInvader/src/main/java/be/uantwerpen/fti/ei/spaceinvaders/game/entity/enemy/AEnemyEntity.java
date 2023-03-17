@@ -1,6 +1,6 @@
-package be.uantwerpen.fi.ei.spaceinvaders.game.entity.enemy;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.enemy;
 
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.abstracts.ALivableEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ALivableEntity;
 
 public abstract class AEnemyEntity extends ALivableEntity {
     /**

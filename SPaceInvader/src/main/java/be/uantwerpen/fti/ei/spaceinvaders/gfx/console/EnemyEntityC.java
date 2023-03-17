@@ -1,8 +1,9 @@
-package be.uantwerpen.fi.ei.spaceinvaders.gfx.console;
+package be.uantwerpen.fti.ei.spaceinvaders.gfx.console;
 
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.enemy.AEnemyEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.enemy.AEnemyEntity;
 
 public class EnemyEntityC extends AEnemyEntity {
+
     @Override
     public void update() {
 

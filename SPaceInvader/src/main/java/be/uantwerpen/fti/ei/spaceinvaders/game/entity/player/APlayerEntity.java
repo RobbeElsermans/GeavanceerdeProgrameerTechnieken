@@ -1,10 +1,11 @@
-package be.uantwerpen.fi.ei.spaceinvaders.game.entity.player;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.player;
 
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.abstracts.ALivableEntity;
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.abstracts.AMoveableEntity;
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.interfaces.ILivable;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ALivableEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AMoveableEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.ILivable;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ALivableEntity;
 
-public abstract class APlayerEntity extends ALivableEntity implements ILivable {
+public abstract class APlayerEntity extends ALivableEntity {
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
      */

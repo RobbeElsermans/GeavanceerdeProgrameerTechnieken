@@ -1,9 +1,9 @@
-package be.uantwerpen.fi.ei.spaceinvaders.gfx.console;
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.enemy.AEnemyEntity;
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.obstacle.AObstacleEntity;
-import be.uantwerpen.fi.ei.spaceinvaders.game.factory.AFactory;
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.player.APlayerEntity;
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.projectile.AProjectileEntity;
+package be.uantwerpen.fti.ei.spaceinvaders.gfx.console;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.enemy.AEnemyEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.obstacle.AObstacleEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.player.APlayerEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.projectile.AProjectileEntity;
 
 public class FactoryConsole extends AFactory {
 
@@ -45,5 +45,10 @@ public class FactoryConsole extends AFactory {
     @Override
     public AObstacleEntity getObstacleEntity(int x, int y, int life) {
         return null;
+    }
+
+    @Override
+    public void render() {
+
     }
 }

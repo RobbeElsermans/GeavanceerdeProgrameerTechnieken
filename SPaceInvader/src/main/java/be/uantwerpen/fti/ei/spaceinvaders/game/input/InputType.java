@@ -1,4 +1,4 @@
-package be.uantwerpen.fi.ei.spaceinvaders.game.input;
+package be.uantwerpen.fti.ei.spaceinvaders.game.input;
 
 public enum InputType {
     UP,

@@ -1,6 +1,4 @@
-package be.uantwerpen.fi.ei.spaceinvaders.game.entity.abstracts;
-
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.interfaces.IMoveable;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 
 /**
  * Een Entiteit die overerft van een static entity. Deze AMoveableEntity zal dus kunnen bewegen.

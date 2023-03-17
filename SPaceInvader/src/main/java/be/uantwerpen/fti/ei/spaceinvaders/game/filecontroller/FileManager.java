@@ -1,4 +1,4 @@
-package be.uantwerpen.fi.ei.spaceinvaders.game.filecontroller;
+package be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller;
 
 public class FileManager {
 }

@@ -1,8 +1,8 @@
-package be.uantwerpen.fi.ei.spaceinvaders.game.entity.abstracts;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 
-import be.uantwerpen.fi.ei.spaceinvaders.game.entity.interfaces.ILivable;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AMoveableEntity;
 
-public abstract class ALivableEntity extends AMoveableEntity{
+public abstract class ALivableEntity extends AMoveableEntity {
     private int life = 5;
     public ALivableEntity() {
     }
