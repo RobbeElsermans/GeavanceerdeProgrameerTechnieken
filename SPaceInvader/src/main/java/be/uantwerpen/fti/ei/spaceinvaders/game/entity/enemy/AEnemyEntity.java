@@ -8,6 +8,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 public abstract class AEnemyEntity extends ALivableEntity {
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
+     * @param input Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
     public AEnemyEntity(IInput input){
         super(input);
@@ -15,11 +16,11 @@ public abstract class AEnemyEntity extends ALivableEntity {
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
-     * @param position  IPosition die de coördinaat bepaald van de speler
-     * @param dimension IDimention die de dimentie bepaald van de speler
-     * @param life
-     * @param speed
-     * @param input
+     * @param position  De positie van de entiteit.
+     * @param dimension De dimensie van de entiteit.
+     * @param life      Het leven van de entiteit.
+     * @param speed     De snelheid waarmee de entiteit zich verplaatst.
+     * @param input     Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
     public AEnemyEntity(IPosition position, IDimension dimension, int life, int speed, IInput input){
         super(position, dimension, life, speed, input);

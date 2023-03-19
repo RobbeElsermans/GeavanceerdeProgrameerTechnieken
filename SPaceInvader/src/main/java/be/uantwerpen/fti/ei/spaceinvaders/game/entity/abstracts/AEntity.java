@@ -1,5 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
@@ -12,15 +13,24 @@ public abstract class AEntity{
      * De coördinaat van een entiteit. Default is dit (0,0).
      */
     private IPosition position;
+
+    /**
+     * De dimensie van een entiteit. Default is dit (1,1).
+     */
     private IDimension dimentions;
 
+    /**
+     * default constructor die positie en dimensie op default zal plaatsen.
+     */
     public AEntity() {
+        this.position = new Position(0,0);
+        this.dimentions = new Dimension(1,1);
     }
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
-     * @param position
-     * @param dimension
+     * @param position  De positie van de entiteit.
+     * @param dimension De dimensie van de entiteit.
      */
     public AEntity(IPosition position, IDimension dimension) {
         this.position = position;
@@ -28,7 +38,7 @@ public abstract class AEntity{
     }
 
     /**
-     * De update methode zal de entiteit updaten a.d.h.v. zijn omgeving.
+     * De update methode zal de entiteit bijwerken a.d.h.v. zijn omgeving.
      */
     public abstract void update();
 
@@ -71,6 +81,6 @@ public abstract class AEntity{
 
     @Override
     public String toString() {
-        return "AStaticEntity( x: " + getX() + ", y: " + getY() + " )";
+        return "AEntity( x: " + getX() + ", y: " + getY() + ", width: "+getWidth() + ", height: " + getHeight()+" )";
     }
 }

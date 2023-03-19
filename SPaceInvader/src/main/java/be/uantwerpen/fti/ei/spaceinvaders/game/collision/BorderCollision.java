@@ -11,6 +11,7 @@ import java.util.List;
  */
 public class BorderCollision {
 
+    //TODO: misschien static maken om dan te gebruiken in CollisionManager
 
     /**
      * De spel dimensies.
@@ -58,6 +59,10 @@ public class BorderCollision {
         return temp;
     }
 
+    /**
+     * De gamedimensies die opgeslagen zijn.
+     * @return
+     */
     public IDimension getGameDimensions() {
         return gameDimensions;
     }

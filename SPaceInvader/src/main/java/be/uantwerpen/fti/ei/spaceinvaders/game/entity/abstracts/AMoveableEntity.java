@@ -12,37 +12,29 @@ public abstract class AMoveableEntity extends AEntity {
     /**
      * De snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 2.
      */
-    private int speed = 2;
+    private int speed;
 
     /**
-     * De Input interface die de entiteit kan bewegen
+     * Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
     private IInput input;
 
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
-     * @param input de input klasse die de entiteit kan laten bewegen
+     * @param input Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
     public AMoveableEntity(IInput input) {
         super();
         this.setInput(input);
+        this.setSpeed(2);
     }
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
-     *
-     * @param x     de x-coördinaat als integer
-     * @param y     de y-coördinaat als integer
-     * @param speed de snelheid als integer
-     * @param input de input klasse die de entiteit kan laten bewegen
-     */
-
-    /**
-     * Overload constructor die de entiteit andere parameter waardes kan geven.
-     * @param position  de positie als IPosition
-     * @param dimension de dimensie als IPosition
-     * @param speed
-     * @param input
+     * @param position  De positie van de entiteit.
+     * @param dimension De dimensie van de entiteit.
+     * @param speed     De snelheid waarmee de entiteit zich verplaatst.
+     * @param input     Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
     public AMoveableEntity(IPosition position, IDimension dimension, int speed, IInput input) {
         super(position, dimension);
@@ -50,9 +42,11 @@ public abstract class AMoveableEntity extends AEntity {
         this.setInput(input);
     }
 
-
+    /**
+     * Een move methode die kan bewerkt worden door onderliggende klasses.
+     * Deze move methode zal de entiteit kunnen laten bewegen.
+     */
     protected void move(){
-
         if(getInput().inputAvailable()) {
             if(getInput().isLeft())
                 setX(getX()-this.getSpeed());
@@ -65,6 +59,9 @@ public abstract class AMoveableEntity extends AEntity {
         }
     }
 
+    /**
+     * Update de entiteit a.d.h.v. de gegeven input.
+     */
     @Override
     public void update() {
         this.move();
@@ -74,20 +71,17 @@ public abstract class AMoveableEntity extends AEntity {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    private void setSpeed(int speed) {
         this.speed = speed;
     }
-
-    @Override
-    public String toString() {
-        return "AStaticEntity( x: " + getX() + ", y: " + getY() + ", speed: " + getSpeed() + " )";
-    }
-
     public IInput getInput() {
         return input;
     }
-
     private void setInput(IInput input) {
         this.input = input;
+    }
+    @Override
+    public String toString() {
+        return "AEntity( x: " + getX() + ", y: " + getY() + ", width: "+getWidth() + ", height: " + getHeight()+ ", speed "+ this.getSpeed()+ " )";
     }
 }
