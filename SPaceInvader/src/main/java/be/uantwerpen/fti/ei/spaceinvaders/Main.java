@@ -9,10 +9,10 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.FactoryJ2d;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
-        IDimension dim = new Dimension(20,20);
+        //IDimension gameDimentions = new Dimension(20,20);
         //AFactory aFactory = new FactoryConsole();
-        AFactory aFactory = new FactoryJ2d(dim, "src/main/resources/gfx_config.txt");
-        Game game = new Game(dim, aFactory);
+        AFactory aFactory = new FactoryJ2d("src/main/resources/gfx_config.txt");
+        Game game = new Game(aFactory, "src/main/resources/game_config.txt");
 
         game.start();
     }

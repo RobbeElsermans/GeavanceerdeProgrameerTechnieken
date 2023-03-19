@@ -18,9 +18,13 @@ public class FactoryJ2d extends AFactory {
      * Initializeer Java2D.
      * @param configFile
      */
-    public FactoryJ2d(IDimension gameDimension,String configFile){
-        super(gameDimension);
+    public FactoryJ2d(String configFile){
         this.configFile = configFile;
+    }
+
+    @Override
+    public void setupGameDimentions(IDimension dimension){
+        super.setupGameDimentions(dimension);
         this.graphicsContext = new GraphicsContext(this.getGameDimension(),this.configFile);
         this.keyboardInput = new KeyboardInputController(this.graphicsContext);
     }
@@ -31,8 +35,23 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public APlayerEntity getPlayerEntity(IPosition position, IDimension dimension, int life, int speed) {
-        return new Playerj2d(position, dimension, life, speed,this.keyboardInput, graphicsContext);
+    public APlayerEntity getPlayerEntity(IPosition position, int life, int speed) {
+
+        //Schaal a.d.h.v. de game dimentions
+        position.setX(position.getX() * this.getDimensionScaler() - 2);
+        position.setX(position.getX() * this.getDimensionScaler() -2);
+
+        if(position.getY() > 0)
+            position.setY(position.getY() * this.getDimensionScaler() + 2);
+        else
+            position.setY(position.getY() * this.getDimensionScaler());
+
+        return new Playerj2d(position, life, speed,this.keyboardInput, graphicsContext);
+    }
+
+    @Override
+    public IDimension getPlayerDimentions(APlayerEntity player) {
+        return null;
     }
 
     @Override
@@ -41,7 +60,12 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public AEnemyEntity getEnemyEntity(IPosition position, IDimension dimension, int life, int speed) {
+    public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed) {
+        return null;
+    }
+
+    @Override
+    public IDimension getEnemyDimentions(AEnemyEntity enemy) {
         return null;
     }
 
@@ -51,7 +75,12 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public AProjectileEntity getProjectileEntity(IPosition position, IDimension dimension, int life, int speed) {
+    public AProjectileEntity getProjectileEntity(IPosition position, int life, int speed) {
+        return null;
+    }
+
+    @Override
+    public IDimension getEnemyDimentions(AProjectileEntity projectile) {
         return null;
     }
 
@@ -61,7 +90,12 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public AObstacleEntity getObstacleEntity(IPosition position, IDimension dimension, int life) {
+    public AObstacleEntity getObstacleEntity(IPosition position, int life) {
+        return null;
+    }
+
+    @Override
+    public IDimension getEnemyDimentions(AObstacleEntity obstacle) {
         return null;
     }
 

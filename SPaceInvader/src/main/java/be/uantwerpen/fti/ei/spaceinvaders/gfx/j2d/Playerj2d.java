@@ -14,8 +14,8 @@ public class Playerj2d extends APlayerEntity {
         this.setGfx(gfx);
     }
 
-    public Playerj2d(IPosition position, IDimension dimension, int life, int speed, IInput input, GraphicsContext gfx) {
-        super(position, dimension, life, speed, input);
+    public Playerj2d(IPosition position, int life, int speed, IInput input, GraphicsContext gfx) {
+        super(position, gfx.getPlayerDimention(), life, speed, input);
         this.setGfx(gfx);
     }
 

@@ -11,6 +11,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.projectile.AProjectileEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
+import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,17 +34,30 @@ public class Game {
     private final int FPS = 30;
 
     private boolean isRunning = true;
-    public Game(IDimension gameDimentions, AFactory aFactory) {
+    public Game(AFactory aFactory, String configFile) {
+
+
         this.gfxFactory = aFactory;
-        this.gameWidth = gameDimentions.getWidth();
-        this.gameHeight = gameDimentions.getHeight();
+
+        //get the game settings
+        this.getSettings(configFile);
+
+        //geeft game dimensions over aan factory
+        this.gfxFactory.setupGameDimentions(new Dimension(this.gameWidth, this.gameHeight));
+
         this.Initialize();
     }
 
+    private void getSettings(String configFile) {
+        this.gameWidth = FileManager.getSetting("gameWidth", configFile, 20);
+        this.gameHeight = FileManager.getSetting("gameHeight", configFile, 20);
+    }
+
     private void Initialize() {
+
         //Collisions
         this.borderCollision = new BorderCollision(new Dimension(gameWidth * gfxFactory.getDimensionScaler(), gameHeight* gfxFactory.getDimensionScaler()));
-        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(10,30),new Dimension(10,30),5,5));
+        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(0,1),5,5));
     }
 
     public void start(){

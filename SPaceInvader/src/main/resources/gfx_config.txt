@@ -1,4 +1,4 @@
-width_game=900
-height_game=900
-width_sprite=50
-height_sprite=50
+width_console=200
+height_console=200
+width_player_sprite=30
+height_player_sprite=50

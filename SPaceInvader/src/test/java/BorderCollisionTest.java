@@ -22,9 +22,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
+        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
-
-        collisions = BorderCollision.checkBorderCollision(position, dimension, width, height);
+        collisions = borderCollision.checkBorderCollision(position, dimension);
 
         assertEquals(false, collisions.get(0));
         assertEquals(false, collisions.get(1));
@@ -44,9 +44,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
+        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
-
-        collisions = BorderCollision.checkBorderCollision(position, dimension, width, height);
+        collisions = borderCollision.checkBorderCollision(position, dimension);
 
         assertEquals(false, collisions.get(0));
         assertEquals(true, collisions.get(1));
@@ -66,8 +66,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
+        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
-        collisions = BorderCollision.checkBorderCollision(position, dimension, width, height);
+        collisions = borderCollision.checkBorderCollision(position, dimension);
 
         assertEquals(false, collisions.get(0));
         assertEquals(false, collisions.get(1));
@@ -87,8 +88,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
+        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
-        collisions = BorderCollision.checkBorderCollision(position, dimension, width, height);
+        collisions = borderCollision.checkBorderCollision(position, dimension);
 
         assertEquals(false, collisions.get(0));
         assertEquals(false, collisions.get(1));
@@ -108,8 +110,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
+        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
-        collisions = BorderCollision.checkBorderCollision(position, dimension, width, height);
+        collisions = borderCollision.checkBorderCollision(position, dimension);
 
         assertEquals(true, collisions.get(0));
         assertEquals(false, collisions.get(1));

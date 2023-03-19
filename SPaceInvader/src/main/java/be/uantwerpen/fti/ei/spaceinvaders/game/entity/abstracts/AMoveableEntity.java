@@ -50,23 +50,25 @@ public abstract class AMoveableEntity extends AEntity {
         this.setInput(input);
     }
 
-    private void move(){
+
+    protected void move(){
+
         if(getInput().inputAvailable()) {
             switch (getInput().inputState()){
                 case LEFT:{
-                    setX(getX()-this.speed);
+                    setX(getX()-this.getSpeed());
                     break;
                 }
                 case RIGHT :{
-                    setX(getX()+this.speed);
+                    setX(getX()+this.getSpeed());
                     break;
                 }
                 case UP :{
-                    setY(getY()-this.speed);
+                    setY(getY()-this.getSpeed());
                     break;
                 }
                 case DOWN :{
-                    setY(getY()+this.speed);
+                    setY(getY()+this.getSpeed());
                     break;
                 }
                 default : {
@@ -74,7 +76,6 @@ public abstract class AMoveableEntity extends AEntity {
                 }
             }
         }
-        //this.setX(getX()+1);
     }
 
     @Override

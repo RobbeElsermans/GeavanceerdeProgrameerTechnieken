@@ -17,4 +17,26 @@ public abstract class APlayerEntity extends ALivableEntity {
     public APlayerEntity(IPosition position, IDimension dimension, int life, int speed, IInput input){
         super(position, dimension, speed, life, input);
     }
+/*
+    @Override
+    protected void move(){
+        if(getInput().inputAvailable()) {
+            switch (getInput().inputState()){
+                case LEFT:{
+                    setX(getX()-this.getSpeed());
+                    break;
+                }
+                case RIGHT :{
+                    setX(getX()+this.getSpeed());
+                    break;
+                }
+                default : {
+
+                }
+            }
+        }
+        //this.setX(getX()+1);
+    }
+    */
+
 }

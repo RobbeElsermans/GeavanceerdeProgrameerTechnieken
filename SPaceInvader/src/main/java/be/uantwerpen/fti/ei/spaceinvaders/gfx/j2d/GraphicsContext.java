@@ -1,6 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,8 +13,10 @@ import java.util.Properties;
 public class GraphicsContext {
     private int screenWidth = 500;
     private int screenHeight = 500;
-    private int spriteWidth = 0;
-    private int spriteHeight = 0;
+    private IDimension playerDimention;
+    private IDimension enemyDimention;
+    private IDimension objectDimention;
+    private IDimension projectileDimention;
     private final JFrame frame;
     private final JPanel panel;
     private BufferedImage g2dimage;     // used for drawing
@@ -42,7 +46,6 @@ public class GraphicsContext {
                 super.paintComponent(g);
                 //super.paint(g);
                 doDrawing(g);
-
             }
         };
 
@@ -63,47 +66,11 @@ public class GraphicsContext {
      * @param configFilePath the location of the config file
      */
     private void getSettings(String configFilePath) {
-
-        try
-        {
-            FileInputStream configuration = new FileInputStream(configFilePath);
-            Properties prop = new Properties();
-            prop.load(configuration);
-
-            /*
-            System.out.println(prop.getProperty("width_game"));
-            System.out.println(prop.getProperty("height_game"));
-            System.out.println(prop.getProperty("width_sprite"));
-            System.out.println(prop.getProperty("height_sprite"));
-            */
-
-            this.screenWidth = Integer.parseInt(prop.getProperty("width_game"));
-            this.screenHeight = Integer.parseInt(prop.getProperty("height_game"));
-            this.spriteWidth = Integer.parseInt(prop.getProperty("width_sprite"));
-            this.spriteHeight = Integer.parseInt(prop.getProperty("height_sprite"));
-
-        } catch (FileNotFoundException e) {
-            try {
-                File file = new File(configFilePath);
-                file.createNewFile();
-
-                String configString = "width_game="+ this.screenWidth;
-                configString = configString + "\nheight_game="+ this.screenHeight;
-                configString = configString + "\nwidth_sprite="+ this.spriteWidth;
-                configString = configString + "\nheight_sprite="+ this.spriteHeight;
-
-                FileWriter fileWriter = new FileWriter(configFilePath);
-                fileWriter.write(configString);
-                fileWriter.close();
-
-            } catch (IOException ex) {
-                //throw new RuntimeException(ex);
-                System.out.println("Er is een fout bestand pad meegegeven!");
-            }
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        this.screenWidth = FileManager.getSetting("width_console", configFilePath, this.screenWidth);
+        this.screenHeight = FileManager.getSetting("height_console", configFilePath, this.screenWidth);
+        this.playerDimention = new Dimension(
+                FileManager.getSetting("width_player_sprite", configFilePath, 10),
+                FileManager.getSetting("height_player_sprite", configFilePath, 10));
     }
 
     public void render() {
@@ -127,7 +94,7 @@ public class GraphicsContext {
 
     public void setGameDimensions(int GameCellsX, int GameCellsY) {
         size = Math.min((screenWidth)/GameCellsX, screenHeight/GameCellsY);
-        frame.setLocation(50,50);
+        frame.setLocation(0,0);
         frame.setSize(screenWidth, screenHeight);
         g2dimage = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_4BYTE_ABGR_PRE);
         g2d = g2dimage.createGraphics();
@@ -137,5 +104,21 @@ public class GraphicsContext {
 
     public int getSize() {
         return size;
+    }
+
+    public IDimension getPlayerDimention() {
+        return playerDimention;
+    }
+
+    public IDimension getEnemyDimention() {
+        return enemyDimention;
+    }
+
+    public IDimension getObjectDimention() {
+        return objectDimention;
+    }
+
+    public IDimension getProjectileDimention() {
+        return projectileDimention;
     }
 }
