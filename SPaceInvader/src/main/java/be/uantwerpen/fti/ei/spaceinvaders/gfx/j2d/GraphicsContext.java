@@ -1,5 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -7,15 +9,16 @@ import java.io.*;
 import java.util.Properties;
 
 public class GraphicsContext {
-    private int screenWidth = 0;
-    private int screenHeight = 0;
+    private int screenWidth = 500;
+    private int screenHeight = 500;
     private int spriteWidth = 0;
     private int spriteHeight = 0;
     private final JFrame frame;
     private final JPanel panel;
     private BufferedImage g2dimage;     // used for drawing
     private Graphics2D g2d;             // always draw in this one
-    private int size;                   // cel size
+    private IDimension gameDimension;   //game dimensions
+    private int size = 0;
 
     public Graphics2D getG2d() {
         return g2d;
@@ -23,13 +26,14 @@ public class GraphicsContext {
     public JFrame getFrame() {
         return frame;
     }
-    public int getSize() {
-        return size;
+    public IDimension getGameDimension() {
+        return this.gameDimension;
     }
 
-    public GraphicsContext(String configFile) {
+    public GraphicsContext(IDimension gameDimension, String configFile) {
         //get settings from file
         getSettings(configFile);
+        this.gameDimension = gameDimension;
 
         frame = new JFrame();
         panel = new JPanel(true) {
@@ -38,18 +42,19 @@ public class GraphicsContext {
                 super.paintComponent(g);
                 //super.paint(g);
                 doDrawing(g);
+
             }
         };
 
         frame.setFocusable(true);
         frame.add(panel);
-        frame.setTitle("Graphics example snake Rect");
+        frame.setTitle("SpaceInvader");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(screenWidth, screenHeight);
         frame.setResizable(true);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-        setGameDimensions(40,40);
+        setGameDimensions(gameDimension.getWidth(),gameDimension.getHeight());
     }
 
     /**
@@ -102,6 +107,13 @@ public class GraphicsContext {
     }
 
     public void render() {
+
+        if (g2d != null)
+            g2d.setBackground(new Color(255, 255, 255));
+            g2d.clearRect(0, 0, frame.getWidth(), frame.getHeight());
+
+
+
         frame.repaint();
         panel.repaint();
     }
@@ -111,17 +123,19 @@ public class GraphicsContext {
         Toolkit.getDefaultToolkit().sync();
         graph2d.drawImage(g2dimage, 0, 0, null);   // copy buffered image
         graph2d.dispose();
-        //if (g2d != null)
-            //g2d.clearRect(0, 0, frame.getWidth(), frame.getHeight());
     }
 
     public void setGameDimensions(int GameCellsX, int GameCellsY) {
-        size = Math.min((screenWidth-20)/GameCellsX, screenHeight/GameCellsY);
+        size = Math.min((screenWidth)/GameCellsX, screenHeight/GameCellsY);
         frame.setLocation(50,50);
         frame.setSize(screenWidth, screenHeight);
         g2dimage = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_4BYTE_ABGR_PRE);
         g2d = g2dimage.createGraphics();
         g2d.setBackground(new Color(255,255,255));
         g2d.clearRect(0,0, frame.getWidth(), frame.getHeight());
+    }
+
+    public int getSize() {
+        return size;
     }
 }

@@ -2,6 +2,8 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.obstacle;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.ILivable;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 
 public abstract class AObstacleEntity extends AEntity{
     /**
@@ -10,8 +12,8 @@ public abstract class AObstacleEntity extends AEntity{
     public AObstacleEntity(){
         super();
     }
-    public AObstacleEntity(int x, int y, int life){
-        super(x, y);
+    public AObstacleEntity(IPosition position, IDimension dimension, int life){
+        super(position, dimension);
     }
 
     @Override

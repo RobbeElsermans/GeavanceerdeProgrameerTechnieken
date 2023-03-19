@@ -2,5 +2,9 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces;
 
 public interface ILivable {
     int getLife();
-    int setLife();
+    void upLife();
+    void upLife(int amount);
+    void downLife();
+    void downLife(int amount);
+
 }

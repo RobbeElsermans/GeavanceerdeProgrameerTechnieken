@@ -1,13 +1,16 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.enemy;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ALivableEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
+import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 
 public abstract class AEnemyEntity extends ALivableEntity {
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
      */
-    public AEnemyEntity(){
-        super();
+    public AEnemyEntity(IInput input){
+        super(input);
     }
 
     /**
@@ -17,7 +20,7 @@ public abstract class AEnemyEntity extends ALivableEntity {
      * @param life de levenswaarde als integer
      * @param speed de snelheid als integer
      */
-    public AEnemyEntity(int x, int y, int life, int speed){
-        super(x, y, speed, life);
+    public AEnemyEntity(IPosition position, IDimension dimension, int life, int speed, IInput input){
+        super(position, dimension, life, speed, input);
     }
 }

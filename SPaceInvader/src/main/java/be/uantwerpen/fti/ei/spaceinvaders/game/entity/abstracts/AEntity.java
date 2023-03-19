@@ -1,25 +1,30 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
+
 /**
  * de moeder van de entiteiten
  */
-public abstract class AEntity {
+public abstract class AEntity implements IPosition {
     /**
      * De coördinaat van een entiteit. Default is dit (0,0).
      */
-    protected int x,y = 0;
+    private IPosition position;
+    private IDimension dimentions;
 
     public AEntity() {
     }
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
-     * @param x de x-coördinaat als integer
-     * @param y de y-coördinaat als integer
+     * @param position
+     * @param dimension
      */
-    public AEntity(int x, int y) {
-        this.setX(x);
-        this.setY(y);
+    public AEntity(IPosition position, IDimension dimension) {
+        this.position = position;
+        this.dimentions = dimension;
     }
 
     /**
@@ -33,19 +38,27 @@ public abstract class AEntity {
     public abstract void visualize();
 
     public int getX() {
-        return x;
+        return position.getX();
     }
 
     public void setX(int x) {
-        this.x = x;
+        this.position.setX(x);
     }
 
     public int getY() {
-        return y;
+        return this.position.getY();
     }
 
     public void setY(int y) {
-        this.y = y;
+        this.position.setY(y);
+    }
+
+    public IPosition getPosition() {
+        return this.position;
+    }
+
+    public IDimension getDimentions() {
+        return this.dimentions.getDimension();
     }
 
     @Override

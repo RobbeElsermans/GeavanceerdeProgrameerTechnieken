@@ -1,6 +1,7 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.input;
+package be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller;
 
 public enum InputType {
+    NONE,
     UP,
     DOWN,
     LEFT,
