@@ -36,7 +36,7 @@ public class Game {
     private boolean isRunning = true;
     public Game(AFactory aFactory, String configFile) {
 
-
+        //get the gfxFactory
         this.gfxFactory = aFactory;
 
         //get the game settings
@@ -56,7 +56,10 @@ public class Game {
     private void Initialize() {
         //Collisions
         this.borderCollision = new BorderCollision(new Dimension(gameWidth * gfxFactory.getDimensionScaler(), gameHeight* gfxFactory.getDimensionScaler()));
-        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2,this.gameHeight-2),5,3));
+
+        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2,this.gameHeight),5,2));
+
+
     }
 
     public void start(){
@@ -98,8 +101,9 @@ public class Game {
 
     private void checkBorderCollisions(){
         //CheckPlayerBorderCollision
-        IDimension temp = new Dimension(gameWidth * gfxFactory.getDimensionScaler(), gameHeight * gfxFactory.getDimensionScaler());
-        playerEntitieList.forEach(i -> CollisionManager.checkBorderCollision(borderCollision,i,temp));
+        playerEntitieList.forEach(i -> CollisionManager.checkBorderCollision(borderCollision,i));
+
+        //Check Enemy Border Collision
     }
 
     private void visualize(){
