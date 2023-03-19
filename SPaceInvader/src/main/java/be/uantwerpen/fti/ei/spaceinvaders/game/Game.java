@@ -31,7 +31,7 @@ public class Game {
     private int gameWidth;
     private int gameHeight;
 
-    private final int FPS = 30;
+    private final int FPS = 60;
 
     private boolean isRunning = true;
     public Game(AFactory aFactory, String configFile) {
@@ -54,10 +54,9 @@ public class Game {
     }
 
     private void Initialize() {
-
         //Collisions
         this.borderCollision = new BorderCollision(new Dimension(gameWidth * gfxFactory.getDimensionScaler(), gameHeight* gfxFactory.getDimensionScaler()));
-        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(0,1),5,5));
+        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2,this.gameHeight-2),5,3));
     }
 
     public void start(){

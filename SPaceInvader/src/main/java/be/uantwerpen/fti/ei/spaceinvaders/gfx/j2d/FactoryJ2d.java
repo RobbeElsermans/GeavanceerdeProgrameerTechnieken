@@ -38,8 +38,8 @@ public class FactoryJ2d extends AFactory {
     public APlayerEntity getPlayerEntity(IPosition position, int life, int speed) {
 
         //Schaal a.d.h.v. de game dimentions
-        position.setX(position.getX() * this.getDimensionScaler() - 2);
-        position.setX(position.getX() * this.getDimensionScaler() -2);
+        position.setX(position.getX() * this.getDimensionScaler());
+        //position.setX(position.getX() * this.getDimensionScaler());
 
         if(position.getY() > 0)
             position.setY(position.getY() * this.getDimensionScaler() + 2);

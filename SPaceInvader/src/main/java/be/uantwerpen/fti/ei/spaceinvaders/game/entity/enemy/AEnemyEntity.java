@@ -15,10 +15,11 @@ public abstract class AEnemyEntity extends ALivableEntity {
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
-     * @param x de x-coördinaat als integer
-     * @param y de y-coördinaat als integer
-     * @param life de levenswaarde als integer
-     * @param speed de snelheid als integer
+     * @param position  IPosition die de coördinaat bepaald van de speler
+     * @param dimension IDimention die de dimentie bepaald van de speler
+     * @param life
+     * @param speed
+     * @param input
      */
     public AEnemyEntity(IPosition position, IDimension dimension, int life, int speed, IInput input){
         super(position, dimension, life, speed, input);

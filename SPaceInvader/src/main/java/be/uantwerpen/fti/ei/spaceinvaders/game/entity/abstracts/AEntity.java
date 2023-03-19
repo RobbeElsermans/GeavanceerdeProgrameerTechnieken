@@ -7,7 +7,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 /**
  * de moeder van de entiteiten
  */
-public abstract class AEntity implements IPosition {
+public abstract class AEntity{
     /**
      * De coördinaat van een entiteit. Default is dit (0,0).
      */
@@ -57,7 +57,15 @@ public abstract class AEntity implements IPosition {
         return this.position;
     }
 
-    public IDimension getDimentions() {
+    public int getWidth() {
+        return this.dimentions.getWidth();
+    }
+
+    public int getHeight(){
+        return this.dimentions.getHeight();
+    }
+    public IDimension getDimension()
+    {
         return this.dimentions.getDimension();
     }
 
