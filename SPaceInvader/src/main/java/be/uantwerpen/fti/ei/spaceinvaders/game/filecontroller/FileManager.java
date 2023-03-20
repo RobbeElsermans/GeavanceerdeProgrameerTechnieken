@@ -3,8 +3,20 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller;
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * Help klassen die de functie krijgt om een bestand uit te lezen en hieruit parameters te halen en door te geven.
+ */
 public class FileManager {
 
+    /**
+     * Een static methode die met behulp van de gegeven parameters, de parameter op te halen in het gegeven bestand.
+     * @param propertyName  De naam van de variabelen gedefinieerd in het bestand.
+     * @param location      De locatie van het bestand.
+     * @param defaultValue  De standaard waarden voor moest het bestand of parameter niet bestaan.
+     * @return  De gevraagde/ default parameter waarden.
+     *
+     * @description Als een bestand niet gevonden wordt en de locatie is geldig, zal er een nieuw bestand gemaakt worden en wordt de parameter hierin geplaatst met de default value.
+     */
     public static int getSetting(String propertyName, String location, int defaultValue) {
         int tempVal = defaultValue;
         try

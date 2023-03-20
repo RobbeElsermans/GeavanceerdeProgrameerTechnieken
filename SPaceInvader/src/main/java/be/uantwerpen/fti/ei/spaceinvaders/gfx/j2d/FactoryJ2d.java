@@ -1,4 +1,5 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.enemy.AEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.obstacle.AObstacleEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
@@ -15,8 +16,10 @@ public class FactoryJ2d extends AFactory {
     private String configFile = "";
 
     /**
-     * Initializeer Java2D.
-     * @param configFile
+     * Initializeer Java2D met gegeven configuratie bestand.
+     * @param configFile    Deze bevat de locatie van het configuratiebestand.
+     *
+     * @description Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
     public FactoryJ2d(String configFile){
         this.configFile = configFile;
@@ -50,22 +53,12 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public IDimension getPlayerDimentions(APlayerEntity player) {
-        return null;
-    }
-
-    @Override
     public AEnemyEntity getEnemyEntity() {
         return null;
     }
 
     @Override
     public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed) {
-        return null;
-    }
-
-    @Override
-    public IDimension getEnemyDimentions(AEnemyEntity enemy) {
         return null;
     }
 
@@ -80,22 +73,12 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public IDimension getEnemyDimentions(AProjectileEntity projectile) {
-        return null;
-    }
-
-    @Override
     public AObstacleEntity getObstacleEntity() {
         return null;
     }
 
     @Override
     public AObstacleEntity getObstacleEntity(IPosition position, int life) {
-        return null;
-    }
-
-    @Override
-    public IDimension getEnemyDimentions(AObstacleEntity obstacle) {
         return null;
     }
 

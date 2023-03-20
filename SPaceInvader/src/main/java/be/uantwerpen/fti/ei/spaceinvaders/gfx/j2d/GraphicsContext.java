@@ -10,18 +10,57 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.util.Properties;
 
+/**
+ * Beheert alles wat moet gebeuren met java2D.
+ */
 public class GraphicsContext {
+    /**
+     * Scherm breedte met als default value 500px.
+     */
     private int screenWidth = 500;
+    /**
+     * Scherm hoogte met als default value 500px.
+     */
     private int screenHeight = 500;
+    /**
+     * De dimensie van het speler entiteit als IDimension. Dit is afhankelijk van de genomen sprite.
+     */
     private IDimension playerDimention;
+    /**
+     * De dimensie van het enemy entiteit als IDimension. Dit is afhankelijk van de genomen sprite.
+     */
     private IDimension enemyDimention;
+    /**
+     * De dimensie van het object entiteit als IDimension. Dit is afhankelijk van de genomen sprite.
+     */
     private IDimension objectDimention;
+    /**
+     * De dimensie van het projectiel entiteit als IDimension. Dit is afhankelijk van de genomen sprite.
+     */
     private IDimension projectileDimention;
+    /**
+     * Het frame waarin alles wordt geplaatst.
+     */
     private final JFrame frame;
+    /**
+     * De panel die we later in het frame plaatsen. Hierin zal het spel zich afspelen.
+     */
     private final JPanel panel;
+    /**
+     * Een buffer waarop we het spel opnieuw tekenen in de achtergrond.
+     */
     private BufferedImage g2dimage;     // used for drawing
+    /**
+     * Het object dat de buffer zal bevatten. Deze gebruiken we wanneer we iets willen teken op de achtergrond.
+     */
     private Graphics2D g2d;             // always draw in this one
+    /**
+     * De game dimensies meegegeven vanuit Game.
+     */
     private IDimension gameDimension;   //game dimensions
+    /**
+     * De scaler om de gegeven game dimensies uit te beelden op de hoogte en breedte van het scherm.
+     */
     private int size = 0;
 
     public Graphics2D getG2d() {
@@ -34,6 +73,13 @@ public class GraphicsContext {
         return this.gameDimension;
     }
 
+    /**
+     * Overload constructor om een GraphicsContext aan te maken met gegeven parameters.
+     * @param gameDimension De game dimensie gegeven door Game.
+     * @param configFile    Het configuratiebestand waarin verschillende properties staan die we gebruiken.
+     *
+     * @implNote Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
+     */
     public GraphicsContext(IDimension gameDimension, String configFile) {
         //get settings from file
         getSettings(configFile);
@@ -61,9 +107,9 @@ public class GraphicsContext {
     }
 
     /**
-     * get the settings from a configuration file given as parameter
-     * @description If the file is found, we use it. Otherwise, we create one with default params
-     * @param configFilePath the location of the config file
+     * Een methode die al de parameters ophaalt van het meegegeven bestand.
+     * @param configFilePath    De locatie van het configuratiebestand.
+     * @description Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
     private void getSettings(String configFilePath) {
         this.screenWidth = FileManager.getSetting("width_console", configFilePath, this.screenWidth);
@@ -73,13 +119,14 @@ public class GraphicsContext {
                 FileManager.getSetting("height_player_sprite", configFilePath, 10));
     }
 
+    /**
+     * Render de gemaakte buffer.
+     */
     public void render() {
 
         if (g2d != null)
             g2d.setBackground(new Color(255, 255, 255));
             g2d.clearRect(0, 0, frame.getWidth(), frame.getHeight());
-
-
 
         frame.repaint();
         panel.repaint();
@@ -92,6 +139,13 @@ public class GraphicsContext {
         graph2d.dispose();
     }
 
+
+    //TODO: Zet parameters om in IDimension
+    /**
+     * Past de gegeven dimensies aan, aan de hoogte en breedte van het scherm
+     * @param GameCellsX    game breedte
+     * @param GameCellsY    game hoogte
+     */
     public void setGameDimensions(int GameCellsX, int GameCellsY) {
         size = Math.min((screenWidth)/GameCellsX, screenHeight/GameCellsY);
         frame.setLocation(0,0);

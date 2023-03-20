@@ -15,7 +15,7 @@ public abstract class ALivableEntity  extends AMoveableEntity implements ILivabl
     private int life;
 
     /**
-     * default constructor die default het leven (life) op 5 zet.
+     * Default constructor waarbij de parameters de default waarden krijgen.
      * @param input Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
     public ALivableEntity(IInput input) {

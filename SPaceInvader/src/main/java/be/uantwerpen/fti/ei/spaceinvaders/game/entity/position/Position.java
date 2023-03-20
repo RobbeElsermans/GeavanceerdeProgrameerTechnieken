@@ -1,10 +1,21 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.position;
 
 public class Position implements IPosition{
-    private int x, y = 0;
+    private int x, y;
 
+    /**
+     * Default constructor die de default waardes voor x en y zet op 0.
+     */
     public Position() {
+        this.x = 0;
+        this.y = 0;
     }
+
+    /**
+     * Overload constructor die een andere coördinaat kan meegeven.
+     * @param x     De x-waarde als integer.
+     * @param y     De y-waarde als integer.
+     */
     public Position(int x, int y) {
         setX(x);
         setY(y);
