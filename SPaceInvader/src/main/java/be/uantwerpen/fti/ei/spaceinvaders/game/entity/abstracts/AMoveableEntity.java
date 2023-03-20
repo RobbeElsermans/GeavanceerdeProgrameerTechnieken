@@ -5,7 +5,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 
 /**
- * Een Entiteit die overerft van een static entity. Deze AMoveableEntity zal dus kunnen bewegen.
+ * Een beweegbare Entiteit die overerft van een static entity.
  */
 public abstract class AMoveableEntity extends AEntity {
     /**
