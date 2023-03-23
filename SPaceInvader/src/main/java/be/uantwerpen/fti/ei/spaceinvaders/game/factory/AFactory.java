@@ -1,12 +1,13 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.factory;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.enemy.AEnemyEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.obstacle.AObstacleEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.player.APlayerEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.projectile.AProjectileEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.LivableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 
 /**
@@ -44,11 +45,6 @@ public abstract class AFactory {
 
     /**
      * Geeft een APlayerEntity object terug met volgende parameters.
-     * @param position  Een positie van de entiteit als IPosition.
-     * @param life      Het leven van de entiteit als integer.
-     * @param speed     De snelheid waarmee de entiteit zich verplaatst als integer.
-     * @return          APlayerEntity object
-     *
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
      */
     public abstract APlayerEntity getPlayerEntity(IPosition position, int life, int speed);
@@ -101,15 +97,6 @@ public abstract class AFactory {
      * Het IInput object waarmee de entiteit zichzelf kan mee bewegen, wordt gedefiniëerd in de GFX-library
      */
     public abstract AObstacleEntity getObstacleEntity(IPosition position, int life);
-
-    /**
-     * Geeft de dimensies terug van een entiteit
-     * @param player    Een object die afkomstig is van AEntity
-     * @return          Een IDimension object
-     */
-    public IDimension getDimentionsOfEntity(AEntity player) {
-        return player.getDimension();
-    }
 
     /**
      * De gekozen GFX renderen.

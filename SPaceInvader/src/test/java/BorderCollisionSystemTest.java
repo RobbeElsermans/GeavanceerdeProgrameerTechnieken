@@ -1,4 +1,4 @@
-import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollision;
+import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollisionSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class BorderCollisionTest {
+class BorderCollisionSystemTest {
 
     @Test
     void testNoBorderCollision(){
@@ -22,9 +22,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
-        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
+        BorderCollisionSystem borderCollisionSystem = new BorderCollisionSystem(new Dimension(width, height));
 
-        collisions = borderCollision.checkBorderCollision(position, dimension);
+        collisions = borderCollisionSystem.checkBorderCollision(position, dimension);
 
         assertEquals(false, collisions.get(0));
         assertEquals(false, collisions.get(1));
@@ -44,9 +44,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
-        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
+        BorderCollisionSystem borderCollisionSystem = new BorderCollisionSystem(new Dimension(width, height));
 
-        collisions = borderCollision.checkBorderCollision(position, dimension);
+        collisions = borderCollisionSystem.checkBorderCollision(position, dimension);
 
         assertEquals(false, collisions.get(0));
         assertEquals(true, collisions.get(1));
@@ -66,9 +66,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
-        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
+        BorderCollisionSystem borderCollisionSystem = new BorderCollisionSystem(new Dimension(width, height));
 
-        collisions = borderCollision.checkBorderCollision(position, dimension);
+        collisions = borderCollisionSystem.checkBorderCollision(position, dimension);
 
         assertEquals(false, collisions.get(0));
         assertEquals(false, collisions.get(1));
@@ -88,9 +88,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
-        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
+        BorderCollisionSystem borderCollisionSystem = new BorderCollisionSystem(new Dimension(width, height));
 
-        collisions = borderCollision.checkBorderCollision(position, dimension);
+        collisions = borderCollisionSystem.checkBorderCollision(position, dimension);
 
         assertEquals(false, collisions.get(0));
         assertEquals(false, collisions.get(1));
@@ -110,9 +110,9 @@ class BorderCollisionTest {
 
         int counter = 0;
         List<Boolean> collisions;
-        BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
+        BorderCollisionSystem borderCollisionSystem = new BorderCollisionSystem(new Dimension(width, height));
 
-        collisions = borderCollision.checkBorderCollision(position, dimension);
+        collisions = borderCollisionSystem.checkBorderCollision(position, dimension);
 
         assertEquals(true, collisions.get(0));
         assertEquals(false, collisions.get(1));

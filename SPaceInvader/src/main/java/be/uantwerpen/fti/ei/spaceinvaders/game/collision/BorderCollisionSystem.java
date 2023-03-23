@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Een klasse om rand collisions te detecteren tussen een positie (met dimensies) en de initiële gameDimensions
  */
-public class BorderCollision {
+public class BorderCollisionSystem {
 
     //TODO: misschien static maken om dan te gebruiken in CollisionManager
 
@@ -17,7 +17,7 @@ public class BorderCollision {
      * De spel dimensies.
      */
     private IDimension gameDimensions;
-    public BorderCollision(IDimension gameDimensions){
+    public BorderCollisionSystem(IDimension gameDimensions){
         this.gameDimensions = gameDimensions;
     }
 

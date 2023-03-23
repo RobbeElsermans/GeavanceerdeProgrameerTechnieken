@@ -1,14 +1,14 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollision;
+import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollisionSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.CollisionManager;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.enemy.AEnemyEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.obstacle.AObstacleEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.player.APlayerEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.projectile.AProjectileEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.GlobalMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
@@ -43,7 +43,7 @@ public class Game {
     /**
      * Een collision object die we gebruiken om de entiteiten binnenin het spelvlak te houden.
      */
-    private BorderCollision borderCollision;
+    private BorderCollisionSystem borderCollisionSystem;
 
     /**
      * De variabelen komen mee met de constructor in een file.
@@ -103,9 +103,10 @@ public class Game {
      */
     private void Initialize() {
         //Collisions
-        this.borderCollision = new BorderCollision(new Dimension(gameWidth * gfxFactory.getDimensionScaler(), gameHeight* gfxFactory.getDimensionScaler()));
+        this.borderCollisionSystem = new BorderCollisionSystem(new Dimension(gameWidth * gfxFactory.getDimensionScaler(), gameHeight* gfxFactory.getDimensionScaler()));
 
         playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2,this.gameHeight),5,2));
+        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2 +10,this.gameHeight),5,2));
     }
 
     /**
@@ -146,7 +147,10 @@ public class Game {
      * De update methoden zal al de objecten van het spel update.
      */
     private void update(){
-        playerEntitieList.forEach(AEntity::update);
+        //move the players
+        playerEntitieList.forEach(i -> {
+            GlobalMovementSystem.move(i.getMovementComponent());
+        });
 
         //Check collisions with border
         //playerEntitieList.forEach(i -> BorderCollision.checkBorderCollsion(i.getPosition(), i.getDimentions(), gameWidth, gameHeight));
@@ -158,7 +162,7 @@ public class Game {
      */
     private void checkCollisions(){
         //CheckPlayerBorderCollision
-        playerEntitieList.forEach(i -> CollisionManager.checkBorderCollision(borderCollision,i));
+        playerEntitieList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));
 
         //Check Enemy Border Collision
     }
@@ -167,11 +171,11 @@ public class Game {
      * De visualize methode zal elk object afbeelden.
      */
     private void visualize(){
-        playerEntitieList.forEach(AEntity::visualize);
+        playerEntitieList.forEach(APlayerEntity::visualize);
     }
 
     /**
-     * De render methoden gaat het gamevlak renderen zodat alle wijzigingen doorgevoerd worden.
+     * De rendermethoden gaat het gamevlak renderen zodat alle wijzigingen doorgevoerd worden.
      */
     private void render(){
         gfxFactory.render();

@@ -1,14 +1,11 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 
-/**
- * de moeder van de entiteiten
- */
-public abstract class AEntity{
+public abstract class APositionComponent {
     /**
      * De coördinaat van een entiteit. Default is dit (0,0).
      */
@@ -22,7 +19,7 @@ public abstract class AEntity{
     /**
      * default constructor die positie en dimensie op default zal plaatsen.
      */
-    public AEntity() {
+    public APositionComponent() {
         this.position = new Position(0,0);
         this.dimentions = new Dimension(1,1);
     }
@@ -32,20 +29,11 @@ public abstract class AEntity{
      * @param position  De positie van de entiteit.
      * @param dimension De dimensie van de entiteit.
      */
-    public AEntity(IPosition position, IDimension dimension) {
+    public APositionComponent(IPosition position, IDimension dimension) {
         this.position = position;
         this.dimentions = dimension;
     }
 
-    /**
-     * De update methode zal de entiteit bijwerken a.d.h.v. zijn omgeving.
-     */
-    public abstract void update();
-
-    /**
-     * De visualize methode zal de entiteit weergeven in de gekozen GFX-interface.
-     */
-    public abstract void visualize();
 
     public int getX() {
         return position.getX();
@@ -78,9 +66,8 @@ public abstract class AEntity{
     {
         return this.dimentions.getDimension();
     }
-
-    @Override
-    public String toString() {
-        return "AEntity( x: " + getX() + ", y: " + getY() + ", width: "+getWidth() + ", height: " + getHeight()+" )";
+    public void setDimension(IDimension dimension)
+    {
+        this.dimentions = dimension;
     }
 }
