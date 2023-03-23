@@ -43,13 +43,12 @@ public class FactoryJ2d extends AFactory {
     public APlayerEntity getPlayerEntity(IPosition position, int life, int speed) {
 
         //Schaal a.d.h.v. de game dimentions
-        position.setX(position.getX() * this.getDimensionScaler().getWidth());
-        //position.setX(position.getX() * this.getDimensionScaler());
+        position.setX(position.getX() * this.graphicsContext.getSize());
 
         if(position.getY() > 0)
-            position.setY(position.getY() * this.getDimensionScaler().getHeight() + 2);
+            position.setY(position.getY() * this.graphicsContext.getSize()+ 2);
         else
-            position.setY(position.getY() * this.getDimensionScaler().getHeight());
+            position.setY(position.getY() * this.graphicsContext.getSize());
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed, this.keyboardInput);
         LivableComponent livableComponent = new LivableComponent(life);
@@ -65,13 +64,12 @@ public class FactoryJ2d extends AFactory {
     @Override
     public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed) {
         //Schaal a.d.h.v. de game dimentions
-        position.setX(position.getX() * this.getDimensionScaler().getWidth());
-        //position.setX(position.getX() * this.getDimensionScaler());
+        position.setX(position.getX() * this.graphicsContext.getSize());
 
         if(position.getY() > 0)
-            position.setY(position.getY() * this.getDimensionScaler().getHeight() + 2);
+            position.setY(position.getY() * this.graphicsContext.getSize() + 2);
         else
-            position.setY(position.getY() * this.getDimensionScaler().getHeight());
+            position.setY(position.getY() * this.graphicsContext.getSize());
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed, this.keyboardInput);
         LivableComponent livableComponent = new LivableComponent(life);
@@ -110,8 +108,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public IDimension getDimensionScaler() {
-        IDimension dimension = new Dimension(this.graphicsContext.getWidthScaler(), this.graphicsContext.getHeightScaler());
-        return dimension;
+    public int getScaler() {
+        return this.graphicsContext.getSize();
     }
 }

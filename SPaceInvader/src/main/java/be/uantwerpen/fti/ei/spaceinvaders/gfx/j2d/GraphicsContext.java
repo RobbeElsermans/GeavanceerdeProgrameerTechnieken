@@ -7,8 +7,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
-import java.util.Properties;
 
 /**
  * Beheert alles wat moet gebeuren met java2D.
@@ -17,11 +15,11 @@ public class GraphicsContext {
     /**
      * Scherm breedte met als default value 500px.
      */
-    private int screenWidth = 500;
+    private int screenWidth = 400;
     /**
      * Scherm hoogte met als default value 500px.
      */
-    private int screenHeight = 500;
+    private int screenHeight = 400;
     /**
      * De dimensie van het speler entiteit als IDimension. Dit is afhankelijk van de genomen sprite.
      */
@@ -58,15 +56,7 @@ public class GraphicsContext {
      * De game dimensies meegegeven vanuit Game.
      */
     private IDimension gameDimension;   //game dimensions
-    /**
-     * De breedte scaler om de gegeven game dimensies uit te beelden op de breedte van het scherm.
-     */
-    private int sizeWidth = 0;
-
-    /**
-     * De hoogte scaler om de gegeven game dimensies uit te beelden op de hoogte van het scherm.
-     */
-    private int sizeHeight = 0;
+    private int size;
 
     public Graphics2D getG2d() {
         return g2d;
@@ -118,11 +108,11 @@ public class GraphicsContext {
      * @description Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
     private void getSettings(String configFilePath) {
-        this.screenWidth = FileManager.getSetting("width_console", configFilePath, this.screenWidth);
-        this.screenHeight = FileManager.getSetting("height_console", configFilePath, this.screenWidth);
+        this.screenWidth = FileManager.getSettingInteger("width_console", configFilePath, this.screenWidth);
+        this.screenHeight = FileManager.getSettingInteger("height_console", configFilePath, this.screenWidth);
         this.playerDimention = new Dimension(
-                FileManager.getSetting("width_player_sprite", configFilePath, 10),
-                FileManager.getSetting("height_player_sprite", configFilePath, 10));
+                FileManager.getSettingInteger("width_player_sprite", configFilePath, 10),
+                FileManager.getSettingInteger("height_player_sprite", configFilePath, 10));
     }
 
     /**
@@ -152,21 +142,15 @@ public class GraphicsContext {
      * @param GameCellsY    game hoogte
      */
     public void setGameDimensions(int GameCellsX, int GameCellsY) {
-        sizeWidth = (int)(screenWidth)/GameCellsX;
-        sizeHeight = (int)(screenHeight)/GameCellsY;
+        //sizeWidth = (int)(screenWidth)/GameCellsX;
+        //sizeHeight = (int)(screenHeight)/GameCellsY;
+        size = Math.min((screenWidth) / GameCellsX, screenHeight / GameCellsY);
         frame.setLocation(0,0);
         frame.setSize(screenWidth, screenHeight+40);
         g2dimage = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_4BYTE_ABGR_PRE);
         g2d = g2dimage.createGraphics();
         g2d.setBackground(new Color(255,255,255));
         g2d.clearRect(0,0, frame.getWidth(), frame.getHeight());
-    }
-
-    public int getWidthScaler() {
-        return sizeWidth;
-    }
-    public int getHeightScaler() {
-        return sizeHeight;
     }
 
     public IDimension getPlayerDimention() {
@@ -183,5 +167,9 @@ public class GraphicsContext {
 
     public IDimension getProjectileDimention() {
         return projectileDimention;
+    }
+
+    public int getSize() {
+        return size;
     }
 }

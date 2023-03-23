@@ -10,7 +10,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.GlobalMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.PlayerMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
@@ -96,8 +95,8 @@ public class Game {
      * @param configFile    De locatie van het configuratiebestand.
      */
     private void getSettings(String configFile) {
-        this.gameWidth = FileManager.getSetting("gameWidth", configFile, 20);
-        this.gameHeight = FileManager.getSetting("gameHeight", configFile, 20);
+        this.gameWidth = FileManager.getSettingInteger("gameWidth", configFile, 20);
+        this.gameHeight = FileManager.getSettingInteger("gameHeight", configFile, 20);
     }
 
     /**
@@ -105,14 +104,16 @@ public class Game {
      */
     private void Initialize() {
         //Collisions
-        this.borderCollisionSystem = new BorderCollisionSystem(new Dimension(gameWidth * gfxFactory.getDimensionScaler().getWidth(), gameHeight* gfxFactory.getDimensionScaler().getHeight()));
+        this.borderCollisionSystem = new BorderCollisionSystem(new Dimension(gameWidth * gfxFactory.getScaler(), gameHeight* gfxFactory.getScaler()));
 
         //Create player
         playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2,this.gameHeight),5,2));
         //playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2 +10,this.gameHeight),5,2));
 
         //Create enemy
-        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(5, 5), 2, 3));
+        for(int i = 0; i < this.gameWidth; i++){
+            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 5+(i%2)), 2, 3));
+        }
     }
 
     /**

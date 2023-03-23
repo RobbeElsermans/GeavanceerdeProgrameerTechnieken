@@ -1,4 +1,6 @@
-width_console=200
-height_console=700
-width_player_sprite=20
-height_player_sprite=20
+#gelieven een 1/1 verhouding te geven voor width/height
+
+width_console=400
+height_console=400
+width_player_sprite=15
+height_player_sprite=15

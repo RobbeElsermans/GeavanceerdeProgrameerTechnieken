@@ -115,6 +115,6 @@ public abstract class AFactory {
     public IDimension getGameDimension() {
         return gameDimension;
     }
-    public abstract IDimension getDimensionScaler();
+    public abstract int getScaler();
 
 }
