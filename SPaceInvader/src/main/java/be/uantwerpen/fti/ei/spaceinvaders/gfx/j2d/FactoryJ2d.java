@@ -1,6 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.LivableComponent;
@@ -42,13 +43,13 @@ public class FactoryJ2d extends AFactory {
     public APlayerEntity getPlayerEntity(IPosition position, int life, int speed) {
 
         //Schaal a.d.h.v. de game dimentions
-        position.setX(position.getX() * this.getDimensionScaler());
+        position.setX(position.getX() * this.getDimensionScaler().getWidth());
         //position.setX(position.getX() * this.getDimensionScaler());
 
         if(position.getY() > 0)
-            position.setY(position.getY() * this.getDimensionScaler() + 2);
+            position.setY(position.getY() * this.getDimensionScaler().getHeight() + 2);
         else
-            position.setY(position.getY() * this.getDimensionScaler());
+            position.setY(position.getY() * this.getDimensionScaler().getHeight());
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed, this.keyboardInput);
         LivableComponent livableComponent = new LivableComponent(life);
@@ -63,7 +64,19 @@ public class FactoryJ2d extends AFactory {
 
     @Override
     public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed) {
-        return null;
+        //Schaal a.d.h.v. de game dimentions
+        position.setX(position.getX() * this.getDimensionScaler().getWidth());
+        //position.setX(position.getX() * this.getDimensionScaler());
+
+        if(position.getY() > 0)
+            position.setY(position.getY() * this.getDimensionScaler().getHeight() + 2);
+        else
+            position.setY(position.getY() * this.getDimensionScaler().getHeight());
+
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed, this.keyboardInput);
+        LivableComponent livableComponent = new LivableComponent(life);
+
+        return new EnemyJ2d(movementComponent, livableComponent, graphicsContext);
     }
 
     @Override
@@ -97,7 +110,8 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public int getDimensionScaler() {
-        return this.graphicsContext.getSize();
+    public IDimension getDimensionScaler() {
+        IDimension dimension = new Dimension(this.graphicsContext.getWidthScaler(), this.graphicsContext.getHeightScaler());
+        return dimension;
     }
 }

@@ -59,9 +59,14 @@ public class GraphicsContext {
      */
     private IDimension gameDimension;   //game dimensions
     /**
-     * De scaler om de gegeven game dimensies uit te beelden op de hoogte en breedte van het scherm.
+     * De breedte scaler om de gegeven game dimensies uit te beelden op de breedte van het scherm.
      */
-    private int size = 0;
+    private int sizeWidth = 0;
+
+    /**
+     * De hoogte scaler om de gegeven game dimensies uit te beelden op de hoogte van het scherm.
+     */
+    private int sizeHeight = 0;
 
     public Graphics2D getG2d() {
         return g2d;
@@ -86,6 +91,7 @@ public class GraphicsContext {
         this.gameDimension = gameDimension;
 
         frame = new JFrame();
+
         panel = new JPanel(true) {
             @Override
             public void paintComponent(Graphics g) {
@@ -139,7 +145,6 @@ public class GraphicsContext {
         graph2d.dispose();
     }
 
-
     //TODO: Zet parameters om in IDimension
     /**
      * Past de gegeven dimensies aan, aan de hoogte en breedte van het scherm
@@ -147,17 +152,21 @@ public class GraphicsContext {
      * @param GameCellsY    game hoogte
      */
     public void setGameDimensions(int GameCellsX, int GameCellsY) {
-        size = Math.min((screenWidth)/GameCellsX, screenHeight/GameCellsY);
+        sizeWidth = (int)(screenWidth)/GameCellsX;
+        sizeHeight = (int)(screenHeight)/GameCellsY;
         frame.setLocation(0,0);
-        frame.setSize(screenWidth, screenHeight);
+        frame.setSize(screenWidth, screenHeight+40);
         g2dimage = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_4BYTE_ABGR_PRE);
         g2d = g2dimage.createGraphics();
         g2d.setBackground(new Color(255,255,255));
         g2d.clearRect(0,0, frame.getWidth(), frame.getHeight());
     }
 
-    public int getSize() {
-        return size;
+    public int getWidthScaler() {
+        return sizeWidth;
+    }
+    public int getHeightScaler() {
+        return sizeHeight;
     }
 
     public IDimension getPlayerDimention() {

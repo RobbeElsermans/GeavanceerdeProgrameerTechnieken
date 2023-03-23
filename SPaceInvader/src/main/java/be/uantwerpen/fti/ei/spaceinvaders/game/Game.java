@@ -9,6 +9,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.GlobalMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.PlayerMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
@@ -103,10 +104,13 @@ public class Game {
      */
     private void Initialize() {
         //Collisions
-        this.borderCollisionSystem = new BorderCollisionSystem(new Dimension(gameWidth * gfxFactory.getDimensionScaler(), gameHeight* gfxFactory.getDimensionScaler()));
+        this.borderCollisionSystem = new BorderCollisionSystem(new Dimension(gameWidth * gfxFactory.getDimensionScaler().getWidth(), gameHeight* gfxFactory.getDimensionScaler().getHeight()));
 
+        //Create players
         playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2,this.gameHeight),5,2));
         playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2 +10,this.gameHeight),5,2));
+
+        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(1, 2), 2, 3));
     }
 
     /**
@@ -149,7 +153,11 @@ public class Game {
     private void update(){
         //move the players
         playerEntitieList.forEach(i -> {
-            GlobalMovementSystem.move(i.getMovementComponent());
+            PlayerMovementSystem.move(i.getMovementComponent());
+        });
+
+        enemyEntityList.forEach(enemy -> {
+            GlobalMovementSystem.move(enemy.getMovementComponent());
         });
 
         //Check collisions with border
@@ -163,6 +171,7 @@ public class Game {
     private void checkCollisions(){
         //CheckPlayerBorderCollision
         playerEntitieList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));
+        enemyEntityList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));
 
         //Check Enemy Border Collision
     }
@@ -172,6 +181,7 @@ public class Game {
      */
     private void visualize(){
         playerEntitieList.forEach(APlayerEntity::visualize);
+        enemyEntityList.forEach(AEnemyEntity::visualize);
     }
 
     /**
