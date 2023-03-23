@@ -111,7 +111,7 @@ public class Game {
         //playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2 +10,this.gameHeight),5,2));
 
         //Create enemy
-        for(int i = 0; i < this.gameWidth; i++){
+        for(int i = 10; i < this.gameWidth-9; i++){
             enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 5+(i%2)), 2, 3));
         }
     }
