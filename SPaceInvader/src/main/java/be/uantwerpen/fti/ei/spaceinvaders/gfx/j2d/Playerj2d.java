@@ -3,6 +3,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.ShootComponent;
 
 import java.awt.*;
 
@@ -13,8 +14,8 @@ public class Playerj2d extends APlayerEntity {
         this.setGfx(gfx);
     }
 
-    public Playerj2d(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
-        super(movementComponent, livableComponent);
+    public Playerj2d(MovementComponent movementComponent, LivableComponent livableComponent, ShootComponent shootComponent, GraphicsContext gfx) {
+        super(movementComponent, livableComponent, shootComponent);
         this.gfx = gfx;
     }
 

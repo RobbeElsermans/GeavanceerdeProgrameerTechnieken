@@ -7,11 +7,15 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.ShootComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.BulletMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.EnemyMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.GlobalMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.PlayerShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
@@ -122,7 +126,6 @@ public class Game {
      * De start methoden zal het spel starten.
      */
     public void start(){
-
         //TIJD CONSTANT HOUDEN
         double fpsIntervalNS = (1000000000/FPS);
         double nextFpsIntervalNS = System.nanoTime() + fpsIntervalNS;
@@ -157,12 +160,25 @@ public class Game {
      */
     private void update(){
 
-        //move the players
+        //move the players and check for bullets
         playerEntitieList.forEach(i -> {
             GlobalMovementSystem.move(i.getMovementComponent(), gfxFactory.getInput());
+
+            //Als er een schot gelost is
+            if(PlayerShootSystem.checkShoot(gfxFactory.getInput())){
+                //Voer het schot uit.
+                PlayerShootSystem.doShoot(i.getMovementComponent(), i.getShootComponent(), gfxFactory);
+            }
+
+            //Als er bullets aanwezig zijn, beweeg ze
+            if(!i.getShootComponent().getBullets().isEmpty()){
+                i.getShootComponent().getBullets().forEach(b -> BulletMovementSystem.move(b.getMovementComponent()));
+            }
+
+            PlayerShootSystem.doCleanup(i.getShootComponent());
         });
 
-        EnemyMovementSystem.move(enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList());
+        //EnemyMovementSystem.move(enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList());
 
         //Check collisions with border
         //playerEntitieList.forEach(i -> BorderCollision.checkBorderCollsion(i.getPosition(), i.getDimentions(), gameWidth, gameHeight));
@@ -174,7 +190,10 @@ public class Game {
      */
     private void checkCollisions(){
         //CheckPlayerBorderCollision
-        playerEntitieList.forEach(i -> CollisionManager.checkBorderCollisionPlayer(borderCollisionSystem,i.getMovementComponent()));
+        playerEntitieList.forEach(i -> {
+            CollisionManager.checkBorderCollisionPlayer(borderCollisionSystem,i.getMovementComponent());
+            i.getShootComponent().getBullets().forEach(b -> CollisionManager.checkBorderCollisionBullet(borderCollisionSystem, b.getMovementComponent()));
+        });
 
         //Check Enemy Border Collision
         //enemyEntityList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));
@@ -199,6 +218,8 @@ public class Game {
      */
     private void visualize(){
         playerEntitieList.forEach(APlayerEntity::visualize);
+        //playerEntitieList.stream().map(APlayerEntity::getShootComponent).map(ShootComponent::getBullets).forEach();
+        playerEntitieList.forEach(i -> i.getShootComponent().getBullets().forEach(IVisualize::visualize));
         enemyEntityList.forEach(AEnemyEntity::visualize);
     }
 

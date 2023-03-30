@@ -69,4 +69,12 @@ public class CollisionManager {
             mcl.forEach(mc -> mc.setX((int) ((mc.getX()) - mc.getSpeed()*Math.abs(mc.getDefaultVelocity()))));
         }
     }
+
+    public static void checkBorderCollisionBullet(BorderCollisionSystem bc, MovementComponent mc){
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(0)) {
+            // if top collision.
+            mc.setY(0);
+            mc.setVelocity(0);
+        }
+    }
 }

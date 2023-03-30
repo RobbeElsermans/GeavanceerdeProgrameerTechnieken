@@ -35,7 +35,7 @@ public class GraphicsContext {
     /**
      * De dimensie van het projectiel entiteit als IDimension. Dit is afhankelijk van de genomen sprite.
      */
-    private IDimension projectileDimention;
+    private IDimension bulletDimention;
     /**
      * Het frame waarin alles wordt geplaatst.
      */
@@ -113,10 +113,10 @@ public class GraphicsContext {
         this.playerDimention = new Dimension(
                 FileManager.getSettingInteger("width_player_sprite", configFilePath, 10),
                 FileManager.getSettingInteger("height_player_sprite", configFilePath, 10));
-        this.playerDimention = new Dimension(
+        this.enemyDimention = new Dimension(
                 FileManager.getSettingInteger("width_enemy_sprite", configFilePath, 10),
                 FileManager.getSettingInteger("height_enemy_sprite", configFilePath, 10));
-        this.playerDimention = new Dimension(
+        this.bulletDimention = new Dimension(
                 FileManager.getSettingInteger("width_bullet_sprite", configFilePath, 5),
                 FileManager.getSettingInteger("height_bullet_sprite", configFilePath, 10));
     }
@@ -171,8 +171,8 @@ public class GraphicsContext {
         return objectDimention;
     }
 
-    public IDimension getProjectileDimention() {
-        return projectileDimention;
+    public IDimension getBulletDimention() {
+        return bulletDimention;
     }
 
     public int getSize() {

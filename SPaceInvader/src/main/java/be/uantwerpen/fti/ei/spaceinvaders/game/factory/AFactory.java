@@ -87,7 +87,6 @@ public abstract class AFactory {
      *
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
      */
-
     public abstract ABulletEntity getBulletEntity(IPosition position, int life, int speed, double velocity);
     /**
      * Geeft een AObstacleEntity object terug met default waarden.
