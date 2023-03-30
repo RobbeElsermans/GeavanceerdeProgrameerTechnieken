@@ -9,7 +9,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.EnemyMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.GlobalMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.PlayerMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
@@ -107,12 +109,12 @@ public class Game {
         this.borderCollisionSystem = new BorderCollisionSystem(new Dimension(gameWidth * gfxFactory.getScaler(), gameHeight* gfxFactory.getScaler()));
 
         //Create player
-        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2,this.gameHeight),5,2));
+        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2,this.gameHeight),5,2, 2));
         //playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2 +10,this.gameHeight),5,2));
 
         //Create enemy
         for(int i = 10; i < this.gameWidth-9; i++){
-            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 5+(i%2)), 2, 3));
+            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 5+(i%2)), 2, 6, 0.5));
         }
     }
 
@@ -159,11 +161,11 @@ public class Game {
             GlobalMovementSystem.move(i.getMovementComponent());
         });
 
-        /*
+
         enemyEntityList.forEach(enemy -> {
-            GlobalMovementSystem.move(enemy.getMovementComponent());
+            EnemyMovementSystem.move(enemy.getMovementComponent());
         });
-        */
+
 
         //Check collisions with border
         //playerEntitieList.forEach(i -> BorderCollision.checkBorderCollsion(i.getPosition(), i.getDimentions(), gameWidth, gameHeight));

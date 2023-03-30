@@ -40,7 +40,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public APlayerEntity getPlayerEntity(IPosition position, int life, int speed) {
+    public APlayerEntity getPlayerEntity(IPosition position, int life, int speed,double velocity) {
 
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getSize());
@@ -50,7 +50,7 @@ public class FactoryJ2d extends AFactory {
         else
             position.setY(position.getY() * this.graphicsContext.getSize());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed, this.keyboardInput);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity, this.keyboardInput);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new Playerj2d(movementComponent, livableComponent, graphicsContext);
@@ -62,7 +62,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed) {
+    public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed,double velocity) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getSize());
 
@@ -71,7 +71,7 @@ public class FactoryJ2d extends AFactory {
         else
             position.setY(position.getY() * this.graphicsContext.getSize());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed, this.keyboardInput);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity, this.keyboardInput);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new EnemyJ2d(movementComponent, livableComponent, graphicsContext);

@@ -96,7 +96,7 @@ public class GraphicsContext {
         frame.setTitle("SpaceInvader");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(screenWidth, screenHeight);
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         setGameDimensions(gameDimension.getWidth(),gameDimension.getHeight());

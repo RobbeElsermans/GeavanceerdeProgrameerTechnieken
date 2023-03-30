@@ -4,19 +4,27 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponen
 
 public class GlobalMovementSystem {
     /**
-     * Een move methode die kan bewerkt worden door onderliggende klasses.
+     * Een globale move methode die overan heen kan bewegen. Is voor debugging belangrijk
      * Deze move methode zal de entiteit kunnen laten bewegen.
      */
-    public static void move(MovementComponent movementComponent){
-        if(movementComponent.getInput().inputAvailable()) {
-            if(movementComponent.getInput().isLeft())
-                movementComponent.setX(movementComponent.getX()-movementComponent.getSpeed());
-            if(movementComponent.getInput().isRight())
-                movementComponent.setX(movementComponent.getX()+movementComponent.getSpeed());
-            if(movementComponent.getInput().isUp())
-                movementComponent.setY(movementComponent.getY()-movementComponent.getSpeed());
-            if(movementComponent.getInput().isDown())
-                movementComponent.setY(movementComponent.getY()+movementComponent.getSpeed());
+    public static void move(MovementComponent mc){
+        if(mc.getInput().inputAvailable()) {
+            if(mc.getInput().isLeft()) {
+                mc.setVelocity(-Math.abs(mc.getDefaultVelocity()));
+                mc.setX((int) (mc.getX() + (mc.getSpeed() * mc.getVelocity())));
+            }
+            if(mc.getInput().isRight()) {
+                mc.setVelocity(Math.abs(mc.getDefaultVelocity()));
+                mc.setX((int) (mc.getX() + (mc.getSpeed() * mc.getVelocity())));
+            }
+            if(mc.getInput().isUp()) {
+                mc.setVelocity(-Math.abs(mc.getDefaultVelocity()));
+                mc.setY((int) (mc.getY() + (mc.getSpeed() * mc.getVelocity())));
+            }
+            if(mc.getInput().isDown()) {
+                mc.setVelocity(Math.abs(mc.getDefaultVelocity()));
+                mc.setY((int) (mc.getY() + (mc.getSpeed() * mc.getVelocity())));
+            }
         }
     }
 }

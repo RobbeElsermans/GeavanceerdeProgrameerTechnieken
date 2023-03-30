@@ -47,7 +47,7 @@ public abstract class AFactory {
      * Geeft een APlayerEntity object terug met volgende parameters.
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
      */
-    public abstract APlayerEntity getPlayerEntity(IPosition position, int life, int speed);
+    public abstract APlayerEntity getPlayerEntity(IPosition position, int life, int speed, double velocity);
 
     /**
      * Geeft een AEnemyEntity object terug met default waarden.
@@ -65,7 +65,7 @@ public abstract class AFactory {
      * Het IInput object waarmee de entiteit zichzelf kan mee bewegen, wordt gedefiniëerd in de GFX-library
      */
 
-    public abstract AEnemyEntity getEnemyEntity(IPosition position, int life, int speed);
+    public abstract AEnemyEntity getEnemyEntity(IPosition position, int life, int speed, double velocity);
 
     /**
      * Geeft een AProjectileEntity object terug met default waarden.

@@ -8,11 +8,16 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
  * Een beweegbaar component
  */
 public class MovementComponent extends APositionComponent{
-    /**µ
-     * De snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 2.
+    /**
+     * De constante snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 2.
      */
     private int speed;
 
+    /**
+     * De snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 1.
+     */
+    private double velocity;
+    private double defaultVelocity;
     /**
      * Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
@@ -26,6 +31,8 @@ public class MovementComponent extends APositionComponent{
         super();
         this.setInput(input);
         this.setSpeed(2);
+        this.defaultVelocity = 1;
+        this.setVelocity(1);
     }
 
     /**
@@ -35,16 +42,28 @@ public class MovementComponent extends APositionComponent{
      * @param speed     De snelheid waarmee de entiteit zich verplaatst.
      * @param input     Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
-    public MovementComponent(IPosition position, IDimension dimension, int speed, IInput input) {
+    public MovementComponent(IPosition position, IDimension dimension, int speed,double velocity, IInput input) {
         super(position, dimension);
         this.setSpeed(speed);
         this.setInput(input);
+        this.defaultVelocity = velocity;
+        this.setVelocity(velocity);
     }
     public int getSpeed() {
         return speed;
     }
     private void setSpeed(int speed) {
         this.speed = speed;
+    }
+    public double getVelocity() {
+        return velocity;
+    }
+    public void setVelocity(double velocity) {
+
+        this.velocity = velocity;
+    }
+    public double getDefaultVelocity(){
+        return this.defaultVelocity;
     }
     public IInput getInput() {
         return input;

@@ -11,28 +11,32 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class CollisionManager {
     /**
      * Dedicated methoden om een borderCollision te detecteren en hierbij een correcte actie op uit te voeren.
-     * @param bc    Een BorderCollision object met een ingestelde gameBorder
-     * @param movementComponent
+     * @param bc    Een BorderCollision object met een ingestelde gameBorder.
+     * @param mc    Een Movement component die de data van movement bijhoud.
      */
-    public static void checkBorderCollision(BorderCollisionSystem bc, MovementComponent movementComponent) {
+    public static void checkBorderCollision(BorderCollisionSystem bc, MovementComponent mc) {
 
-        if (bc.checkBorderCollision(movementComponent.getPosition(), movementComponent.getDimension()).get(1)) {
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
             // if left collision.
-            movementComponent.setX(0);
+            mc.setX(0);
+            mc.setVelocity(0);
             //TODO: Wat als het spel niet in 0 start?
         }
-        if (bc.checkBorderCollision(movementComponent.getPosition(), movementComponent.getDimension()).get(3)) {
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
             // if right collision.
-            movementComponent.setX(bc.getGameDimensions().getWidth() - movementComponent.getDimension().getWidth());
+            mc.setX((int) (bc.getGameDimensions().getWidth() - (mc.getDimension().getWidth() + (mc.getSpeed()))));
+            mc.setVelocity(0);
         }
-        if (bc.checkBorderCollision(movementComponent.getPosition(), movementComponent.getDimension()).get(0)) {
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(0)) {
             // if left collision.
-            movementComponent.setY(0);
+            mc.setY(0);
+            mc.setVelocity(0);
             //TODO: Wat als het spel niet in 0 start?
         }
-        if (bc.checkBorderCollision(movementComponent.getPosition(), movementComponent.getDimension()).get(2)) {
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
             // if right collision.
-            movementComponent.setY(bc.getGameDimensions().getHeight() - movementComponent.getDimension().getHeight());
+            mc.setY((int) (bc.getGameDimensions().getHeight() - (mc.getDimension().getHeight()+ (mc.getSpeed()))));
+            mc.setVelocity(0);
         }
     }
 
