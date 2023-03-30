@@ -113,7 +113,7 @@ public class Game {
         //playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2 +10,this.gameHeight),5,2));
 
         //Create enemy
-        for(int i = 10; i < this.gameWidth-9; i++){
+        for(int i = 10; i < this.gameWidth-5; i++){
             enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 5+(i%2)), 2, 6, 0.5));
         }
     }
@@ -156,20 +156,16 @@ public class Game {
      * De update methoden zal al de objecten van het spel update.
      */
     private void update(){
+        //Check collisions with border
+        //playerEntitieList.forEach(i -> BorderCollision.checkBorderCollsion(i.getPosition(), i.getDimentions(), gameWidth, gameHeight));
+        checkCollisions();
         //move the players
         playerEntitieList.forEach(i -> {
             GlobalMovementSystem.move(i.getMovementComponent());
         });
 
 
-        enemyEntityList.forEach(enemy -> {
-            EnemyMovementSystem.move(enemy.getMovementComponent());
-        });
-
-
-        //Check collisions with border
-        //playerEntitieList.forEach(i -> BorderCollision.checkBorderCollsion(i.getPosition(), i.getDimentions(), gameWidth, gameHeight));
-        checkCollisions();
+        EnemyMovementSystem.move(enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList());
     }
 
     /**
@@ -180,11 +176,11 @@ public class Game {
         playerEntitieList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));
 
         //Check Enemy Border Collision
-        enemyEntityList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));
+        //enemyEntityList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));
+        CollisionManager.checkBorderCollisionEnemy(borderCollisionSystem, enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList());
 
         //Check entity + entity collision.
-        if(EntityCollision.entityCollision(playerEntitieList.get(0).getMovementComponent(),
-        enemyEntityList.get(0).getMovementComponent())){
+        if(EntityCollision.entityCollision(playerEntitieList.get(0).getMovementComponent(), enemyEntityList.get(0).getMovementComponent())){
             System.out.println("Collision!");
         }
     }

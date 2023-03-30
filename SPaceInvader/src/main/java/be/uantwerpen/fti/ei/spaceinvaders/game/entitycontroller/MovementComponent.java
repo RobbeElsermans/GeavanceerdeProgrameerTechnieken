@@ -17,6 +17,7 @@ public class MovementComponent extends APositionComponent{
      * De snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 1.
      */
     private double velocity;
+    private double prevVelocity;
     private double defaultVelocity;
     /**
      * Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
@@ -59,8 +60,11 @@ public class MovementComponent extends APositionComponent{
         return velocity;
     }
     public void setVelocity(double velocity) {
-
+        this.prevVelocity = this.velocity;
         this.velocity = velocity;
+    }
+    public double getPrevVelocity(){
+        return this.prevVelocity;
     }
     public double getDefaultVelocity(){
         return this.defaultVelocity;

@@ -28,43 +28,53 @@ public class CollisionManager {
             mc.setVelocity(0);
         }
         if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(0)) {
-            // if left collision.
+            // if top collision.
             mc.setY(0);
             mc.setVelocity(0);
             //TODO: Wat als het spel niet in 0 start?
         }
         if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
-            // if right collision.
+            // if bottom collision.
             mc.setY((int) (bc.getGameDimensions().getHeight() - (mc.getDimension().getHeight()+ (mc.getSpeed()))));
             mc.setVelocity(0);
         }
     }
 
-    /**
-     * Bekijkt ofdat een enemy tegen de kant zit.
-     * Als een enemy links ergens tegen komt, zal er +1 terug gestuurd worden.
-     * Als er een enemy rechts ergens tegen komt, zal er -1 terug gegeven worden.
-     * Als er geen collision is, wordt er 0 terug gegeven.
-     * @param bc
-     * @param movementComponent
-     * @return  Als een enemy links ergens tegen komt, zal er +1 terug gestuurd worden.
-     *          Als er een enemy rechts ergens tegen komt, zal er -1 terug gegeven worden.
-     *          Als er geen collision is, wordt er 0 terug gegeven.
-     */
-    //TODO: zorg ervoor dat in de EnemyMovementSystem nu de -1, 0, 1 worden verwerkt. zodat de enemy 1x naar onder gaat en naar de andere kant gaat.
-    public static int checkBorderCollisionEnemy(BorderCollisionSystem bc, List<MovementComponent> movementComponent) {
-        AtomicInteger temp = new AtomicInteger();
-        movementComponent.forEach(mc -> {
-            if(bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)){
-                //if left collision
-                temp.set(1);
-            }
-            if(bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)){
-                //if left collision
-                temp.set(-1);
-            }
-        });
 
-        return temp.get();
+    public static void checkBorderCollisionEnemy(BorderCollisionSystem bc, List<MovementComponent> mcl) {
+        boolean hasCollideLeft = false;
+        boolean hasCollideRight = false;
+        boolean hasCollideBottom = false;
+        for (MovementComponent mc : mcl) {
+            if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
+                // if left collision.
+                mc.setX(0);
+                hasCollideLeft = true;
+                break;
+                //TODO: Wat als het spel niet in 0 start?
+            }
+            if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
+                // if right collision.
+                //mc.setX(bc.getGameDimensions().getWidth() - (mc.getDimension().getWidth() + (mc.getSpeed())));
+                hasCollideRight = true;
+                break;
+            }
+            if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
+                // if bottom collision.
+                mc.setY(bc.getGameDimensions().getHeight() - (mc.getDimension().getHeight() + (mc.getSpeed())));
+                hasCollideBottom = true;
+                break;
+            }
+        }
+
+        if(hasCollideLeft || hasCollideBottom || hasCollideRight){
+            mcl.forEach(i -> i.setVelocity(0));
+        }
+
+        if(hasCollideRight){
+            //fix alle entiteiten want deze zijn te ver bewogen.
+            //mc.setX(bc.getGameDimensions().getWidth() - (mc.getDimension().getWidth() + (mc.getSpeed())));
+            mcl.forEach(mc -> mc.setX((int) ((mc.getX()) - mc.getSpeed()*Math.abs(mc.getDefaultVelocity()))));
+        }
     }
 }
