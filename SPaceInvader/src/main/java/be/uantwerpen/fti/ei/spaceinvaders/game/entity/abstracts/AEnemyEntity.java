@@ -17,10 +17,9 @@ public abstract class AEnemyEntity  implements IVisualize {
 
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
-     * @param input Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
-    public AEnemyEntity(IInput input){//Insert de input
-        setMovementComponent(new MovementComponent(input));
+    public AEnemyEntity(){//Insert de input
+        setMovementComponent(new MovementComponent());
         setLivableComponent(new LivableComponent());
     }
 

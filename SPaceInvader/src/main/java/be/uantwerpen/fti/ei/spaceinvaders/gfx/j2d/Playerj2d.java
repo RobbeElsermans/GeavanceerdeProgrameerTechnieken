@@ -10,8 +10,8 @@ import java.awt.*;
 
 public class Playerj2d extends APlayerEntity {
     private GraphicsContext gfx;
-    public Playerj2d(IInput input, GraphicsContext gfx) {
-        super(input);
+    public Playerj2d(GraphicsContext gfx) {
+        super();
         this.setGfx(gfx);
     }
 

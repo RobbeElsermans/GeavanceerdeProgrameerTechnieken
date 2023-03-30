@@ -22,9 +22,8 @@ public class MovementComponent extends APositionComponent{
 
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
-     * @param input Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
-    public MovementComponent(IInput input) {
+    public MovementComponent() {
         super();
         this.setSpeed(2);
         this.defaultVelocity = 1;

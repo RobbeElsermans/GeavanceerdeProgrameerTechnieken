@@ -45,6 +45,12 @@ public abstract class AFactory {
 
     /**
      * Geeft een APlayerEntity object terug met volgende parameters.
+     * @param position  Een positie van de entiteit als IPosition.
+     * @param life      Het leven van de entiteit als integer.
+     * @param speed     De snelheid waarmee de entiteit zich verplaatst als integer.
+     * @param velocity  De versnelling waarmee de entiteit zich verplaatst als integer.
+     * @return          AEnemyEntity object
+     *
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
      */
     public abstract APlayerEntity getPlayerEntity(IPosition position, int life, int speed, double velocity);
@@ -54,17 +60,17 @@ public abstract class AFactory {
      * @return AEnemyEntity object
      */
     public abstract AEnemyEntity getEnemyEntity();
+
     /**
      * Geeft een AEnemyEntity object terug met volgende parameters.
      * @param position  Een positie van de entiteit als IPosition.
      * @param life      Het leven van de entiteit als integer.
      * @param speed     De snelheid waarmee de entiteit zich verplaatst als integer.
+     * @param velocity  De versnelling waarmee de entiteit zich verplaatst als integer.
      * @return          AEnemyEntity object
      *
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
-     * Het IInput object waarmee de entiteit zichzelf kan mee bewegen, wordt gedefiniëerd in de GFX-library
      */
-
     public abstract AEnemyEntity getEnemyEntity(IPosition position, int life, int speed, double velocity);
 
     /**
@@ -77,12 +83,13 @@ public abstract class AFactory {
      * @param position  Een positie van de entiteit als IPosition.
      * @param life      Het leven van de entiteit als integer.
      * @param speed     De snelheid waarmee de entiteit zich verplaatst als integer.
+     * @param velocity  De versnelling waarmee de entiteit zich verplaatst als integer.
      * @return          AProjectileEntity object
      *
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
-     * Het IInput object waarmee de entiteit zichzelf kan mee bewegen, wordt gedefiniëerd in de GFX-library
      */
-    public abstract AProjectileEntity getProjectileEntity(IPosition position, int life, int speed);
+
+    public abstract AProjectileEntity getProjectileEntity(IPosition position, int life, int speed, double velocity);
     /**
      * Geeft een AObstacleEntity object terug met default waarden.
      * @return AObstacleEntity object
@@ -94,7 +101,6 @@ public abstract class AFactory {
      * @param life      Het leven van de entiteit als integer.
      * @return          AObstacleEntity object
      * @implNote  De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
-     * Het IInput object waarmee de entiteit zichzelf kan mee bewegen, wordt gedefiniëerd in de GFX-library
      */
     public abstract AObstacleEntity getObstacleEntity(IPosition position, int life);
 

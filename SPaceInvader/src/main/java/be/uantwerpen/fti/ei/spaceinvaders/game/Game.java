@@ -12,7 +12,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntit
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.EnemyMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.GlobalMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.PlayerMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
@@ -157,16 +156,17 @@ public class Game {
      * De update methoden zal al de objecten van het spel update.
      */
     private void update(){
-        //Check collisions with border
-        //playerEntitieList.forEach(i -> BorderCollision.checkBorderCollsion(i.getPosition(), i.getDimentions(), gameWidth, gameHeight));
-        checkCollisions();
+
         //move the players
         playerEntitieList.forEach(i -> {
             GlobalMovementSystem.move(i.getMovementComponent(), gfxFactory.getInput());
         });
 
-
         EnemyMovementSystem.move(enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList());
+
+        //Check collisions with border
+        //playerEntitieList.forEach(i -> BorderCollision.checkBorderCollsion(i.getPosition(), i.getDimentions(), gameWidth, gameHeight));
+        checkCollisions();
     }
 
     /**
@@ -174,7 +174,7 @@ public class Game {
      */
     private void checkCollisions(){
         //CheckPlayerBorderCollision
-        playerEntitieList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));
+        playerEntitieList.forEach(i -> CollisionManager.checkBorderCollisionPlayer(borderCollisionSystem,i.getMovementComponent()));
 
         //Check Enemy Border Collision
         //enemyEntityList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));

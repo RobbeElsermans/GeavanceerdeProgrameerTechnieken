@@ -36,7 +36,7 @@ public class FactoryJ2d extends AFactory {
 
     @Override
     public APlayerEntity getPlayerEntity() {
-        return new Playerj2d(this.keyboardInput, this.graphicsContext);
+        return new Playerj2d(this.graphicsContext);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class FactoryJ2d extends AFactory {
 
     @Override
     public AEnemyEntity getEnemyEntity() {
-        return null;
+        return new EnemyJ2d(this.graphicsContext);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public AProjectileEntity getProjectileEntity(IPosition position, int life, int speed) {
+    public AProjectileEntity getProjectileEntity(IPosition position, int life, int speed,double velocity) {
         return null;
     }
 

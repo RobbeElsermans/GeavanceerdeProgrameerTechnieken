@@ -3,7 +3,6 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.collision;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Een collision Manager die de taak krijgt om de collisions uit te voeren en hiermee de entiteit de correcte locatie kan geven.
@@ -14,7 +13,7 @@ public class CollisionManager {
      * @param bc    Een BorderCollision object met een ingestelde gameBorder.
      * @param mc    Een Movement component die de data van movement bijhoud.
      */
-    public static void checkBorderCollision(BorderCollisionSystem bc, MovementComponent mc) {
+    public static void checkBorderCollisionPlayer(BorderCollisionSystem bc, MovementComponent mc) {
 
         if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
             // if left collision.

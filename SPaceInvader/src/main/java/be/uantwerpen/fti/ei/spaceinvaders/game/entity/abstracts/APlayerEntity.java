@@ -20,10 +20,9 @@ public abstract class APlayerEntity implements IVisualize {
 
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
-     * @param input Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
-    public APlayerEntity(IInput input){//Insert de input
-        setMovementComponent(new MovementComponent(input));
+    public APlayerEntity(){//Insert de input
+        setMovementComponent(new MovementComponent());
         setLivableComponent(new LivableComponent());
     }
 

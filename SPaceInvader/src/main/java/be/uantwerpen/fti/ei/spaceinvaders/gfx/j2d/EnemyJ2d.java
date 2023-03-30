@@ -9,8 +9,8 @@ import java.awt.*;
 
 public class EnemyJ2d extends AEnemyEntity {
     private GraphicsContext gfx;
-    public EnemyJ2d(IInput input, GraphicsContext gfx) {
-        super(input);
+    public EnemyJ2d(GraphicsContext gfx) {
+        super();
         this.setGfx(gfx);
     }
 
