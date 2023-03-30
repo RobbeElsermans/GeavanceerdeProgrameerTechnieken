@@ -1,9 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
 
 /**
  * Een player entiteit dat overerft van livable & movable entiteit.
@@ -49,25 +48,3 @@ public abstract class APlayerEntity implements IVisualize {
         this.livableComponent = livableComponent;
     }
 }
-
-/*  movement van player nog naar AmovementPlayer spelen
-    @Override
-    protected void move(){
-        if(getInput().inputAvailable()) {
-            switch (getInput().inputState()){
-                case LEFT:{
-                    setX(getX()-this.getSpeed());
-                    break;
-                }
-                case RIGHT :{
-                    setX(getX()+this.getSpeed());
-                    break;
-                }
-                default : {
-
-                }
-            }
-        }
-        //this.setX(getX()+1);
-    }
-    */

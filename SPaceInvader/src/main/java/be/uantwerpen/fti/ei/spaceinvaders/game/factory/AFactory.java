@@ -1,13 +1,11 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.factory;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 
 /**
@@ -74,22 +72,23 @@ public abstract class AFactory {
     public abstract AEnemyEntity getEnemyEntity(IPosition position, int life, int speed, double velocity);
 
     /**
-     * Geeft een AProjectileEntity object terug met default waarden.
-     * @return AProjectileEntity object
+     * Geeft een ABulletEntity object terug met default waarden.
+     * @return ABulletEntity object
      */
-    public abstract AProjectileEntity getProjectileEntity();
+    public abstract ABulletEntity getBulletEntity();
+
     /**
-     * Geeft een AProjectileEntity object terug met volgende parameters.
+     * Geeft een ABulletEntity object terug met volgende parameters.
      * @param position  Een positie van de entiteit als IPosition.
      * @param life      Het leven van de entiteit als integer.
      * @param speed     De snelheid waarmee de entiteit zich verplaatst als integer.
      * @param velocity  De versnelling waarmee de entiteit zich verplaatst als integer.
-     * @return          AProjectileEntity object
+     * @return          ABulletEntity object
      *
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
      */
 
-    public abstract AProjectileEntity getProjectileEntity(IPosition position, int life, int speed, double velocity);
+    public abstract ABulletEntity getBulletEntity(IPosition position, int life, int speed, double velocity);
     /**
      * Geeft een AObstacleEntity object terug met default waarden.
      * @return AObstacleEntity object

@@ -1,9 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
-
-import java.util.List;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
 
 public class BulletMovementSystem {
     public static void move(MovementComponent mc, LivableComponent lc){

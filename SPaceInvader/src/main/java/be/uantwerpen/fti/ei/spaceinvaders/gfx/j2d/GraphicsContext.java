@@ -113,6 +113,12 @@ public class GraphicsContext {
         this.playerDimention = new Dimension(
                 FileManager.getSettingInteger("width_player_sprite", configFilePath, 10),
                 FileManager.getSettingInteger("height_player_sprite", configFilePath, 10));
+        this.playerDimention = new Dimension(
+                FileManager.getSettingInteger("width_enemy_sprite", configFilePath, 10),
+                FileManager.getSettingInteger("height_enemy_sprite", configFilePath, 10));
+        this.playerDimention = new Dimension(
+                FileManager.getSettingInteger("width_bullet_sprite", configFilePath, 5),
+                FileManager.getSettingInteger("height_bullet_sprite", configFilePath, 10));
     }
 
     /**

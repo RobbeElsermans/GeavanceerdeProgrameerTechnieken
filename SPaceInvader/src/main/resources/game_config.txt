@@ -1,2 +1,9 @@
 gameHeight=20
 gameWidth=20
+gameHeight=20
+gameWidth=20
+gameHeight=20
+gameWidth=20
+gameHeight=20
+gameWidth=20
+gameHeight=20

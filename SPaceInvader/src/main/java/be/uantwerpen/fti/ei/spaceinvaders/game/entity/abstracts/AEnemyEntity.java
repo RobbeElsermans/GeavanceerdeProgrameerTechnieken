@@ -1,9 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
 
 public abstract class AEnemyEntity  implements IVisualize {
     /**

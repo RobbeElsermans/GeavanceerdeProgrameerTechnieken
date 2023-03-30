@@ -1,6 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.collision;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
 
 import java.util.List;
 

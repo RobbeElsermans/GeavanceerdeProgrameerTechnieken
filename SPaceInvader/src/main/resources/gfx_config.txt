@@ -1,6 +1,8 @@
-#gelieven een 1/1 verhouding te geven voor width/height
-
 width_console=400
 height_console=400
-width_player_sprite=15
-height_player_sprite=15
+width_player_sprite=10
+height_player_sprite=10
+width_enemy_sprite=10
+height_enemy_sprite=10
+width_bullet_sprite=5
+height_bullet_sprite=10

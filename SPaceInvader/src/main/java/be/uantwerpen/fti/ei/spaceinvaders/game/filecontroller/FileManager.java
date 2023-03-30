@@ -24,7 +24,6 @@ public class FileManager {
             FileInputStream configuration = new FileInputStream(location);
             Properties prop = new Properties();
             prop.load(configuration);
-
             tempVal = Integer.parseInt(prop.getProperty(propertyName));
 
         } catch (FileNotFoundException e) {
@@ -48,6 +47,7 @@ public class FileManager {
         catch (NumberFormatException ex){
             //throw new NumberFormatException("De opgegeven propertyName is niet geldig! Default value wordt gebruikt.");
             System.out.println("De opgegeven propertyName is niet geldig! Default value wordt gebruikt");
+            createProp(propertyName, location, String.valueOf(defaultValue));
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -74,7 +74,6 @@ public class FileManager {
             FileInputStream configuration = new FileInputStream(location);
             Properties prop = new Properties();
             prop.load(configuration);
-
             tempVal = Double.parseDouble(prop.getProperty(propertyName));
 
         } catch (FileNotFoundException e) {
@@ -98,6 +97,7 @@ public class FileManager {
         catch (NumberFormatException ex){
             //throw new NumberFormatException("De opgegeven propertyName is niet geldig! Default value wordt gebruikt.");
             System.out.println("De opgegeven propertyName is niet geldig! Default value wordt gebruikt");
+            createProp(propertyName, location, String.valueOf(defaultValue));
         }
         catch (IOException e) {
             throw new RuntimeException(e);
@@ -106,5 +106,21 @@ public class FileManager {
 
 
         return tempVal;
+    }
+
+    protected static void createProp(String propertyName, String location, String defaultValue){
+        try {
+            String configString = propertyName + "=" + defaultValue + "\n";
+
+            FileWriter fileWriter = new FileWriter(location, true);
+            fileWriter.append(configString);
+            fileWriter.close();
+
+
+        }
+        catch (IOException ex) {
+            throw new RuntimeException(ex);
+            //System.out.println("Er is een fout bestand pad meegegeven!");
+        }
     }
 }

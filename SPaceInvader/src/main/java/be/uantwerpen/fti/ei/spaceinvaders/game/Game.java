@@ -3,13 +3,13 @@ package be.uantwerpen.fti.ei.spaceinvaders.game;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollisionSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.CollisionManager;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.EntityCollision;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.EnemyMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.GlobalMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
@@ -37,7 +37,7 @@ public class Game {
     /**
      * Een lijst van projectile entiteiten.
      */
-    List<AProjectileEntity> projectileEntityList = new ArrayList<>();
+    List<ABulletEntity> projectileEntityList = new ArrayList<>();
     /**
      * Een lijst van obstacle entiteiten.
      */

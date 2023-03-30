@@ -1,10 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
 
 import java.awt.*;
 

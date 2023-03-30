@@ -1,8 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller;
-
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents;
 
 /**
  * Een leefbaar component

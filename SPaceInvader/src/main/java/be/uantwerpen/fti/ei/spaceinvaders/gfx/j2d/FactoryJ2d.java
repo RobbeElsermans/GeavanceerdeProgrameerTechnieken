@@ -1,14 +1,13 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 
 public class FactoryJ2d extends AFactory {
@@ -78,13 +77,24 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public AProjectileEntity getProjectileEntity() {
-        return null;
+    public ABulletEntity getBulletEntity() {
+        return new BulletJ2d(graphicsContext);
     }
 
     @Override
-    public AProjectileEntity getProjectileEntity(IPosition position, int life, int speed,double velocity) {
-        return null;
+    public ABulletEntity getBulletEntity(IPosition position, int life, int speed,double velocity) {
+        //Schaal a.d.h.v. de game dimentions
+        position.setX(position.getX() * this.graphicsContext.getSize());
+
+        if(position.getY() > 0)
+            position.setY(position.getY() * this.graphicsContext.getSize() + 2);
+        else
+            position.setY(position.getY() * this.graphicsContext.getSize());
+
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity);
+        LivableComponent livableComponent = new LivableComponent(life);
+
+        return new BulletJ2d(movementComponent, livableComponent, graphicsContext);
     }
 
     @Override
