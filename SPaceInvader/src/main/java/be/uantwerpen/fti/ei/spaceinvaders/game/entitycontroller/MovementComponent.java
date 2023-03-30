@@ -19,10 +19,6 @@ public class MovementComponent extends APositionComponent{
     private double velocity;
     private double prevVelocity;
     private double defaultVelocity;
-    /**
-     * Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
-     */
-    private IInput input;
 
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
@@ -30,7 +26,6 @@ public class MovementComponent extends APositionComponent{
      */
     public MovementComponent(IInput input) {
         super();
-        this.setInput(input);
         this.setSpeed(2);
         this.defaultVelocity = 1;
         this.setVelocity(1);
@@ -38,15 +33,14 @@ public class MovementComponent extends APositionComponent{
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
+     *
      * @param position  De positie van de entiteit.
      * @param dimension De dimensie van de entiteit.
      * @param speed     De snelheid waarmee de entiteit zich verplaatst.
-     * @param input     Een IInput object waarmee de entiteit zichzelf mee kan bewegen.
      */
-    public MovementComponent(IPosition position, IDimension dimension, int speed,double velocity, IInput input) {
+    public MovementComponent(IPosition position, IDimension dimension, int speed,double velocity) {
         super(position, dimension);
         this.setSpeed(speed);
-        this.setInput(input);
         this.defaultVelocity = velocity;
         this.setVelocity(velocity);
     }
@@ -68,11 +62,5 @@ public class MovementComponent extends APositionComponent{
     }
     public double getDefaultVelocity(){
         return this.defaultVelocity;
-    }
-    public IInput getInput() {
-        return input;
-    }
-    private void setInput(IInput input) {
-        this.input = input;
     }
 }

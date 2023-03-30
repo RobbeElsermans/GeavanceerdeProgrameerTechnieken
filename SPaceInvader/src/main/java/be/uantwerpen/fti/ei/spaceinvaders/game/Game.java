@@ -9,6 +9,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AProjectileEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycontroller.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.EnemyMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.GlobalMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.PlayerMovementSystem;
@@ -114,7 +115,7 @@ public class Game {
 
         //Create enemy
         for(int i = 10; i < this.gameWidth-5; i++){
-            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 5+(i%2)), 2, 6, 0.5));
+            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 1+(i%2)), 2, 6, 0.5));
         }
     }
 
@@ -161,7 +162,7 @@ public class Game {
         checkCollisions();
         //move the players
         playerEntitieList.forEach(i -> {
-            GlobalMovementSystem.move(i.getMovementComponent());
+            GlobalMovementSystem.move(i.getMovementComponent(), gfxFactory.getInput());
         });
 
 
@@ -180,9 +181,17 @@ public class Game {
         CollisionManager.checkBorderCollisionEnemy(borderCollisionSystem, enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList());
 
         //Check entity + entity collision.
-        if(EntityCollision.entityCollision(playerEntitieList.get(0).getMovementComponent(), enemyEntityList.get(0).getMovementComponent())){
-            System.out.println("Collision!");
-        }
+        /*for (MovementComponent emc : enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList())
+            if(EntityCollision.entityCollision(playerEntitieList.get(0).getMovementComponent(), emc)){
+                System.out.println("Collision!");
+            }
+*/
+        //Check player + enemy collision.
+        for (MovementComponent emc : enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList())
+            if(EntityCollision.entityIsOnSameLine(playerEntitieList.get(0).getMovementComponent(), emc)){
+                System.out.println("DEAD!");
+                this.isRunning = false;
+            }
     }
 
     /**

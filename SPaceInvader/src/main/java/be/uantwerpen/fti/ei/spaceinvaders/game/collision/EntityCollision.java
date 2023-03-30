@@ -40,6 +40,16 @@ public class EntityCollision{
         }
         return false;
     }
+
+    /**
+     * Check of dat een entiteit op dezelfde lijn is of niet.
+     * @param mc1
+     * @param mc2
+     * @return
+     */
+    public static boolean entityIsOnSameLine(MovementComponent mc1, MovementComponent mc2){
+        return mc2.getY() + mc2.getHeight() >= mc1.getY();
+    }
 }
 
 /*

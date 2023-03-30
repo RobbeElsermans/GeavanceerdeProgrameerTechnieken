@@ -24,7 +24,7 @@ public class CollisionManager {
         }
         if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
             // if right collision.
-            mc.setX((int) (bc.getGameDimensions().getWidth() - (mc.getDimension().getWidth() + (mc.getSpeed()))));
+            mc.setX((int) ((mc.getX()) - mc.getSpeed()*Math.abs(mc.getDefaultVelocity())));
             mc.setVelocity(0);
         }
         if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(0)) {
@@ -35,7 +35,7 @@ public class CollisionManager {
         }
         if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
             // if bottom collision.
-            mc.setY((int) (bc.getGameDimensions().getHeight() - (mc.getDimension().getHeight()+ (mc.getSpeed()))));
+            mc.setY((int) ((mc.getY()) - mc.getSpeed()*Math.abs(mc.getDefaultVelocity())));
             mc.setVelocity(0);
         }
     }
@@ -51,18 +51,11 @@ public class CollisionManager {
                 mc.setX(0);
                 hasCollideLeft = true;
                 break;
-                //TODO: Wat als het spel niet in 0 start?
             }
             if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
                 // if right collision.
                 //mc.setX(bc.getGameDimensions().getWidth() - (mc.getDimension().getWidth() + (mc.getSpeed())));
                 hasCollideRight = true;
-                break;
-            }
-            if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
-                // if bottom collision.
-                mc.setY(bc.getGameDimensions().getHeight() - (mc.getDimension().getHeight() + (mc.getSpeed())));
-                hasCollideBottom = true;
                 break;
             }
         }

@@ -50,7 +50,7 @@ public class FactoryJ2d extends AFactory {
         else
             position.setY(position.getY() * this.graphicsContext.getSize());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity, this.keyboardInput);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new Playerj2d(movementComponent, livableComponent, graphicsContext);
@@ -71,7 +71,7 @@ public class FactoryJ2d extends AFactory {
         else
             position.setY(position.getY() * this.graphicsContext.getSize());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity, this.keyboardInput);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new EnemyJ2d(movementComponent, livableComponent, graphicsContext);
@@ -104,7 +104,7 @@ public class FactoryJ2d extends AFactory {
 
     @Override
     public IInput getInput() {
-        return new KeyboardInputController(graphicsContext);
+        return this.keyboardInput;
     }
 
     @Override
