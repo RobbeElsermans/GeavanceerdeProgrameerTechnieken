@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;

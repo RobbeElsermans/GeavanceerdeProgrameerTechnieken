@@ -5,7 +5,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponen
 /**
  * Een klasse om entity vs entity te detecteren.
  */
-public class EntityCollision{
+public class EntityCollisionSystem {
     public static boolean entityCollision(MovementComponent mc1, MovementComponent mc2){
         /**
          * Als entiteit 1, entiteit 2 aanraakt langs links boven.

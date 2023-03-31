@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Een collision Manager die de taak krijgt om de collisions uit te voeren en hiermee de entiteit de correcte locatie kan geven.
  */
-public class CollisionManager {
+public class BorderCollisionManager {
     /**
      * Dedicated methoden om een borderCollision te detecteren en hierbij een correcte actie op uit te voeren.
      * @param bc    Een BorderCollision object met een ingestelde gameBorder.
@@ -59,7 +59,7 @@ public class CollisionManager {
             }
         }
 
-        if(hasCollideLeft || hasCollideBottom || hasCollideRight){
+        if(hasCollideLeft || hasCollideRight){
             mcl.forEach(i -> i.setVelocity(0));
         }
 
@@ -74,6 +74,11 @@ public class CollisionManager {
         if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(0)) {
             // if top collision.
             mc.setY(0);
+            mc.setVelocity(0);
+        }
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
+            // if bottom collision.
+            mc.setY((int) ((mc.getY()) - mc.getSpeed()*Math.abs(mc.getDefaultVelocity())));
             mc.setVelocity(0);
         }
     }

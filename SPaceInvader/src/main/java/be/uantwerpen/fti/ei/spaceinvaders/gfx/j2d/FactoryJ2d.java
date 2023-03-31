@@ -6,7 +6,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.ShootComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
@@ -52,9 +51,8 @@ public class FactoryJ2d extends AFactory {
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
-        ShootComponent shootComponent = new ShootComponent();
 
-        return new Playerj2d(movementComponent, livableComponent, shootComponent,graphicsContext);
+        return new Playerj2d(movementComponent, livableComponent,graphicsContext);
     }
 
     @Override
