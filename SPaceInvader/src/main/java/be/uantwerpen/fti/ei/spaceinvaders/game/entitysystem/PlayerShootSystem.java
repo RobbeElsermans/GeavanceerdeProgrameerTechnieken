@@ -22,17 +22,22 @@ public class PlayerShootSystem {
         if(input.inputAvailable() && input.isShoot() && remainingIntervalTime <=0 && !hasFire){//Als er input aanwezig is & er is geschoten & (de timer is afgelopen of er is nog niet geschoten)
             nextIntervalNS +=intervalNs;
             hasFire = true;
+            System.out.println("if1: timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000) + "\t\t hasFire: "+ hasFire);
             return true;
+
         }
-        else if(remainingIntervalTime <=0 && hasFire){
+        else if(input.inputAvailable() && !input.isShoot() && remainingIntervalTime <=0 && hasFire){
             hasFire = false;
             nextIntervalNS +=intervalNs;
+            System.out.println("if2: timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000) + "\t\t hasFire: "+ hasFire);
         }
         else if(remainingIntervalTime <= 0){
+            hasFire = false;
             nextIntervalNS +=intervalNs;
+            System.out.println("if3: timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000) + "\t\t hasFire: "+ hasFire);
         }
 
-        System.out.println("timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000));
+
         //TODO: fix dat er maar 1 bullet geschoten wordt
         // Als er meerdere toets slagen achter elkaar binnen komen, mogen we maar om de 500 ms een toets doorlaten.
         return false;
