@@ -196,6 +196,7 @@ public class Game {
         });
 
 
+        //TODO: zorg dat enemy's kunnen vuren
         //move the enemy's and check for bullets
         EnemyMovementSystem.move(enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList());
         enemyEntityList.forEach(i -> {
