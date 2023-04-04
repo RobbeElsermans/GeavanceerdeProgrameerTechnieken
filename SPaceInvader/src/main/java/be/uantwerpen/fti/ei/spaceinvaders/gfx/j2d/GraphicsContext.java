@@ -37,6 +37,10 @@ public class GraphicsContext {
      */
     private IDimension bulletDimention;
     /**
+     * De dimensie van het text veld entiteit als IDimension.
+     */
+    private IDimension textDimention;
+    /**
      * Het frame waarin alles wordt geplaatst.
      */
     private final JFrame frame;
@@ -55,7 +59,7 @@ public class GraphicsContext {
     /**
      * De game dimensies meegegeven vanuit Game.
      */
-    private IDimension gameDimension;   //game dimensions
+    private final IDimension gameDimension;   //game dimensions
     private int size;
 
     public Graphics2D getG2d() {
@@ -119,6 +123,9 @@ public class GraphicsContext {
         this.bulletDimention = new Dimension(
                 FileManager.getSettingInteger("width_bullet_sprite", configFilePath, 5),
                 FileManager.getSettingInteger("height_bullet_sprite", configFilePath, 10));
+        this.textDimention = new Dimension(
+                FileManager.getSettingInteger("width_text", configFilePath, 100),
+                FileManager.getSettingInteger("height_text", configFilePath, 10));
     }
 
     /**
@@ -174,8 +181,12 @@ public class GraphicsContext {
     public IDimension getBulletDimention() {
         return bulletDimention;
     }
+    public IDimension getTextDimention() {return textDimention;
+    }
 
     public int getSize() {
         return size;
     }
+
+
 }

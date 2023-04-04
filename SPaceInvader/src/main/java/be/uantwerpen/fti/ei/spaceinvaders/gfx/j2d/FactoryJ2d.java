@@ -1,14 +1,16 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.StaticComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.BulletJ2d;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.EnemyJ2d;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.Playerj2d;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.TextJ2d;
 
 public class FactoryJ2d extends AFactory {
 
@@ -49,7 +51,7 @@ public class FactoryJ2d extends AFactory {
         else
             position.setY(position.getY() * this.graphicsContext.getSize());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getPlayerDimention(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new Playerj2d(movementComponent, livableComponent,graphicsContext);
@@ -70,7 +72,7 @@ public class FactoryJ2d extends AFactory {
         else
             position.setY(position.getY() * this.graphicsContext.getSize());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getGameDimension(),speed,velocity);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimention(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new EnemyJ2d(movementComponent, livableComponent, graphicsContext);
@@ -83,7 +85,6 @@ public class FactoryJ2d extends AFactory {
 
     @Override
     public ABulletEntity getBulletEntity(IPosition position, int life, int speed,double velocity) {
-
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBulletDimention(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
@@ -99,6 +100,40 @@ public class FactoryJ2d extends AFactory {
     @Override
     public AObstacleEntity getObstacleEntity(IPosition position, int life) {
         return null;
+    }
+
+    @Override
+    public ATextEntity getTextEntity() {
+        return new TextJ2d(graphicsContext);
+    }
+
+    @Override
+    public ATextEntity getTextEntity(IPosition pos, String preText) {
+        //Schaal a.d.h.v. de game dimentions
+        pos.setX(pos.getX() * this.graphicsContext.getSize());
+
+        if(pos.getY() > 0)
+            pos.setY(pos.getY() * this.graphicsContext.getSize() + 2);
+        else
+            pos.setY(pos.getY() * this.graphicsContext.getSize());
+
+        StaticComponent staticComponent = new StaticComponent(pos, this.graphicsContext.getTextDimention());
+
+        return new TextJ2d(staticComponent, preText,graphicsContext);
+    }
+
+    @Override
+    public ATextEntity getTextEntity(IPosition pos, String preText, String text) {
+        //Schaal a.d.h.v. de game dimentions
+        pos.setX(pos.getX() * this.graphicsContext.getSize());
+
+        if(pos.getY() > 0)
+            pos.setY(pos.getY() * this.graphicsContext.getSize() + 2);
+        else
+            pos.setY(pos.getY() * this.graphicsContext.getSize());
+
+        StaticComponent staticComponent = new StaticComponent(pos, this.graphicsContext.getTextDimention());
+        return new TextJ2d(staticComponent, preText,text,graphicsContext);
     }
 
     @Override

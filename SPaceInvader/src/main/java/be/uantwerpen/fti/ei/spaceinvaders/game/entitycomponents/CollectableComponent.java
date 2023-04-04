@@ -1,5 +1,5 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents;
 
-public class ACollectableComponent {
+public class CollectableComponent {
     //Zorgen voor een type etc
 }

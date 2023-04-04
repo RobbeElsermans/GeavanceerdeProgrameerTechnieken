@@ -4,6 +4,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class AEnemyEntity  implements IVisualize {
     /**
      * De entiteit kan bewegen
@@ -15,11 +18,17 @@ public abstract class AEnemyEntity  implements IVisualize {
     LivableComponent livableComponent;
 
     /**
+     * De entiteit bevat kogels.
+     */
+    private final List<ABulletEntity> bulletList;
+
+    /**
      * Default constructor waarbij de parameters de default waarden krijgen.
      */
     public AEnemyEntity(){//Insert de input
         setMovementComponent(new MovementComponent());
         setLivableComponent(new LivableComponent());
+        this.bulletList = new ArrayList<>();
     }
 
     /**
@@ -28,6 +37,7 @@ public abstract class AEnemyEntity  implements IVisualize {
     public AEnemyEntity(MovementComponent movementComponent, LivableComponent livableComponent){
         setMovementComponent(movementComponent);
         setLivableComponent(livableComponent);
+        this.bulletList = new ArrayList<>();
     }
     public MovementComponent getMovementComponent() {
         return movementComponent;
@@ -43,5 +53,8 @@ public abstract class AEnemyEntity  implements IVisualize {
 
     public void setLivableComponent(LivableComponent livableComponent) {
         this.livableComponent = livableComponent;
+    }
+    public List<ABulletEntity> getBulletList() {
+        return bulletList;
     }
 }

@@ -5,11 +5,11 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 
-public abstract class APositionComponent {
+public class PositionComponent {
     /**
      * De coördinaat van een entiteit. Default is dit (0,0).
      */
-    private IPosition position;
+    private final IPosition position;
 
     /**
      * De dimensie van een entiteit. Default is dit (1,1).
@@ -19,7 +19,7 @@ public abstract class APositionComponent {
     /**
      * default constructor die positie en dimensie op default zal plaatsen.
      */
-    public APositionComponent() {
+    public PositionComponent() {
         this.position = new Position(0,0);
         this.dimentions = new Dimension(1,1);
     }
@@ -29,7 +29,7 @@ public abstract class APositionComponent {
      * @param position  De positie van de entiteit.
      * @param dimension De dimensie van de entiteit.
      */
-    public APositionComponent(IPosition position, IDimension dimension) {
+    public PositionComponent(IPosition position, IDimension dimension) {
         this.position = position;
         this.dimentions = dimension;
     }

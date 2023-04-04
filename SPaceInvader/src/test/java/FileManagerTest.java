@@ -15,7 +15,7 @@ public class FileManagerTest {
     @Test
     public void testFileNotExist(){
         //genereer random naam zodat deze niet bestaat
-        String name = String.valueOf(Math.round(Math.random() * (100 - 0 + 1)+0));
+        String name = String.valueOf(Math.round(Math.random() * (100 + 1)+0));
         int setting = FileManager.getSettingInteger("width_game", "src/test/java/configfiletest/" + name +".txt", 500);
         assertEquals(setting, 500);
     }

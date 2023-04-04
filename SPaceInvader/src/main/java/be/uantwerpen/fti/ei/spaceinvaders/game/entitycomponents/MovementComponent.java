@@ -6,7 +6,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 /**
  * Een beweegbaar component
  */
-public class MovementComponent extends APositionComponent{
+public class MovementComponent extends PositionComponent {
     /**
      * De constante snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 2.
      */
@@ -17,7 +17,7 @@ public class MovementComponent extends APositionComponent{
      */
     private double velocity;
     private double prevVelocity;
-    private double defaultVelocity;
+    private final double defaultVelocity;
 
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.

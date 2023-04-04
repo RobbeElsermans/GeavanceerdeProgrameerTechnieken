@@ -28,18 +28,18 @@ public class PlayerShootSystem extends GlobalShootSystem {
         if(input.inputAvailable() && input.isShoot() && remainingIntervalTime <=0 && !hasFire){//Als er input aanwezig is & er is geschoten & (de timer is afgelopen of er is nog niet geschoten)
             nextIntervalNS +=intervalNs;
             hasFire = true;
-            System.out.println("if1: timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000) + "\t\t hasFire: "+ hasFire);
+            //System.out.println("if1: timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000) + "\t\t hasFire: "+ hasFire);
             return true;
         }
         else if(input.inputAvailable() && !input.isShoot() && remainingIntervalTime <=0 && hasFire){
             hasFire = false;
             nextIntervalNS +=intervalNs;
-            System.out.println("if2: timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000) + "\t\t hasFire: "+ hasFire);
+            //System.out.println("if2: timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000) + "\t\t hasFire: "+ hasFire);
         }
         else if(remainingIntervalTime <= 0){
             hasFire = false;
             nextIntervalNS +=intervalNs;
-            System.out.println("if3: timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000) + "\t\t hasFire: "+ hasFire);
+            //System.out.println("if3: timer: " + String.valueOf(remainingIntervalTime/1000000) + "\t\t to: " + String.valueOf((nextIntervalNS - System.nanoTime())/1000000) + "\t\t hasFire: "+ hasFire);
         }
         return false;
     }

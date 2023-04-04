@@ -4,7 +4,8 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.position;
  * Een dimensie klassen waarmee we een dimensie kunnen definiëren voor een entiteit.
  */
 public class Dimension implements IDimension{
-    private int width, height;
+    private final int width;
+    private final int height;
 
     /**
      * Default constructor die de default waardes voor width en height zet als 1.

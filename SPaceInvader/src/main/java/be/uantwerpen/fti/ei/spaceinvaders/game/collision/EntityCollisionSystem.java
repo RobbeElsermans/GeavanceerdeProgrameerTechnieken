@@ -34,11 +34,8 @@ public class EntityCollisionSystem {
         /**
          * Als entiteit 2, entiteit 1 aanraakt langs rechts onder.
          */
-        if(     (mc2.getX()+mc2.getWidth() >= mc1.getX() && mc2.getX()+mc2.getWidth() <= mc1.getX()+mc1.getWidth())&&
-                (mc2.getY() <= mc1.getY()+mc1.getHeight() && mc2.getY() >= mc1.getY())){
-            return true;
-        }
-        return false;
+        return (mc2.getX() + mc2.getWidth() >= mc1.getX() && mc2.getX() + mc2.getWidth() <= mc1.getX() + mc1.getWidth()) &&
+                (mc2.getY() <= mc1.getY() + mc1.getHeight() && mc2.getY() >= mc1.getY());
     }
 
     /**

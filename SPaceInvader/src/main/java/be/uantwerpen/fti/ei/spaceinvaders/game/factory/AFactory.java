@@ -1,9 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.factory;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
@@ -101,6 +98,11 @@ public abstract class AFactory {
      * @implNote  De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
      */
     public abstract AObstacleEntity getObstacleEntity(IPosition position, int life);
+
+    public abstract ATextEntity getTextEntity();
+    public abstract ATextEntity getTextEntity(IPosition pos, String preText);
+    public abstract ATextEntity getTextEntity(IPosition pos, String preText, String text);
+
 
     /**
      * De gekozen GFX renderen.

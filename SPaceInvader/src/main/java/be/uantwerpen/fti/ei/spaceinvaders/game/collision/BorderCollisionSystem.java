@@ -16,7 +16,7 @@ public class BorderCollisionSystem {
     /**
      * De spel dimensies.
      */
-    private IDimension gameDimensions;
+    private final IDimension gameDimensions;
     public BorderCollisionSystem(IDimension gameDimensions){
         this.gameDimensions = gameDimensions;
     }

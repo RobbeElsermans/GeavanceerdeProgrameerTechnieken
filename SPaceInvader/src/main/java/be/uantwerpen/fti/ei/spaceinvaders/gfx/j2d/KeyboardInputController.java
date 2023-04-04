@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 
 public class KeyboardInputController extends AInputController {
-    private GraphicsContext gfx;
+    private final GraphicsContext gfx;
 
     public KeyboardInputController(GraphicsContext gfx) {
         super();
