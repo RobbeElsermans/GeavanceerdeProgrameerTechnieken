@@ -1,10 +1,14 @@
 width_console=600
-height_console=400
-width_player_sprite=20
-height_player_sprite=20
-width_enemy_sprite=20
-height_enemy_sprite=20
-width_bullet_sprite=5
-height_bullet_sprite=10
-width_text=100
-height_text=10
+height_console=600
+
+#width en height stelt 1 tile voor.
+width_player_sprite=1
+height_player_sprite=1
+width_enemy_sprite=1
+height_enemy_sprite=1
+width_bullet_sprite=0.2
+height_bullet_sprite=0.4
+width_text=20
+height_text=1
+width_object_sprite=1
+height_object_sprite=1

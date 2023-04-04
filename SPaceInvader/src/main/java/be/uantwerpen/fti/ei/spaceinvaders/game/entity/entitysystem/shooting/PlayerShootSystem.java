@@ -1,6 +1,5 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting.GlobalShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 
 

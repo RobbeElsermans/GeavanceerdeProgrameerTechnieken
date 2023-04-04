@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 /**
  * Bevat verschillende statistieke waardes.

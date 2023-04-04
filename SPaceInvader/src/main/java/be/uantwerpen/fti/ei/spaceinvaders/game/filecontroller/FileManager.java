@@ -94,7 +94,7 @@ public class FileManager {
                 //System.out.println("Er is een fout bestand pad meegegeven!");
             }
         }
-        catch (NumberFormatException ex){
+        catch (NullPointerException ex){
             //throw new NumberFormatException("De opgegeven propertyName is niet geldig! Default value wordt gebruikt.");
             System.out.println("De opgegeven propertyName is niet geldig! Default value wordt gebruikt");
             createProp(propertyName, location, String.valueOf(defaultValue));

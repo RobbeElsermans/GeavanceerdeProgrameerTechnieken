@@ -1,2 +1,3 @@
-gameHeight=50
-gameWidth=50
+#width en height een 1/1 verhouding
+gameHeight=30
+gameWidth=30

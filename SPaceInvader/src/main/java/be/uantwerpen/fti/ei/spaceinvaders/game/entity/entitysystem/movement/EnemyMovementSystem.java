@@ -1,7 +1,10 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.List;
 
 /**
@@ -20,12 +23,22 @@ public class EnemyMovementSystem {
                 mc.setVelocity(-1 * prevState);
                 //beweeg naar beneden en naar links/rechts
                 mc.setY( (mc.getY() + (mc.getSpeed())));
-                mc.setX((int) (mc.getX() + (mc.getSpeed() * mc.getVelocity())));
+
             });
         }
-        else{
-            //beweeg normaal
-            mcl.forEach(mc -> mc.setX((int) (mc.getX() + (mc.getSpeed() * mc.getVelocity()))));
-        }
+
+        /**
+         * Probleem dat -1.5 -> -1 en 1.5 -> 2.
+         * Oplossing: Roundingmode Down
+         * https://docs.oracle.com/javase/7/docs/api/java/math/RoundingMode.html
+         */
+
+
+        mcl.forEach(mc -> {
+            BigDecimal temp = new BigDecimal((mc.getSpeed() * mc.getVelocity()));
+            temp = temp.setScale(0,RoundingMode.DOWN);
+
+            mc.setX(mc.getX() + (temp.intValue()));
+        });
     }
 }

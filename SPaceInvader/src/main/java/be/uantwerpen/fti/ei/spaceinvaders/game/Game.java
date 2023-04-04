@@ -7,16 +7,15 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.collision.EntityCollisionSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.EntityCleanupSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement.BulletMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement.EnemyMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement.GlobalMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement.PlayerMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting.EnemyShootSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting.FromWhoBulletType;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting.GlobalShootSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting.PlayerShootSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCleanupSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.BulletMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.EnemyMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.PlayerMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.EnemyShootSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.FromWhoBulletType;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.GlobalShootSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.PlayerShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
@@ -132,12 +131,12 @@ public class Game {
      */
     private void Initialize() {
         //Collisions
-        this.borderCollisionSystem = new BorderCollisionSystem(new Dimension(gameWidth * gfxFactory.getScaler(), gameHeight * gfxFactory.getScaler()));
+        this.borderCollisionSystem = new BorderCollisionSystem(new Dimension(gameWidth * gfxFactory.getScaler().getWidth(), gameHeight * gfxFactory.getScaler().getHeight()));
         this.playerShootSystem = new PlayerShootSystem();
         this.enemyShootSystem = new EnemyShootSystem();
 
         //Create player
-        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth / 2, this.gameHeight), 5, 2, 2));
+        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth / 2, this.gameHeight-1), 5, 2, 2));
         //playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth/2 +10,this.gameHeight),5,2));
 
         //Create texten a.d.h.v. aantal players
@@ -148,7 +147,7 @@ public class Game {
 
         //Create enemy
         for (int i = 5; i < this.gameWidth - 5; i++) {
-            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 1 + (i % 2)), 1, 6, 0.5));
+            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 1 + (i % 2)), 1, 3, 0.5));
         }
     }
 
@@ -183,9 +182,10 @@ public class Game {
             }
             //TIJD CONSTANT HOUDEN
 
-
             //DEBUG
-            System.out.printf(playerEntitieList.get(0).getStatisticsComponent().toString());
+            //System.out.printf(playerEntitieList.get(0).getStatisticsComponent().toString());
+            //System.out.print("\n");
+            System.out.printf(String.valueOf(playerEntitieList.get(0).getMovementComponent().getPosition().getY()));
             System.out.print("\n");
             //DEBUG
         }
@@ -345,6 +345,7 @@ public class Game {
             if (EntityCollisionSystem.entityIsOnSameLine(playerEntitieList.get(0).getMovementComponent(), emc)) {
                 System.out.println("DEAD!");
                 this.isRunning = false;
+                break;
             }
     }
 

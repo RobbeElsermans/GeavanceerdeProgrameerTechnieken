@@ -1,9 +1,9 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 
 import java.util.List;

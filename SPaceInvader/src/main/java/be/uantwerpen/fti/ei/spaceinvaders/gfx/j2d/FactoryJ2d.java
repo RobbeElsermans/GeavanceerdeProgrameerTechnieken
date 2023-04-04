@@ -1,16 +1,14 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.StaticComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StaticComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
-import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.BulletJ2d;
-import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.EnemyJ2d;
-import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.Playerj2d;
-import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.TextJ2d;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.*;
 
 public class FactoryJ2d extends AFactory {
 
@@ -44,12 +42,12 @@ public class FactoryJ2d extends AFactory {
     public APlayerEntity getPlayerEntity(IPosition position, int life, int speed,double velocity) {
 
         //Schaal a.d.h.v. de game dimentions
-        position.setX(position.getX() * this.graphicsContext.getSize());
+        position.setX(position.getX() * this.graphicsContext.getTileWidth());
         //TODO refactor game dimensie zodat het schaalt a.d.h.v. de gfx_config en game_config
         if(position.getY() > 0)
-            position.setY(position.getY() * this.graphicsContext.getSize()+ 2);
+            position.setY(position.getY() * this.graphicsContext.getTileHeight());
         else
-            position.setY(position.getY() * this.graphicsContext.getSize());
+            position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getPlayerDimention(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
@@ -65,12 +63,12 @@ public class FactoryJ2d extends AFactory {
     @Override
     public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed,double velocity) {
         //Schaal a.d.h.v. de game dimentions
-        position.setX(position.getX() * this.graphicsContext.getSize());
+        position.setX(position.getX() * this.graphicsContext.getTileWidth());
 
         if(position.getY() > 0)
-            position.setY(position.getY() * this.graphicsContext.getSize() + 2);
+            position.setY(position.getY() * this.graphicsContext.getTileHeight());
         else
-            position.setY(position.getY() * this.graphicsContext.getSize());
+            position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimention(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
@@ -99,7 +97,18 @@ public class FactoryJ2d extends AFactory {
 
     @Override
     public AObstacleEntity getObstacleEntity(IPosition position, int life) {
-        return null;
+        //Schaal a.d.h.v. de game dimentions
+        position.setX(position.getX() * this.graphicsContext.getTileWidth());
+
+        if(position.getY() > 0)
+            position.setY(position.getY() * this.graphicsContext.getTileHeight());
+        else
+            position.setY(position.getY() * this.graphicsContext.getTileHeight());
+
+        StaticComponent staticComponent = new StaticComponent(position, this.graphicsContext.getObjectDimention());
+        LivableComponent livableComponent = new LivableComponent(life);
+
+        return new ObstacleJ2d(staticComponent, livableComponent, graphicsContext);
     }
 
     @Override
@@ -110,12 +119,12 @@ public class FactoryJ2d extends AFactory {
     @Override
     public ATextEntity getTextEntity(IPosition pos, String preText) {
         //Schaal a.d.h.v. de game dimentions
-        pos.setX(pos.getX() * this.graphicsContext.getSize());
+        pos.setX(pos.getX() * this.graphicsContext.getTileWidth());
 
         if(pos.getY() > 0)
-            pos.setY(pos.getY() * this.graphicsContext.getSize() + 2);
+            pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
         else
-            pos.setY(pos.getY() * this.graphicsContext.getSize());
+            pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
 
         StaticComponent staticComponent = new StaticComponent(pos, this.graphicsContext.getTextDimention());
 
@@ -125,12 +134,12 @@ public class FactoryJ2d extends AFactory {
     @Override
     public ATextEntity getTextEntity(IPosition pos, String preText, String text) {
         //Schaal a.d.h.v. de game dimentions
-        pos.setX(pos.getX() * this.graphicsContext.getSize());
+        pos.setX(pos.getX() * this.graphicsContext.getTileWidth());
 
         if(pos.getY() > 0)
-            pos.setY(pos.getY() * this.graphicsContext.getSize() + 2);
+            pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
         else
-            pos.setY(pos.getY() * this.graphicsContext.getSize());
+            pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
 
         StaticComponent staticComponent = new StaticComponent(pos, this.graphicsContext.getTextDimention());
         return new TextJ2d(staticComponent, preText,text,graphicsContext);
@@ -147,7 +156,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public int getScaler() {
-        return this.graphicsContext.getSize();
+    public IDimension getScaler() {
+        return new Dimension(graphicsContext.getTileWidth(), graphicsContext.getTileHeight());
     }
 }

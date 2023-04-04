@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;

@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 /**
  * Een leefbaar component
@@ -44,5 +44,12 @@ public class LivableComponent{
             this.life = 0;
         else
             this.life -= amount;
+    }
+
+    @Override
+    public String toString() {
+        return "LivableComponent{" +
+                "life=" + life +
+                '}';
     }
 }

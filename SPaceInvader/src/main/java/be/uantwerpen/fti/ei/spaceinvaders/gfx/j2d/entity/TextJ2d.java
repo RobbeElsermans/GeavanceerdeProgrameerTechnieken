@@ -1,10 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ATextEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.InformationComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.StaticComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StaticComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 
 import java.awt.*;

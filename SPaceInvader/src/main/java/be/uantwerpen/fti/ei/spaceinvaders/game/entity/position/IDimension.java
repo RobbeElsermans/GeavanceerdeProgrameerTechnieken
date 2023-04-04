@@ -5,12 +5,12 @@ public interface IDimension {
      * Geeft de breedte (width) terug van het object.
      * @return  de breedte als integer.
      */
-    int getWidth();
+    double getWidth();
     /**
      * Geeft de hoogte (height) terug van het object.
      * @return  de hoogte als integer.
      */
-    int getHeight();
+    double getHeight();
 
     /**
      * Geeft een IDimension object terug waarin width en height staan.

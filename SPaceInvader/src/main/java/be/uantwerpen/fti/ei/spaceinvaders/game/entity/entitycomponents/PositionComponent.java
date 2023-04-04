@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
@@ -56,11 +56,11 @@ public class PositionComponent {
     }
 
     public int getWidth() {
-        return this.dimentions.getWidth();
+        return (int) this.dimentions.getWidth();
     }
 
     public int getHeight(){
-        return this.dimentions.getHeight();
+        return (int) this.dimentions.getHeight();
     }
     public IDimension getDimension()
     {
@@ -69,5 +69,13 @@ public class PositionComponent {
     public void setDimension(IDimension dimension)
     {
         this.dimentions = dimension;
+    }
+
+    @Override
+    public String toString() {
+        return "PositionComponent{" +
+                "position=" + position +
+                ", dimentions=" + dimentions +
+                '}';
     }
 }

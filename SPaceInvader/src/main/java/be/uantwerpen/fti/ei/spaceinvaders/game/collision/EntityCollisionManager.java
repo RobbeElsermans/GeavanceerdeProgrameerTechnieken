@@ -1,6 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.collision;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 
 public class EntityCollisionManager {
     public static boolean bulletEntityCollision(MovementComponent mc1, MovementComponent mc2){

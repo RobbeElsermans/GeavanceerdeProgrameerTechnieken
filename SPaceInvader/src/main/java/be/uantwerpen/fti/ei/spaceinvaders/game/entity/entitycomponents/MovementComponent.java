@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
@@ -60,5 +60,15 @@ public class MovementComponent extends PositionComponent {
     }
     public double getDefaultVelocity(){
         return this.defaultVelocity;
+    }
+
+    @Override
+    public String toString() {
+        return "MovementComponent{" +
+                "speed=" + speed +
+                ", velocity=" + velocity +
+                ", prevVelocity=" + prevVelocity +
+                ", defaultVelocity=" + defaultVelocity +
+                '}';
     }
 }

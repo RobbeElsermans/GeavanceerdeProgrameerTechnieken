@@ -1,10 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.InformationComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.PositionComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.StaticComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.InformationComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StaticComponent;
 
 public abstract class ATextEntity implements IVisualize {
     /**

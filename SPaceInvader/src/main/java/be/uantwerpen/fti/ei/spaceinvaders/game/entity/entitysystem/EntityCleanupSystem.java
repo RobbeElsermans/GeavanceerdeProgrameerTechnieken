@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;

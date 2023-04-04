@@ -19,7 +19,7 @@ public class GraphicsContext {
     /**
      * Scherm hoogte met als default value 500px.
      */
-    private int screenHeight = 400;
+    private int screenHeight = 600;
     /**
      * De dimensie van het speler entiteit als IDimension. Dit is afhankelijk van de genomen sprite.
      */
@@ -60,7 +60,14 @@ public class GraphicsContext {
      * De game dimensies meegegeven vanuit Game.
      */
     private final IDimension gameDimension;   //game dimensions
-    private int size;
+    /**
+     * De game dimensie in pixels per vak.
+     */
+    private int tileWidth;
+    /**
+     * De game dimensie in pixels per vak.
+     */
+    private int tileHeight;
 
     public Graphics2D getG2d() {
         return g2d;
@@ -116,17 +123,20 @@ public class GraphicsContext {
         this.screenWidth = FileManager.getSettingInteger("width_console", configFilePath, this.screenWidth);
         this.screenHeight = FileManager.getSettingInteger("height_console", configFilePath, this.screenWidth);
         this.playerDimention = new Dimension(
-                FileManager.getSettingInteger("width_player_sprite", configFilePath, 10),
-                FileManager.getSettingInteger("height_player_sprite", configFilePath, 10));
+                FileManager.getSettingDouble("width_player_sprite", configFilePath, 1),
+                FileManager.getSettingDouble("height_player_sprite", configFilePath, 1));
         this.enemyDimention = new Dimension(
-                FileManager.getSettingInteger("width_enemy_sprite", configFilePath, 10),
-                FileManager.getSettingInteger("height_enemy_sprite", configFilePath, 10));
+                FileManager.getSettingDouble("width_enemy_sprite", configFilePath, 1),
+                FileManager.getSettingDouble("height_enemy_sprite", configFilePath, 1));
         this.bulletDimention = new Dimension(
-                FileManager.getSettingInteger("width_bullet_sprite", configFilePath, 5),
-                FileManager.getSettingInteger("height_bullet_sprite", configFilePath, 10));
+                FileManager.getSettingDouble("width_bullet_sprite", configFilePath, 0.5),
+                FileManager.getSettingDouble("height_bullet_sprite", configFilePath, 1));
+        this.objectDimention = new Dimension(
+                FileManager.getSettingDouble("width_object_sprite", configFilePath, 1),
+                FileManager.getSettingDouble("height_object_sprite", configFilePath, 1));
         this.textDimention = new Dimension(
-                FileManager.getSettingInteger("width_text", configFilePath, 100),
-                FileManager.getSettingInteger("height_text", configFilePath, 10));
+                FileManager.getSettingDouble("width_text", configFilePath, 20),
+                FileManager.getSettingDouble("height_text", configFilePath, 1));
     }
 
     /**
@@ -155,10 +165,12 @@ public class GraphicsContext {
      * @param gameCellsX    game breedte
      * @param gameCellsY    game hoogte
      */
-    public void setGameDimensions(int gameCellsX, int gameCellsY) {
+    public void setGameDimensions(double gameCellsX, double gameCellsY) {
         //sizeWidth = (int)(screenWidth)/GameCellsX;
         //sizeHeight = (int)(screenHeight)/GameCellsY;
-        size = Math.min((screenWidth) / gameCellsX, screenHeight / gameCellsY);
+        this.tileWidth = (int) ((screenWidth) / gameCellsX);
+        this.tileHeight = (int) ((screenHeight) / gameCellsY);
+
         frame.setLocation(0,0);
         frame.setSize(screenWidth, screenHeight+40);
         g2dimage = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_4BYTE_ABGR_PRE);
@@ -172,11 +184,15 @@ public class GraphicsContext {
      * @param gameCellsX
      * @param gameCellsY
      */
-    public void setEntityDimensions(int gameCellsX, int gameCellsY) {
-        int sizeWidth = screenWidth/gameCellsX;
-        int sizeHeight = screenHeight/gameCellsY;
+    public void setEntityDimensions(double gameCellsX, double gameCellsY) {
+        int sizeWidth = (int) (screenWidth/gameCellsX);
+        int sizeHeight = (int) (screenHeight/gameCellsY);
 
-        this.enemyDimention = new Dimension(sizeWidth, sizeHeight);
+        this.enemyDimention = new Dimension(sizeWidth*getEnemyDimention().getWidth(), sizeHeight*getEnemyDimention().getHeight());
+        this.bulletDimention = new Dimension(sizeWidth*getBulletDimention().getWidth(), sizeHeight*getBulletDimention().getHeight());
+        this.playerDimention = new Dimension(sizeWidth*getPlayerDimention().getWidth(), sizeHeight*getPlayerDimention().getHeight());
+        this.textDimention = new Dimension(sizeWidth*getTextDimention().getWidth(), sizeHeight*getTextDimention().getHeight());
+        this.objectDimention = new Dimension(sizeWidth*getObjectDimention().getWidth(), sizeHeight*getObjectDimention().getHeight());
     }
 
     public IDimension getPlayerDimention() {
@@ -197,9 +213,11 @@ public class GraphicsContext {
     public IDimension getTextDimention() {return textDimention;
     }
 
-    public int getSize() {
-        return size;
+    public int getTileWidth() {
+        return tileWidth;
     }
 
-
+    public int getTileHeight() {
+        return tileHeight;
+    }
 }

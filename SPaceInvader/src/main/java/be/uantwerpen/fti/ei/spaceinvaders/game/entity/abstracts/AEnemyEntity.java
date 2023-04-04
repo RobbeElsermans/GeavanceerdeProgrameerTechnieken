@@ -1,8 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 
 import java.util.ArrayList;
 import java.util.List;

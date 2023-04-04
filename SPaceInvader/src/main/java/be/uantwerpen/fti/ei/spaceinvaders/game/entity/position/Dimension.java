@@ -4,8 +4,8 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.position;
  * Een dimensie klassen waarmee we een dimensie kunnen definiëren voor een entiteit.
  */
 public class Dimension implements IDimension{
-    private final int width;
-    private final int height;
+    private final double width;
+    private final double height;
 
     /**
      * Default constructor die de default waardes voor width en height zet als 1.
@@ -20,18 +20,18 @@ public class Dimension implements IDimension{
      * @param width     De breedte als integer.
      * @param height    De hoogte als integer.
      */
-    public Dimension(int width, int height) {
+    public Dimension(double width, double height) {
         this.width = width;
         this.height = height;
     }
 
     @Override
-    public int getWidth() {
+    public double getWidth() {
         return width;
     }
 
     @Override
-    public int getHeight() {
+    public double getHeight() {
         return height;
     }
 
