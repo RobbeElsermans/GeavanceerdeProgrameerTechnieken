@@ -45,7 +45,7 @@ public class FactoryJ2d extends AFactory {
 
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getSize());
-
+        //TODO refactor game dimensie zodat het schaalt a.d.h.v. de gfx_config en game_config
         if(position.getY() > 0)
             position.setY(position.getY() * this.graphicsContext.getSize()+ 2);
         else

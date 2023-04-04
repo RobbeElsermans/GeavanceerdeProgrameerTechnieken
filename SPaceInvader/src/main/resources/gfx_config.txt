@@ -1,4 +1,4 @@
-width_console=400
+width_console=600
 height_console=400
 width_player_sprite=20
 height_player_sprite=20

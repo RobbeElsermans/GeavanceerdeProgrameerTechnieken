@@ -10,8 +10,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
  */
 public abstract class AFactory {
 
-    //TODO: Zorg ervoor dat de IInput meegegeven wordt bij de factory zodat de GFX-factory niet verantwoordelijk is voor de input die gegeven moet worden. Doe dit voor elke get...Entity die een IInput nodig hebben
-
     /**
      * Variabelen die de speldimensies bijhoud.
      */
@@ -109,8 +107,6 @@ public abstract class AFactory {
      */
     public abstract void render();
 
-
-    //TODO: Als bovenstaande todo uitgevoerd is, moet dit weg.
     /**
      * De player input controller terug geven
      * @return

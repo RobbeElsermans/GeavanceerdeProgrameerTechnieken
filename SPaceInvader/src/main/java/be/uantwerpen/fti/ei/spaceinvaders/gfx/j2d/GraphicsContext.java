@@ -104,6 +104,7 @@ public class GraphicsContext {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         setGameDimensions(gameDimension.getWidth(),gameDimension.getHeight());
+        setEntityDimensions(gameDimension.getWidth(),gameDimension.getHeight());
     }
 
     /**
@@ -151,19 +152,31 @@ public class GraphicsContext {
     //TODO: Zet parameters om in IDimension
     /**
      * Past de gegeven dimensies aan, aan de hoogte en breedte van het scherm
-     * @param GameCellsX    game breedte
-     * @param GameCellsY    game hoogte
+     * @param gameCellsX    game breedte
+     * @param gameCellsY    game hoogte
      */
-    public void setGameDimensions(int GameCellsX, int GameCellsY) {
+    public void setGameDimensions(int gameCellsX, int gameCellsY) {
         //sizeWidth = (int)(screenWidth)/GameCellsX;
         //sizeHeight = (int)(screenHeight)/GameCellsY;
-        size = Math.min((screenWidth) / GameCellsX, screenHeight / GameCellsY);
+        size = Math.min((screenWidth) / gameCellsX, screenHeight / gameCellsY);
         frame.setLocation(0,0);
         frame.setSize(screenWidth, screenHeight+40);
         g2dimage = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_4BYTE_ABGR_PRE);
         g2d = g2dimage.createGraphics();
         g2d.setBackground(new Color(255,255,255));
         g2d.clearRect(0,0, frame.getWidth(), frame.getHeight());
+    }
+
+    /**
+     * Past de gegeven dimensies aan van de entiteiten a.d.h.v. de gegeven game dimensie.
+     * @param gameCellsX
+     * @param gameCellsY
+     */
+    public void setEntityDimensions(int gameCellsX, int gameCellsY) {
+        int sizeWidth = screenWidth/gameCellsX;
+        int sizeHeight = screenHeight/gameCellsY;
+
+        this.enemyDimention = new Dimension(sizeWidth, sizeHeight);
     }
 
     public IDimension getPlayerDimention() {

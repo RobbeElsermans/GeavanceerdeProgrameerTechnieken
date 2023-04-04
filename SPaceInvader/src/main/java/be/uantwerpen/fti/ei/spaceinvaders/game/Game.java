@@ -12,6 +12,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.EntityCleanupSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement.BulletMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement.EnemyMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement.GlobalMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.movement.PlayerMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting.EnemyShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting.FromWhoBulletType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entitysystem.shooting.GlobalShootSystem;
@@ -146,7 +147,7 @@ public class Game {
         }
 
         //Create enemy
-        for (int i = 10; i < this.gameWidth - 5; i++) {
+        for (int i = 5; i < this.gameWidth - 5; i++) {
             enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 1 + (i % 2)), 1, 6, 0.5));
         }
     }
@@ -209,7 +210,7 @@ public class Game {
 
         //move the players and check for bullets
         playerEntitieList.forEach(player -> {
-            GlobalMovementSystem.move(player.getMovementComponent(), gfxFactory.getInput());
+            PlayerMovementSystem.move(player.getMovementComponent(), gfxFactory.getInput());
 
             if (playerShootSystem.checkShoot(gfxFactory.getInput())) {
                 //Voer het schot uit.

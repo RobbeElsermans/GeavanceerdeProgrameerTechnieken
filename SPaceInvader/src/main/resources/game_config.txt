@@ -1,9 +1,2 @@
-gameHeight=20
-gameWidth=20
-gameHeight=20
-gameWidth=20
-gameHeight=20
-gameWidth=20
-gameHeight=20
-gameWidth=20
-gameHeight=20
+gameHeight=50
+gameWidth=50
