@@ -3,6 +3,9 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class PlayerMovementSystem{
     /**
      * Een move methode die kan bewerkt worden door onderliggende klasses.
@@ -12,12 +15,20 @@ public class PlayerMovementSystem{
         if(input.inputAvailable()) {
             if(input.isLeft()) {
                 mc.setVelocity(-Math.abs(mc.getDefaultVelocity()));
-                mc.setX((int) (mc.getX() + (mc.getSpeed() * mc.getVelocity())));
+
+                BigDecimal temp = new BigDecimal((mc.getSpeed() * mc.getVelocity()));
+                temp = temp.setScale(0, RoundingMode.DOWN);
+
+                mc.setX((int) (mc.getX() + (mc.getSpeed() * temp.intValue())));
                 //System.out.println(mc.getVelocity());
             }
             if(input.isRight()) {
                 mc.setVelocity(Math.abs(mc.getDefaultVelocity()));
-                mc.setX((int) (mc.getX() + (mc.getSpeed() * mc.getVelocity())));
+
+                BigDecimal temp = new BigDecimal((mc.getSpeed() * mc.getVelocity()));
+                temp = temp.setScale(0, RoundingMode.DOWN);
+
+                mc.setX((int) (mc.getX() + (mc.getSpeed() * temp.intValue())));
                 //System.out.println(mc.getVelocity());
             }
         }

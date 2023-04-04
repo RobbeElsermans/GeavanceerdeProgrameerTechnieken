@@ -1,6 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.factory;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
@@ -96,6 +97,24 @@ public abstract class AFactory {
      * @implNote  De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
      */
     public abstract AObstacleEntity getObstacleEntity(IPosition position, int life);
+
+    /**
+     * Geeft een ABonusEntity object terug met default waarden.
+     * @return ABonusEntity object
+     */
+    public abstract ABonusEntity getBonusEntity();
+
+    /**
+     * Geeft een ABonusEntity object terug met volgende parameters.
+     * @param position  Een positie van de entiteit als IPosition.
+     * @param life      Het leven van de entiteit als integer.
+     * @param speed     De snelheid waarmee de entiteit zich verplaatst als integer.
+     * @param velocity  De versnelling waarmee de entiteit zich verplaatst als integer.
+     * @return          ABulletEntity object
+     *
+     * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
+     */
+    public abstract ABonusEntity getBonusEntity(IPosition position, int life, int speed, double velocity, CollectableComponent.collectableType type , int value);
 
     public abstract ATextEntity getTextEntity();
     public abstract ATextEntity getTextEntity(IPosition pos, String preText);

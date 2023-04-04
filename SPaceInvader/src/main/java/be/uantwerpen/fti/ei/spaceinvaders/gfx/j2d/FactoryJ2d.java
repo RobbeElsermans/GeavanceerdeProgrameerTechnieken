@@ -1,5 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
@@ -49,7 +50,7 @@ public class FactoryJ2d extends AFactory {
         else
             position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getPlayerDimention(),speed,velocity);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getPlayerDimension(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new Playerj2d(movementComponent, livableComponent,graphicsContext);
@@ -70,7 +71,7 @@ public class FactoryJ2d extends AFactory {
         else
             position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimention(),speed,velocity);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimension(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new EnemyJ2d(movementComponent, livableComponent, graphicsContext);
@@ -84,7 +85,7 @@ public class FactoryJ2d extends AFactory {
     @Override
     public ABulletEntity getBulletEntity(IPosition position, int life, int speed,double velocity) {
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBulletDimention(),speed,velocity);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBulletDimension(),speed,velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new BulletJ2d(movementComponent, livableComponent, graphicsContext);
@@ -92,7 +93,7 @@ public class FactoryJ2d extends AFactory {
 
     @Override
     public AObstacleEntity getObstacleEntity() {
-        return null;
+        return new ObstacleJ2d(graphicsContext);
     }
 
     @Override
@@ -105,10 +106,48 @@ public class FactoryJ2d extends AFactory {
         else
             position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-        StaticComponent staticComponent = new StaticComponent(position, this.graphicsContext.getObjectDimention());
+        StaticComponent staticComponent = new StaticComponent(position, this.graphicsContext.getObjectDimension());
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new ObstacleJ2d(staticComponent, livableComponent, graphicsContext);
+    }
+
+    @Override
+    public ABonusEntity getBonusEntity() {
+        return new BonusJ2d(graphicsContext);
+    }
+
+    @Override
+    public ABonusEntity getBonusEntity(IPosition position, int life, int speed, double velocity, CollectableComponent.collectableType type, int value) {
+        //Schaal a.d.h.v. de game dimentions
+        position.setX(position.getX() * this.graphicsContext.getTileWidth());
+
+        if(position.getY() > 0)
+            position.setY(position.getY() * this.graphicsContext.getTileHeight());
+        else
+            position.setY(position.getY() * this.graphicsContext.getTileHeight());
+
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimension(),speed,velocity);
+        LivableComponent livableComponent = new LivableComponent(life);
+        CollectableComponent collectableComponent = new CollectableComponent(type, value);
+        /*
+        CollectableComponent collectableComponent;
+        //Selecteer typen at random
+        int temp = (int) (Math.random()*3);
+        if(temp == 0){
+            collectableComponent = new CollectableComponent(CollectableComponent.collectableType.life, life);
+        } else if (temp == 1) {
+
+        } else if (temp == 2) {
+
+        }
+        else {
+
+        }
+
+         */
+
+        return new BonusJ2d(movementComponent, livableComponent,collectableComponent, graphicsContext);
     }
 
     @Override

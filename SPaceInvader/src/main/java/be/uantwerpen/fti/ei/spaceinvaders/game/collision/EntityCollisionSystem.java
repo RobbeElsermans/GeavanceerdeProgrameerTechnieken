@@ -48,7 +48,6 @@ public class EntityCollisionSystem {
         return mc2.getY() + mc2.getHeight() >= mc1.getY();
     }
 }
-
 /*
 ﻿using Microsoft.Xna.Framework;
 

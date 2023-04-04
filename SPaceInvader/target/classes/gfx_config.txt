@@ -1,5 +1,5 @@
 width_console=600
-height_console=600
+height_console=400
 
 #width en height stelt 1 tile voor.
 width_player_sprite=1
@@ -10,5 +10,7 @@ width_bullet_sprite=0.2
 height_bullet_sprite=0.4
 width_text=20
 height_text=1
-width_object_sprite=1
+width_object_sprite=3
 height_object_sprite=1
+width_bonus_sprite=1.5
+height_bonus_sprite=1.5

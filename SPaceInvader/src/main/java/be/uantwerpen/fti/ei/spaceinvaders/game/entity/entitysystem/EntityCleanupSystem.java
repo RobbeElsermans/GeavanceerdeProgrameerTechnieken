@@ -1,7 +1,9 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABonusEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
 
 import java.util.List;
 
@@ -24,6 +26,19 @@ public class EntityCleanupSystem {
     public static void cleanupEnemys(List<AEnemyEntity> enemyEntityList){
         if(!enemyEntityList.isEmpty()){
             enemyEntityList.removeIf( b -> b.getLivableComponent().getLife()==0);       //Als de entiteit geen leven meer heeft.
+        }
+    }
+
+    public static void cleanupObstacles(List<AObstacleEntity> obstacleEntitieList) {
+        if(!obstacleEntitieList.isEmpty()){
+            obstacleEntitieList.removeIf( b -> b.getLivableComponent().getLife()==0);       //Als de entiteit geen leven meer heeft.
+        }
+    }
+
+    public static void cleanupBonuses(List<ABonusEntity> bonusEntityList) {
+        if(!bonusEntityList.isEmpty()){
+            bonusEntityList.removeIf( b -> b.getMovementComponent().getVelocity()==0);  //Als de entiteit ergens is tegen gebotst.
+            bonusEntityList.removeIf( b -> b.getLivableComponent().getLife()==0);       //Als de entiteit geen leven meer heeft.
         }
     }
 }

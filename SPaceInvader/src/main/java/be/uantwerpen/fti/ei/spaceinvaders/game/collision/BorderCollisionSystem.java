@@ -1,69 +1,100 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.collision;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Een klasse om rand collisions te detecteren tussen een positie (met dimensies) en de initiële gameDimensions
+ * Een collision Manager die de taak krijgt om de collisions uit te voeren en hiermee de entiteit de correcte locatie kan geven.
  */
 public class BorderCollisionSystem {
-
-    //TODO: misschien static maken om dan te gebruiken in CollisionManager
-
     /**
-     * De spel dimensies.
+     * Dedicated methoden om een borderCollision te detecteren en hierbij een correcte actie op uit te voeren.
+     * @param bc    Een BorderCollision object met een ingestelde gameBorder.
+     * @param mc    Een Movement component die de data van movement bijhoud.
      */
-    private final IDimension gameDimensions;
-    public BorderCollisionSystem(IDimension gameDimensions){
-        this.gameDimensions = gameDimensions;
+    public static void checkBorderCollisionPlayer(BorderCollision bc, MovementComponent mc) {
+
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
+            // if left collision.
+            mc.setX(0);
+            mc.setVelocity(0);
+            //TODO: Wat als het spel niet in 0 start?
+        }
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
+            // if right collision.
+            mc.setX((int) ((bc.getGameDimensions().getWidth()) - mc.getDimension().getWidth()));
+            mc.setVelocity(0);
+        }
+
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(0)) {
+            // if top collision.
+            mc.setY(0);
+            mc.setVelocity(0);
+            //TODO: Wat als het spel niet in 0 start?
+        }
+
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
+            // if bottom collision.
+            mc.setY((int) (bc.getGameDimensions().getHeight() - mc.getDimension().getHeight()));
+            mc.setVelocity(0);
+        }
     }
 
-    /**
-     * Kijken of dat er een collision is met een rand van het spel.
-     * @param position   positie van de entiteit
-     * @param dimension   dimensie van de entiteit (hoe groot deze is).
-     * @return List<Boolean>    met formaat [TOPCOLLISION, LEFTCOLLISION, BOTTOMCOLLISION, RIGHTCOLLISION]
-     */
-    public List<Boolean> checkBorderCollision(IPosition position, IDimension dimension){
-        List<Boolean> temp = new ArrayList<>();
 
-        //Als links boven hoek tegen de bovenkant komt
-        if(position.getY() <= 0)
-            temp.add(true);
-        else
-            temp.add(false);
+    public static void checkBorderCollisionEnemy(BorderCollision bc, List<MovementComponent> mcl) {
+        boolean hasCollideLeft = false;
+        boolean hasCollideRight = false;
+        boolean hasCollideBottom = false;
+        for (MovementComponent mc : mcl) {
+            if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
+                // if left collision.
+                mc.setX(0);
+                hasCollideLeft = true;
+                break;
+            }
+            if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
+                // if right collision.
+                //mc.setX(bc.getGameDimensions().getWidth() - (mc.getDimension().getWidth() + (mc.getSpeed())));
+                hasCollideRight = true;
+                break;
+            }
+        }
 
-        //Als links boven hoek tegen de linkse kant komt
-        if(position.getX() <= 0)
-            temp.add(true);
-        else
-            temp.add(false);
+        if(hasCollideLeft || hasCollideRight){
+            mcl.forEach(i -> i.setVelocity(0));
+        }
 
-        //Als recht onder hoek tegen de onderkant komt
-        //Hierbij moeten de dimensies bij
-        if(position.getY() + dimension.getHeight() >= this.gameDimensions.getHeight())
-            temp.add(true);
-        else
-            temp.add(false);
-
-        //Als recht onder hoek tegen de rechterkant komt
-        //Hierbij moeten de dimensies bij
-        if(position.getX() + dimension.getWidth() >= this.gameDimensions.getWidth())
-            temp.add(true);
-        else
-            temp.add(false);
-
-        return temp;
+        if(hasCollideRight){
+            //fix alle entiteiten want deze zijn te ver bewogen.
+            //mc.setX(bc.getGameDimensions().getWidth() - (mc.getDimension().getWidth() + (mc.getSpeed())));
+            mcl.forEach(mc -> mc.setX((int) ((mc.getX()) - mc.getSpeed()*Math.abs(mc.getDefaultVelocity()))));
+        }
     }
 
-    /**
-     * De gamedimensies die opgeslagen zijn.
-     * @return
-     */
-    public IDimension getGameDimensions() {
-        return gameDimensions;
+    public static void checkBorderCollisionBullet(BorderCollision bc, MovementComponent mc){
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(0)) {
+            // if top collision.
+            mc.setY(0);
+            mc.setVelocity(0);
+        }
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
+            // if bottom collision.
+            mc.setY((int) (bc.getGameDimensions().getHeight() - mc.getSpeed()*Math.abs(mc.getDefaultVelocity())));
+            mc.setVelocity(0);
+        }
+    }
+
+    public static void checkBorderCollisionBonus(BorderCollision bc, MovementComponent mc) {
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
+            // if left collision.
+            mc.setX(0);
+            mc.setVelocity(0);
+        }
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
+            // if right collision.
+            mc.setX((int) ((bc.getGameDimensions().getWidth()) - mc.getDimension().getWidth()));
+            mc.setVelocity(0);
+        }
     }
 }

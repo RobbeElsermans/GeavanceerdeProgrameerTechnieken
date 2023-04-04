@@ -32,8 +32,6 @@ public class EnemyMovementSystem {
          * Oplossing: Roundingmode Down
          * https://docs.oracle.com/javase/7/docs/api/java/math/RoundingMode.html
          */
-
-
         mcl.forEach(mc -> {
             BigDecimal temp = new BigDecimal((mc.getSpeed() * mc.getVelocity()));
             temp = temp.setScale(0,RoundingMode.DOWN);

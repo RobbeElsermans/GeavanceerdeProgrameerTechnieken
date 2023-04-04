@@ -37,4 +37,5 @@ public class GlobalShootSystem {
         lc1.downLifeByAmount(lc2.getLife());    //Damage lc1 met lc2 life
         lc2.downLifeByAmount(lc2.getLife());    //lc2 is ook dood want de waarden is afgegeven
     }
+
 }
