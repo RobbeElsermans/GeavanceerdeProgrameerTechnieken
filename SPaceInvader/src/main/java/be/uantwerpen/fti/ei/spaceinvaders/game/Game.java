@@ -20,6 +20,8 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
+import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,6 +75,9 @@ public class Game {
      * Een enemy schiet systeem
      */
     private EnemyShootSystem enemyShootSystem;
+
+    //TODO: refactor sound.
+    private SoundSystem soundSystem;
 
     /**
      * De variabelen komen mee met de constructor in een file.
@@ -136,6 +141,13 @@ public class Game {
         this.borderCollision = new BorderCollision(new Dimension(gameWidth * gfxFactory.getScale().getWidth(), gameHeight * gfxFactory.getScale().getHeight()));
         this.playerShootSystem = new PlayerShootSystem();
         this.enemyShootSystem = new EnemyShootSystem(1);
+        this.soundSystem = new SoundSystem();
+
+        //Voeg de geluidjes toe aan de soundcomponent in soundSystem.
+        this.soundSystem.getSoundComponent().addSound("/sound/explosion.wav", SoundType.playerDeadSound);
+        this.soundSystem.getSoundComponent().addSound("/sound/invaderkilled.wav", SoundType.enemyDeadSound);
+        this.soundSystem.getSoundComponent().addSound("/sound/shoot.wav", SoundType.playerShootSound);
+        this.soundSystem.getSoundComponent().addSound("/sound/ufo_lowpitch.wav", SoundType.bonusSound);
 
         // Player & texten blijven bestaan.
         playerEntitieList = new ArrayList<>();
@@ -166,10 +178,20 @@ public class Game {
     private void levelInitialize(int lvlNumber) {
         if (lvlNumber == 1) {
             //Create enemy
-            for (int i = 5; i < this.gameWidth - 5; i++) {
-                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 4 + (i % 3)), 1, 10, 0.5));
+            /*
+            for (int i = 5; i < this.gameWidth-5; i++) {
+                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 4 + (i % 3)), 1, 5, 0.5));
             }
 
+             */
+            for (int i = 6; i < this.gameWidth - 6; i++) {
+                if (i % 2 == 0) {
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 4), 4, 4, 0.5));
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 5), 3, 4, 0.5));
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 6), 2, 4, 0.5));
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 7), 1, 4, 0.5));
+                }
+            }
             //bonusEntityList.add(gfxFactory.getBonusEntity(new Position(2,1),1,3,0.5, CollectableComponent.collectableType.life,1));
 
             //Create Obstacles
@@ -178,9 +200,9 @@ public class Game {
             obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(23, this.gameHeight - 2), 3));
 
         } else if (lvlNumber == 2) {
-            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(2, 2), 3, 10, 0.5));
-            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(2, 3), 3, 10, 0.5));
-            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(4, 4), 3, 10, 0.5));
+            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(2, 2), 1, 2, 0.5));
+            //enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(2, 3), 3, 10, 0.5));
+            //enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(4, 4), 3, 10, 0.5));
 
             //Create Obstacles
             obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(15, this.gameHeight - 2), 3));
@@ -199,11 +221,16 @@ public class Game {
         double remainingFpsIntervalTime = 0;
         //TIJD CONSTANT HOUDEN
 
-        int levelNumber = 1;
-        while (true) {
-            levelInitialize(levelNumber);
+        //Sound test
+        //this.soundSystem.playSoundOnce(SoundType.playerShootSound);
+        //this.soundSystem.stopSoundLoop();
 
-            while (this.isRunning) {
+
+        int levelNumber = 1;
+        while (levelNumber <= 2) {   //maximum 2 levels
+            levelInitialize(levelNumber);
+            this.isRunning = true;
+            while (this.isRunning && levelNumber <= 2) { //maximum 2 levels
                 //render screen
                 render();
                 //update
@@ -242,8 +269,11 @@ public class Game {
 
         //Heeft een speler shotHits van %5 bereikt? maak dan een bonus van live van 1
         if (playerEntitieList.stream().anyMatch(i -> (i.getStatisticsComponent().getShotsHits() % 5 == 0) && (i.getStatisticsComponent().getShotsHits() > 0))) {
-            if (bonusEntityList.size() == 0)
-                bonusEntityList.add(gfxFactory.getBonusEntity(new Position(2, 1), 1, 3, 0.5, CollectableComponent.collectableType.life, 1));
+            if (this.bonusEntityList.size() == 0) {
+                this.bonusEntityList.add(this.gfxFactory.getBonusEntity(new Position(2, 1), 1, 3, 0.5, CollectableComponent.collectableType.life, 1));
+                this.soundSystem.playSoundOnce(SoundType.bonusSound);
+            }
+
         }
 
         if (enemyEntityList.isEmpty()) {
@@ -252,6 +282,7 @@ public class Game {
         }
 
         if (playerEntitieList.stream().map(APlayerEntity::getLivableComponent).anyMatch(i -> i.getLife() == 0)) {
+            soundSystem.playSoundOnce(SoundType.playerDeadSound);
             System.out.println("LOSE!");
             this.isRunning = false;
         }
@@ -263,6 +294,10 @@ public class Game {
             if (playerShootSystem.checkShoot(gfxFactory.getInput())) {
                 //Voer het schot uit.
                 GlobalShootSystem.fire(player.getMovementComponent(), player.getShootingComponent(), gfxFactory, FromWhoBulletType.player);
+
+                //Voer sound uit
+                this.soundSystem.playSoundOnce(SoundType.playerShootSound);
+
                 //STATISTICS
                 player.getStatisticsComponent().incrementShotsFired(1); //houd bij hoe vaak een speler geschoten heeft.
                 //STATISTICS
@@ -455,13 +490,17 @@ public class Game {
         });
 
         //Cleanup enemy's
-        EntityCleanupSystem.cleanupEnemys(enemyEntityList);
+        if (EntityCleanupSystem.cleanupEnemys(enemyEntityList)) {
+            soundSystem.playSoundOnce(SoundType.enemyDeadSound);
+        }
 
         //Cleanup obstacles
         EntityCleanupSystem.cleanupObstacles(obstacleEntitieList);
 
         //Cleanup bonuses
-        EntityCleanupSystem.cleanupBonuses(bonusEntityList);
+        if (EntityCleanupSystem.cleanupBonuses(bonusEntityList)) {
+            soundSystem.playSoundOnce(SoundType.enemyDeadSound);
+        }
     }
 
     /**
