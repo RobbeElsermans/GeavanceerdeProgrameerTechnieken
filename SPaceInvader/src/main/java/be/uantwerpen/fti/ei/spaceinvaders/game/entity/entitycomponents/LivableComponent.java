@@ -1,19 +1,20 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 /**
- * Een leefbaar component
+ * Een component dat een leven bevat.
  */
 public class LivableComponent{
     /**
-     * Het leven van een leefbaar entiteit
+     * Het leven van een leefbare entiteit. Standaard is dit 1.
      */
     private int life;
+
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
      */
     public LivableComponent() {
         super();
-        this.setLife(5);
+       this.life = 1;
     }
 
     /**
@@ -21,10 +22,6 @@ public class LivableComponent{
      * @param life      Het leven van de entiteit.
      */
     public LivableComponent(int life) {
-        this.setLife(life);
-    }
-
-    private void setLife(int life) {
         this.life = life;
     }
     public int getLife(){

@@ -3,21 +3,21 @@ package be.uantwerpen.fti.ei.spaceinvaders.game;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollision;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollisionSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BulletCollisionSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.collision.EntityCollisionSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.collision.EntityCollision;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.CollectableMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.GlobalMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCleanupSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.BulletMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.CollectableMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.EnemyMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.GlobalMovementSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.EnemyShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.FromWhoBulletType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.GlobalShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.PlayerShootSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 
@@ -133,7 +133,7 @@ public class Game {
      */
     private void baseInitialize() {
         // Systemen initialiseren
-        this.borderCollision = new BorderCollision(new Dimension(gameWidth * gfxFactory.getScaler().getWidth(), gameHeight * gfxFactory.getScaler().getHeight()));
+        this.borderCollision = new BorderCollision(new Dimension(gameWidth * gfxFactory.getScale().getWidth(), gameHeight * gfxFactory.getScale().getHeight()));
         this.playerShootSystem = new PlayerShootSystem();
         this.enemyShootSystem = new EnemyShootSystem(1);
 
@@ -151,8 +151,8 @@ public class Game {
 
         //Create texten a.d.h.v. aantal players.
         for (int i = 0; i < playerEntitieList.size(); i++) {
-            this.textLifeList.add(gfxFactory.getTextEntity(new Position(0, i * 2+1), "life: ", String.valueOf(this.playerEntitieList.get(i).getLivableComponent().getLife())));
-            this.textPointsList.add(gfxFactory.getTextEntity(new Position(0, i * 2+2), "points: ", "0"));
+            this.textLifeList.add(gfxFactory.getTextEntity(new Position(0, i * 2 + 1), "life: ", String.valueOf(this.playerEntitieList.get(i).getLivableComponent().getLife())));
+            this.textPointsList.add(gfxFactory.getTextEntity(new Position(0, i * 2 + 2), "points: ", "0"));
         }
     }
 
@@ -163,29 +163,28 @@ public class Game {
         obstacleEntitieList = new ArrayList<>();
     }
 
-    private void levelInitialize(int lvlNumber){
-        if(lvlNumber == 1){
+    private void levelInitialize(int lvlNumber) {
+        if (lvlNumber == 1) {
             //Create enemy
             for (int i = 5; i < this.gameWidth - 5; i++) {
-                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 4 + (i % 3)), 1, 2, 0.5));
+                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 4 + (i % 3)), 1, 10, 0.5));
             }
 
             //bonusEntityList.add(gfxFactory.getBonusEntity(new Position(2,1),1,3,0.5, CollectableComponent.collectableType.life,1));
 
             //Create Obstacles
-            obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(2,this.gameHeight-3),3));
-            obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(15,this.gameHeight-4),3));
-            obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(23,this.gameHeight-2),3));
+            obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(2, this.gameHeight - 3), 3));
+            obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(15, this.gameHeight - 4), 3));
+            obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(23, this.gameHeight - 2), 3));
 
         } else if (lvlNumber == 2) {
-            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(2,2 ), 3, 10, 0.5));
-            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(2,3 ), 3, 10, 0.5));
-            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(4,4 ), 3, 10, 0.5));
+            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(2, 2), 3, 10, 0.5));
+            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(2, 3), 3, 10, 0.5));
+            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(4, 4), 3, 10, 0.5));
 
             //Create Obstacles
-            obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(15,this.gameHeight-2),3));
-        }
-        else {
+            obstacleEntitieList.add(gfxFactory.getObstacleEntity(new Position(15, this.gameHeight - 2), 3));
+        } else {
 
         }
     }
@@ -242,9 +241,9 @@ public class Game {
     private void update() {
 
         //Heeft een speler shotHits van %5 bereikt? maak dan een bonus van live van 1
-        if(playerEntitieList.stream().anyMatch(i -> (i.getStatisticsComponent().getShotsHits() % 5 == 0)&&(i.getStatisticsComponent().getShotsHits()>0))){
-            if(bonusEntityList.size() == 0)
-                bonusEntityList.add(gfxFactory.getBonusEntity(new Position(2,1),1,3,0.5, CollectableComponent.collectableType.life,1));
+        if (playerEntitieList.stream().anyMatch(i -> (i.getStatisticsComponent().getShotsHits() % 5 == 0) && (i.getStatisticsComponent().getShotsHits() > 0))) {
+            if (bonusEntityList.size() == 0)
+                bonusEntityList.add(gfxFactory.getBonusEntity(new Position(2, 1), 1, 3, 0.5, CollectableComponent.collectableType.life, 1));
         }
 
         if (enemyEntityList.isEmpty()) {
@@ -263,7 +262,7 @@ public class Game {
 
             if (playerShootSystem.checkShoot(gfxFactory.getInput())) {
                 //Voer het schot uit.
-                GlobalShootSystem.fire(player.getMovementComponent(), player.getBulletList(), gfxFactory, FromWhoBulletType.player);
+                GlobalShootSystem.fire(player.getMovementComponent(), player.getShootingComponent(), gfxFactory, FromWhoBulletType.player);
                 //STATISTICS
                 player.getStatisticsComponent().incrementShotsFired(1); //houd bij hoe vaak een speler geschoten heeft.
                 //STATISTICS
@@ -275,21 +274,21 @@ public class Game {
         enemyEntityList.forEach(i -> {
             if (enemyShootSystem.checkShoot()) {
                 //Voer het schot uit.
-                GlobalShootSystem.fire(i.getMovementComponent(), i.getBulletList(), gfxFactory, FromWhoBulletType.enemy);
+                GlobalShootSystem.fire(i.getMovementComponent(), i.getShootingComponent(), gfxFactory, FromWhoBulletType.enemy);
             }
         });
 
         //Als er bullets aanwezig zijn van een speler, beweeg ze
         playerEntitieList.forEach(player -> {
-            if (!player.getBulletList().isEmpty()) {
-                player.getBulletList().forEach(b -> BulletMovementSystem.move(b.getMovementComponent()));
+            if (!player.getShootingComponent().getBulletList().isEmpty()) {
+                player.getShootingComponent().getBulletList().forEach(b -> BulletMovementSystem.move(b.getMovementComponent()));
             }
         });
 
         //Als er bullets aanwezig zijn van een enemy, beweeg ze
         enemyEntityList.forEach(enemy -> {
-            if (!enemy.getBulletList().isEmpty()) {
-                enemy.getBulletList().forEach(b -> BulletMovementSystem.move(b.getMovementComponent()));
+            if (!enemy.getShootingComponent().getBulletList().isEmpty()) {
+                enemy.getShootingComponent().getBulletList().forEach(b -> BulletMovementSystem.move(b.getMovementComponent()));
             }
         });
 
@@ -301,7 +300,7 @@ public class Game {
         checkCollisions();
 
         //Check voor wijzigingen in life en points van de spelers.
-        for (int i=0; i < playerEntitieList.size(); i++){
+        for (int i = 0; i < playerEntitieList.size(); i++) {
             textLifeList
                     .get(i)
                     .getInformationComponent()
@@ -329,7 +328,7 @@ public class Game {
 
         //Check bullet collision player with game ends
         for (APlayerEntity player : playerEntitieList) {
-            for (ABulletEntity b : player.getBulletList()) {
+            for (ABulletEntity b : player.getShootingComponent().getBulletList()) {
 
                 //STATISTICS
                 double tempVelocityBullets = b.getMovementComponent().getVelocity();
@@ -347,7 +346,7 @@ public class Game {
 
         //Check bullet collision enemy with game ends
         for (AEnemyEntity enemy : enemyEntityList) {
-            for (ABulletEntity b : enemy.getBulletList()) {
+            for (ABulletEntity b : enemy.getShootingComponent().getBulletList()) {
                 BorderCollisionSystem.checkBorderCollisionBullet(borderCollision, b.getMovementComponent());
             }
         }
@@ -368,7 +367,7 @@ public class Game {
         //Check for bullet to enemy collision
         for (AEnemyEntity enemy : enemyEntityList) {
             for (APlayerEntity player : playerEntitieList) {
-                for (ABulletEntity bullet : player.getBulletList()) {
+                for (ABulletEntity bullet : player.getShootingComponent().getBulletList()) {
                     if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), enemy.getMovementComponent())) {
 
                         //STATISTICS
@@ -385,7 +384,7 @@ public class Game {
         //Check for bullet to player collision
         for (APlayerEntity player : playerEntitieList) {
             for (AEnemyEntity enemy : enemyEntityList) {
-                for (ABulletEntity bullet : enemy.getBulletList()) {
+                for (ABulletEntity bullet : enemy.getShootingComponent().getBulletList()) {
                     if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), player.getMovementComponent())) {
 
                         //STATISTICS
@@ -401,7 +400,7 @@ public class Game {
         //Check for bullet to obstacle from enemy and player
         for (AObstacleEntity obstacle : obstacleEntitieList) {
             for (AEnemyEntity enemy : enemyEntityList) {
-                for (ABulletEntity bullet : enemy.getBulletList()) {
+                for (ABulletEntity bullet : enemy.getShootingComponent().getBulletList()) {
                     if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), obstacle.getStaticComponent())) {
                         GlobalShootSystem.damage(obstacle.getLivableComponent(), bullet.getLivableComponent());
                     }
@@ -411,7 +410,7 @@ public class Game {
 
         for (AObstacleEntity obstacle : obstacleEntitieList) {
             for (APlayerEntity player : playerEntitieList) {
-                for (ABulletEntity bullet : player.getBulletList()) {
+                for (ABulletEntity bullet : player.getShootingComponent().getBulletList()) {
                     if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), obstacle.getStaticComponent())) {
                         GlobalShootSystem.damage(obstacle.getLivableComponent(), bullet.getLivableComponent());
                     }
@@ -422,11 +421,11 @@ public class Game {
         //Check for bullets from player to bonus
         for (ABonusEntity bonus : bonusEntityList) {
             for (APlayerEntity player : playerEntitieList) {
-                for (ABulletEntity bullet : player.getBulletList()) {
+                for (ABulletEntity bullet : player.getShootingComponent().getBulletList()) {
                     if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), bonus.getMovementComponent())) {
                         GlobalShootSystem.damage(bonus.getLivableComponent(), bullet.getLivableComponent());
 
-                        if(bonus.getCollectableComponent().getType() == CollectableComponent.collectableType.life){
+                        if (bonus.getCollectableComponent().getType() == CollectableComponent.collectableType.life) {
                             player.getLivableComponent().upLifeByAmount(bonus.getCollectableComponent().getValue());
                         }
 
@@ -437,7 +436,7 @@ public class Game {
 
         //Check player to an enemy collision
         for (MovementComponent emc : enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList())
-            if (EntityCollisionSystem.entityIsOnSameLine(playerEntitieList.get(0).getMovementComponent(), emc)) {
+            if (EntityCollision.entityIsOnSameLine(playerEntitieList.get(0).getMovementComponent(), emc)) {
                 System.out.println("DEAD!");
                 this.isRunning = false;
                 break;
@@ -447,12 +446,12 @@ public class Game {
     void doCleanup() {
         //Cleanup bullets van een speler
         playerEntitieList.forEach(player -> {
-            EntityCleanupSystem.cleanupBullets(player.getBulletList());
+            EntityCleanupSystem.cleanupBullets(player.getShootingComponent().getBulletList());
         });
 
         //Cleanup bullets van een enemy
         enemyEntityList.forEach(enemy -> {
-            EntityCleanupSystem.cleanupBullets(enemy.getBulletList());
+            EntityCleanupSystem.cleanupBullets(enemy.getShootingComponent().getBulletList());
         });
 
         //Cleanup enemy's

@@ -1,23 +1,37 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting;
 
-public class EnemyShootSystem extends GlobalShootSystem{
+/**
+ * Dedicated ShootSysteem voor een enemy entiteit.
+ */
+public class EnemyShootSystem extends GlobalShootSystem {
+    /**
+     * De difficulty van een enemy shoot systeem. Standaard is dit 1.
+     */
     private int diff;
-    public EnemyShootSystem(){
+
+    /**
+     * Default constructor waarbij de parameters de default waarden krijgen.
+     */
+    public EnemyShootSystem() {
         diff = 1;
     }
 
     /**
+     * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param diff duid de moeilijkheid aan. Hoe hoger, hoe moeilijker.
      */
-    public EnemyShootSystem(int diff){
+    public EnemyShootSystem(int diff) {
         this.diff = diff;
     }
+
+    /**
+     * Een functie die bepaald wanneer een enemy mag schieten.
+     * @return  True als de enemy mag schieten. Anders false.
+     */
     public boolean checkShoot() {
         //Math.floor(Math.random() *(max - min + 1) + min)
-        int randomTime = (int) (Math.random() * (2000/diff));
-        if(randomTime == 3)
-            return true;
-        return false;
+        int randomTime = (int) (Math.random() * (2000 / diff));
+        return randomTime == 3;
     }
 }

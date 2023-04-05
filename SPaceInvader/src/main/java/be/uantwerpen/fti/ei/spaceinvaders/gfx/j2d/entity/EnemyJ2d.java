@@ -21,7 +21,7 @@ public class EnemyJ2d extends AEnemyEntity {
     }
     @Override
     public void visualize() {
-        for (ABulletEntity aBulletEntity : getBulletList()) {
+        for (ABulletEntity aBulletEntity : getShootingComponent().getBulletList()) {
             aBulletEntity.visualize();
         }
         //Use the gfx to draw onto the buffer

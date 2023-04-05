@@ -195,7 +195,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public IDimension getScaler() {
+    public IDimension getScale() {
         return new Dimension(graphicsContext.getTileWidth(), graphicsContext.getTileHeight());
     }
 }

@@ -1,17 +1,41 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 /**
- * Bevat verschillende statistieke waardes.
+ * Een component dat verschillende statistieke waardes bevat.
  */
 public class StatisticsComponent {
+    /**
+     * De hoeveelheid damage dat het kreeg.
+     */
     private int damageTaken = 0;
+    /**
+     * De hoeveelheid damage dat er uitgedeeld is.
+     */
     private int damageDone = 0;
+    /**
+     * De hoeveelheid levens genomen.
+     */
     private int livesTaken = 0;
+    /**
+     * De hoeveelheid levens verloren.
+     */
     private int livesLose = 0;
+    /**
+     * De hoeveelheid schoten afgevuurd.
+     */
     private int shotsFired = 0;
+    /**
+     * De hoeveelheid schoten er gemist zijn.
+     */
     private int shotsMissed = 0;
+    /**
+     * De hoeveelheid schoten dat raak waren.
+     */
     private int shotsHits = 0;
 
+    /**
+     * Default constructor.
+     */
     public StatisticsComponent(){
     }
 

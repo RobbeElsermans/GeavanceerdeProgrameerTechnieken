@@ -1,5 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller;
 
+/**
+ * Interface die een player input bevat.
+ */
 public interface IInput {
 
     //TODO: IInput meer onderverdelen in bv. IProjectileInput, ICharacterInput

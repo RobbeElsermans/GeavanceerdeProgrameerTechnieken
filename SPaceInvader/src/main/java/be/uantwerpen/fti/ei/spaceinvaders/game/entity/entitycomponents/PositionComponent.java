@@ -5,6 +5,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 
+/**
+ * Een component dat een positie en dimensie bevat.
+ */
 public class PositionComponent {
     /**
      * De coördinaat van een entiteit. Default is dit (0,0).
@@ -17,7 +20,7 @@ public class PositionComponent {
     private IDimension dimentions;
 
     /**
-     * default constructor die positie en dimensie op default zal plaatsen.
+     * Default constructor die positie en dimensie op default zal plaatsen.
      */
     public PositionComponent() {
         this.position = new Position(0,0);

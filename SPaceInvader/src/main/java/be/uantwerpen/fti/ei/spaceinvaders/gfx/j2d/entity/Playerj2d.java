@@ -22,7 +22,7 @@ public class Playerj2d extends APlayerEntity {
 
     @Override
     public void visualize() {
-        for (ABulletEntity aBulletEntity : getBulletList()) {
+        for (ABulletEntity aBulletEntity : getShootingComponent().getBulletList()) {
             aBulletEntity.visualize();
         }
         //Use the gfx to draw onto the buffer

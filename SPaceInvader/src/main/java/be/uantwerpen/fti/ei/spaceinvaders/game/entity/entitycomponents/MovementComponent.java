@@ -4,7 +4,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 
 /**
- * Een beweegbaar component
+ * Een component dat een positie, dimensie, snelheid en versnelling bevat.
  */
 public class MovementComponent extends PositionComponent {
     /**
@@ -16,7 +16,13 @@ public class MovementComponent extends PositionComponent {
      * De snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 1.
      */
     private double velocity;
+    /**
+     * De vorige velocity. Wordt aangepast wanneer we de velocity wijzigen.
+     */
     private double prevVelocity;
+    /**
+     * De default velocity. Wordt gezet bij aanmaken component.
+     */
     private final double defaultVelocity;
 
     /**

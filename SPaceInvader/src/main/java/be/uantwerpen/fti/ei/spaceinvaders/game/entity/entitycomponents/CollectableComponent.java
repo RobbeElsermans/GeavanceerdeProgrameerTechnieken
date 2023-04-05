@@ -1,25 +1,44 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
+/**
+ * Een component dat een collectable bevat.
+ */
 public class CollectableComponent {
     //Zorgen voor een type etc
-    public enum collectableType{
-        life,
-        reloadSpeed,
-        moveSpeed
+
+    /**
+     * Het typen collectable.
+     */
+    public enum collectableType {
+        life,   //Life collectable
+        reloadSpeed,    //De snelheid van herladen
+        moveSpeed   //De bewegingssnelheid
     }
 
+    /**
+     * Het typen van de collectable.
+     */
     private collectableType type;
+    /**
+     * De waarde van de collectable.
+     */
     private int value;
 
     /**
      * Default constructor waarbij er als typen life genomen wordt met waarde 1.
      */
-    public CollectableComponent(){
+    public CollectableComponent() {
         this.type = collectableType.life;
         this.value = 1;
     }
 
-    public CollectableComponent(collectableType type, int value){
+    /**
+     * Overload constructor die de entiteit andere parameter waardes kan geven.
+     *
+     * @param type  Een specifiek type van collectableType.
+     * @param value Een value die bij het typen hoort. Kan zowel negatief als positief zijn.
+     */
+    public CollectableComponent(collectableType type, int value) {
         this.type = type;
         this.value = value;
     }

@@ -1,7 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 /**
- * Een entiteit dat informatie kan bevatten.
+ * Een component dat informatie bevat.
  */
 public class InformationComponent{
     private String preInfoText;
