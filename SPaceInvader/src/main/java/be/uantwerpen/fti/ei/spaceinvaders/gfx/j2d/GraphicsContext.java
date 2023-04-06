@@ -152,7 +152,7 @@ public class GraphicsContext {
     public void render() {
 
         if (g2d != null)
-            g2d.setBackground(new Color(255, 255, 255));
+            g2d.setBackground(new Color(0, 0, 0));
             g2d.clearRect(0, 0, frame.getWidth(), frame.getHeight());
 
         frame.repaint();

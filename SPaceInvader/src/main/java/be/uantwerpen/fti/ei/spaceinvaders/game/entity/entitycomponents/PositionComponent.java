@@ -15,26 +15,19 @@ public class PositionComponent {
     private final IPosition position;
 
     /**
-     * De dimensie van een entiteit. Default is dit (1,1).
-     */
-    private IDimension dimentions;
-
-    /**
      * Default constructor die positie en dimensie op default zal plaatsen.
      */
     public PositionComponent() {
         this.position = new Position(0,0);
-        this.dimentions = new Dimension(1,1);
     }
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      * @param position  De positie van de entiteit.
-     * @param dimension De dimensie van de entiteit.
      */
-    public PositionComponent(IPosition position, IDimension dimension) {
+    public PositionComponent(IPosition position) {
         this.position = position;
-        this.dimentions = dimension;
+
     }
 
 
@@ -58,27 +51,10 @@ public class PositionComponent {
         return this.position;
     }
 
-    public int getWidth() {
-        return (int) this.dimentions.getWidth();
-    }
-
-    public int getHeight(){
-        return (int) this.dimentions.getHeight();
-    }
-    public IDimension getDimension()
-    {
-        return this.dimentions.getDimension();
-    }
-    public void setDimension(IDimension dimension)
-    {
-        this.dimentions = dimension;
-    }
-
     @Override
     public String toString() {
         return "PositionComponent{" +
                 "position=" + position +
-                ", dimentions=" + dimentions +
                 '}';
     }
 }

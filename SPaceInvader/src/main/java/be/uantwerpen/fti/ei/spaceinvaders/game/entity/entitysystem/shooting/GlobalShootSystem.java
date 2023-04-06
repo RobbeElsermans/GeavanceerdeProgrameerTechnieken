@@ -22,10 +22,10 @@ public class GlobalShootSystem {
      */
     public static void fire(MovementComponent mc, ShootingComponent sc, AFactory af, FromWhoBulletType bt) {
         ABulletEntity tempBulletEntity = null;
-        if (bt == FromWhoBulletType.enemy)
+        if (bt == FromWhoBulletType.ENEMY)
             tempBulletEntity = af.getBulletEntity(new Position(mc.getX() + (mc.getWidth() / 2), mc.getY()), 1, 2, 1);
 
-        if (bt == FromWhoBulletType.player)
+        if (bt == FromWhoBulletType.PLAYER)
             tempBulletEntity = af.getBulletEntity(new Position(mc.getX() + (mc.getWidth() / 2), mc.getY()), 1, 2, -1);
         sc.getBulletList().add(tempBulletEntity);
     }

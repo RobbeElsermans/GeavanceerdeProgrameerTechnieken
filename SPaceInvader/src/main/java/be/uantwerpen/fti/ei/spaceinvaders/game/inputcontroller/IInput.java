@@ -13,44 +13,56 @@ public interface IInput {
      */
     boolean inputAvailable();
     /**
-     * is de knop up ingedrukt geef dan true terug.
+     * Is de knop up ingedrukt geef dan true terug.
      * @return boolean
      */
     boolean isUp();
     /**
-     * is de knop down ingedrukt geef dan true terug.
+     * Is de knop down ingedrukt geef dan true terug.
      * @return boolean
      */
     boolean isDown();
     /**
-     * is de knop left ingedrukt geef dan true terug.
+     * Is de knop left ingedrukt geef dan true terug.
      * @return boolean
      */
     boolean isLeft();
     /**
-     * is de knop right ingedrukt geef dan true terug.
+     * Is de knop right ingedrukt geef dan true terug.
      * @return boolean
      */
     boolean isRight();
     /**
-     * is de knop shoot ingedrukt geef dan true terug.
+     * Is de knop shoot ingedrukt geef dan true terug.
      * @return boolean
      */
     boolean isShoot();
     /**
-     * is de knop volume up ingedrukt geef dan true terug.
+     * Is de knop volume up ingedrukt geef dan true terug.
      * @return boolean
      */
     boolean isVolUp();
     /**
-     * is de knop volume down ingedrukt geef dan true terug.
+     * Is de knop volume down ingedrukt geef dan true terug.
      * @return boolean
      */
     boolean isVolDown();
     /**
-     * is de knop escape ingedrukt geef dan true terug.
+     * Is de knop escape ingedrukt geef dan true terug.
      * @return boolean
      */
     boolean isEsc();
+
+    /**
+     * Is de knop Enter ingedrukt geef dan true terug.
+     * @return boolean
+     */
+    boolean isEnter();
+
+    /**
+     * Is de knop Quit ingedrukt geef dan true terug.
+     * @return boolean
+     */
+    boolean isQuit();
 
 }

@@ -1,7 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.DimensionComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StaticComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
 /**
@@ -11,7 +11,7 @@ public abstract class AObstacleEntity implements IVisualize {
     /**
      * De entiteit kan op een positie staan en heeft een dimensie
      */
-    private final StaticComponent staticComponent;
+    private final DimensionComponent dimensionComponent;
     /**
      * De entiteit leeft.
      */
@@ -21,25 +21,25 @@ public abstract class AObstacleEntity implements IVisualize {
      * Default constructor waarbij de parameters de default waarden krijgen.
      */
     public AObstacleEntity() {
-        this.staticComponent = new StaticComponent();
+        this.dimensionComponent = new DimensionComponent();
         this.livableComponent = new LivableComponent();
     }
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
-     * @param staticComponent   De locatie en dimensie van de entiteit.
+     * @param dimensionComponent   De locatie en dimensie van de entiteit.
      * @param livableComponent  Het leven van de entiteit.
      */
-    public AObstacleEntity(StaticComponent staticComponent, LivableComponent livableComponent) {
-        this.staticComponent = staticComponent;
+    public AObstacleEntity(DimensionComponent dimensionComponent, LivableComponent livableComponent) {
+        this.dimensionComponent = dimensionComponent;
         this.livableComponent = livableComponent;
     }
 
     public LivableComponent getLivableComponent() {
         return livableComponent;
     }
-    public StaticComponent getStaticComponent() {
-        return staticComponent;
+    public DimensionComponent getStaticComponent() {
+        return dimensionComponent;
     }
 }

@@ -1,15 +1,17 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
+
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StaticComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class FactoryJ2d extends AFactory {
 
@@ -19,18 +21,18 @@ public class FactoryJ2d extends AFactory {
 
     /**
      * Initializeer Java2D met gegeven configuratie bestand.
-     * @param configFile    Deze bevat de locatie van het configuratiebestand.
      *
+     * @param configFile Deze bevat de locatie van het configuratiebestand.
      * @description Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
-    public FactoryJ2d(String configFile){
+    public FactoryJ2d(String configFile) {
         this.configFile = configFile;
     }
 
     @Override
-    public void setupGameDimentions(IDimension dimension){
+    public void setupGameDimentions(IDimension dimension) {
         super.setupGameDimentions(dimension);
-        this.graphicsContext = new GraphicsContext(this.getGameDimension(),this.configFile);
+        this.graphicsContext = new GraphicsContext(this.getGameDimension(), this.configFile);
         this.keyboardInput = new KeyboardInputController(this.graphicsContext);
     }
 
@@ -40,20 +42,16 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public APlayerEntity getPlayerEntity(IPosition position, int life, int speed,double velocity) {
+    public APlayerEntity getPlayerEntity(IPosition position, int life, int speed, double velocity) {
 
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
-        //TODO refactor game dimensie zodat het schaalt a.d.h.v. de gfx_config en game_config
-        if(position.getY() > 0)
-            position.setY(position.getY() * this.graphicsContext.getTileHeight());
-        else
-            position.setY(position.getY() * this.graphicsContext.getTileHeight());
+        position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getPlayerDimension(),speed,velocity);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getPlayerDimension(), speed, velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
-        return new Playerj2d(movementComponent, livableComponent,graphicsContext);
+        return new Playerj2d(movementComponent, livableComponent, graphicsContext);
     }
 
     @Override
@@ -62,16 +60,12 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed,double velocity) {
+    public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed, double velocity) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
+        position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-        if(position.getY() > 0)
-            position.setY(position.getY() * this.graphicsContext.getTileHeight());
-        else
-            position.setY(position.getY() * this.graphicsContext.getTileHeight());
-
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimension(),speed,velocity);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimension(), speed, velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new EnemyJ2d(movementComponent, livableComponent, graphicsContext);
@@ -83,9 +77,9 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public ABulletEntity getBulletEntity(IPosition position, int life, int speed,double velocity) {
+    public ABulletEntity getBulletEntity(IPosition position, int life, int speed, double velocity) {
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBulletDimension(),speed,velocity);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBulletDimension(), speed, velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new BulletJ2d(movementComponent, livableComponent, graphicsContext);
@@ -100,34 +94,27 @@ public class FactoryJ2d extends AFactory {
     public AObstacleEntity getObstacleEntity(IPosition position, int life) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
+        position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-        if(position.getY() > 0)
-            position.setY(position.getY() * this.graphicsContext.getTileHeight());
-        else
-            position.setY(position.getY() * this.graphicsContext.getTileHeight());
-
-        StaticComponent staticComponent = new StaticComponent(position, this.graphicsContext.getObjectDimension());
+        DimensionComponent dimensionComponent = new DimensionComponent(position, this.graphicsContext.getObjectDimension());
         LivableComponent livableComponent = new LivableComponent(life);
 
-        return new ObstacleJ2d(staticComponent, livableComponent, graphicsContext);
+        return new ObstacleJ2d(dimensionComponent, livableComponent, graphicsContext);
     }
 
     @Override
-    public ABonusEntity getBonusEntity() {
-        return new BonusJ2d(graphicsContext);
+    public ABigEnemyEntity getBigEnemyEntity() {
+        return new BigEnemyJ2D(graphicsContext);
     }
 
     @Override
-    public ABonusEntity getBonusEntity(IPosition position, int life, int speed, double velocity, CollectableComponent.collectableType type, int value) {
+    public ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, int speed, double velocity, CollectableComponent.collectableType type, int value) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
+        position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-        if(position.getY() > 0)
-            position.setY(position.getY() * this.graphicsContext.getTileHeight());
-        else
-            position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimension(),speed,velocity);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimension(), speed, velocity);
         LivableComponent livableComponent = new LivableComponent(life);
         CollectableComponent collectableComponent = new CollectableComponent(type, value);
         /*
@@ -147,7 +134,7 @@ public class FactoryJ2d extends AFactory {
 
          */
 
-        return new BonusJ2d(movementComponent, livableComponent,collectableComponent, graphicsContext);
+        return new BigEnemyJ2D(movementComponent, livableComponent, graphicsContext);
     }
 
     @Override
@@ -159,34 +146,81 @@ public class FactoryJ2d extends AFactory {
     public ATextEntity getTextEntity(IPosition pos, String preText) {
         //Schaal a.d.h.v. de game dimentions
         pos.setX(pos.getX() * this.graphicsContext.getTileWidth());
+        pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
 
-        if(pos.getY() > 0)
-            pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
-        else
-            pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
+        DimensionComponent dimensionComponent = new DimensionComponent(pos, this.graphicsContext.getTextDimention());
 
-        StaticComponent staticComponent = new StaticComponent(pos, this.graphicsContext.getTextDimention());
-
-        return new TextJ2d(staticComponent, preText,graphicsContext);
+        return new TextJ2d(dimensionComponent, preText, graphicsContext);
     }
 
     @Override
     public ATextEntity getTextEntity(IPosition pos, String preText, String text) {
         //Schaal a.d.h.v. de game dimentions
         pos.setX(pos.getX() * this.graphicsContext.getTileWidth());
+        pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
 
-        if(pos.getY() > 0)
-            pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
-        else
-            pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
-
-        StaticComponent staticComponent = new StaticComponent(pos, this.graphicsContext.getTextDimention());
-        return new TextJ2d(staticComponent, preText,text,graphicsContext);
+        DimensionComponent dimensionComponent = new DimensionComponent(pos, this.graphicsContext.getTextDimention());
+        return new TextJ2d(dimensionComponent, preText, text, graphicsContext);
     }
 
     @Override
     public void render() {
         graphicsContext.render();
+    }
+
+    @Override
+    public AScreenEntity getStartScreen(IPosition pos, String titleText, String enterText, String excText) {
+        //Maak de positie relatief in het scherm vlak.
+        PositionComponent positionHeading = new PositionComponent(new Position((pos.getX() + 2) * this.graphicsContext.getTileWidth(), (pos.getY()) * this.graphicsContext.getTileHeight()));
+        PositionComponent positionEnterText = new PositionComponent(new Position((pos.getX() + 3) * this.graphicsContext.getTileWidth(), (pos.getY() + 1) * this.graphicsContext.getTileHeight()));
+        PositionComponent positionEscText = new PositionComponent(new Position((pos.getX() + 3) * this.graphicsContext.getTileWidth(), (pos.getY() + 2) * this.graphicsContext.getTileHeight()));
+
+        PositionComponent positionScreen = new PositionComponent(new Position(pos.getX() * this.graphicsContext.getTileWidth(), pos.getY() * this.graphicsContext.getTileHeight()));
+
+        List<ATextEntity> textEntities = new ArrayList<>();
+        textEntities.add(new TextJ2d(positionHeading, titleText, graphicsContext));
+        textEntities.add(new TextJ2d(positionEnterText, enterText, graphicsContext));
+        textEntities.add(new TextJ2d(positionEscText, excText, graphicsContext));
+
+        return new StartScreenJ2d(positionScreen, textEntities, graphicsContext);
+    }
+
+    @Override
+    public AScreenEntity getPauseScreen(IPosition pos, String titleText, String enterText, String excText) {
+        //Maak de positie relatief in het scherm vlak.
+        PositionComponent positionHeading = new PositionComponent(new Position((pos.getX() + 2) * this.graphicsContext.getTileWidth(), (pos.getY()) * this.graphicsContext.getTileHeight()));
+        PositionComponent positionEnterText = new PositionComponent(new Position((pos.getX() + 3) * this.graphicsContext.getTileWidth(), (pos.getY() + 1) * this.graphicsContext.getTileHeight()));
+        PositionComponent positionEscText = new PositionComponent(new Position((pos.getX() + 3) * this.graphicsContext.getTileWidth(), (pos.getY() + 2) * this.graphicsContext.getTileHeight()));
+
+        PositionComponent positionScreen = new PositionComponent(new Position(pos.getX() * this.graphicsContext.getTileWidth(), pos.getY() * this.graphicsContext.getTileHeight()));
+
+        List<ATextEntity> textEntities = new ArrayList<>();
+        textEntities.add(new TextJ2d(positionHeading, titleText, graphicsContext));
+        textEntities.add(new TextJ2d(positionEnterText, enterText, graphicsContext));
+        textEntities.add(new TextJ2d(positionEscText, excText, graphicsContext));
+
+        return new PauseScreenJ2d(positionScreen, textEntities, graphicsContext);
+    }
+
+    @Override
+    public AScreenEntity getEndScreen(IPosition pos, String titleText, String enterText, String excText, String preScore, String preHighScore) {
+        //Maak de positie relatief in het scherm vlak.
+        PositionComponent positionHeading = new PositionComponent(new Position((pos.getX() + 2) * this.graphicsContext.getTileWidth(), (pos.getY()) * this.graphicsContext.getTileHeight()));
+        PositionComponent positionPreScoreText = new PositionComponent(new Position((pos.getX() + 3) * this.graphicsContext.getTileWidth(), (pos.getY() + 1) * this.graphicsContext.getTileHeight()));
+        PositionComponent positionPreHighScoreText = new PositionComponent(new Position((pos.getX() + 3) * this.graphicsContext.getTileWidth(), (pos.getY() + 2) * this.graphicsContext.getTileHeight()));
+        PositionComponent positionEnterText = new PositionComponent(new Position((pos.getX() + 3) * this.graphicsContext.getTileWidth(), (pos.getY() + 4) * this.graphicsContext.getTileHeight()));
+        PositionComponent positionEscText = new PositionComponent(new Position((pos.getX() + 3) * this.graphicsContext.getTileWidth(), (pos.getY() + 5) * this.graphicsContext.getTileHeight()));
+
+        PositionComponent positionScreen = new PositionComponent(new Position(pos.getX() * this.graphicsContext.getTileWidth(), pos.getY() * this.graphicsContext.getTileHeight()));
+
+        List<ATextEntity> textEntities = new ArrayList<>();
+        textEntities.add(new TextJ2d(positionHeading, titleText, graphicsContext));
+        textEntities.add(new TextJ2d(positionPreScoreText, preScore, graphicsContext));
+        textEntities.add(new TextJ2d(positionPreHighScoreText, preHighScore, graphicsContext));
+        textEntities.add(new TextJ2d(positionEnterText, enterText, graphicsContext));
+        textEntities.add(new TextJ2d(positionEscText, excText, graphicsContext));
+
+        return new EndScreenJ2d(positionScreen, textEntities, graphicsContext);
     }
 
     @Override

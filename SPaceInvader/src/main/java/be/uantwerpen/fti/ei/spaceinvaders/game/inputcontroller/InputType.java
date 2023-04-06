@@ -11,6 +11,9 @@ public enum InputType {
     RIGHT,
     SHOOT,
     ESC,
-    VOLUP,
-    VOLDOWN
+    VOLUME_UP,
+    VOLUME_DOWN,
+    ENTER,
+    QUIT
 }
+

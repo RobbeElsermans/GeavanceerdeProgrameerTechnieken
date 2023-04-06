@@ -101,6 +101,27 @@ public class FileManager {
     }
 
     /**
+     * Wijzig een bestand met een property.
+     *
+     * @param propertyName De naam van de property.
+     * @param location     Het bestands-pad met de naam included.
+     * @param value De default value in string formaat.
+     */
+    public static void propOverwrite(String propertyName, String location, String value) {
+        try {
+            String configString = propertyName + "=" + value + "\n";
+
+            FileWriter fileWriter = new FileWriter(location, false);
+            fileWriter.append(configString);
+            fileWriter.close();
+
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+            //System.out.println("Er is een fout bestand pad meegegeven!");
+        }
+    }
+
+    /**
      * Voeg een property toe aan een bestand.
      *
      * @param propertyName De naam van de property.

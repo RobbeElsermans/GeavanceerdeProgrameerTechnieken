@@ -112,7 +112,7 @@ public abstract class AFactory {
      *
      * @return ABonusEntity object
      */
-    public abstract ABonusEntity getBonusEntity();
+    public abstract ABigEnemyEntity getBigEnemyEntity();
 
     /**
      * Geeft een ABonusEntity object terug met volgende parameters.
@@ -126,7 +126,7 @@ public abstract class AFactory {
      * @return ABonusEntity object.
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
      */
-    public abstract ABonusEntity getBonusEntity(IPosition position, int life, int speed, double velocity, CollectableComponent.collectableType type, int value);
+    public abstract ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, int speed, double velocity, CollectableComponent.collectableType type, int value);
 
     /**
      * Geeft een ATextEntity object terug met default waarden.
@@ -158,6 +158,54 @@ public abstract class AFactory {
      * De gekozen GFX renderen.
      */
     public abstract void render();
+
+    /**
+     * Het startscherm van het spel.
+     *
+     * @implNote Hierop kan de gebruiker ENTER -> naar spel gaan of ESC -> het spel afsluiten.
+     * Geen bewegende delen zijn nodig.
+     */
+
+    /**
+     * Het startscherm van het spel.
+     *
+     * @param pos       positie
+     * @param TitleText titel tekst
+     * @param enterText De tekst waar we willen aantonen dat enter, verder gaan is.
+     * @param excText   De tekst waar we willen aantonen dat ecs, stoppen is.
+     * @return AScreenEntity
+     * @implNote Hierop kan de gebruiker ENTER -> naar spel gaan of ESC -> het spel afsluiten.
+     * Geen bewegende delen zijn nodig.
+     */
+    public abstract AScreenEntity getStartScreen(IPosition pos, String TitleText, String enterText, String excText);
+
+    /**
+     * Het pauzescherm van het spel.
+     *
+     * @param pos       positie
+     * @param TitleText titel tekst
+     * @param enterText De tekst waar we willen aantonen dat enter, verder gaan is.
+     * @param excText   De tekst waar we willen aantonen dat ecs, stoppen is.
+     * @return AScreenEntity
+     * @implNote Hierop kan de gebruiker ENTER -> terug keren naar het spel of ESC -> het spel afsluiten.
+     * Geen bewegende delen zijn nodig.
+     */
+    public abstract AScreenEntity getPauseScreen(IPosition pos, String TitleText, String enterText, String excText);
+
+    /**
+     * Het eindscherm van het spel.
+     *
+     * @param pos       positie
+     * @param TitleText titel tekst
+     * @param enterText De tekst waar we willen aantonen dat enter, verder gaan is.
+     * @param excText   De tekst waar we willen aantonen dat ecs, stoppen is.
+     * @return AScreenEntity
+     * @implNote Hierop kan de gebruiker ENTER -> om opnieuw te starten of ESC -> het spel afsluiten.
+     * Geen bewegende delen zijn nodig.
+     * De score van huidige speler staan hier op en de hoogste score bekomen staat hier op
+     */
+    public abstract AScreenEntity getEndScreen(IPosition pos, String TitleText, String enterText, String excText, String preScore, String preHighScore);
+
 
     /**
      * De player input controller terug geven

@@ -4,12 +4,12 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.sound;
  * De soorten geluiden die aanwezig zijn in game.
  */
 public enum SoundType {
-    bonusSound,
-    enemy1Sound,
-    enemy2Sound,
-    enemy3Sound,
-    enemyDeadSound,
-    playerShootSound,
-    playerDeadSound,
-    backgroundMusic
+    BONUS_SOUND,
+    ENEMY_1_SOUND,
+    ENEMY_2_SOUND,
+    ENEMY_3_SOUND,
+    ENEMY_DEAD_SOUND,
+    PLAYER_SHOOT_SOUND,
+    PLAYER_DEAD_SOUND,
+    BACKGROUND_MUSIC
 }

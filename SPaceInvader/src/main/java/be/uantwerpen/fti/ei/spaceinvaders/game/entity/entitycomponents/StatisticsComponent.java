@@ -34,6 +34,11 @@ public class StatisticsComponent {
     private int shotsHits = 0;
 
     /**
+     * De score
+     */
+    private int score = 0;
+
+    /**
      * Default constructor.
      */
     public StatisticsComponent(){
@@ -43,56 +48,64 @@ public class StatisticsComponent {
         return damageTaken;
     }
 
-    public void incrementDamageTaken(int damageTaken) {
-        this.damageTaken = this.damageTaken + damageTaken;
+    public void setDamageTaken(int damageTaken) {
+        this.damageTaken = damageTaken;
     }
 
     public int getDamageDone() {
         return damageDone;
     }
 
-    public void incrementDamageDone(int damageDone) {
-        this.damageDone = this.damageDone + damageDone;
+    public void setDamageDone(int damageDone) {
+        this.damageDone = damageDone;
     }
 
     public int getLivesTaken() {
         return livesTaken;
     }
 
-    public void incrementLivesTaken(int livesTaken) {
-        this.livesTaken = this.livesTaken + livesTaken;
+    public void setLivesTaken(int livesTaken) {
+        this.livesTaken = livesTaken;
     }
 
     public int getLivesLose() {
         return livesLose;
     }
 
-    public void incrementLivesLose(int livesLose) {
-        this.livesLose = this.livesLose + livesLose;
+    public void setLivesLose(int livesLose) {
+        this.livesLose = livesLose;
     }
 
     public int getShotsFired() {
         return shotsFired;
     }
 
-    public void incrementShotsFired(int shotsFired) {
-        this.shotsFired = this.shotsFired + shotsFired;
+    public void setShotsFired(int shotsFired) {
+        this.shotsFired = shotsFired;
     }
 
     public int getShotsMissed() {
         return shotsMissed;
     }
 
-    public void incrementShotsMissed(int shotsMissed) {
-        this.shotsMissed = this.shotsMissed + shotsMissed;
+    public void setShotsMissed(int shotsMissed) {
+        this.shotsMissed = shotsMissed;
     }
 
     public int getShotsHits() {
         return shotsHits;
     }
 
-    public void incrementShotsHits(int shotsHits) {
-        this.shotsHits = this.shotsHits + shotsHits;
+    public void setShotsHits(int shotsHits) {
+        this.shotsHits = shotsHits;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score  = score;
     }
 
     @Override
@@ -105,6 +118,7 @@ public class StatisticsComponent {
                 ", shotsFired=" + shotsFired +
                 ", shotsMissed=" + shotsMissed +
                 ", shotsHits=" + shotsHits +
+                ", score=" + score +
                 '}';
     }
 }

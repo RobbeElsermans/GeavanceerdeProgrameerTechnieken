@@ -7,10 +7,12 @@ public class InformationComponent{
     private String preInfoText;
     private String information;
     public InformationComponent(){
+        this.preInfoText = "";
         this.information = "";
     }
     public InformationComponent(String preText){
         this.preInfoText = preText;
+        this.information = "";
     }
     public InformationComponent(String preText, String text){
         this.preInfoText = preText;

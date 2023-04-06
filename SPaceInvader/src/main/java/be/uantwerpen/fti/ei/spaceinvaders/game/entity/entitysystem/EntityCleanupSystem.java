@@ -1,6 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABonusEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABigEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
@@ -59,7 +59,7 @@ public class EntityCleanupSystem {
      * @param bonusEntityList De ABonusEntity lijst van de bonus entiteiten. Hierin worden de bonussen bewaard.
      * @return True als er een entiteit verwijderd is door een life = 0.
      */
-    public static boolean cleanupBonuses(List<ABonusEntity> bonusEntityList) {
+    public static boolean cleanupBonuses(List<ABigEnemyEntity> bonusEntityList) {
         if (!bonusEntityList.isEmpty()) {
             bonusEntityList.removeIf(b -> b.getMovementComponent().getVelocity() == 0);  //Als de entiteit ergens is tegen gebotst.
             return bonusEntityList.removeIf(b -> b.getLivableComponent().getLife() == 0);       //Als de entiteit geen leven meer heeft.

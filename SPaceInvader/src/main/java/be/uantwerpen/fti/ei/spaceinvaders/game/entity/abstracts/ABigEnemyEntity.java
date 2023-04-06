@@ -5,7 +5,11 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableCo
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
-public abstract class ABonusEntity implements IVisualize {
+/**
+ * Een abstracte implementatie van een bonus entiteit. Deze bonus entiteit kan bewegen en heeft een zeker leven.
+ * Ook is het een collectable omdat een bonus entiteit iets bijheeft voor een speler entiteit.
+ */
+public abstract class ABigEnemyEntity implements IVisualize  {
     /**
      * De entiteit kan bewegen
      */
@@ -17,17 +21,11 @@ public abstract class ABonusEntity implements IVisualize {
     private final LivableComponent livableComponent;
 
     /**
-     * De entiteit heeft een collectable
-     */
-    private final CollectableComponent collectableComponent;
-
-    /**
      * Default constructor waarbij de parameters de default waarden krijgen.
      */
-    public ABonusEntity(){
+    public ABigEnemyEntity(){
         this.movementComponent = new  MovementComponent();
         this.livableComponent = new LivableComponent();
-        this.collectableComponent = new CollectableComponent();
     }
 
     /**
@@ -35,12 +33,10 @@ public abstract class ABonusEntity implements IVisualize {
      *
      * @param movementComponent    De locatie en dimensie van de entiteit met zijn snelheid en versnelling.
      * @param livableComponent     Het leven van de entiteit.
-     * @param collectableComponent Het soort collectable van de entiteit.
      */
-    public ABonusEntity(MovementComponent movementComponent, LivableComponent livableComponent, CollectableComponent collectableComponent){
+    public ABigEnemyEntity(MovementComponent movementComponent, LivableComponent livableComponent){
         this.movementComponent = movementComponent;
         this.livableComponent = livableComponent;
-        this.collectableComponent = collectableComponent;
     }
 
     public MovementComponent getMovementComponent() {
@@ -48,8 +44,5 @@ public abstract class ABonusEntity implements IVisualize {
     }
     public LivableComponent getLivableComponent() {
         return livableComponent;
-    }
-    public CollectableComponent getCollectableComponent() {
-        return collectableComponent;
     }
 }
