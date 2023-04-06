@@ -1,5 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller;
 
+/**
+ * De soorten inputs die kunnen voorkomen.
+ */
 public enum InputType {
     NONE,
     UP,
@@ -8,6 +11,9 @@ public enum InputType {
     RIGHT,
     SHOOT,
     ESC,
-    VOLUP,
-    VOLDOWN
+    VOLUME_UP,
+    VOLUME_DOWN,
+    ENTER,
+    QUIT
 }
+

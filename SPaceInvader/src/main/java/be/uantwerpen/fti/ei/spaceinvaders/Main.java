@@ -8,7 +8,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.FactoryJ2d;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
         //IDimension gameDimentions = new Dimension(20,20);
         //AFactory aFactory = new FactoryConsole();
         AFactory aFactory = new FactoryJ2d("src/main/resources/gfx_config.txt");
