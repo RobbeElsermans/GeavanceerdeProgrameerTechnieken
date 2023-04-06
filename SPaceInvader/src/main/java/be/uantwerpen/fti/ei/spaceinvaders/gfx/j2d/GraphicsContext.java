@@ -37,6 +37,10 @@ public class GraphicsContext {
      */
     private IDimension bulletDimension;
     /**
+     * De dimensie van het big enemy entiteit als IDimension. Dit is afhankelijk van de genomen sprite.
+     */
+    private IDimension bigEnemyDimension;
+    /**
      * De dimensie van het bonus entiteit als IDimension. Dit is afhankelijk van de genomen sprite.
      */
     private IDimension bonusDimension;
@@ -49,7 +53,7 @@ public class GraphicsContext {
      */
     private final JFrame frame;
     /**
-     * De panel die we later in het frame plaatsen. Hierin zal het spel zich afspelen.
+     * Het panel dat we later in het frame plaatsen. Hierin zal het spel zich afspelen.
      */
     private final JPanel panel;
     /**
@@ -138,9 +142,12 @@ public class GraphicsContext {
         this.objectDimension = new Dimension(
                 FileManager.getSettingDouble("width_object_sprite", configFilePath, 3),
                 FileManager.getSettingDouble("height_object_sprite", configFilePath, 1));
+        this.bigEnemyDimension = new Dimension(
+                FileManager.getSettingDouble("width_big_enemy_sprite", configFilePath, 2),
+                FileManager.getSettingDouble("height_big_enemy_sprite", configFilePath, 1));
         this.bonusDimension = new Dimension(
-                FileManager.getSettingDouble("width_bonus_sprite", configFilePath, 1.5),
-                FileManager.getSettingDouble("height_bonus_sprite", configFilePath, 1.5));
+                FileManager.getSettingDouble("width_bonus_sprite", configFilePath, 0.5),
+                FileManager.getSettingDouble("height_bonus_sprite", configFilePath, 0.5));
         this.textDimention = new Dimension(
                 FileManager.getSettingDouble("width_text", configFilePath, 20),
                 FileManager.getSettingDouble("height_text", configFilePath, 1));
@@ -201,6 +208,7 @@ public class GraphicsContext {
         this.textDimention = new Dimension(sizeWidth*getTextDimention().getWidth(), sizeHeight*getTextDimention().getHeight());
         this.objectDimension = new Dimension(sizeWidth* getObjectDimension().getWidth(), sizeHeight* getObjectDimension().getHeight());
         this.bonusDimension = new Dimension(sizeWidth* getBonusDimension().getWidth(), sizeHeight* getBonusDimension().getHeight());
+        this.bigEnemyDimension = new Dimension(sizeWidth* getBigEnemyDimension().getWidth(), sizeHeight* getBigEnemyDimension().getHeight());
     }
 
     public IDimension getPlayerDimension() {
@@ -217,6 +225,9 @@ public class GraphicsContext {
 
     public IDimension getBonusDimension() {
         return bonusDimension;
+    }
+    public IDimension getBigEnemyDimension() {
+        return bigEnemyDimension;
     }
 
     public IDimension getBulletDimension() {

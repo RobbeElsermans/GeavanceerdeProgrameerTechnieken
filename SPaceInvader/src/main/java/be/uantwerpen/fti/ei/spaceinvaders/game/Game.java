@@ -5,14 +5,11 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollisionSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BulletCollisionSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.EntityCollision;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCleanupSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.StatisticsSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.BulletMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.BigEnemyMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.EnemyMovementSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.GlobalMovementSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.EnemyShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.FromWhoBulletType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.GlobalShootSystem;
@@ -45,9 +42,13 @@ public class Game {
      */
     List<AEnemyEntity> enemyEntityList = new ArrayList<>();
     /**
+     * Een lijst van big enemy entiteiten.
+     */
+    List<ABigEnemyEntity> bigEnemyEntityList = new ArrayList<>();
+    /**
      * Een lijst van bonus entiteiten.
      */
-    List<ABigEnemyEntity> bonusEntityList = new ArrayList<>();
+    List<ABonusEntity> bonusEntityList = new ArrayList<>();
     /**
      * Een lijst van obstacle entiteiten.
      */
@@ -63,7 +64,15 @@ public class Game {
      */
     List<ATextEntity> textPointsList = new ArrayList<>();
 
+    /**
+     * Een lijst van schermen.
+     */
     List<AScreenEntity> screenEntityList = new ArrayList<>();
+
+    /**
+     * Een lijst van move componenten.
+     */
+    List<IMovement> movementComponents = new ArrayList<>();
 
     /**
      * Een collision object die we gebruiken om de entiteiten binnenin het spelvlak te houden.
@@ -104,6 +113,8 @@ public class Game {
      * Wanneer men bv. op ESC zou drukken, zal het spel in pauze gaan.
      */
     private boolean isRunning = true;
+
+    private boolean hasFireBonus = false;
 
     private GameStates gameState = GameStates.START_SCREEN;
     private InGameStates inGameState = InGameStates.NO_GAME;
@@ -203,7 +214,8 @@ public class Game {
             //TIJD CONSTANT HOUDEN
 
             //DEBUG
-            //System.out.println(playerEntitieList.get(0).getStatisticsComponent().toString());
+            //if(!bonusEntityList.isEmpty())
+            //System.out.println(bonusEntityList.get(0).getCollectableComponent().getValue());
             //DEBUG
         }
     }
@@ -221,13 +233,14 @@ public class Game {
     private void update() {
         updateInGameStates();   // Updates in game states en game states.
 
-        updateBullets();        // Updates kogel movement.
-        //updateBonus();          // Updates bonus creatie en movement.
-        updateBigEnemy();          // Updates big enemy creatie en movement.
+        updateBullets();            // Updates kogel movement.
+        updateBonus();              // Updates bonus creatie en movement.
+        updateBigEnemy();           // Updates big enemy creatie en movement.
 
         checkBorderCollisions();        // Checkt de entiteiten dat ze niet buiten de grenzen gaan en reageer gepast wanneer wel.
         checkBulletCollision();         // Checkt wanneer dat kogels ergens inslaan en reageer gepast.
         checkEnemyToPlayerCollision();  // Checkt wanneer een enemy tegen de player aanbotst en reageer gepast.
+        checkBonusToPlayerCollision();
 
         updateText();   //Updates teksten met spelers statistics.
 
@@ -241,7 +254,8 @@ public class Game {
         playerEntitieList.forEach(APlayerEntity::visualize);
         enemyEntityList.forEach(AEnemyEntity::visualize);
         obstacleEntitieList.forEach(AObstacleEntity::visualize);
-        bonusEntityList.forEach(ABigEnemyEntity::visualize);
+        bigEnemyEntityList.forEach(ABigEnemyEntity::visualize);
+        bonusEntityList.forEach(ABonusEntity::visualize);
         textLifeList.forEach(ATextEntity::visualize);
         textPointsList.forEach(ATextEntity::visualize);
     }
@@ -285,6 +299,7 @@ public class Game {
         this.playerShootSystem = new PlayerShootSystem();
         this.enemyShootSystem = new EnemyShootSystem(1);
 
+
         // Player & texten blijven bestaan.
         playerEntitieList = new ArrayList<>();
         textLifeList = new ArrayList<>();
@@ -294,7 +309,7 @@ public class Game {
         clearEntityLists();
 
         //Create player
-        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth / 2, this.gameHeight - 1), 1, 2, 2));
+        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth / 2, this.gameHeight - 1), 3, 2, 2));
         //playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth / 2 + 10, this.gameHeight-1), 5, 2, 0.3));
 
         //Create texten a.d.h.v. aantal players.
@@ -311,7 +326,8 @@ public class Game {
         this.soundSystem.getSoundComponent().addSound("/sound/explosion.wav", SoundType.PLAYER_DEAD_SOUND);
         this.soundSystem.getSoundComponent().addSound("/sound/invaderkilled.wav", SoundType.ENEMY_DEAD_SOUND);
         this.soundSystem.getSoundComponent().addSound("/sound/shoot.wav", SoundType.PLAYER_SHOOT_SOUND);
-        this.soundSystem.getSoundComponent().addSound("/sound/ufo_lowpitch.wav", SoundType.BONUS_SOUND);
+        this.soundSystem.getSoundComponent().addSound("/sound/ufo_lowpitch.wav", SoundType.BIG_ENEMY_SOUND);
+        this.soundSystem.getSoundComponent().addSound("/sound/ufo_highpitch.wav", SoundType.BONUS_SOUND);
     }
 
     private void screenInitialize() {
@@ -451,6 +467,33 @@ public class Game {
     }
 
     /**
+     * Checkt wanneer een bonus tegen de speler botst
+     */
+    private void checkBonusToPlayerCollision() {
+        //Check player to an enemy collision
+        for (ABonusEntity bonus : bonusEntityList)
+            for (APlayerEntity player : playerEntitieList) {
+                if (EntityCollision.entityCollision(player.getMovementComponent(), bonus.getMovementComponent())) {
+                    //Bonus toevoegen
+                    //TODO
+                    switch (bonus.getCollectableComponent().getType()) {
+                        case LIFE -> {
+                            player.getLivableComponent().upLifeByAmount((int) bonus.getCollectableComponent().takeValue());
+                        }
+                        case MOVE_SPEED -> {
+                            double temp1 = bonus.getCollectableComponent().takeValue();
+                            int temp = (int) (player.getMovementComponent().getSpeed() - temp1);
+                            if(temp < 1)
+                                player.getMovementComponent().setSpeed(1);
+                            else
+                                player.getMovementComponent().setSpeed(temp);
+                        }
+                    }
+                }
+            }
+    }
+
+    /**
      * Checkt wanneer dat kogels ergens inslaan en reageer gepast.
      */
     private void checkBulletCollision() {
@@ -516,13 +559,13 @@ public class Game {
         }
 
         //Check for bullets from player to BigEnemy
-        for (ABigEnemyEntity bigEnemy : bonusEntityList) {
+        for (ABigEnemyEntity bigEnemy : bigEnemyEntityList) {
             for (APlayerEntity player : playerEntitieList) {
                 for (ABulletEntity bullet : player.getShootingComponent().getBulletList()) {
                     if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), bigEnemy.getMovementComponent())) {
 
                         //STATISTICS
-                        if(bullet.getLivableComponent().getLife()>0) {
+                        if (bullet.getLivableComponent().getLife() > 0) {
                             StatisticsSystem.incrementShotHit(player.getStatisticsComponent());
                             StatisticsSystem.incrementDamageDone(player.getStatisticsComponent(), bigEnemy.getLivableComponent());
                         }
@@ -551,9 +594,6 @@ public class Game {
                         if (bonus.getCollectableComponent().getType() == CollectableComponent.collectableType.life) {
                             player.getLivableComponent().upLifeByAmount(bonus.getCollectableComponent().getValue());
                         }
-
-
-
                     }
                 }
             }
@@ -600,15 +640,20 @@ public class Game {
         //enemyEntityList.forEach(i -> CollisionManager.checkBorderCollision(borderCollisionSystem,i.getMovementComponent()));
         BorderCollisionSystem.checkBorderCollisionEnemy(borderCollision, enemyEntityList.stream().map(AEnemyEntity::getMovementComponent).toList());
 
+        //Check for BigEnemy Border Collsion
+        bigEnemyEntityList.forEach(bonus -> BorderCollisionSystem.checkBorderCollisionBigEnemy(borderCollision, bonus.getMovementComponent()));
+
         //Check for Bonus Border Collsion
         bonusEntityList.forEach(bonus -> BorderCollisionSystem.checkBorderCollisionBonus(borderCollision, bonus.getMovementComponent()));
+
     }
 
     private void clearEntityLists() {
         //playerEntitieList = new ArrayList<>();
         enemyEntityList = new ArrayList<>();
-        bonusEntityList = new ArrayList<>();
+        bigEnemyEntityList = new ArrayList<>();
         obstacleEntitieList = new ArrayList<>();
+        bonusEntityList = new ArrayList<>();
     }
 
     /**
@@ -666,18 +711,71 @@ public class Game {
     /**
      * Updates bonus creatie en movement.
      */
+    private void updateBonus() {
+
+        // Als er al een MOVE_SPEED bonus bestaat, niets doen.
+        if (bonusEntityList.stream().noneMatch(i -> i.getCollectableComponent().getType() == CollectableType.MOVE_SPEED)) {
+            //Heeft een speler shotHit van %20 bereikt? maak dan een bonus van movespeed van 0.5 dus vertragen.
+            if (!hasFireBonus && playerEntitieList.stream().anyMatch(i -> (i.getStatisticsComponent().getShotsHits() % 2 == 0) && (i.getStatisticsComponent().getShotsHits() > 0))) {
+                this.bonusEntityList.add(this.gfxFactory.getBonusEntity(new Position(Random.getRandom(this.gameWidth), 0), 2, 0.5, CollectableType.MOVE_SPEED, 1));
+                this.soundSystem.playSoundOnce(SoundType.BONUS_SOUND);
+                hasFireBonus = true;
+            } else if ( playerEntitieList.stream().noneMatch(i -> (i.getStatisticsComponent().getShotsHits() % 2 == 0) && (i.getStatisticsComponent().getShotsHits() > 0))) {
+                hasFireBonus = false;
+            }
+
+//TODO: Plaats hasFireBonus binnenin het systeem. Er moet voor elke bonus fire een aparte boolean zijn die er voor zorgt dat de fire maar 1x gezet kan worden
+//Als de fire niet waar is, zet dan deze boolean op false.
+
+/*
+                //Heeft een speler een score van 100 bereikt? maak dan een bonus van reloadSpeed van 2
+                if (playerEntitieList.stream().anyMatch(i -> (i.getStatisticsComponent().getShotsHits() % 10 == 0) && (i.getStatisticsComponent().getShotsHits() > 0))) {
+                    this.bonusEntityList.add(this.gfxFactory.getBonusEntity(new Position(Random.getRandom(this.gameWidth), 0), 4, 0.5, CollectableType.MOVE_SPEED, 2));
+                    this.soundSystem.playSoundOnce(SoundType.BONUS_SOUND);
+                    hasFireBonus = true;
+                }
+
+ */
+        }
+/*
+            // Als er al een LIFE bonus bestaat, niets doen.
+            if (bonusEntityList.stream().noneMatch(i -> i.getCollectableComponent().getType() == CollectableType.LIFE)) {
+                //Heeft een speler damageTaken van %2 bereikt? maak dan een bonus van life van 1
+                if (playerEntitieList.stream().anyMatch(i -> (i.getStatisticsComponent().getDamageTaken() % 2 == 0) && (i.getStatisticsComponent().getDamageTaken() > 0))) {
+                    this.bonusEntityList.add(this.gfxFactory.getBonusEntity(new Position(Random.getRandom(this.gameWidth), 0), 4, 0.5, CollectableType.LIFE, 1));
+                    this.soundSystem.playSoundOnce(SoundType.BONUS_SOUND);
+                    hasFireBonus = true;
+                }
+
+                //Heeft een speler een score van 50 bereikt? maak dan een bonus van life van 1
+                if (playerEntitieList.stream().anyMatch(i -> (i.getStatisticsComponent().getScore() % 50 == 0) && (i.getStatisticsComponent().getScore() > 0))) {
+                    this.bonusEntityList.add(this.gfxFactory.getBonusEntity(new Position(Random.getRandom(this.gameWidth), 0), 4, 0.5, CollectableType.LIFE, 1));
+                    this.soundSystem.playSoundOnce(SoundType.BONUS_SOUND);
+                    hasFireBonus = true;
+                }
+            }
+        }
+        */
+
+
+        // Als er bonus entiteiten aanwezig zijn, beweeg ze
+        bonusEntityList.forEach(i -> BonusMovementSystem.move(i.getMovementComponent()));
+    }
+
+    /**
+     * Updates bigEnemy creatie en movement.
+     */
     private void updateBigEnemy() {
         //Heeft een speler shotHits van %5 bereikt? maak dan een big Enemy van life van 1
         if (playerEntitieList.stream().anyMatch(i -> (i.getStatisticsComponent().getShotsHits() % 5 == 0) && (i.getStatisticsComponent().getShotsHits() > 0))) {
-            if (this.bonusEntityList.size() == 0) {
-                this.bonusEntityList.add(this.gfxFactory.getBigEnemyEntity(new Position(2, 1), 1, 3, 0.5, CollectableComponent.collectableType.life, 1));
-                this.soundSystem.playSoundOnce(SoundType.BONUS_SOUND);
+            if (this.bigEnemyEntityList.size() == 0) {
+                this.bigEnemyEntityList.add(this.gfxFactory.getBigEnemyEntity(new Position(2, 1), 1, 3, 0.5));
+                this.soundSystem.playSoundOnce(SoundType.BIG_ENEMY_SOUND);
             }
-
         }
 
         // Als er bonus entiteiten aanwezig zijn, beweeg ze
-        bonusEntityList.forEach(i -> BigEnemyMovementSystem.move(i.getMovementComponent()));
+        bigEnemyEntityList.forEach(i -> BigEnemyMovementSystem.move(i.getMovementComponent()));
     }
 
     /**
@@ -748,9 +846,12 @@ public class Game {
         //Cleanup obstacles
         EntityCleanupSystem.cleanupObstacles(obstacleEntitieList);
 
-        //Cleanup bonuses
-        if (EntityCleanupSystem.cleanupBonuses(bonusEntityList)) {
+        //Cleanup BigEnemy
+        if (EntityCleanupSystem.cleanupBigEnemy(bigEnemyEntityList)) {
             soundSystem.playSoundOnce(SoundType.ENEMY_DEAD_SOUND);
         }
+
+        //Cleanup bonuses
+        EntityCleanupSystem.cleanupBonuses(bonusEntityList);
     }
 }

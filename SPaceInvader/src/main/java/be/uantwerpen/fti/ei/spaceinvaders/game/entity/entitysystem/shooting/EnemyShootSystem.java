@@ -1,5 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.Random;
+
 /**
  * Dedicated ShootSysteem voor een enemy entiteit.
  */
@@ -30,8 +32,6 @@ public class EnemyShootSystem extends GlobalShootSystem {
      * @return  True als de enemy mag schieten. Anders false.
      */
     public boolean checkShoot() {
-        //Math.floor(Math.random() *(max - min + 1) + min)
-        int randomTime = (int) (Math.random() * (2000 / diff));
-        return randomTime == 3;
+        return Random.getRandom(2000/diff) == 3;
     }
 }

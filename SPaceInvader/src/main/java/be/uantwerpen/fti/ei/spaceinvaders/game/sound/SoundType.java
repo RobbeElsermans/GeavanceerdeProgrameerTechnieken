@@ -5,6 +5,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.sound;
  */
 public enum SoundType {
     BONUS_SOUND,
+    BIG_ENEMY_SOUND,
     ENEMY_1_SOUND,
     ENEMY_2_SOUND,
     ENEMY_3_SOUND,

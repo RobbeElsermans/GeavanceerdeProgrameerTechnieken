@@ -2,6 +2,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.factory;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
@@ -108,17 +109,35 @@ public abstract class AFactory {
     public abstract AObstacleEntity getObstacleEntity(IPosition position, int life);
 
     /**
+     * Geeft een ABigEnemyEntity object terug met default waarden.
+     *
+     * @return ABigEnemyEntity object
+     */
+    public abstract ABigEnemyEntity getBigEnemyEntity();
+
+    /**
+     * Geeft een ABigEnemyEntity object terug met volgende parameters.
+     *
+     * @param position Een positie van de entiteit als IPosition.
+     * @param life     Het leven van de entiteit als integer.
+     * @param speed    De snelheid waarmee de entiteit zich verplaatst als integer.
+     * @param velocity De versnelling waarmee de entiteit zich verplaatst als integer.
+     * @return ABigEnemyEntity object.
+     * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
+     */
+    public abstract ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, int speed, double velocity);
+
+    /**
      * Geeft een ABonusEntity object terug met default waarden.
      *
      * @return ABonusEntity object
      */
-    public abstract ABigEnemyEntity getBigEnemyEntity();
+    public abstract ABonusEntity getBonusEntity();
 
     /**
      * Geeft een ABonusEntity object terug met volgende parameters.
      *
      * @param position Een positie van de entiteit als IPosition.
-     * @param life     Het leven van de entiteit als integer.
      * @param speed    De snelheid waarmee de entiteit zich verplaatst als integer.
      * @param velocity De versnelling waarmee de entiteit zich verplaatst als integer.
      * @param type     het type collectable.
@@ -126,7 +145,20 @@ public abstract class AFactory {
      * @return ABonusEntity object.
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
      */
-    public abstract ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, int speed, double velocity, CollectableComponent.collectableType type, int value);
+    public abstract ABonusEntity getBonusEntity(IPosition position, int speed, double velocity, CollectableType type, double value);
+
+    /**
+     * Geeft een ABonusEntity object terug met volgende parameters.
+     *
+     * @param position Een positie van de entiteit als IPosition.
+     * @param speed    De snelheid waarmee de entiteit zich verplaatst als integer.
+     * @param velocity De versnelling waarmee de entiteit zich verplaatst als integer.
+     * @param randValueRange De range startend van 0 tot randValueRange -1.
+     * @return ABonusEntity object.
+     * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
+     * De collectable wordt random geselecteerd.
+     */
+    public abstract ABonusEntity getRandomBonusEntity(IPosition position, int speed, double velocity, int randValueRange);
 
     /**
      * Geeft een ATextEntity object terug met default waarden.

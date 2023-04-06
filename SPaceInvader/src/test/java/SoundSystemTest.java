@@ -14,7 +14,7 @@ public class SoundSystemTest {
         soundSystem.getSoundComponent().addSound("/sound/explosion.wav", SoundType.PLAYER_DEAD_SOUND);
         soundSystem.getSoundComponent().addSound("/sound/invaderkilled.wav", SoundType.ENEMY_DEAD_SOUND);
         soundSystem.getSoundComponent().addSound("/sound/shoot.wav", SoundType.PLAYER_SHOOT_SOUND);
-        soundSystem.getSoundComponent().addSound("/sound/ufo_lowpitch.wav", SoundType.BONUS_SOUND);
+        soundSystem.getSoundComponent().addSound("/sound/ufo_lowpitch.wav", SoundType.BIG_ENEMY_SOUND);
         for(int i = 0; i < 1000; i++) {
             try {
                 soundSystem.playSoundOnce(SoundType.PLAYER_DEAD_SOUND);

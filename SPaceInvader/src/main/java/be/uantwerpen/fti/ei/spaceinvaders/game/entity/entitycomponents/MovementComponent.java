@@ -51,7 +51,7 @@ public class MovementComponent extends DimensionComponent {
     public int getSpeed() {
         return speed;
     }
-    private void setSpeed(int speed) {
+    public void setSpeed(int speed) {
         this.speed = speed;
     }
     public double getVelocity() {

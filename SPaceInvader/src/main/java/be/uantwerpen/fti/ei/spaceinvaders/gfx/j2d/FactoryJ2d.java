@@ -103,36 +103,54 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public ABigEnemyEntity getBigEnemyEntity() {
-        return new BigEnemyJ2D(graphicsContext);
+    public ABonusEntity getBonusEntity() {
+        return new BonusEntity(graphicsContext);
     }
 
     @Override
-    public ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, int speed, double velocity, CollectableComponent.collectableType type, int value) {
+    public ABonusEntity getBonusEntity(IPosition position, int speed, double velocity, CollectableType type, double value) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
         position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getEnemyDimension(), speed, velocity);
-        LivableComponent livableComponent = new LivableComponent(life);
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBonusDimension(), speed, velocity);
         CollectableComponent collectableComponent = new CollectableComponent(type, value);
-        /*
-        CollectableComponent collectableComponent;
+
+        return new BonusEntity(movementComponent, collectableComponent, graphicsContext);
+    }
+
+    @Override
+    public ABonusEntity getRandomBonusEntity(IPosition position, int speed, double velocity, int randValueRange) {
+        //Schaal a.d.h.v. de game dimentions
+        position.setX(position.getX() * this.graphicsContext.getTileWidth());
+        position.setY(position.getY() * this.graphicsContext.getTileHeight());
+
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBonusDimension(), speed, velocity);
+        CollectableComponent collectableComponent = new CollectableComponent();
         //Selecteer typen at random
-        int temp = (int) (Math.random()*3);
-        if(temp == 0){
-            collectableComponent = new CollectableComponent(CollectableComponent.collectableType.life, life);
+        int temp = (int) (Math.random() * CollectableType.values().length+1);
+        if (temp == 0) {
+            collectableComponent = new CollectableComponent(CollectableType.LIFE, (int) (Math.random() * randValueRange));
         } else if (temp == 1) {
-
-        } else if (temp == 2) {
-
+            collectableComponent = new CollectableComponent(CollectableType.MOVE_SPEED, (int) (Math.random() * randValueRange));
         }
-        else {
+        return new BonusEntity(movementComponent, collectableComponent, graphicsContext);
+    }
 
-        }
+    @Override
+    public ABigEnemyEntity getBigEnemyEntity() {
+        return new BigEnemyJ2D(graphicsContext);
+    }
 
-         */
+
+    @Override
+    public ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, int speed, double velocity) {
+        //Schaal a.d.h.v. de game dimentions
+        position.setX(position.getX() * this.graphicsContext.getTileWidth());
+        position.setY(position.getY() * this.graphicsContext.getTileHeight());
+
+        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBigEnemyDimension(), speed, velocity);
+        LivableComponent livableComponent = new LivableComponent(life);
 
         return new BigEnemyJ2D(movementComponent, livableComponent, graphicsContext);
     }

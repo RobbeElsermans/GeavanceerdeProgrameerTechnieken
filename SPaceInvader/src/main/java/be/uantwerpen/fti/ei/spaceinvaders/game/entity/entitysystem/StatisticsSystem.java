@@ -45,6 +45,6 @@ public class StatisticsSystem {
     }
 
     public static void incrementLivesTaken(StatisticsComponent sc, CollectableComponent cc) {
-        sc.setLivesTaken(sc.getLivesTaken()+cc.getValue());
+        sc.setLivesTaken((int) (sc.getLivesTaken()+cc.getValue()));
     }
 }

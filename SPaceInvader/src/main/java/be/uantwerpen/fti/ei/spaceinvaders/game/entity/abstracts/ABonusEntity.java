@@ -12,11 +12,6 @@ public abstract class ABonusEntity implements IVisualize {
     private final MovementComponent movementComponent;
 
     /**
-     * De entiteit kan leven
-     */
-    private final LivableComponent livableComponent;
-
-    /**
      * De entiteit heeft een collectable
      */
     private final CollectableComponent collectableComponent;
@@ -26,7 +21,6 @@ public abstract class ABonusEntity implements IVisualize {
      */
     public ABonusEntity(){
         this.movementComponent = new  MovementComponent();
-        this.livableComponent = new LivableComponent();
         this.collectableComponent = new CollectableComponent();
     }
 
@@ -34,20 +28,15 @@ public abstract class ABonusEntity implements IVisualize {
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param movementComponent    De locatie en dimensie van de entiteit met zijn snelheid en versnelling.
-     * @param livableComponent     Het leven van de entiteit.
      * @param collectableComponent Het soort collectable van de entiteit.
      */
-    public ABonusEntity(MovementComponent movementComponent, LivableComponent livableComponent, CollectableComponent collectableComponent){
+    public ABonusEntity(MovementComponent movementComponent, CollectableComponent collectableComponent){
         this.movementComponent = movementComponent;
-        this.livableComponent = livableComponent;
         this.collectableComponent = collectableComponent;
     }
 
     public MovementComponent getMovementComponent() {
         return movementComponent;
-    }
-    public LivableComponent getLivableComponent() {
-        return livableComponent;
     }
     public CollectableComponent getCollectableComponent() {
         return collectableComponent;

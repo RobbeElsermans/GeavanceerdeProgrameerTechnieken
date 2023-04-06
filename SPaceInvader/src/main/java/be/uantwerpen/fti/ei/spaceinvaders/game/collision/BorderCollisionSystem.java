@@ -113,7 +113,7 @@ public class BorderCollisionSystem {
      * @param mc Een MovementComponent die de data van de Bonus bijhoudt.
      * @implNote Deze functie kijkt enkel links en rechts.
      */
-    public static void checkBorderCollisionBonus(BorderCollision bc, MovementComponent mc) {
+    public static void checkBorderCollisionBigEnemy(BorderCollision bc, MovementComponent mc) {
         if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
             // if left collision.
             mc.setX(0);
@@ -122,6 +122,21 @@ public class BorderCollisionSystem {
         if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
             // if right collision.
             mc.setX((int) ((bc.getGameDimensions().getWidth()) - mc.getDimension().getWidth()));
+            mc.setVelocity(0);
+        }
+    }
+
+    /**
+     * Dedicated methoden om een borderCollision te detecteren van een Bonus en hierbij een correcte actie uit te voeren.
+     *
+     * @param bc Een BorderCollision object met een ingestelde gameBorder.
+     * @param mc Een MovementComponent die de data van de bullet bijhoudt.
+     * @implNote Deze functie kijkt enkel boven en onder.
+     */
+    public static void checkBorderCollisionBonus(BorderCollision bc, MovementComponent mc) {
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
+            // if bottom collision.
+            mc.setY((int) (bc.getGameDimensions().getHeight() - mc.getSpeed() * Math.abs(mc.getDefaultVelocity())));
             mc.setVelocity(0);
         }
     }
