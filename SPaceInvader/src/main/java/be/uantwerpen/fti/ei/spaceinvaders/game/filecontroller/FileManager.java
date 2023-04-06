@@ -10,21 +10,19 @@ public class FileManager {
 
     /**
      * Een static methode die met behulp van de gegeven parameters, de parameter op te halen in het gegeven bestand.
-     * @param propertyName  De naam van de variabelen gedefinieerd in het bestand.
-     * @param location      De locatie van het bestand.
-     * @param defaultValue  De standaard waarden voor moest het bestand of parameter niet bestaan.
-     * @return  De gevraagde/ default parameter waarden.
      *
+     * @param propertyName De naam van de variabelen gedefinieerd in het bestand.
+     * @param location     De locatie van het bestand.
+     * @param defaultValue De standaard waarden voor moest het bestand of parameter niet bestaan.
+     * @return De gevraagde/ default parameter waarden.
      * @description Als een bestand niet gevonden wordt en de locatie is geldig, zal er een nieuw bestand gemaakt worden en wordt de parameter hierin geplaatst met de default value.
      */
-    public static int getSetting(String propertyName, String location, int defaultValue) {
+    public static int getSettingInteger(String propertyName, String location, int defaultValue) {
         int tempVal = defaultValue;
-        try
-        {
+        try {
             FileInputStream configuration = new FileInputStream(location);
             Properties prop = new Properties();
             prop.load(configuration);
-
             tempVal = Integer.parseInt(prop.getProperty(propertyName));
 
         } catch (FileNotFoundException e) {
@@ -39,22 +37,109 @@ public class FileManager {
                 fileWriter.append(configString);
                 fileWriter.close();
 
+            } catch (IOException ex) {
+                //throw new RuntimeException(ex);
+                System.out.println("Er is een fout bestand pad meegegeven!");
             }
-            catch (IOException ex) {
-                throw new RuntimeException(ex);
-                //System.out.println("Er is een fout bestand pad meegegeven!");
-            }
-        }
-        catch (NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             //throw new NumberFormatException("De opgegeven propertyName is niet geldig! Default value wordt gebruikt.");
             System.out.println("De opgegeven propertyName is niet geldig! Default value wordt gebruikt");
-        }
-        catch (IOException e) {
-            throw new RuntimeException(e);
-            //System.out.println("Er is een fout bestand pad meegegeven!");
+            createProp(propertyName, location, String.valueOf(defaultValue));
+        } catch (IOException e) {
+            //throw new RuntimeException(e);
+            System.out.println("Er is een fout bestand pad meegegeven!");
         }
 
 
         return tempVal;
+    }
+
+    /**
+     * Een static methode die met behulp van de gegeven parameters, de parameter op te halen in het gegeven bestand.
+     *
+     * @param propertyName De naam van de variabelen gedefinieerd in het bestand.
+     * @param location     De locatie van het bestand.
+     * @param defaultValue De standaard waarden voor moest het bestand of parameter niet bestaan.
+     * @return De gevraagde/ default parameter waarden.
+     * @description Als een bestand niet gevonden wordt en de locatie is geldig,
+     * zal er een nieuw bestand gemaakt worden en wordt de parameter hierin geplaatst met de default value.
+     */
+    public static double getSettingDouble(String propertyName, String location, double defaultValue) {
+        double tempVal = defaultValue;
+        try {
+            FileInputStream configuration = new FileInputStream(location);
+            Properties prop = new Properties();
+            prop.load(configuration);
+            tempVal = Double.parseDouble(prop.getProperty(propertyName));
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Het bestand bestaat niet! Het wordt aangemaakt met default value.");
+            try {
+                File file = new File(location);
+                file.createNewFile();
+
+                String configString = propertyName + "=" + tempVal + "\n";
+
+                FileWriter fileWriter = new FileWriter(location);
+                fileWriter.append(configString);
+                fileWriter.close();
+
+            } catch (IOException ex) {
+                //throw new RuntimeException(ex);
+                System.out.println("Er is een fout bestand pad meegegeven!");
+            }
+        } catch (NullPointerException ex) {
+            //throw new NumberFormatException("De opgegeven propertyName is niet geldig! Default value wordt gebruikt.");
+            System.out.println("De opgegeven propertyName is niet geldig! Default value wordt gebruikt");
+            createProp(propertyName, location, String.valueOf(defaultValue));
+        } catch (IOException e) {
+            //throw new RuntimeException(e);
+            System.out.println("Er is een fout bestand pad meegegeven!");
+        }
+
+        return tempVal;
+    }
+
+    /**
+     * Wijzig een bestand met een property.
+     *
+     * @param propertyName De naam van de property.
+     * @param location     Het bestands-pad met de naam included.
+     * @param value De default value in string formaat.
+     */
+    public static void propOverwrite(String propertyName, String location, String value) {
+        try {
+            String configString = propertyName + "=" + value + "\n";
+
+            FileWriter fileWriter = new FileWriter(location, false);
+            fileWriter.append(configString);
+            fileWriter.close();
+
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+            //System.out.println("Er is een fout bestand pad meegegeven!");
+        }
+    }
+
+    /**
+     * Voeg een property toe aan een bestand.
+     *
+     * @param propertyName De naam van de property.
+     * @param location     Het bestands-pad met de naam included.
+     * @param defaultValue De default value in string formaat.
+     */
+    protected static void createProp(String propertyName, String location, String defaultValue) {
+        try {
+            String configString = propertyName + "=" + defaultValue + "\n";
+
+            FileWriter fileWriter = new FileWriter(location, true);
+            fileWriter.append(configString);
+            fileWriter.close();
+
+
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+            //System.out.println("Er is een fout bestand pad meegegeven!");
+        }
     }
 }

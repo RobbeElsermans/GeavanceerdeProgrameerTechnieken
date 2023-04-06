@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 
 public class KeyboardInputController extends AInputController {
-    private GraphicsContext gfx;
+    private final GraphicsContext gfx;
 
     public KeyboardInputController(GraphicsContext gfx) {
         super();
@@ -48,6 +48,12 @@ public class KeyboardInputController extends AInputController {
             if (keycode == KeyEvent.VK_ESCAPE) {
                 setEsc(true);
             }
+            if (keycode == KeyEvent.VK_ENTER) {
+                setEnter(true);
+            }
+            if (keycode == KeyEvent.VK_Q) {
+                setQuit(true);
+            }
         }
 
         @Override
@@ -77,6 +83,12 @@ public class KeyboardInputController extends AInputController {
             }
             if (keycode == KeyEvent.VK_ESCAPE) {
                 setEsc(false);
+            }
+            if (keycode == KeyEvent.VK_ENTER) {
+                setEnter(false);
+            }
+            if (keycode == KeyEvent.VK_Q) {
+                setQuit(false);
             }
         }
     }

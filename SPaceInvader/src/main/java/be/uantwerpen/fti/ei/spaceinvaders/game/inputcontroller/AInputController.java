@@ -1,20 +1,17 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller;
 
-import java.util.LinkedList;
-
-
 //TODO: Meer opsplitsen in andere soorten bv. IInputVolume , IInputMovement, IInputShoot, IInputCanvas
 //TODO: En andere abstracties zoals AInputMovement, AInputVolume (of AInputControls)
 
 /**
  * Een abstracte classen die de input controller samen bundelt.
  */
-public abstract class AInputController implements IInput{
+public abstract class AInputController implements IInput {
 
     /**
      * Interne variabelen om te kijken welke knoppen er ingedrukt zijn.
      */
-    private boolean left, right, up, down,shoot, volup, voldown, esc = false;
+    private boolean left, right, up, down, shoot, volup, voldown, esc, enter, quit = false;
 
     /**
      * Default constructor
@@ -22,9 +19,13 @@ public abstract class AInputController implements IInput{
     public AInputController() {
     }
 
+    /**
+     * Wanneer een input available is, kunnen we dit checken door deze functie te gebruiken.
+     * @return  True als er een input available is.
+     */
     @Override
     public boolean inputAvailable() {
-        return (isDown() || isEsc() || isLeft() || isRight() || isUp() || isVolDown() || isVolUp() || isShoot());
+        return (isDown() || isEsc() || isLeft() || isRight() || isUp() || isVolDown() || isVolUp() || isShoot() || isEnter() || isQuit());
     }
 
     public boolean isShoot() {
@@ -32,7 +33,8 @@ public abstract class AInputController implements IInput{
     }
 
     /**
-     * zal de shoot variabelen plaatsen op de mee gegeven state.
+     * Zal de shoot variabelen plaatsen op de mee gegeven state.
+     *
      * @param shoot wat de nieuwe waarden wordt voor shoot als boolean.
      */
     protected void setShoot(boolean shoot) {
@@ -44,7 +46,8 @@ public abstract class AInputController implements IInput{
     }
 
     /**
-     * zal de down variabelen plaatsen op de mee gegeven state.
+     * Zal de down variabelen plaatsen op de mee gegeven state.
+     *
      * @param down wat de nieuwe waarden wordt voor down als boolean.
      */
     protected void setDown(boolean down) {
@@ -56,7 +59,8 @@ public abstract class AInputController implements IInput{
     }
 
     /**
-     * zal de left variabelen plaatsen op de mee gegeven state.
+     * Zal de left variabelen plaatsen op de mee gegeven state.
+     *
      * @param left wat de nieuwe waarden wordt voor left als boolean.
      */
     protected void setLeft(boolean left) {
@@ -68,7 +72,8 @@ public abstract class AInputController implements IInput{
     }
 
     /**
-     * zal de right variabelen plaatsen op de mee gegeven state.
+     * Zal de right variabelen plaatsen op de mee gegeven state.
+     *
      * @param right wat de nieuwe waarden wordt voor right als boolean.
      */
     protected void setRight(boolean right) {
@@ -80,7 +85,8 @@ public abstract class AInputController implements IInput{
     }
 
     /**
-     * zal de up variabelen plaatsen op de mee gegeven state.
+     * Zal de up variabelen plaatsen op de mee gegeven state.
+     *
      * @param up wat de nieuwe waarden wordt voor up als boolean.
      */
     protected void setUp(boolean up) {
@@ -92,7 +98,8 @@ public abstract class AInputController implements IInput{
     }
 
     /**
-     * zal de volup variabelen plaatsen op de mee gegeven state.
+     * Zal de volup variabelen plaatsen op de mee gegeven state.
+     *
      * @param volup wat de nieuwe waarden wordt voor volup als boolean.
      */
     protected void setVolup(boolean volup) {
@@ -104,7 +111,8 @@ public abstract class AInputController implements IInput{
     }
 
     /**
-     * zal de voldown variabelen plaatsen op de mee gegeven state.
+     * Zal de voldown variabelen plaatsen op de mee gegeven state.
+     *
      * @param voldown wat de nieuwe waarden wordt voor voldown als boolean.
      */
     protected void setVoldown(boolean voldown) {
@@ -116,10 +124,37 @@ public abstract class AInputController implements IInput{
     }
 
     /**
-     * zal de esc variabelen plaatsen op de mee gegeven state.
+     * Zal de esc variabelen plaatsen op de mee gegeven state.
+     *
      * @param esc wat de nieuwe waarden wordt voor esc als boolean.
      */
     protected void setEsc(boolean esc) {
         this.esc = esc;
+    }
+
+    public boolean isEnter() {
+        return enter;
+    }
+
+    /**
+     * Zal de enter variabelen plaatsen op de mee gegeven state.
+     *
+     * @param enter wat de nieuwe waarden wordt voor esc als boolean.
+     */
+    protected void setEnter(boolean enter) {
+        this.enter = enter;
+    }
+
+    public boolean isQuit() {
+        return quit;
+    }
+
+    /**
+     * Zal de quit variabelen plaatsen op de mee gegeven state.
+     *
+     * @param quit wat de nieuwe waarden wordt voor esc als boolean.
+     */
+    protected void setQuit(boolean quit) {
+        this.quit = quit;
     }
 }
