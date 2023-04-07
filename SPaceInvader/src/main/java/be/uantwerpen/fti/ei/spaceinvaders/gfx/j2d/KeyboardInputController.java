@@ -51,7 +51,7 @@ public class KeyboardInputController extends AInputController {
             if (keycode == KeyEvent.VK_ENTER) {
                 setEnter(true);
             }
-            if (keycode == KeyEvent.VK_Q) {
+            if (keycode == KeyEvent.VK_Q || keycode == KeyEvent.VK_A ) {
                 setQuit(true);
             }
         }

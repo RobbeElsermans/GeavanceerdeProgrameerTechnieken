@@ -104,7 +104,7 @@ public class FactoryJ2d extends AFactory {
 
     @Override
     public ABonusEntity getBonusEntity() {
-        return new BonusEntity(graphicsContext);
+        return new BonusJ2d(graphicsContext);
     }
 
     @Override
@@ -116,7 +116,7 @@ public class FactoryJ2d extends AFactory {
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBonusDimension(), speed, velocity);
         CollectableComponent collectableComponent = new CollectableComponent(type, value);
 
-        return new BonusEntity(movementComponent, collectableComponent, graphicsContext);
+        return new BonusJ2d(movementComponent, collectableComponent, graphicsContext);
     }
 
     @Override
@@ -134,7 +134,7 @@ public class FactoryJ2d extends AFactory {
         } else if (temp == 1) {
             collectableComponent = new CollectableComponent(CollectableType.MOVE_SPEED, (int) (Math.random() * randValueRange));
         }
-        return new BonusEntity(movementComponent, collectableComponent, graphicsContext);
+        return new BonusJ2d(movementComponent, collectableComponent, graphicsContext);
     }
 
     @Override
@@ -166,9 +166,9 @@ public class FactoryJ2d extends AFactory {
         pos.setX(pos.getX() * this.graphicsContext.getTileWidth());
         pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
 
-        DimensionComponent dimensionComponent = new DimensionComponent(pos, this.graphicsContext.getTextDimention());
+        PositionComponent positionComponent = new PositionComponent(pos);
 
-        return new TextJ2d(dimensionComponent, preText, graphicsContext);
+        return new TextJ2d(positionComponent, preText, graphicsContext);
     }
 
     @Override
@@ -177,8 +177,8 @@ public class FactoryJ2d extends AFactory {
         pos.setX(pos.getX() * this.graphicsContext.getTileWidth());
         pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
 
-        DimensionComponent dimensionComponent = new DimensionComponent(pos, this.graphicsContext.getTextDimention());
-        return new TextJ2d(dimensionComponent, preText, text, graphicsContext);
+        PositionComponent positionComponent = new PositionComponent(pos);
+        return new TextJ2d(positionComponent, preText, text, graphicsContext);
     }
 
     @Override

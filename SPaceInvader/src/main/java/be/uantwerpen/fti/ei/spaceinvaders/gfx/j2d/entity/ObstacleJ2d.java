@@ -35,7 +35,7 @@ public class ObstacleJ2d extends AObstacleEntity {
                 getGfx().getG2d().setColor(new Color(51, 102, 100));
             else
                 getGfx().getG2d().setColor(new Color(0, 102, 0));
-            getGfx().getG2d().fillRect((int) this.getStaticComponent().getX(), (int) this.getStaticComponent().getY(), this.getStaticComponent().getWidth(), this.getStaticComponent().getHeight());
+            getGfx().getG2d().fillRect((int) this.getDimensionComponent().getX(), (int) this.getDimensionComponent().getY(), this.getDimensionComponent().getWidth(), this.getDimensionComponent().getHeight());
         }
     }
 

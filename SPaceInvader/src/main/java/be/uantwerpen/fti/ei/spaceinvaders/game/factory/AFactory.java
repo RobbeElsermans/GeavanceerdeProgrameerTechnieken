@@ -203,33 +203,33 @@ public abstract class AFactory {
      * Het startscherm van het spel.
      *
      * @param pos       positie
-     * @param TitleText titel tekst
+     * @param titleText titel tekst
      * @param enterText De tekst waar we willen aantonen dat enter, verder gaan is.
      * @param excText   De tekst waar we willen aantonen dat ecs, stoppen is.
      * @return AScreenEntity
      * @implNote Hierop kan de gebruiker ENTER -> naar spel gaan of ESC -> het spel afsluiten.
      * Geen bewegende delen zijn nodig.
      */
-    public abstract AScreenEntity getStartScreen(IPosition pos, String TitleText, String enterText, String excText);
+    public abstract AScreenEntity getStartScreen(IPosition pos, String titleText, String enterText, String excText);
 
     /**
      * Het pauzescherm van het spel.
      *
      * @param pos       positie
-     * @param TitleText titel tekst
+     * @param titleText titel tekst
      * @param enterText De tekst waar we willen aantonen dat enter, verder gaan is.
      * @param excText   De tekst waar we willen aantonen dat ecs, stoppen is.
      * @return AScreenEntity
      * @implNote Hierop kan de gebruiker ENTER -> terug keren naar het spel of ESC -> het spel afsluiten.
      * Geen bewegende delen zijn nodig.
      */
-    public abstract AScreenEntity getPauseScreen(IPosition pos, String TitleText, String enterText, String excText);
+    public abstract AScreenEntity getPauseScreen(IPosition pos, String titleText, String enterText, String excText);
 
     /**
      * Het eindscherm van het spel.
      *
      * @param pos       positie
-     * @param TitleText titel tekst
+     * @param titleText titel tekst
      * @param enterText De tekst waar we willen aantonen dat enter, verder gaan is.
      * @param excText   De tekst waar we willen aantonen dat ecs, stoppen is.
      * @return AScreenEntity
@@ -237,7 +237,7 @@ public abstract class AFactory {
      * Geen bewegende delen zijn nodig.
      * De score van huidige speler staan hier op en de hoogste score bekomen staat hier op
      */
-    public abstract AScreenEntity getEndScreen(IPosition pos, String TitleText, String enterText, String excText, String preScore, String preHighScore);
+    public abstract AScreenEntity getEndScreen(IPosition pos, String titleText, String enterText, String excText, String preScore, String preHighScore);
 
 
     /**

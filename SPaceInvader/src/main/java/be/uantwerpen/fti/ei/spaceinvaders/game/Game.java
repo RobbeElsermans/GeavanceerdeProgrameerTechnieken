@@ -5,7 +5,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollisionSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BulletCollisionSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.collision.EntityCollision;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCleanupSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCreationSystem;
@@ -104,7 +103,7 @@ public class Game {
     /**
      * De genomen FPS (Frames per second).
      */
-    private final int FPS = 40;
+    private final int FPS = 1;
 
     /**
      * Een boolean die bijhoud of het spel bezig is.
@@ -210,8 +209,8 @@ public class Game {
             //TIJD CONSTANT HOUDEN
 
             //DEBUG
-            if(!playerEntitieList.isEmpty())
-                System.out.println(playerEntitieList.get(0).getMovementComponent().getSpeed());
+            //if(!playerEntitieList.isEmpty())
+            //    System.out.println(playerEntitieList.get(0).getMovementComponent().getSpeed());
             //DEBUG
         }
     }
@@ -309,7 +308,7 @@ public class Game {
         clearEntityLists();
 
         //Create player
-        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth / 2, this.gameHeight - 1), 3, 1.5, 1));
+        playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth / 2, this.gameHeight - 2), 3, 1.5, 1));
         //playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth / 2 + 10, this.gameHeight-1), 5, 2, 0.3));
 
         //Create texten a.d.h.v. aantal players.
@@ -342,13 +341,13 @@ public class Game {
                 new Position(gameWidth/2-5, gameHeight/2-5),
                 "Pause",
                 "Enter om verder te spelen",
-                "Q om te stoppen"));
+                "Q/A om te stoppen"));
 
         screenEntityList.add(gfxFactory.getEndScreen(
                 new Position(gameWidth/2-5, gameHeight/2-5),
                 "End",
                 "Enter om opnieuw te starten",
-                "Q om te stoppen",
+                "Q/A om te stoppen",
                 "speler score: ",
                 "highscore: "));
     }
@@ -368,10 +367,10 @@ public class Game {
                 //Create enemy
                 for (int i = 6; i < this.gameWidth - 6; i++) {
                     if (i % 2 == 0) {
-                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 4), 4, 4, 0.5));
-                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 5), 3, 4, 0.5));
-                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 6), 2, 4, 0.5));
-                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 7), 1, 4, 0.5));
+                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 2), 4, 4, 0.5));
+                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 3), 3, 4, 0.5));
+                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 4), 2, 4, 0.5));
+                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 5), 1, 4, 0.5));
                     }
                 }
                 //bonusEntityList.add(gfxFactory.getBonusEntity(new Position(2,1),1,3,0.5, CollectableComponent.collectableType.life,1));
@@ -535,7 +534,7 @@ public class Game {
         for (AObstacleEntity obstacle : obstacleEntitieList) {
             for (AEnemyEntity enemy : enemyEntityList) {
                 for (ABulletEntity bullet : enemy.getShootingComponent().getBulletList()) {
-                    if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), obstacle.getStaticComponent())) {
+                    if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), obstacle.getDimensionComponent())) {
                         GlobalShootSystem.damage(obstacle.getLivableComponent(), bullet.getLivableComponent());
                     }
                 }
@@ -545,7 +544,7 @@ public class Game {
         for (AObstacleEntity obstacle : obstacleEntitieList) {
             for (APlayerEntity player : playerEntitieList) {
                 for (ABulletEntity bullet : player.getShootingComponent().getBulletList()) {
-                    if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), obstacle.getStaticComponent())) {
+                    if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), obstacle.getDimensionComponent())) {
                         GlobalShootSystem.damage(obstacle.getLivableComponent(), bullet.getLivableComponent());
 
                         //STATISTICS

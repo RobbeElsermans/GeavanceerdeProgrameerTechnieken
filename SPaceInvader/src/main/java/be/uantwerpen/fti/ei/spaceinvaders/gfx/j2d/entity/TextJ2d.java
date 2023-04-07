@@ -11,29 +11,22 @@ public class TextJ2d extends ATextEntity {
     private GraphicsContext gfx;
     public TextJ2d(GraphicsContext gfx){
         super();
-        this.setGfx(gfx);
+        this.gfx = gfx;
     }
     public TextJ2d(PositionComponent positionComponent, String preText,GraphicsContext gfx){
         super(positionComponent, preText);
-        this.setGfx(gfx);
+        this.gfx = gfx;
     }
     public TextJ2d(PositionComponent positionComponent, String preText, String text, GraphicsContext gfx){
         super(positionComponent, preText, text);
-        this.setGfx(gfx);
+        this.gfx = gfx;
     }
 
     @Override
     public void visualize() {
-        if (getGfx().getG2d() != null) {
-            getGfx().getG2d().setColor(new Color(0,20,255));
-            getGfx().getG2d().drawString(this.getInformationComponent().getInfoText(), (int) this.getPositionComponent().getX(), (int) this.getPositionComponent().getY());
+        if (gfx.getG2d() != null) {
+            gfx.getG2d().setColor(new Color(0,20,255));
+            gfx.getG2d().drawString(this.getInformationComponent().getInfoText(), (int) this.getPositionComponent().getX(), (int) this.getPositionComponent().getY());
         }
-    }
-    public GraphicsContext getGfx() {
-        return gfx;
-    }
-
-    public void setGfx(GraphicsContext gfx) {
-        this.gfx = gfx;
     }
 }

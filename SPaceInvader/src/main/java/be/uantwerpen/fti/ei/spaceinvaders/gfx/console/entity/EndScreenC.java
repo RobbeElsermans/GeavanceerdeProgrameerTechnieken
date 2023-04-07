@@ -7,21 +7,19 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 
 import java.util.List;
 
-public class StartScreenC extends AScreenEntity {
+public class EndScreenC extends AScreenEntity {
     private GraphicsContext gfx;
-    public StartScreenC(GraphicsContext gfx){
+    public EndScreenC(GraphicsContext gfx){
         this.gfx = gfx;
     }
-    public StartScreenC(PositionComponent positionComponent, GraphicsContext gfx) {
+    public EndScreenC(PositionComponent positionComponent, GraphicsContext gfx) {
         super(positionComponent);
         this.gfx = gfx;
     }
-
-    public StartScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities, GraphicsContext graphicsContext) {
+    public EndScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities, GraphicsContext graphicsContext) {
         super(positionComponent, textEntities);
         this.gfx = graphicsContext;
     }
-
     @Override
     public void visualize() {
         this.getTextEntityList().forEach(ATextEntity::visualize);

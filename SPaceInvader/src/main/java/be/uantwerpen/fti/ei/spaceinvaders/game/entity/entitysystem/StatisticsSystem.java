@@ -17,7 +17,7 @@ public class StatisticsSystem {
      */
     public static void calculateScore(StatisticsComponent sc){
         // (hits/fired)*damageDone*10
-        System.out.println(sc);
+        // System.out.println(sc);
         int tempScore;
         try{
             tempScore = sc.getShotsHits()*10 - sc.getShotsMissed()*10 + (sc.getDamageDone()/10)*10;

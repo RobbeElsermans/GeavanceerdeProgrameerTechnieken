@@ -39,7 +39,7 @@ public abstract class AObstacleEntity implements IVisualize {
     public LivableComponent getLivableComponent() {
         return livableComponent;
     }
-    public DimensionComponent getStaticComponent() {
+    public DimensionComponent getDimensionComponent() {
         return dimensionComponent;
     }
 }

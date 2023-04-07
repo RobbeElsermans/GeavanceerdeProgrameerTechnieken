@@ -26,7 +26,7 @@ public class EnemyMovementSystem {
                 //verander de velocity states
                 mc.setVelocity(-1 * prevState);
                 //beweeg naar beneden en naar links/rechts
-                mc.setY((int) (mc.getY() + (mc.getSpeed())));
+                mc.setY((int) (mc.getY() + mc.getHeight()));
 
             });
         }

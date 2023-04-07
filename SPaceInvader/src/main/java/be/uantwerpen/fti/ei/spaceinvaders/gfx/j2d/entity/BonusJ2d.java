@@ -3,21 +3,20 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABonusEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableType;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 
 import java.awt.*;
 
-public class BonusEntity extends ABonusEntity {
+public class BonusJ2d extends ABonusEntity {
     private GraphicsContext gfx;
 
-    public BonusEntity(GraphicsContext gfx) {
+    public BonusJ2d(GraphicsContext gfx) {
         super();
         this.setGfx(gfx);
     }
 
-    public BonusEntity(MovementComponent movementComponent, CollectableComponent collectableComponent, GraphicsContext gfx) {
+    public BonusJ2d(MovementComponent movementComponent, CollectableComponent collectableComponent, GraphicsContext gfx) {
         super(movementComponent, collectableComponent);
         this.gfx = gfx;
     }
