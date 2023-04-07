@@ -439,17 +439,19 @@ public class Game {
             }
             case DEBUG -> {
 
-                //Stel nieuwe enemy op [2,2].
+                //Stel nieuwe enemy op [2,2] rekeninghoudend met zijn dimensies.
+                //TODO
                 IPosition tempPos;
 
                 for (int i = 0; i < gameSize.getWidth(); i += enemyDimension.getWidth())
                     for (int j = 0; j < gameSize.getHeight(); j += enemyDimension.getHeight()) {
 
                     }
-                }
 
-            for (int i = 0; i < gameSize.getWidth(); i += enemyDimension.getWidth())
-                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 0), i % 4 + 1, 1, 1));
+                for (int i = 0; i < gameSize.getWidth(); i += enemyDimension.getWidth()) {
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(i, 0), i % 4 + 1, 1, 1));
+                }
+            }
         }
 
             /*
