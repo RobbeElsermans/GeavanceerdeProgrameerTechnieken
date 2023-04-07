@@ -4,5 +4,6 @@ public enum InGameStates {
     NO_GAME,
     LEVEL_1,
     LEVEL_2,
-    BOSS_LEVEL
+    BOSS_LEVEL,
+    DEBUG
 }

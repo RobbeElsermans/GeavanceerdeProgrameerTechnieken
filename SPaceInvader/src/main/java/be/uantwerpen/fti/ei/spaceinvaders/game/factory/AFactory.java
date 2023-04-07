@@ -1,10 +1,9 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.factory;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableType;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 
 /**
@@ -262,5 +261,12 @@ public abstract class AFactory {
      * @return IDimension met schaal langs width en height.
      */
     public abstract IDimension getScale();
+
+    /**
+     * De scale van een entiteit om alles op het scherm te laten passen.
+     *
+     * @return IDimension met schaal langs width en height.
+     */
+    public abstract IDimension getScale(EntityType type);
 
 }

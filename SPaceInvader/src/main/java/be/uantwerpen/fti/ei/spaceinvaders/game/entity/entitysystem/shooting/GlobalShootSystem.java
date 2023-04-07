@@ -4,7 +4,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.ShootingComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 
 /**
@@ -23,10 +23,10 @@ public class GlobalShootSystem {
     public static void fire(MovementComponent mc, ShootingComponent sc, AFactory af, FromWhoBulletType bt) {
         ABulletEntity tempBulletEntity = null;
         if (bt == FromWhoBulletType.ENEMY)
-            tempBulletEntity = af.getBulletEntity(new Position(mc.getX() + (mc.getWidth() / 2), mc.getY()), 1, 2, 1);
+            tempBulletEntity = af.getBulletEntity(new Position(mc.getX() + (mc.getWidth() / 2.0), mc.getY()), 1, sc.getSpeed(), 1);
 
         if (bt == FromWhoBulletType.PLAYER)
-            tempBulletEntity = af.getBulletEntity(new Position(mc.getX() + (mc.getWidth() / 2), mc.getY()), 1, 2, -1);
+            tempBulletEntity = af.getBulletEntity(new Position(mc.getX() + (mc.getWidth() / 2.0), mc.getY()), 1, sc.getSpeed(), -1);
         sc.getBulletList().add(tempBulletEntity);
     }
 

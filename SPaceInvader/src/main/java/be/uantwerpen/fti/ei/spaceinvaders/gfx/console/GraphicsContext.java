@@ -1,10 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.console;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-
-import java.io.Console;
-import java.util.ArrayList;
-import java.util.List;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 
 public class GraphicsContext {
     IDimension gameDimension;

@@ -1,8 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 
 public class DimensionComponent extends PositionComponent{
     /**

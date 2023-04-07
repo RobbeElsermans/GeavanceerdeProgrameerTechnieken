@@ -5,5 +5,5 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
  */
 public enum CollectableType {
     LIFE,   //Life collectable
-    MOVE_SPEED   //De bewegingssnelheid
+    BULLET_SPEED   //De bewegingssnelheid
 }

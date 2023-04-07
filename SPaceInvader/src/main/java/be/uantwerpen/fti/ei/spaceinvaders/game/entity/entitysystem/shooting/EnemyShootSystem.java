@@ -34,4 +34,8 @@ public class EnemyShootSystem extends GlobalShootSystem {
     public boolean checkShoot() {
         return Random.getRandom(2000/diff) == 3;
     }
+
+    public void setDiff(int diff) {
+        this.diff = diff;
+    }
 }

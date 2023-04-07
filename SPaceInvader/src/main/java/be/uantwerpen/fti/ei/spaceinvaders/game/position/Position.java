@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entity.position;
+package be.uantwerpen.fti.ei.spaceinvaders.game.position;
 
 /**
  * Een positie klassen waarmee we een positie kunnen definiëren voor een entiteit.

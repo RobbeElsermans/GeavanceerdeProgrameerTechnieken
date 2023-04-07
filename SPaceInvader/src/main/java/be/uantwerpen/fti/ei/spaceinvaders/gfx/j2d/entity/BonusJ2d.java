@@ -31,7 +31,7 @@ public class BonusJ2d extends ABonusEntity {
             if (getCollectableComponent().getType() == CollectableType.LIFE) {
                 getGfx().getG2d().setColor(new Color(255, 0, 127));
             }
-            if (getCollectableComponent().getType() == CollectableType.MOVE_SPEED) {
+            if (getCollectableComponent().getType() == CollectableType.BULLET_SPEED) {
                 if (getCollectableComponent().getValue() < 0) {
                     getGfx().getG2d().setColor(new Color(128, 128, 128));
                 }

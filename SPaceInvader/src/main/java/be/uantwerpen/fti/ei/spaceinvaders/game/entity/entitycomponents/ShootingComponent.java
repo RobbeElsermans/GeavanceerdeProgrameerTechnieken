@@ -15,10 +15,16 @@ public class ShootingComponent {
     private List<ABulletEntity> bulletList;
 
     /**
+     * De snelheid van een bullet
+     */
+    private double speed;
+
+    /**
      * Default constructor die positie en dimensie op default zal plaatsen.
      */
     public ShootingComponent() {
         this.bulletList = new ArrayList<>();
+        this.speed = 2;
     }
 
     /**
@@ -27,10 +33,22 @@ public class ShootingComponent {
      */
     public void shoot(ABulletEntity bulletEntity){
         this.bulletList.add(bulletEntity);
+        this.speed = 2;
     }
 
     public List<ABulletEntity> getBulletList() {
         return bulletList;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        if(speed < 1)
+            this.speed = 1;
+        else
+            this.speed = speed;
     }
 
     @Override

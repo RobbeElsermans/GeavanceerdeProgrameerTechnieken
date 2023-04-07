@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entity.position;
+package be.uantwerpen.fti.ei.spaceinvaders.game.position;
 
 /**
  * Een dimensie klassen waarmee we een dimensie kunnen definiëren voor een entiteit.

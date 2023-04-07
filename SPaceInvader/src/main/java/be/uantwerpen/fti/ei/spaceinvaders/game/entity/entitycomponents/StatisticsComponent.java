@@ -33,11 +33,11 @@ public class StatisticsComponent {
      */
     private int shotsHits = 0;
 
+    private int bigEnemyHit = 0;
     /**
      * De score
      */
     private int score = 0;
-
     /**
      * Default constructor.
      */
@@ -98,6 +98,14 @@ public class StatisticsComponent {
 
     public void setShotsHits(int shotsHits) {
         this.shotsHits = shotsHits;
+    }
+
+    public int getBigEnemyHit() {
+        return bigEnemyHit;
+    }
+
+    public void setBigEnemyHit(int bigEnemyHit) {
+        this.bigEnemyHit = bigEnemyHit;
     }
 
     public int getScore() {

@@ -1,3 +1,24 @@
 #width en height een 1/1 verhouding
-gameHeight=35
-gameWidth=80
+#minimum game grootte is 30
+
+gameHeight=30
+gameWidth=30
+fps=40
+
+# width en height stelt 1 tile voor. Het definieert hoe veel tiles 1 entiteit in beslag neemt.
+# Deze liggen vast. De sprite moet zich hieraan aanpassen.
+# Het is een integer waarde.
+
+width_player=1
+height_player=1
+width_enemy=2
+height_enemy=2
+width_bullet=1
+height_bullet=1
+width_object=2
+height_object=1
+width_big_enemy=2
+height_big_enemy=1
+width_bonus=1
+height_bonus=1
+

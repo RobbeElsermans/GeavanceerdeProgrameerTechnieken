@@ -20,7 +20,7 @@ public class StatisticsSystem {
         // System.out.println(sc);
         int tempScore;
         try{
-            tempScore = sc.getShotsHits()*10 - sc.getShotsMissed()*10 + (sc.getDamageDone()/10)*10;
+            tempScore = sc.getShotsHits()*10 - sc.getShotsMissed()*10 + (sc.getDamageDone()/10)*10 + sc.getBigEnemyHit()*100;
             if(sc.getShotsFired() != 0 && (sc.getShotsFired() == (sc.getShotsHits() + sc.getShotsMissed()))) {
                 sc.setScore(tempScore);
             }
@@ -60,5 +60,9 @@ public class StatisticsSystem {
 
     public static void incrementLivesTaken(StatisticsComponent sc, CollectableComponent cc) {
         sc.setLivesTaken((int) (sc.getLivesTaken()+cc.getValue()));
+    }
+
+    public static void incrementBigEnemyHit(StatisticsComponent sc) {
+        sc.setBigEnemyHit(sc.getBigEnemyHit()+1);
     }
 }

@@ -1,15 +1,8 @@
-import be.uantwerpen.fti.ei.spaceinvaders.game.collision.BorderCollision;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.APlayerEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.FactoryConsole;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

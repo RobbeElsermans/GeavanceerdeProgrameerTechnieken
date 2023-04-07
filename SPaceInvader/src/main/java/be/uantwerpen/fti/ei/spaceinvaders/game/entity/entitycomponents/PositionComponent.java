@@ -1,9 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 
 /**
  * Een component dat een positie en dimensie bevat.

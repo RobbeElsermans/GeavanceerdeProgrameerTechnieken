@@ -2,11 +2,12 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.*;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
+import be.uantwerpen.fti.ei.spaceinvaders.game.factory.EntityType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.*;
 
@@ -96,7 +97,7 @@ public class FactoryJ2d extends AFactory {
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
         position.setY(position.getY() * this.graphicsContext.getTileHeight());
 
-        DimensionComponent dimensionComponent = new DimensionComponent(position, this.graphicsContext.getObjectDimension());
+        DimensionComponent dimensionComponent = new DimensionComponent(position, this.graphicsContext.getObstacleDimension());
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new ObstacleJ2d(dimensionComponent, livableComponent, graphicsContext);
@@ -132,7 +133,7 @@ public class FactoryJ2d extends AFactory {
         if (temp == 0) {
             collectableComponent = new CollectableComponent(CollectableType.LIFE, (int) (Math.random() * randValueRange));
         } else if (temp == 1) {
-            collectableComponent = new CollectableComponent(CollectableType.MOVE_SPEED, (int) (Math.random() * randValueRange));
+            collectableComponent = new CollectableComponent(CollectableType.BULLET_SPEED, (int) (Math.random() * randValueRange));
         }
         return new BonusJ2d(movementComponent, collectableComponent, graphicsContext);
     }
@@ -249,5 +250,31 @@ public class FactoryJ2d extends AFactory {
     @Override
     public IDimension getScale() {
         return new Dimension(graphicsContext.getTileWidth(), graphicsContext.getTileHeight());
+    }
+
+    @Override
+    public IDimension getScale(EntityType type) {
+
+        switch (type){
+            case BONUS -> {
+                return graphicsContext.getBonusDimension();
+            }
+            case BIG_ENEMY -> {
+                return graphicsContext.getBigEnemyDimension();
+            }
+            case ENEMY -> {
+                return graphicsContext.getEnemyDimension();
+            }
+            case PLAYER -> {
+                return graphicsContext.getPlayerDimension();
+            }
+            case OBSTACLE -> {
+                return graphicsContext.getObstacleDimension();
+            }
+            case BULLET -> {
+                return graphicsContext.getBulletDimension();
+            }
+        }
+        return null;
     }
 }

@@ -1,5 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
+
 import java.io.*;
 import java.util.Properties;
 
@@ -98,6 +101,23 @@ public class FileManager {
         }
 
         return tempVal;
+    }
+
+    /**
+     * Een static methode die met behulp van de gegeven parameters, de parameter op te halen in het gegeven bestand.
+     *
+     * @param propertyNameWidth     De naam van de width variabelen gedefinieerd in het bestand.
+     * @param propertyNameHeight    De naam van de height variabelen gedefinieerd in het bestand.
+     * @param location     De locatie van het bestand.
+     * @param defaultValue De standaard waarden voor moest het bestand of parameter niet bestaan als IDimension.
+     * @return De gevraagde/ default parameter waarden in IDimension formaat.
+     * @description Als een bestand niet gevonden wordt en de locatie is geldig,
+     * zal er een nieuw bestand gemaakt worden en wordt de parameter hierin geplaatst met de default value.
+     */
+    public static IDimension getSettingAsDimension(String propertyNameWidth,String propertyNameHeight, String location, IDimension defaultValue) {
+        double width = FileManager.getSettingDouble(propertyNameWidth, location, defaultValue.getWidth());
+        double height = FileManager.getSettingDouble(propertyNameHeight, location, defaultValue.getHeight());
+        return new Dimension(width, height);
     }
 
     /**

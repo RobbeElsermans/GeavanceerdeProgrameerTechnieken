@@ -2,11 +2,12 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.console;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.*;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Dimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.position.Position;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
+import be.uantwerpen.fti.ei.spaceinvaders.game.factory.EntityType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.entity.*;
 
@@ -194,5 +195,10 @@ public class FactoryConsole extends AFactory {
     @Override
     public IDimension getScale() {
         return new Dimension(1, 1);
+    }
+
+    @Override
+    public IDimension getScale(EntityType type) {
+        return new Dimension();
     }
 }
