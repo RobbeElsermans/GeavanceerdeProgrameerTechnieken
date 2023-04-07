@@ -10,7 +10,7 @@ public class CollectableComponent {
     /**
      * Het typen van de collectable.
      */
-    private CollectableType type;
+    private final CollectableType type;
     /**
      * De waarde van de collectable.
      */

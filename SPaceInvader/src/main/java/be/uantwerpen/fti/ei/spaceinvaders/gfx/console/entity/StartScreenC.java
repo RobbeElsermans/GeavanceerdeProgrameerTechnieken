@@ -8,18 +8,12 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 import java.util.List;
 
 public class StartScreenC extends AScreenEntity {
-    private GraphicsContext gfx;
-    public StartScreenC(GraphicsContext gfx){
-        this.gfx = gfx;
-    }
-    public StartScreenC(PositionComponent positionComponent, GraphicsContext gfx) {
+    public StartScreenC(PositionComponent positionComponent) {
         super(positionComponent);
-        this.gfx = gfx;
     }
 
-    public StartScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities, GraphicsContext graphicsContext) {
+    public StartScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities) {
         super(positionComponent, textEntities);
-        this.gfx = graphicsContext;
     }
 
     @Override

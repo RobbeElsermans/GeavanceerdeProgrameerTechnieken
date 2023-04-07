@@ -26,17 +26,12 @@ public class BulletCollisionSystem {
      * Bekijkt bullet met een Statische Entiteit.
      *
      * @param mc MovementComponent van de bullet.
-     * @param dc StaticComponent van de entiteit.
+     * @param dc DimentionComponent van de entiteit.
      * @return true als de bullet collided is met de gegeven statische entiteit. Anders false.
-     * @implNote We converteren StaticComponent naar MovableComponent om dezelfde collision methode te kunnen gebruiken.
-     * TODO: Nog omzetten zodat dit niet is.
      */
     public static boolean bulletEntityCollision(MovementComponent mc, DimensionComponent dc) {
-        //Converteer static naar movable
-        //TODO: wegwerken door betere conversie of meer structuur in componenten te brengen.
-        MovementComponent temp = new MovementComponent(dc.getPosition(), dc.getDimension(), 0, 0);
-
-        if (EntityCollision.entityCollision(mc, temp)) {
+        //MovementComponent is een DimensionComponent.
+        if (EntityCollision.entityCollision(mc, dc)) {
             mc.setVelocity(0);
             return true;
         }

@@ -16,10 +16,10 @@ public class SoundComponent {
      * Een Map met key, value pairs waar de key het typen geluid voorstelt en de value de locatie van het bestand.
      */
     //Bron: https://stackoverflow.com/questions/12669497/using-enum-as-key-for-map
-    private final ThreadLocal<EnumMap<SoundType, URL>> sounds = new ThreadLocal<EnumMap<SoundType, URL>>();
+    private final ThreadLocal<EnumMap<SoundType, URL>> sounds = new ThreadLocal<>();
 
     public SoundComponent() {
-        this.sounds.set(new EnumMap<SoundType, URL>(SoundType.class));
+        this.sounds.set(new EnumMap<>(SoundType.class));
     }
 
     /**

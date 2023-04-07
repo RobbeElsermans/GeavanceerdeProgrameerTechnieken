@@ -8,17 +8,14 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 import java.util.List;
 
 public class EndScreenC extends AScreenEntity {
-    private GraphicsContext gfx;
-    public EndScreenC(GraphicsContext gfx){
-        this.gfx = gfx;
+    public EndScreenC(){
+
     }
-    public EndScreenC(PositionComponent positionComponent, GraphicsContext gfx) {
+    public EndScreenC(PositionComponent positionComponent) {
         super(positionComponent);
-        this.gfx = gfx;
     }
-    public EndScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities, GraphicsContext graphicsContext) {
+    public EndScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities) {
         super(positionComponent, textEntities);
-        this.gfx = graphicsContext;
     }
     @Override
     public void visualize() {

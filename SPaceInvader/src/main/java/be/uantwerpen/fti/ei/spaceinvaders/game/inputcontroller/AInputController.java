@@ -1,8 +1,4 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller;
-
-//TODO: Meer opsplitsen in andere soorten bv. IInputVolume , IInputMovement, IInputShoot, IInputCanvas
-//TODO: En andere abstracties zoals AInputMovement, AInputVolume (of AInputControls)
-
 /**
  * Een abstracte classen die de input controller samen bundelt.
  */

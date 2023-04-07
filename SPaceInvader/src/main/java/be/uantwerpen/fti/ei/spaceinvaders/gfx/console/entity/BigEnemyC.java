@@ -6,7 +6,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 
 public class BigEnemyC extends ABigEnemyEntity {
-    private GraphicsContext gfx;
+    private final GraphicsContext gfx;
     public BigEnemyC(GraphicsContext gfx){
         this.gfx = gfx;
     }

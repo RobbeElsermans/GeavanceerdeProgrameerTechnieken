@@ -5,11 +5,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ATextEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.PositionComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 
-import java.awt.*;
 import java.util.List;
 
 public class StartScreenJ2d extends AScreenEntity {
-    private GraphicsContext gfx;
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
      */
@@ -22,9 +20,8 @@ public class StartScreenJ2d extends AScreenEntity {
      *
      * @param positionComponent De positie en dimensie van de entiteit.
      */
-    public StartScreenJ2d(PositionComponent positionComponent, GraphicsContext gfx) {
+    public StartScreenJ2d(PositionComponent positionComponent) {
         super(positionComponent);
-        this.gfx = gfx;
     }
 
     /**
@@ -33,9 +30,8 @@ public class StartScreenJ2d extends AScreenEntity {
      * @param positionComponent De positie en dimensie van de entiteit.
      * @param textEntityList  De tekst lijsten die de informatie bevatten.
      */
-    public StartScreenJ2d(PositionComponent positionComponent, List<ATextEntity> textEntityList, GraphicsContext gfx) {
+    public StartScreenJ2d(PositionComponent positionComponent, List<ATextEntity> textEntityList) {
         super(positionComponent, textEntityList);
-        this.gfx = gfx;
     }
 
     @Override

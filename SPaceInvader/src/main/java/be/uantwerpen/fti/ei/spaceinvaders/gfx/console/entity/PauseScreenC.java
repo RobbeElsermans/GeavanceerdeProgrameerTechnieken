@@ -8,21 +8,16 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 import java.util.List;
 
 public class PauseScreenC  extends AScreenEntity {
-    private GraphicsContext gfx;
     public PauseScreenC(GraphicsContext gfx){
-        this.gfx = gfx;
     }
-    public PauseScreenC(PositionComponent positionComponent, GraphicsContext gfx) {
+    public PauseScreenC(PositionComponent positionComponent) {
         super(positionComponent);
-        this.gfx = gfx;
     }
-    public PauseScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities, GraphicsContext graphicsContext) {
+    public PauseScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities) {
         super(positionComponent, textEntities);
-        this.gfx = graphicsContext;
     }
     @Override
     public void visualize() {
         this.getTextEntityList().forEach(ATextEntity::visualize);
     }
-
 }

@@ -9,8 +9,6 @@ import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
-import java.awt.event.KeyEvent;
-
 /**
  * @implSpec Op ubuntu, login als xorg.
  * bron: https://github.com/go-vgo/robotgo/issues/304

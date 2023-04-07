@@ -1,23 +1,17 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.AInputController;
-import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
-import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.InputType;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.LinkedList;
 
 public class KeyboardInputController extends AInputController {
-    private final GraphicsContext gfx;
 
     public KeyboardInputController(GraphicsContext gfx) {
         super();
-        this.gfx = gfx;
-        this.gfx.getFrame().addKeyListener(new KeyInputAdapter());
+        gfx.getFrame().addKeyListener(new KeyInputAdapter());
     }
 
-    //TODO: https://stackoverflow.com/questions/15865087/java-2d-game-dev-multiple-key-input
     class KeyInputAdapter extends KeyAdapter {
 
         @Override

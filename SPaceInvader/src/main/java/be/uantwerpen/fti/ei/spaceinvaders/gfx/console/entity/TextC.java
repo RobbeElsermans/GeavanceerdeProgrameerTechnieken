@@ -5,7 +5,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.PositionC
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 
 public class TextC extends ATextEntity {
-    private GraphicsContext gfx;
+    private final GraphicsContext gfx;
 
     public TextC(GraphicsContext gfx) {
         this.gfx = gfx;

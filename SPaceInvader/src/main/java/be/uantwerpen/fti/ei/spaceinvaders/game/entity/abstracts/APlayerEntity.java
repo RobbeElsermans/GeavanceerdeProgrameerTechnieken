@@ -73,8 +73,8 @@ public abstract class APlayerEntity implements IVisualize {
         return "APlayerEntity{" +
                 "movementComponent=" + movementComponent.toString() +
                 ", livableComponent=" + livableComponent.toString() +
-                ", statisticsComponent=" + statisticsComponent.toString() +
-                ", shootingComponent=" + shootingComponent.toString() +
+                ", statisticsComponent=" + statisticsComponent +
+                ", shootingComponent=" + shootingComponent +
                 '}';
     }
 }

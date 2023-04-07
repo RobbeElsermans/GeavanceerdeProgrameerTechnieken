@@ -1,7 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.collision;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.DimensionComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,52 +9,41 @@ import java.util.List;
 /**
  * Een klasse om rand collisions te detecteren tussen een positie (met dimensies) en de initiële gameDimension
  * Deze dimension wordt verkregen van de gfxFactory.
+ *
+ * @param gameDimensions De spel dimensies.
  */
-public class BorderCollision {
-
-    //TODO: misschien static maken om dan te gebruiken in CollisionManager
-
-    /**
-     * De spel dimensies.
-     */
-    private final IDimension gameDimensions;
-
-    public BorderCollision(IDimension gameDimensions) {
-        this.gameDimensions = gameDimensions;
-    }
-
+public record BorderCollision(IDimension gameDimensions) {
     /**
      * Kijken of dat er een collision is met een rand van het spel.
      *
-     * @param position  positie van de entiteit
-     * @param dimension dimensie van de entiteit (hoe groot deze is).
-     * @return List<Boolean>    met formaat [TOPCOLLISION, LEFTCOLLISION, BOTTOMCOLLISION, RIGHTCOLLISION]
+     * @param dc positie en dimensie van de entiteit
+     * @return List<Boolean> met formaat [TOPCOLLISION, LEFTCOLLISION, BOTTOMCOLLISION, RIGHTCOLLISION]
      */
-    public List<Boolean> checkBorderCollision(IPosition position, IDimension dimension) {
+    public List<Boolean> checkBorderCollision(DimensionComponent dc) {
         List<Boolean> temp = new ArrayList<>();
 
         //Als links boven hoek tegen de bovenkant komt
-        if (position.getY() < 0)
+        if (dc.getY() < 0)
             temp.add(true);
         else
             temp.add(false);
 
         //Als links boven hoek tegen de linkse kant komt
-        if (position.getX() < 0)
+        if (dc.getX() < 0)
             temp.add(true);
         else
             temp.add(false);
 
         //Als recht onder hoek tegen de onderkant komt
         //Hierbij moeten de dimensies bij
-        if (position.getY() + dimension.getHeight() > this.gameDimensions.getHeight())
+        if (dc.getY() + dc.getHeight() > this.gameDimensions.getHeight())
             temp.add(true);
         else
             temp.add(false);
 
         //Als recht onder hoek tegen de rechterkant komt
         //Hierbij moeten de dimensies bij
-        if (position.getX() + dimension.getWidth() > this.gameDimensions.getWidth())
+        if (dc.getX() + dc.getWidth() > this.gameDimensions.getWidth())
             temp.add(true);
         else
             temp.add(false);
@@ -67,7 +56,8 @@ public class BorderCollision {
      *
      * @return
      */
-    public IDimension getGameDimensions() {
+    @Override
+    public IDimension gameDimensions() {
         return gameDimensions;
     }
 }

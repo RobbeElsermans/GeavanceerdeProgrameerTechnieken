@@ -7,7 +7,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 
 public class BulletC extends ABulletEntity {
 
-    private GraphicsContext gfx;
+    private final GraphicsContext gfx;
     public BulletC(GraphicsContext gfx){
         this.gfx = gfx;
     }

@@ -33,7 +33,7 @@ public class Game {
     /**
      * Het level waarin het spel start.
      */
-    public static final InGameStates START_GAME_STATE = InGameStates.LEVEL_1;
+    public static final InGameStates START_GAME_STATE = InGameStates.DEBUG;
     /**
      * Gebruikt een GFX-abstract factory om GFX en Game gescheiden te houden.
      */
@@ -75,7 +75,9 @@ public class Game {
     List<AScreenEntity> screenEntityList = new ArrayList<>();
 
     /**
-     * Een collision object die we gebruiken om de entiteiten binnenin het spelvlak te houden.
+     * Een collision record die we gebruiken om de entiteiten binnenin het spelvlak te houden.
+     * <p>
+     * Het bevat de gfx spelgrootte om de grenzen te detecteren. De methode wordt gebruikt om 2
      */
     private BorderCollision borderCollision;
 
@@ -127,7 +129,7 @@ public class Game {
         this.getSettings(configFile);
 
         //geeft game dimensions over aan factory
-        this.gfxFactory.setupGameDimentions(new Dimension(gameSize.getWidth(), gameSize.getHeight()));
+        this.gfxFactory.setupGameDimension(new Dimension(gameSize.getWidth(), gameSize.getHeight()));
     }
 
     /**
@@ -148,33 +150,36 @@ public class Game {
             render();
 
             switch (gameState) {
-                case START_SCREEN, PAUSED -> {
-                    //Create startscreen van aFactory.
-                    visualizeScreen();
-                    //Kijk of dat de input ENTER is.
-                    //Als ENTER, dan verder naar IN_GAME
-                }
-                case IN_GAME -> {
-                    //Do game mechanics.
-                    //Verschillende levels mogelijk.
+                /*
+                 * Create startscreen van aFactory.
+                 *
+                 * Kijk of dat de input ENTER is.
+                 * Als ENTER, dan verder naar IN_GAME
+                 */
+                case START_SCREEN, PAUSED -> visualizeScreen();
 
-                    //Als level veranderd is, upgraden
+                /*
+                 * Do game mechanics.
+                 * Verschillende levels mogelijk.
+                 * Als level veranderd is, upgraden
+                 */
+                case IN_GAME -> {
+
+                    //Als er nog geen spel gestart is geweest, doe dan de basis initialisatie.
                     if (prevInGameState == null) {
                         this.baseInitialize();
                     }
 
+                    //Als het level veranderd is t.o.v. het vorige level dat bezig was, initialiseer dan het nieuwe level.
                     if (prevInGameState != inGameState) {
                         this.levelInitialize();
                     }
 
                     prevInGameState = inGameState;
 
-                    //update
                     update();
-                    //visualize entities
                     visualize();
                 }
-                //Pause screen en game mag niet verder gaan.
                 case END_GAME -> {
 
                     //De values doorspelen naar endscherm.
@@ -270,15 +275,9 @@ public class Game {
     private void visualizeScreen() {
         switch (gameState) {
 
-            case START_SCREEN -> {
-                screenEntityList.get(0).visualize();
-            }
-            case PAUSED -> {
-                screenEntityList.get(1).visualize();
-            }
-            case END_GAME -> {
-                screenEntityList.get(2).visualize();
-            }
+            case START_SCREEN -> screenEntityList.get(0).visualize();
+            case PAUSED -> screenEntityList.get(1).visualize();
+            case END_GAME -> screenEntityList.get(2).visualize();
             default -> throw new IllegalStateException("Unexpected value: " + gameState);
         }
 
@@ -293,7 +292,7 @@ public class Game {
         gameSize = FileManager.getSettingAsDimension("gameWidth", "gameHeight", configFile, new Dimension(30, 20));
 
         this.fps = FileManager.getSettingInteger("fps", configFile, 40);
-        //TODO: zorg dat de game generatie rekening houd met de entiteiten hun grootte.
+
         this.playerDimension = FileManager.getSettingAsDimension("width_player", "height_player", configFile, new Dimension(1, 1));
         this.enemyDimension = FileManager.getSettingAsDimension("width_enemy", "height_enemy", configFile, new Dimension(1, 1));
         this.bigEnemyDimension = FileManager.getSettingAsDimension("width_big_enemy", "height_big_enemy", configFile, new Dimension(2, 1));
@@ -386,13 +385,12 @@ public class Game {
 
     /**
      * Initialiseer een level a.d.h.v. de inGameState.
+     *
      * @level_1 In LEVEL_1 wordt 1/3 van de breedte benut om enemy's te genereren. Het is een gewone blokvorm in de vorm van:
      * <p>x x x x x</p>
      * <p>x x x x x</p>
-     *
      * @level_2 In LEVEL_2 wordt een vaste structuur gevormd ( -_-_- ) die op 1/8 van de hoogte start.
      * De hoeveelheid is vast ingesteld. De enemy's schieten en gaan hier sneller.
-     *
      */
     private void levelInitialize() {
         //Clear all entities
@@ -446,7 +444,6 @@ public class Game {
             }
             case DEBUG -> {
 
-                //TODO
                 //Stel nieuwe enemy van [2,0] tot [2,2] rekeninghoudend met zijn dimensies.
                 //Dimensie is 2x2.
                 //Dus als we coordinate [2,2] geven wordt dit in werkelijkheid -> [2,6] .
@@ -587,7 +584,6 @@ public class Game {
             for (APlayerEntity player : playerEntityList) {
                 if (EntityCollision.entityCollision(player.getMovementComponent(), bonus.getMovementComponent())) {
                     //Bonus toevoegen
-                    //TODO
                     switch (bonus.getCollectableComponent().getType()) {
                         case LIFE -> {
                             //STATISTICS
@@ -645,6 +641,7 @@ public class Game {
 
                         //STATISTICS
                         StatisticsSystem.incrementDamageTaken(player.getStatisticsComponent(), bullet.getLivableComponent());
+                        StatisticsSystem.incrementLivesLose(player.getStatisticsComponent());
                         //STATISTICS
 
                         GlobalShootSystem.damage(player.getLivableComponent(), bullet.getLivableComponent());
@@ -728,9 +725,7 @@ public class Game {
      */
     private void checkBorderCollisions() {
         //checkBorderCollisionPlayer
-        playerEntityList.forEach(i -> {
-            BorderCollisionSystem.checkBorderCollisionPlayer(borderCollision, i.getMovementComponent());
-        });
+        playerEntityList.forEach(i -> BorderCollisionSystem.checkBorderCollisionPlayer(borderCollision, i.getMovementComponent()));
 
         //Check bullet collision player with game ends
         for (APlayerEntity player : playerEntityList) {
@@ -802,16 +797,10 @@ public class Game {
     private void updateInGameStates() {
         //Al de enemies zijn dood en elke speler heeft nog genoeg leven
         if (enemyEntityList.isEmpty() && playerEntityList.stream().noneMatch(i -> i.getLivableComponent().getLife() == 0)) {
-            System.out.println("WIN!");
+            //System.out.println("WIN!");
             switch (inGameState) {
-
-                case LEVEL_1 -> {
-                    inGameState = InGameStates.LEVEL_2;
-                }
-                case LEVEL_2 -> {
-                    //inGameState = InGameStates.BOSS_LEVEL;
-                    gameState = GameStates.END_GAME;
-                }
+                case LEVEL_1 -> inGameState = InGameStates.LEVEL_2;
+                case LEVEL_2 -> gameState = GameStates.END_GAME;
                 /*
                 case BOSS_LEVEL -> {
                     gameState = GameStates.END_GAME;
@@ -933,14 +922,10 @@ public class Game {
      */
     void doCleanup() {
         //Cleanup bullets van een speler
-        playerEntityList.forEach(player -> {
-            EntityCleanupSystem.cleanupBullets(player.getShootingComponent().getBulletList());
-        });
+        playerEntityList.forEach(player -> EntityCleanupSystem.cleanupBullets(player.getShootingComponent().getBulletList()));
 
         //Cleanup bullets van een enemy
-        enemyEntityList.forEach(enemy -> {
-            EntityCleanupSystem.cleanupBullets(enemy.getShootingComponent().getBulletList());
-        });
+        enemyEntityList.forEach(enemy -> EntityCleanupSystem.cleanupBullets(enemy.getShootingComponent().getBulletList()));
 
         //Cleanup enemy's
         if (EntityCleanupSystem.cleanupEnemys(enemyEntityList)) {

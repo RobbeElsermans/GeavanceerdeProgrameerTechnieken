@@ -12,7 +12,7 @@ public class ShootingComponent {
     /**
      * De lijst met afgevuurde schoten.
      */
-    private List<ABulletEntity> bulletList;
+    private final List<ABulletEntity> bulletList;
 
     /**
      * De snelheid van een bullet

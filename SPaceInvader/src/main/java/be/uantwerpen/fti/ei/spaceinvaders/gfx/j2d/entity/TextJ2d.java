@@ -1,14 +1,13 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ATextEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.DimensionComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.PositionComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 
 import java.awt.*;
 
 public class TextJ2d extends ATextEntity {
-    private GraphicsContext gfx;
+    private final GraphicsContext gfx;
     public TextJ2d(GraphicsContext gfx){
         super();
         this.gfx = gfx;

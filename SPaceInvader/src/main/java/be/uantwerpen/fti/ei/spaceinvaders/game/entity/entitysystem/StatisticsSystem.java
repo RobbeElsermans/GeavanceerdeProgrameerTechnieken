@@ -4,9 +4,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.Collectab
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StatisticsComponent;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 /**
  * Systeem dat de statistieken bijhoud en onderhoud.
  */
@@ -64,5 +61,9 @@ public class StatisticsSystem {
 
     public static void incrementBigEnemyHit(StatisticsComponent sc) {
         sc.setBigEnemyHit(sc.getBigEnemyHit()+1);
+    }
+
+    public static void incrementLivesLose(StatisticsComponent sc) {
+        sc.setLivesLose(sc.getLivesLose()+1);
     }
 }

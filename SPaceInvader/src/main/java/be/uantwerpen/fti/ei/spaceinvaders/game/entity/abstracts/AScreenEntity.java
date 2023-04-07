@@ -15,7 +15,7 @@ public abstract class AScreenEntity implements IVisualize {
     /**
      * De entiteit bevat informatie teksten
      */
-    private List<ATextEntity> textEntityList;
+    private final List<ATextEntity> textEntityList;
 
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.

@@ -2,14 +2,13 @@ package be.uantwerpen.fti.ei.spaceinvaders;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.Game;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
-import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.FactoryConsole;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.FactoryJ2d;
 
 public class Main {
     public static void main(String[] args) {
         //IDimension gameDimentions = new Dimension(20,20);
 
-        /**
+        /*
          * Wanneer je console selecteer, zorg ervoor dat je in een leeg text editor staat met je cursor. De keyevents worden namelijk globaal genomen.
          * Stel de FPS ook in met 1 i.p.v. 40.
          *

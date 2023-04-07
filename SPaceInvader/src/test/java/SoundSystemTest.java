@@ -2,9 +2,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public class SoundSystemTest {
     @Test
     public void testClipHang() {

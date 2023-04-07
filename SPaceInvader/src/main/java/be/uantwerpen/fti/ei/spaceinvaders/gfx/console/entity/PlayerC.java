@@ -7,7 +7,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 
 public class PlayerC extends APlayerEntity {
-    private GraphicsContext gfx;
+    private final GraphicsContext gfx;
 
     public PlayerC(GraphicsContext gfx) {
         this.gfx = gfx;

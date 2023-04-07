@@ -18,28 +18,26 @@ public class BorderCollisionSystem {
      */
     public static void checkBorderCollisionPlayer(BorderCollision bc, MovementComponent mc) {
 
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
+        if (bc.checkBorderCollision(mc).get(1)) {
             // if left collision.
             mc.setX(0);
             mc.setVelocity(0);
-            //TODO: Wat als het spel niet in 0 start?
         }
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
+        if (bc.checkBorderCollision(mc).get(3)) {
             // if right collision.
-            mc.setX((int) ((bc.getGameDimensions().getWidth()) - mc.getDimension().getWidth()));
+            mc.setX((int) ((bc.gameDimensions().getWidth()) - mc.getDimension().getWidth()));
             mc.setVelocity(0);
         }
 
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(0)) {
+        if (bc.checkBorderCollision(mc).get(0)) {
             // if top collision.
             mc.setY(0);
             mc.setVelocity(0);
-            //TODO: Wat als het spel niet in 0 start?
         }
 
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
+        if (bc.checkBorderCollision(mc).get(2)) {
             // if bottom collision.
-            mc.setY((int) (bc.getGameDimensions().getHeight() - mc.getDimension().getHeight()));
+            mc.setY((int) (bc.gameDimensions().getHeight() - mc.getDimension().getHeight()));
             mc.setVelocity(0);
         }
     }
@@ -57,13 +55,13 @@ public class BorderCollisionSystem {
         boolean hasCollideLeft = false;
         boolean hasCollideRight = false;
         for (MovementComponent mc : mcl) {
-            if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
+            if (bc.checkBorderCollision(mc).get(1)) {
                 // if left collision.
                 //mc.setX(0);
                 hasCollideLeft = true;
                 break;
             }
-            if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
+            if (bc.checkBorderCollision(mc).get(3)) {
                 // if right collision.
                 //mc.setX(bc.getGameDimensions().getWidth() - (mc.getDimension().getWidth() + (mc.getSpeed())));
                 hasCollideRight = true;
@@ -94,14 +92,14 @@ public class BorderCollisionSystem {
      * @implNote Deze functie kijkt enkel boven en onder.
      */
     public static void checkBorderCollisionBullet(BorderCollision bc, MovementComponent mc) {
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(0)) {
+        if (bc.checkBorderCollision(mc).get(0)) {
             // if top collision.
             mc.setY(0);
             mc.setVelocity(0);
         }
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
+        if (bc.checkBorderCollision(mc).get(2)) {
             // if bottom collision.
-            mc.setY((int) (bc.getGameDimensions().getHeight() - mc.getSpeed() * Math.abs(mc.getDefaultVelocity())));
+            mc.setY((int) (bc.gameDimensions().getHeight() - mc.getSpeed() * Math.abs(mc.getDefaultVelocity())));
             mc.setVelocity(0);
         }
     }
@@ -114,14 +112,14 @@ public class BorderCollisionSystem {
      * @implNote Deze functie kijkt enkel links en rechts.
      */
     public static void checkBorderCollisionBigEnemy(BorderCollision bc, MovementComponent mc) {
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1) && mc.getVelocity() < 0) {
+        if (bc.checkBorderCollision(mc).get(1) && mc.getVelocity() < 0) {
             // if left collision.
             mc.setX(0);
             mc.setVelocity(0);
         }
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)  && mc.getVelocity() > 0) {
+        if (bc.checkBorderCollision(mc).get(3)  && mc.getVelocity() > 0) {
             // if right collision.
-            mc.setX((int) ((bc.getGameDimensions().getWidth()) - mc.getDimension().getWidth()));
+            mc.setX((int) ((bc.gameDimensions().getWidth()) - mc.getDimension().getWidth()));
             mc.setVelocity(0);
         }
     }
@@ -134,9 +132,9 @@ public class BorderCollisionSystem {
      * @implNote Deze functie kijkt enkel boven en onder.
      */
     public static void checkBorderCollisionBonus(BorderCollision bc, MovementComponent mc) {
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(2)) {
+        if (bc.checkBorderCollision(mc).get(2)) {
             // if bottom collision.
-            mc.setY((int) (bc.getGameDimensions().getHeight() - mc.getSpeed() * Math.abs(mc.getDefaultVelocity())));
+            mc.setY((int) (bc.gameDimensions().getHeight() - mc.getSpeed() * Math.abs(mc.getDefaultVelocity())));
             mc.setVelocity(0);
         }
     }

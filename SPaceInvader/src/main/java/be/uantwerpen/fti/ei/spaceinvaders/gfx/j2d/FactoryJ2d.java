@@ -7,7 +7,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
-import be.uantwerpen.fti.ei.spaceinvaders.game.factory.EntityType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.*;
 
@@ -31,8 +30,8 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public void setupGameDimentions(IDimension dimension) {
-        super.setupGameDimentions(dimension);
+    public void setupGameDimension(IDimension dimension) {
+        super.setupGameDimension(dimension);
         this.graphicsContext = new GraphicsContext(this.gameDimension, this.configFile);
         this.keyboardInput = new KeyboardInputController(this.graphicsContext);
     }
@@ -201,7 +200,7 @@ public class FactoryJ2d extends AFactory {
         textEntities.add(new TextJ2d(positionEnterText, enterText, graphicsContext));
         textEntities.add(new TextJ2d(positionEscText, excText, graphicsContext));
 
-        return new StartScreenJ2d(positionScreen, textEntities, graphicsContext);
+        return new StartScreenJ2d(positionScreen, textEntities);
     }
 
     @Override
@@ -239,7 +238,7 @@ public class FactoryJ2d extends AFactory {
         textEntities.add(new TextJ2d(positionEnterText, enterText, graphicsContext));
         textEntities.add(new TextJ2d(positionEscText, excText, graphicsContext));
 
-        return new EndScreenJ2d(positionScreen, textEntities, graphicsContext);
+        return new EndScreenJ2d(positionScreen, textEntities);
     }
 
     @Override

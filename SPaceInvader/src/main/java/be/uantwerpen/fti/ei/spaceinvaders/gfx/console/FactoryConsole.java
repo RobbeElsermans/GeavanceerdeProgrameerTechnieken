@@ -7,7 +7,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
-import be.uantwerpen.fti.ei.spaceinvaders.game.factory.EntityType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.entity.*;
 
@@ -24,8 +23,8 @@ public class FactoryConsole extends AFactory {
     }
 
     @Override
-    public void setupGameDimentions(IDimension dimension) {
-        super.setupGameDimentions(dimension);
+    public void setupGameDimension(IDimension dimension) {
+        super.setupGameDimension(dimension);
         this.graphicsContext = new GraphicsContext(dimension);
     }
 
@@ -145,7 +144,7 @@ public class FactoryConsole extends AFactory {
         textEntities.add(new TextC(positionEnterText, enterText, graphicsContext));
         textEntities.add(new TextC(positionEscText, excText, graphicsContext));
 
-        return new StartScreenC(positionScreen, textEntities, graphicsContext);
+        return new StartScreenC(positionScreen, textEntities);
     }
 
     @Override
@@ -162,7 +161,7 @@ public class FactoryConsole extends AFactory {
         textEntities.add(new TextC(positionEnterText, enterText, graphicsContext));
         textEntities.add(new TextC(positionEscText, excText, graphicsContext));
 
-        return new PauseScreenC(positionScreen, textEntities, graphicsContext);
+        return new PauseScreenC(positionScreen, textEntities);
     }
 
     @Override
@@ -179,7 +178,7 @@ public class FactoryConsole extends AFactory {
         textEntities.add(new TextC(positionEnterText, enterText, graphicsContext));
         textEntities.add(new TextC(positionEscText, excText, graphicsContext));
 
-        return new EndScreenC(positionScreen, textEntities, graphicsContext);
+        return new EndScreenC(positionScreen, textEntities);
     }
 
     @Override

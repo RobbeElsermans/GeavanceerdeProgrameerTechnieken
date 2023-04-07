@@ -156,8 +156,6 @@ public class GraphicsContext {
         graph2d.dispose();
     }
 
-    //TODO: Zet parameters om in IDimension
-
     /**
      * Past de gegeven dimensies aan, aan de hoogte en breedte van het scherm.
      *

@@ -2,12 +2,11 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.console.entity;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABonusEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 
 public class BonusC extends ABonusEntity {
-    private GraphicsContext gfx;
+    private final GraphicsContext gfx;
     public BonusC(GraphicsContext gfx){
         this.gfx = gfx;
     }

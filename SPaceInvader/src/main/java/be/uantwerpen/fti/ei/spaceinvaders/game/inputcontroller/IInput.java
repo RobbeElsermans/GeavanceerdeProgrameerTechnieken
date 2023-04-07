@@ -4,9 +4,6 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller;
  * Interface die een player input bevat.
  */
 public interface IInput {
-
-    //TODO: IInput meer onderverdelen in bv. IProjectileInput, ICharacterInput
-
     /**
      * Als er één van de knoppen is ingedrukt, zal deze methode true geven. Anders false.
      * @return  boolean

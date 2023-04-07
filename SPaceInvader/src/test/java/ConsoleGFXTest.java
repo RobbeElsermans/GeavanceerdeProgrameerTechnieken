@@ -4,13 +4,11 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.FactoryConsole;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 public class ConsoleGFXTest {
     @Test
     void testConsoleClear() {
         AFactory gfxFac = new FactoryConsole();
-        gfxFac.setupGameDimentions(new Dimension(5, 5));
+        gfxFac.setupGameDimension(new Dimension(5, 5));
 
         AEnemyEntity enemy = gfxFac.getEnemyEntity();
 
