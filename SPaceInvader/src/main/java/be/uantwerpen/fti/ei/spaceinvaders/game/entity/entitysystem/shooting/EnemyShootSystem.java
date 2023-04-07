@@ -1,6 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.Random;
+import be.uantwerpen.fti.ei.spaceinvaders.game.helper.Random;
 
 /**
  * Dedicated ShootSysteem voor een enemy entiteit.

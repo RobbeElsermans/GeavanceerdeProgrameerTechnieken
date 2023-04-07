@@ -1,6 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.Random;
+import be.uantwerpen.fti.ei.spaceinvaders.game.helper.Random;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABigEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABonusEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableType;

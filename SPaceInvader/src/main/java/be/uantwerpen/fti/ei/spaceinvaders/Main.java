@@ -17,8 +17,8 @@ public class Main {
         //AFactory aFactory = new FactoryConsole();
         //Game game = new Game(aFactory, "src/main/resources/game_config.txt");
 
-        AFactory aFactory = new FactoryJ2d("src/main/resources/gfx_config.txt");
-        Game game = new Game(aFactory, "src/main/resources/game_config.txt");
+        AFactory aFactory = new FactoryJ2d("src/main/resources/config/gfx_config.txt");
+        Game game = new Game(aFactory, "src/main/resources/config/game_config.txt");
 
         game.start();
     }
