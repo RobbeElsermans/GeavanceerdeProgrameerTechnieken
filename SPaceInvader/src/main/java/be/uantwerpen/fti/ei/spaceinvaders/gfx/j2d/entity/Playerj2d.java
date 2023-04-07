@@ -29,7 +29,7 @@ public class Playerj2d extends APlayerEntity {
         //Graphics2D g2d = getGfx().getG2d();
         if (getGfx().getG2d() != null) {
             getGfx().getG2d().setColor(new Color(50, 200, 200));
-            getGfx().getG2d().fillRect(this.getMovementComponent().getX() , this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());
+            getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());
         }
     }
 

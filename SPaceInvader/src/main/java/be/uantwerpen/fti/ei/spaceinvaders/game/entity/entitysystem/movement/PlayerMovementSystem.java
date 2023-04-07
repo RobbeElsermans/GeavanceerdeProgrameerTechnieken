@@ -20,21 +20,22 @@ public class PlayerMovementSystem {
     public static void move(MovementComponent mc, IInput input) {
         if (input.inputAvailable()) {
             if (input.isLeft()) {
-                mc.setVelocity(-Math.abs(mc.getDefaultVelocity()));
+                mc.setVelocity(Math.abs(mc.getDefaultVelocity()));
 
-                BigDecimal temp = new BigDecimal((mc.getSpeed() * mc.getVelocity()));
+                BigDecimal temp = BigDecimal.valueOf(mc.getSpeed() * mc.getVelocity());
                 temp = temp.setScale(0, RoundingMode.DOWN);
 
-                mc.setX((int) (mc.getX() + (mc.getSpeed() * temp.intValue())));
+                mc.setX((mc.getX() - (mc.getSpeed() * temp.intValue())));
+
                 //System.out.println(mc.getVelocity());
             }
             if (input.isRight()) {
                 mc.setVelocity(Math.abs(mc.getDefaultVelocity()));
 
-                BigDecimal temp = new BigDecimal((mc.getSpeed() * mc.getVelocity()));
+                BigDecimal temp = BigDecimal.valueOf(mc.getSpeed() * mc.getVelocity());
                 temp = temp.setScale(0, RoundingMode.DOWN);
 
-                mc.setX((int) (mc.getX() + (mc.getSpeed() * temp.intValue())));
+                mc.setX((mc.getX() + (mc.getSpeed() * temp.intValue())));
                 //System.out.println(mc.getVelocity());
             }
         }

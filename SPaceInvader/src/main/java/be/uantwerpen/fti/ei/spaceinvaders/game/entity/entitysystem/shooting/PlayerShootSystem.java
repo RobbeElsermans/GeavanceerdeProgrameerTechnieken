@@ -28,10 +28,13 @@ public class PlayerShootSystem extends GlobalShootSystem {
      * Default constructor
      */
     public PlayerShootSystem() {
+        /*
         this.intervalNs = 500000000;
         this.nextIntervalNS = System.nanoTime() + intervalNs;
         this.remainingIntervalTime = 0;
         this.hasFire = false;
+
+         */
     }
 
     /**
@@ -40,6 +43,11 @@ public class PlayerShootSystem extends GlobalShootSystem {
      * @param input De inputcontroller van de entiteit.
      * @return True als er geschoten mag worden. Anders false.
      */
+    public boolean checkShoot(IInput input) {
+        //Als er input aanwezig is & er is geschoten & (de timer is afgelopen of er is nog niet geschoten)
+        return input.inputAvailable() && input.isShoot();
+    }
+    /*
     public boolean checkShoot(IInput input) {
         remainingIntervalTime += nextIntervalNS - System.nanoTime();
         remainingIntervalTime /= 1000;
@@ -60,5 +68,6 @@ public class PlayerShootSystem extends GlobalShootSystem {
         }
         return false;
     }
-}
 
+     */
+}

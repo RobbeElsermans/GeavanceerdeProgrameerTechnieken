@@ -24,7 +24,7 @@ public class BulletJ2d extends ABulletEntity {
         //Graphics2D g2d = getGfx().getG2d();
         if (getGfx().getG2d() != null) {
             getGfx().getG2d().setColor(new Color(219, 15, 15));
-            getGfx().getG2d().fillRect(this.getMovementComponent().getX() , this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
+            getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
         }
     }
 

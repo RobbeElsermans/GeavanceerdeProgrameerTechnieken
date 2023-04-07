@@ -22,6 +22,7 @@ public abstract class AFactory {
      * Default constructor die niets doet dan enkel het object aanmaken.
      */
     public AFactory() {
+
     }
 
     /**
@@ -51,7 +52,7 @@ public abstract class AFactory {
      * @return APlayerEntity object
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library.
      */
-    public abstract APlayerEntity getPlayerEntity(IPosition position, int life, int speed, double velocity);
+    public abstract APlayerEntity getPlayerEntity(IPosition position, int life, double speed, double velocity);
 
     /**
      * Geeft een AEnemyEntity object terug met default waarden.
@@ -70,7 +71,7 @@ public abstract class AFactory {
      * @return AEnemyEntity object
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
      */
-    public abstract AEnemyEntity getEnemyEntity(IPosition position, int life, int speed, double velocity);
+    public abstract AEnemyEntity getEnemyEntity(IPosition position, int life, double speed, double velocity);
 
     /**
      * Geeft een ABulletEntity object terug met default waarden.
@@ -89,7 +90,7 @@ public abstract class AFactory {
      * @return ABulletEntity object
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
      */
-    public abstract ABulletEntity getBulletEntity(IPosition position, int life, int speed, double velocity);
+    public abstract ABulletEntity getBulletEntity(IPosition position, int life, double speed, double velocity);
 
     /**
      * Geeft een AObstacleEntity object terug met default waarden.
@@ -125,7 +126,7 @@ public abstract class AFactory {
      * @return ABigEnemyEntity object.
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
      */
-    public abstract ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, int speed, double velocity);
+    public abstract ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, double speed, double velocity);
 
     /**
      * Geeft een ABonusEntity object terug met default waarden.
@@ -145,7 +146,7 @@ public abstract class AFactory {
      * @return ABonusEntity object.
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
      */
-    public abstract ABonusEntity getBonusEntity(IPosition position, int speed, double velocity, CollectableType type, double value);
+    public abstract ABonusEntity getBonusEntity(IPosition position, double speed, double velocity, CollectableType type, double value);
 
     /**
      * Geeft een ABonusEntity object terug met volgende parameters.
@@ -158,7 +159,7 @@ public abstract class AFactory {
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
      * De collectable wordt random geselecteerd.
      */
-    public abstract ABonusEntity getRandomBonusEntity(IPosition position, int speed, double velocity, int randValueRange);
+    public abstract ABonusEntity getRandomBonusEntity(IPosition position, double speed, double velocity, int randValueRange);
 
     /**
      * Geeft een ATextEntity object terug met default waarden.

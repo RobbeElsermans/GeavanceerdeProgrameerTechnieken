@@ -31,7 +31,7 @@ public class BigEnemyJ2D extends ABigEnemyEntity {
                 getGfx().getG2d().setColor(new Color(244, 195, 100));
             else
                 getGfx().getG2d().setColor(new Color(255, 100, 0));
-            getGfx().getG2d().fillRect(this.getMovementComponent().getX() , this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
+            getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
         }
     }
 

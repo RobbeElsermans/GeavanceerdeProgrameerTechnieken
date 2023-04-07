@@ -10,7 +10,7 @@ public class MovementComponent extends DimensionComponent {
     /**
      * De constante snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 2.
      */
-    private int speed;
+    private double speed;
 
     /**
      * De snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 1.
@@ -42,16 +42,16 @@ public class MovementComponent extends DimensionComponent {
      * @param dimension De dimensie van de entiteit.
      * @param speed     De snelheid waarmee de entiteit zich verplaatst.
      */
-    public MovementComponent(IPosition position, IDimension dimension, int speed,double velocity) {
+    public MovementComponent(IPosition position, IDimension dimension, double speed,double velocity) {
         super(position, dimension);
         this.setSpeed(speed);
         this.defaultVelocity = velocity;
         this.setVelocity(velocity);
     }
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
     public double getVelocity() {

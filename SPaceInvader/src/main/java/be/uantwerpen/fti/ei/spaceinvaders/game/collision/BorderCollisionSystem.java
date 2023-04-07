@@ -114,12 +114,12 @@ public class BorderCollisionSystem {
      * @implNote Deze functie kijkt enkel links en rechts.
      */
     public static void checkBorderCollisionBigEnemy(BorderCollision bc, MovementComponent mc) {
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1)) {
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(1) && mc.getVelocity() < 0) {
             // if left collision.
             mc.setX(0);
             mc.setVelocity(0);
         }
-        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)) {
+        if (bc.checkBorderCollision(mc.getPosition(), mc.getDimension()).get(3)  && mc.getVelocity() > 0) {
             // if right collision.
             mc.setX((int) ((bc.getGameDimensions().getWidth()) - mc.getDimension().getWidth()));
             mc.setVelocity(0);

@@ -6,28 +6,28 @@ public interface IPosition {
      *
      * @return De huidige x-waarde als integer.
      */
-    int getX();
+    double getX();
 
     /**
      * Geeft de huidige y-waarden terug.
      *
      * @return De huidige y-waarde als integer.
      */
-    int getY();
+    double getY();
 
     /**
      * Zet de huidige x-waarde met een gegeven waarde.
      *
      * @param x die de nieuwe waarden voorstelt.
      */
-    void setX(int x);
+    void setX(double x);
 
     /**
      * Zet de huidige y-waarde met een gegeven waarde.
      *
      * @param y die de nieuwe waarden voorstelt.
      */
-    void setY(int y);
+    void setY(double y);
 
     /**
      * Geeft een IPosition object terug waarin x-waarden en y-waarden staan.

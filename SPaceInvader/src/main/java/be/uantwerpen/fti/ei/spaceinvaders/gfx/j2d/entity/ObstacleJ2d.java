@@ -25,13 +25,17 @@ public class ObstacleJ2d extends AObstacleEntity {
         //Use the gfx to draw onto the buffer
         //Graphics2D g2d = getGfx().getG2d();
         if (getGfx().getG2d() != null) {
-            if (getLivableComponent().getLife() > 2)
-                getGfx().getG2d().setColor(new Color(0, 255, 0));
+            if (getLivableComponent().getLife() == 1)
+                getGfx().getG2d().setColor(new Color(102, 0, 0));
             else if (getLivableComponent().getLife() == 2)
-                getGfx().getG2d().setColor(new Color(244, 195, 8));
+                getGfx().getG2d().setColor(new Color(102, 51, 0));
+            else if (getLivableComponent().getLife() == 3)
+                getGfx().getG2d().setColor(new Color(102, 102, 100));
+            else if (getLivableComponent().getLife() == 4)
+                getGfx().getG2d().setColor(new Color(51, 102, 100));
             else
-                getGfx().getG2d().setColor(new Color(255, 0, 0));
-            getGfx().getG2d().fillRect(this.getStaticComponent().getX(), this.getStaticComponent().getY(), this.getStaticComponent().getWidth(), this.getStaticComponent().getHeight());
+                getGfx().getG2d().setColor(new Color(0, 102, 0));
+            getGfx().getG2d().fillRect((int) this.getStaticComponent().getX(), (int) this.getStaticComponent().getY(), this.getStaticComponent().getWidth(), this.getStaticComponent().getHeight());
         }
     }
 

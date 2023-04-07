@@ -6,6 +6,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
  * Een MovementSysteem dedicated voor een collectable (Bonus).
  */
 public class BigEnemyMovementSystem {
+
     /**
      * Beweegt de entiteit.
      *

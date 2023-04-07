@@ -26,7 +26,7 @@ public class TextJ2d extends ATextEntity {
     public void visualize() {
         if (getGfx().getG2d() != null) {
             getGfx().getG2d().setColor(new Color(0,20,255));
-            getGfx().getG2d().drawString(this.getInformationComponent().getInfoText(),this.getPositionComponent().getX(), this.getPositionComponent().getY());
+            getGfx().getG2d().drawString(this.getInformationComponent().getInfoText(), (int) this.getPositionComponent().getX(), (int) this.getPositionComponent().getY());
         }
     }
     public GraphicsContext getGfx() {

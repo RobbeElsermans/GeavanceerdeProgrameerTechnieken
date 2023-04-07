@@ -42,7 +42,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public APlayerEntity getPlayerEntity(IPosition position, int life, int speed, double velocity) {
+    public APlayerEntity getPlayerEntity(IPosition position, int life, double speed, double velocity) {
 
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
@@ -60,7 +60,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public AEnemyEntity getEnemyEntity(IPosition position, int life, int speed, double velocity) {
+    public AEnemyEntity getEnemyEntity(IPosition position, int life, double speed, double velocity) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
         position.setY(position.getY() * this.graphicsContext.getTileHeight());
@@ -77,7 +77,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public ABulletEntity getBulletEntity(IPosition position, int life, int speed, double velocity) {
+    public ABulletEntity getBulletEntity(IPosition position, int life, double speed, double velocity) {
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBulletDimension(), speed, velocity);
         LivableComponent livableComponent = new LivableComponent(life);
@@ -108,7 +108,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public ABonusEntity getBonusEntity(IPosition position, int speed, double velocity, CollectableType type, double value) {
+    public ABonusEntity getBonusEntity(IPosition position, double speed, double velocity, CollectableType type, double value) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
         position.setY(position.getY() * this.graphicsContext.getTileHeight());
@@ -120,7 +120,7 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public ABonusEntity getRandomBonusEntity(IPosition position, int speed, double velocity, int randValueRange) {
+    public ABonusEntity getRandomBonusEntity(IPosition position, double speed, double velocity, int randValueRange) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
         position.setY(position.getY() * this.graphicsContext.getTileHeight());
@@ -144,7 +144,7 @@ public class FactoryJ2d extends AFactory {
 
 
     @Override
-    public ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, int speed, double velocity) {
+    public ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, double speed, double velocity) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
         position.setY(position.getY() * this.graphicsContext.getTileHeight());

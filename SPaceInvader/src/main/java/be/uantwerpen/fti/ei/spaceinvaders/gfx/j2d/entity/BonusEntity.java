@@ -29,11 +29,18 @@ public class BonusEntity extends ABonusEntity {
         //Graphics2D g2d = getGfx().getG2d();
         if (getGfx().getG2d() != null) {
             //getGfx().getG2d().setColor(new Color(224, 17, 231));
-            if (getCollectableComponent().getType() == CollectableType.LIFE)
+            if (getCollectableComponent().getType() == CollectableType.LIFE) {
                 getGfx().getG2d().setColor(new Color(255, 0, 127));
-            if (getCollectableComponent().getType() == CollectableType.MOVE_SPEED)
-                getGfx().getG2d().setColor(new Color(128, 128, 128));
-            getGfx().getG2d().fillRect(this.getMovementComponent().getX(), this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
+            }
+            if (getCollectableComponent().getType() == CollectableType.MOVE_SPEED) {
+                if (getCollectableComponent().getValue() < 0) {
+                    getGfx().getG2d().setColor(new Color(128, 128, 128));
+                }
+                if (getCollectableComponent().getValue() > 0) {
+                    getGfx().getG2d().setColor(new Color(102, 178, 255));
+                }
+            }
+            getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
         }
     }
 

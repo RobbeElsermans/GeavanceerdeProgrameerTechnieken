@@ -17,11 +17,25 @@ public class StatisticsSystem {
      */
     public static void calculateScore(StatisticsComponent sc){
         // (hits/fired)*damageDone*10
-        double tempScore = ((double) sc.getShotsHits() /sc.getShotsFired())*sc.getDamageDone()*10;
-        //System.out.println(sc.toString());
-        if(sc.getShotsFired() != 0 && (sc.getShotsFired() == (sc.getShotsHits() + sc.getShotsMissed()))) {
-            sc.setScore((int)tempScore);
+        System.out.println(sc);
+        int tempScore;
+        try{
+            tempScore = sc.getShotsHits()*10 - sc.getShotsMissed()*10 + (sc.getDamageDone()/10)*10;
+            if(sc.getShotsFired() != 0 && (sc.getShotsFired() == (sc.getShotsHits() + sc.getShotsMissed()))) {
+                sc.setScore(tempScore);
+            }
         }
+        catch (ArithmeticException ignored){
+
+        }
+        /*
+        int tempScore = sc.getShotsHits()*10 - ((sc.getShotsMissed()/sc.getDamageDone())/10)*10;
+        System.out.println(tempScore);
+        if(sc.getShotsFired() != 0 && (sc.getShotsFired() == (sc.getShotsHits() + sc.getShotsMissed()))) {
+            sc.setScore(tempScore);
+        }
+
+         */
     }
 
     public static void incrementShotFired(StatisticsComponent sc){

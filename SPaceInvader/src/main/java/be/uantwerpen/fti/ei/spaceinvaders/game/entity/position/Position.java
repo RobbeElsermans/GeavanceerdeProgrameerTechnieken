@@ -7,7 +7,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.position;
  * zijn gekoppeld aan gameWidth en gameHeight die in het bestand game_config.txt staan.
  */
 public class Position implements IPosition {
-    private int x, y;
+    private double x, y;
 
     /**
      * Default constructor die de default waardes voor x en y zet op 0.
@@ -23,28 +23,28 @@ public class Position implements IPosition {
      * @param x De x-waarde als integer.
      * @param y De y-waarde als integer.
      */
-    public Position(int x, int y) {
+    public Position(double x, double y) {
         setX(x);
         setY(y);
     }
 
     @Override
-    public int getX() {
+    public double getX() {
         return this.x;
     }
 
     @Override
-    public int getY() {
+    public double getY() {
         return this.y;
     }
 
     @Override
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
     @Override
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
