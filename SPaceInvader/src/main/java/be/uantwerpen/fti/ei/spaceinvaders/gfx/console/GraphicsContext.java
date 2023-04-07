@@ -21,7 +21,7 @@ public class GraphicsContext {
             for (int width = 0; width <= gameDimension.getWidth()-1; width++){
                 System.out.print(gamePicture[height][width]);
             }
-            System.out.println(gamePicture[height][(int) gameDimension.getWidth()-1]);
+            System.out.println(gamePicture[height][(int) gameDimension.getWidth()]);
         }
 
         //clear the picture.

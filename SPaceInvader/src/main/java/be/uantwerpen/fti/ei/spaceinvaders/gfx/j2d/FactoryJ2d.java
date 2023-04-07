@@ -33,7 +33,7 @@ public class FactoryJ2d extends AFactory {
     @Override
     public void setupGameDimentions(IDimension dimension) {
         super.setupGameDimentions(dimension);
-        this.graphicsContext = new GraphicsContext(this.getGameDimension(), this.configFile);
+        this.graphicsContext = new GraphicsContext(this.gameDimension, this.configFile);
         this.keyboardInput = new KeyboardInputController(this.graphicsContext);
     }
 
@@ -250,31 +250,5 @@ public class FactoryJ2d extends AFactory {
     @Override
     public IDimension getScale() {
         return new Dimension(graphicsContext.getTileWidth(), graphicsContext.getTileHeight());
-    }
-
-    @Override
-    public IDimension getScale(EntityType type) {
-
-        switch (type){
-            case BONUS -> {
-                return graphicsContext.getBonusDimension();
-            }
-            case BIG_ENEMY -> {
-                return graphicsContext.getBigEnemyDimension();
-            }
-            case ENEMY -> {
-                return graphicsContext.getEnemyDimension();
-            }
-            case PLAYER -> {
-                return graphicsContext.getPlayerDimension();
-            }
-            case OBSTACLE -> {
-                return graphicsContext.getObstacleDimension();
-            }
-            case BULLET -> {
-                return graphicsContext.getBulletDimension();
-            }
-        }
-        return null;
     }
 }

@@ -196,9 +196,4 @@ public class FactoryConsole extends AFactory {
     public IDimension getScale() {
         return new Dimension(1, 1);
     }
-
-    @Override
-    public IDimension getScale(EntityType type) {
-        return new Dimension();
-    }
 }

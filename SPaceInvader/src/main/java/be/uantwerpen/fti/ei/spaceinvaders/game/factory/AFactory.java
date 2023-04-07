@@ -15,7 +15,7 @@ public abstract class AFactory {
     /**
      * Variabelen die de speldimensies bijhoud.
      */
-    private IDimension gameDimension;
+    protected IDimension gameDimension;
 
     /**
      * Default constructor die niets doet dan enkel het object aanmaken.
@@ -117,13 +117,14 @@ public abstract class AFactory {
 
     /**
      * Geeft een ABigEnemyEntity object terug met volgende parameters.
+     * <p>
+     * De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
      *
      * @param position Een positie van de entiteit als IPosition.
      * @param life     Het leven van de entiteit als integer.
      * @param speed    De snelheid waarmee de entiteit zich verplaatst als integer.
      * @param velocity De versnelling waarmee de entiteit zich verplaatst als integer.
      * @return ABigEnemyEntity object.
-     * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
      */
     public abstract ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, double speed, double velocity);
 
@@ -150,9 +151,9 @@ public abstract class AFactory {
     /**
      * Geeft een ABonusEntity object terug met volgende parameters.
      *
-     * @param position Een positie van de entiteit als IPosition.
-     * @param speed    De snelheid waarmee de entiteit zich verplaatst als integer.
-     * @param velocity De versnelling waarmee de entiteit zich verplaatst als integer.
+     * @param position       Een positie van de entiteit als IPosition.
+     * @param speed          De snelheid waarmee de entiteit zich verplaatst als integer.
+     * @param velocity       De versnelling waarmee de entiteit zich verplaatst als integer.
      * @param randValueRange De range startend van 0 tot randValueRange -1.
      * @return ABonusEntity object.
      * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
@@ -247,26 +248,9 @@ public abstract class AFactory {
     public abstract IInput getInput();
 
     /**
-     * De game dimensie van de gekozen gfx.
-     *
-     * @return IDimension
-     */
-    public IDimension getGameDimension() {
-        return gameDimension;
-    }
-
-    /**
      * De scale van de gfx om alles op het scherm te laten passen.
      *
      * @return IDimension met schaal langs width en height.
      */
     public abstract IDimension getScale();
-
-    /**
-     * De scale van een entiteit om alles op het scherm te laten passen.
-     *
-     * @return IDimension met schaal langs width en height.
-     */
-    public abstract IDimension getScale(EntityType type);
-
 }
