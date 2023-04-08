@@ -329,7 +329,7 @@ public class Game {
                     this.gfxFactory.getPlayerEntity(
                             new Position(this.gameSize.getWidth() - playerDimension.getWidth() / 2, this.gameSize.getHeight() - playerDimension.getHeight()),
                             3,
-                            1.5,
+                            2,
                             1)
             );
         } else {

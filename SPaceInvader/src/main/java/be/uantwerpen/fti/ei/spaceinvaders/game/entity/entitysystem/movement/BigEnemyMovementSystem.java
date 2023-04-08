@@ -1,18 +1,21 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.helper.RoundEvenly;
 
 /**
- * Een MovementSysteem dedicated voor een collectable (Bonus).
+ * Een MovementSysteem dedicated voor een bigEnemy.
  */
 public class BigEnemyMovementSystem {
 
     /**
-     * Beweegt de entiteit.
+     * Beweegt de entiteit a.d.h.v. een MovementComponent.
      *
-     * @param mc MovementComponent van de entiteit
+     * @param mc MovementComponent van de bigEnemy entiteit die bewogen moet worden.
+     * @see MovementComponent
+     * @see RoundEvenly#toInteger(double)
      */
     public static void move(MovementComponent mc) {
-        mc.setX((int) (mc.getX() + mc.getSpeed() * mc.getVelocity()));
+        mc.setX(mc.getX() + RoundEvenly.toInteger(mc.getSpeed()*mc.getVelocity()));
     }
 }
