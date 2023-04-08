@@ -4,11 +4,11 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertEquals;
 
 class BorderCollisionTest {
 
@@ -21,15 +21,15 @@ class BorderCollisionTest {
         int width = 300;
         int height = 400;
 
-        List<Boolean> collisions;
+        Boolean[] collisions;
         BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
         collisions = borderCollision.checkBorderCollision(new DimensionComponent(position, dimension));
 
-        assertEquals(false, collisions.get(0));
-        assertEquals(false, collisions.get(1));
-        assertEquals(false, collisions.get(2));
-        assertEquals(false, collisions.get(3));
+        assertEquals(false, collisions[0]);
+        assertEquals(false, collisions[1]);
+        assertEquals(false, collisions[2]);
+        assertEquals(false, collisions[3]);
 
     }
 
@@ -42,15 +42,15 @@ class BorderCollisionTest {
         int width = 300;
         int height = 400;
 
-        List<Boolean> collisions;
+        Boolean[] collisions;
         BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
         collisions = borderCollision.checkBorderCollision(new DimensionComponent(position, dimension));
 
-        assertEquals(false, collisions.get(0));
-        assertEquals(true, collisions.get(1));
-        assertEquals(false, collisions.get(2));
-        assertEquals(false, collisions.get(3));
+        assertEquals(false, collisions[0]);
+        assertEquals(true, collisions[1]);
+        assertEquals(false, collisions[2]);
+        assertEquals(false, collisions[3]);
 
     }
 
@@ -63,16 +63,15 @@ class BorderCollisionTest {
         int width = 300;
         int height = 400;
 
-        List<Boolean> collisions;
+        Boolean[] collisions;
         BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
         collisions = borderCollision.checkBorderCollision(new DimensionComponent(position, dimension));
 
-        assertEquals(false, collisions.get(0));
-        assertEquals(false, collisions.get(1));
-        assertEquals(true, collisions.get(2));
-        assertEquals(false, collisions.get(3));
-
+        assertEquals(false, collisions[0]);
+        assertEquals(false, collisions[1]);
+        assertEquals(true, collisions[2]);
+        assertEquals(false, collisions[3]);
     }
 
     @Test
@@ -84,15 +83,15 @@ class BorderCollisionTest {
         int width = 300;
         int height = 400;
 
-        List<Boolean> collisions;
+        Boolean[] collisions;
         BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
         collisions = borderCollision.checkBorderCollision(new DimensionComponent(position, dimension));
 
-        assertEquals(false, collisions.get(0));
-        assertEquals(false, collisions.get(1));
-        assertEquals(false, collisions.get(2));
-        assertEquals(true, collisions.get(3));
+        assertEquals(false, collisions[0]);
+        assertEquals(false, collisions[1]);
+        assertEquals(false, collisions[2]);
+        assertEquals(true, collisions[3]);
 
     }
 
@@ -105,14 +104,14 @@ class BorderCollisionTest {
         int width = 300;
         int height = 400;
 
-        List<Boolean> collisions;
+        Boolean[] collisions;
         BorderCollision borderCollision = new BorderCollision(new Dimension(width, height));
 
         collisions = borderCollision.checkBorderCollision(new DimensionComponent(position, dimension));
 
-        assertEquals(true, collisions.get(0));
-        assertEquals(false, collisions.get(1));
-        assertEquals(false, collisions.get(2));
-        assertEquals(false, collisions.get(3));
+        assertEquals(true, collisions[0]);
+        assertEquals(false, collisions[1]);
+        assertEquals(false, collisions[2]);
+        assertEquals(false, collisions[3]);
     }
 }

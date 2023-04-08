@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.types;
 
 /**
  * Het typen kogel. Dit zorgt voor de richting van de kogel.

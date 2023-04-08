@@ -2,6 +2,8 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.*;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
+import be.uantwerpen.fti.ei.spaceinvaders.game.helper.Random;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
@@ -127,12 +129,13 @@ public class FactoryJ2d extends AFactory {
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBonusDimension(), speed, velocity);
         CollectableComponent collectableComponent = new CollectableComponent();
-        //Selecteer typen at random
-        int temp = (int) (Math.random() * CollectableType.values().length+1);
+
+        //Selecteer typen at random a.d.h.v. de totale lengte van de enum
+        int temp = (int) (Random.getRandom(CollectableType.values().length-1));
         if (temp == 0) {
-            collectableComponent = new CollectableComponent(CollectableType.LIFE, (int) (Math.random() * randValueRange));
+            collectableComponent = new CollectableComponent(CollectableType.LIFE, (Random.getRandom(randValueRange)));
         } else if (temp == 1) {
-            collectableComponent = new CollectableComponent(CollectableType.BULLET_SPEED, (int) (Math.random() * randValueRange));
+            collectableComponent = new CollectableComponent(CollectableType.BULLET_SPEED, (Random.getRandom(randValueRange)));
         }
         return new BonusJ2d(movementComponent, collectableComponent, graphicsContext);
     }

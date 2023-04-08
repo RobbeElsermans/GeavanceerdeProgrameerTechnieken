@@ -6,8 +6,17 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
 /**
  * Een abstracte implementatie van een bullet entiteit. Deze bullet entiteit kan bewegen en heeft een zeker leven.
+ * <p>
+ * Het leven van de bullet entiteit wordt gebruikt om schaden aan te richten aan een andere entiteit.
+ * Het ABulletEntity wordt gebruikt door zowel de speler als de enemy om een kogel af te vuren.
+ * Het enige verschil tussen beide is de velocity, speed en eventueel life (wat de schaden voorstelt).
+ * <p>
+ * Wanneer men deze entity wilt implementeren, moet men de visualize methode overerven van IVisualize.
+ * Deze methode wordt gebruikt om de entiteit af te beelden.
  *
- * @implNote Het leven van de bullet entiteit wordt gebruikt om schaden aan te richten.
+ * @see IVisualize
+ * @see be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.BulletMovementSystem
+ * @see be.uantwerpen.fti.ei.spaceinvaders.game.collision.BulletCollisionSystem
  */
 public abstract class ABulletEntity implements IVisualize {
     /**
@@ -22,6 +31,11 @@ public abstract class ABulletEntity implements IVisualize {
 
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
+     * <p>
+     * De default parameters zijn terug te vinden in MovementComponent en LivableComponent.
+     *
+     * @see MovementComponent
+     * @see LivableComponent
      */
     public ABulletEntity() {
         this.movementComponent = new MovementComponent();
@@ -31,18 +45,26 @@ public abstract class ABulletEntity implements IVisualize {
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
-     * @param movementComponent De locatie en dimensie van de entiteit met zijn snelheid en versnelling.
-     * @param livableComponent  Het leven van de entiteit.
+     * @param movementComponent De locatie en dimensie van de entiteit (in graphics-coordinates) met zijn snelheid en versnelling.
+     * @param livableComponent  Het leven van de entiteit. Dit leven stelt de schaden voor dat een bullet kan aanrichten.
+     * @see MovementComponent
+     * @see LivableComponent
      */
     public ABulletEntity(MovementComponent movementComponent, LivableComponent livableComponent) {
         this.movementComponent = movementComponent;
         this.livableComponent = livableComponent;
     }
 
+    /**
+     * @return De movementComponent van de entiteit.
+     */
     public MovementComponent getMovementComponent() {
         return movementComponent;
     }
 
+    /**
+     * @return De livableComponent van de entiteit.
+     */
     public LivableComponent getLivableComponent() {
         return livableComponent;
     }

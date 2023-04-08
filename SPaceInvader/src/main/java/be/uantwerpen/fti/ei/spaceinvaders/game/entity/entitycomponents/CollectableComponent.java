@@ -1,5 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
+
 /**
  * Een component dat een collectable bevat.
  */

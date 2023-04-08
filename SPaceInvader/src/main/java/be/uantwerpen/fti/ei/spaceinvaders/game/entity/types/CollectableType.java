@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
+package be.uantwerpen.fti.ei.spaceinvaders.game.entity.types;
 
 /**
  * Het typen collectable.

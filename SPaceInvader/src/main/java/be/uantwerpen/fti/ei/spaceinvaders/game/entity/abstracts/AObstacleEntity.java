@@ -6,6 +6,14 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
 /**
  * Een obstacle entiteit dat een statische entiteit is. Deze bevat enkel een positie, dimensie en een leven.
+ * <p>
+ * Het AObstacleEntity is een niet-beweegbaar entiteit dat kan gebruikt worden als schild door de speler.
+ * Een obstakel kan zowel door de enemy als door de speler weg geschoten worden.
+ * <p>
+ * Wanneer men deze entity wilt implementeren, moet men de visualize methode overerven van IVisualize.
+ * Deze methode wordt gebruikt om de entiteit af te beelden.
+ *
+ * @see IVisualize
  */
 public abstract class AObstacleEntity implements IVisualize {
     /**
@@ -19,6 +27,11 @@ public abstract class AObstacleEntity implements IVisualize {
 
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
+     * <p>
+     * De default parameters zijn terug te vinden in DimensionComponent, LivableComponent.
+     *
+     * @see DimensionComponent
+     * @see LivableComponent
      */
     public AObstacleEntity() {
         this.dimensionComponent = new DimensionComponent();
@@ -28,17 +41,26 @@ public abstract class AObstacleEntity implements IVisualize {
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
-     * @param dimensionComponent   De locatie en dimensie van de entiteit.
-     * @param livableComponent  Het leven van de entiteit.
+     * @param dimensionComponent De locatie en dimensie van de entiteit (in graphics-coordinates).
+     * @param livableComponent   Het leven van de entiteit.
+     * @see DimensionComponent
+     * @see LivableComponent
      */
     public AObstacleEntity(DimensionComponent dimensionComponent, LivableComponent livableComponent) {
         this.dimensionComponent = dimensionComponent;
         this.livableComponent = livableComponent;
     }
 
+    /**
+     * @return De livableComponent van de entiteit.
+     */
     public LivableComponent getLivableComponent() {
         return livableComponent;
     }
+
+    /**
+     * @return De dimensionComponent van de entiteit.
+     */
     public DimensionComponent getDimensionComponent() {
         return dimensionComponent;
     }

@@ -1,12 +1,15 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.factory;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableType;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+
+import java.util.List;
 
 /**
  * @author Robbe Elsermans
@@ -120,7 +123,7 @@ public abstract class AFactory {
      * <p>
      * In de methode kan de dimensie, gedefinieerd in <i>game_config.txt</i>, en positie omgevormd worden naar de graphics-systeem dimensies.
      *
-     * @return AEnemyEntity Een AEnemyEntity specifiek van een graphics-systeem.
+     * @return ABulletEntity Een ABulletEntity specifiek van een graphics-systeem.
      * @see ABulletEntity
      * @see ABulletEntity#ABulletEntity() ABulletEntity()
      */
@@ -141,7 +144,7 @@ public abstract class AFactory {
      * @param life     Het leven van de entiteit als integer.
      * @param speed    De snelheid waarmee de entiteit zich verplaatst als double.
      * @param velocity De versnelling waarmee de entiteit zich verplaatst als double.
-     * @return AEnemyEntity Een AEnemyEntity specifiek van een graphics-systeem.
+     * @return ABulletEntity Een ABulletEntity specifiek van een graphics-systeem.
      * @see ABulletEntity
      * @see ABulletEntity#ABulletEntity() ABulletEntity()
      */
@@ -175,7 +178,7 @@ public abstract class AFactory {
      *
      * @param position Een positie van de entiteit als IPosition. Deze zijn in game dimensie waarden.
      * @param life     Het leven van de entiteit als integer.
-     * @return AEnemyEntity Een AEnemyEntity specifiek van een graphics-systeem.
+     * @return AObstacleEntity Een v specifiek van een graphics-systeem.
      * @see AObstacleEntity
      * @see AObstacleEntity#AObstacleEntity() AObstacleEntity()
      */
@@ -219,65 +222,151 @@ public abstract class AFactory {
 
     /**
      * Geeft een ABonusEntity object terug met default waarden.
+     * <p>
+     * Het ABonusEntity is een bonus die volgende bonussen kan afgeven.
+     * <ul>
+     *     <li>LIFE</li> -> Kan het leven van de entiteit bevorderen.
+     *     <li>BULLET_SPEED</li> -> Kan de schietsnelheid van de entiteit veranderen.
+     * </ul>
+     * Deze bonussen worden afgegeven in EntityCreationSystem wanneer een bepaalde eigenschap voldaan is in StatisticsComponent.
+     * TODO: Nog in game_config.txt plaatsen en doorvoeren.
+     * <p>
+     * De dimensies van een entiteit worden gedefinieerd in het configuratiebestand <i>gfx_config.txt</i> van de GFX-library.
+     * Deze dimensie mag niet groter zijn dan de dimensies gedefinieerd in <i>game_config.txt</i>. Mag wel kleiner zijn.
+     * <p>
+     * In de methode kan de dimensie, gedefinieerd in <i>game_config.txt</i>, en positie omgevormd worden naar de graphics-systeem dimensies.
      *
-     * @return ABonusEntity object
+     * @return ABonusEntity Een ABonusEntity specifiek van een graphics-systeem.
+     * @see ABonusEntity
+     * @see ABonusEntity#ABonusEntity() ABonusEntity()
+     * @see CollectableType
+     * @see be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StatisticsComponent StatisticsComponent
+     * @see be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCreationSystem#bonusCreation(List, List, AFactory, IDimension, IDimension)  bonusCreation(List, List, AFactory, IDimension, IDimension)
      */
     public abstract ABonusEntity getBonusEntity();
 
     /**
-     * Geeft een ABonusEntity object terug met volgende parameters.
+     * Geeft een ABonusEntity object terug met extra parameters.
+     * <p>
+     * Het ABonusEntity is een bonus ( positief of negatief ) die volgende bonussen kan afgeven.
+     * <ul>
+     *     <li>LIFE</li> -> Kan het leven van de entiteit bevorderen.
+     *     <li>BULLET_SPEED</li> -> Kan de schietsnelheid van de entiteit veranderen.
+     * </ul>
+     * Deze bonussen worden afgegeven in EntityCreationSystem wanneer een bepaalde eigenschap voldaan is in StatisticsComponent.
+     * TODO: Nog in game_config.txt plaatsen en doorvoeren.
+     * <p>
+     * De dimensies van een entiteit worden gedefinieerd in het configuratiebestand <i>gfx_config.txt</i> van de GFX-library.
+     * Deze dimensie mag niet groter zijn dan de dimensies gedefinieerd in <i>game_config.txt</i>. Mag wel kleiner zijn.
+     * <p>
+     * In de methode kan de dimensie, gedefinieerd in <i>game_config.txt</i>, en positie omgevormd worden naar de graphics-systeem dimensies.
      *
-     * @param position Een positie van de entiteit als IPosition.
-     * @param speed    De snelheid waarmee de entiteit zich verplaatst als integer.
-     * @param velocity De versnelling waarmee de entiteit zich verplaatst als integer.
-     * @param type     het type collectable.
-     * @param value    De waarde van de collectable.
-     * @return ABonusEntity object.
-     * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
+     * @param position Een positie van de entiteit als IPosition. Deze zijn in game dimensies.
+     * @param speed    De snelheid waarmee de entiteit zich verplaatst als double.
+     * @param velocity De versnelling waarmee de entiteit zich verplaatst als double.
+     * @param type     het type collectable gedefinieerd in CollectableType.
+     * @param value    De waarde van de collectable. Dit kan zowel positief als negatief zijn.
+     * @return ABonusEntity Een ABonusEntity specifiek van een graphics-systeem.
+     * @see ABonusEntity
+     * @see ABonusEntity#ABonusEntity(MovementComponent, CollectableComponent) ABonusEntity(MovementComponent, CollectableComponent)
+     * @see CollectableType
+     * @see MovementComponent
+     * @see CollectableComponent
+     * @see be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StatisticsComponent StatisticsComponent
+     * @see be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCreationSystem#bonusCreation(List, List, AFactory, IDimension, IDimension)  bonusCreation(List, List, AFactory, IDimension, IDimension)
      */
     public abstract ABonusEntity getBonusEntity(IPosition position, double speed, double velocity, CollectableType type, double value);
 
     /**
-     * Geeft een ABonusEntity object terug met volgende parameters.
+     * Geeft een ABonusEntity object terug met extra parameters.
+     * <p>
+     * Het ABonusEntity is een bonus ( positief of negatief ) die volgende bonussen kan afgeven.
+     * <ul>
+     *     <li>LIFE</li> -> Kan het leven van de entiteit bevorderen.
+     *     <li>BULLET_SPEED</li> -> Kan de schietsnelheid van de entiteit veranderen.
+     * </ul>
+     * Deze bonussen worden afgegeven in EntityCreationSystem wanneer een bepaalde eigenschap voldaan is in StatisticsComponent.
+     * TODO: Nog in game_config.txt plaatsen en doorvoeren.
+     * <p>
+     * De <b>randValueRange</b> kan gebruikt worden om een random waarde door te voeren naar
+     * CollectableComponent wat de value betreft van de collectable. Om de random te genereren is er
+     * een help klasse ontworpen genaamd Random.
+     * <p>
+     * De dimensies van een entiteit worden gedefinieerd in het configuratiebestand <i>gfx_config.txt</i> van de GFX-library.
+     * Deze dimensie mag niet groter zijn dan de dimensies gedefinieerd in <i>game_config.txt</i>. Mag wel kleiner zijn.
+     * <p>
+     * In de methode kan de dimensie, gedefinieerd in <i>game_config.txt</i>, en positie omgevormd worden naar de graphics-systeem dimensies.
      *
-     * @param position       Een positie van de entiteit als IPosition.
-     * @param speed          De snelheid waarmee de entiteit zich verplaatst als integer.
-     * @param velocity       De versnelling waarmee de entiteit zich verplaatst als integer.
-     * @param randValueRange De range startend van 0 tot randValueRange -1.
-     * @return ABonusEntity object.
-     * @implNote De dimensies van een entiteit worden gedefinieerd in het configuratiebestand van de GFX-library. Dit wordt geschaald.
-     * De collectable wordt random geselecteerd.
+     * @param position       Een positie van de entiteit als IPosition. Deze zijn in game dimensies.
+     * @param speed          De snelheid waarmee de entiteit zich verplaatst als double.
+     * @param velocity       De versnelling waarmee de entiteit zich verplaatst als double.
+     * @param randValueRange De random range startend van 0 tot randValueRange dus [0, randValueRange].
+     * @return ABonusEntity Een ABonusEntity specifiek van een graphics-systeem.
+     * @see ABonusEntity
+     * @see ABonusEntity#ABonusEntity(MovementComponent, CollectableComponent)  ABonusEntity(MovementComponent, CollectableComponent)
+     * @see CollectableType
+     * @see MovementComponent
+     * @see CollectableComponent
+     * @see be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StatisticsComponent StatisticsComponent
+     * @see be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCreationSystem#bonusCreation(List, List, AFactory, IDimension, IDimension)  bonusCreation(List, List, AFactory, IDimension, IDimension)
      */
     public abstract ABonusEntity getRandomBonusEntity(IPosition position, double speed, double velocity, int randValueRange);
 
     /**
      * Geeft een ATextEntity object terug met default waarden.
+     * <p>
+     * De ATextEntity zorgt voor text visualisatie met eventueel variabele informatie die elk moment kan wijzigen.
+     * <p>
+     * De waarde hierin bestaan uit Strings. Het is aan het graphics-systeem om deze String waardes te tonen, op een correcte manier.
+     * <p>
+     * In de methode kan de positie omgevormd worden naar de graphics-systeem dimensies.
      *
-     * @return ATextEntity object
+     * @return ATextEntity Een ATextEntity specifiek van een graphics-systeem.
+     * @see ATextEntity
+     * @see ATextEntity#ATextEntity() ATextEntity()
      */
     public abstract ATextEntity getTextEntity();
 
     /**
-     * Geeft een ATextEntity object terug met volgende parameters.
+     * Geeft een ATextEntity object terug met extra parameters.
+     * <p>
+     * De ATextEntity zorgt voor text visualisatie met eventueel variabele informatie die elk moment kan wijzigen.
+     * <p>
+     * De waarde hierin bestaan uit Strings. Het is aan het graphics-systeem om deze String waardes te tonen, op een correcte manier.
+     * <p>
+     * In de methode kan de positie omgevormd worden naar de graphics-systeem dimensies.
      *
-     * @param pos     Een positie van de entiteit als IPosition.
-     * @param preText Een preText dat voor de informatie text komt.
-     * @return ATextEntity object.
+     * @param pos     Een positie van de entiteit als IPosition. Deze zijn in game dimensies.
+     * @param preText Een preText dat voor de informatie text komt te staan als String.
+     * @return ATextEntity Een ATextEntity specifiek van een graphics-systeem.
+     * @see ATextEntity
+     * @see ATextEntity#ATextEntity() ATextEntity()
      */
     public abstract ATextEntity getTextEntity(IPosition pos, String preText);
 
     /**
-     * Geeft een ATextEntity object terug met volgende parameters.
+     * Geeft een ATextEntity object terug met extra parameters.
+     * <p>
+     * De ATextEntity zorgt voor text visualisatie met eventueel variabele informatie die elk moment kan wijzigen.
+     * <p>
+     * De waarde hierin bestaan uit Strings. Het is aan het graphics-systeem om deze String waardes te tonen, op een correcte manier.
+     * <p>
+     * In de methode kan de positie omgevormd worden naar de graphics-systeem dimensies.
      *
-     * @param pos     Een positie van de entiteit als IPosition.
-     * @param preText Een preText dat voor de informatie text komt.
-     * @param text    De effectieve informatie.
-     * @return ATextEntity object.
+     * @param pos     Een positie van de entiteit als IPosition. Deze zijn in game dimensies.
+     * @param preText Een preText dat voor de informatie text komt te staan als String.
+     * @param text    De informatie tekst die getoond kan worden na de preText als String.
+     * @return ATextEntity Een ATextEntity specifiek van een graphics-systeem.
+     * @see ATextEntity
+     * @see ATextEntity#ATextEntity() ATextEntity()
      */
     public abstract ATextEntity getTextEntity(IPosition pos, String preText, String text);
 
     /**
-     * De gekozen GFX renderen.
+     * De graphics-systeem renderen.
+     * <p>
+     * De graphics-systeem moet eerst zijn scherm clearen om daarna alles te tonen.
+     * Men kan best een systeem ontwerpen om alles wat getoond moet worden, in op te slaan om vervolgens, na de clear, alles te renderen.
      */
     public abstract void render();
 
@@ -292,8 +381,8 @@ public abstract class AFactory {
      * <p>
      * Geen bewegende delen zijn nodig.
      *
-     * @param pos       positie
-     * @param titleText titel tekst
+     * @param pos       De Positie van het start scherm. Deze zijn in game dimensies.
+     * @param titleText titel tekst.
      * @param enterText De tekst waar we willen aantonen dat enter, verder gaan is.
      * @param excText   De tekst waar we willen aantonen dat ecs, stoppen is.
      * @return AScreenEntity Hierin zitten enkelen ATextEntities waar informatie in kan opgeslagen worden zoals een text.
@@ -309,8 +398,8 @@ public abstract class AFactory {
      *     <li><b>Q</b> of <b>A</b> -> het spel afsluiten</li>
      * </ul>
      *
-     * @param pos       positie
-     * @param titleText titel tekst
+     * @param pos       De Positie van het pause scherm. Deze zijn in game dimensies.
+     * @param titleText Titel tekst.
      * @param enterText De tekst waar we willen aantonen dat enter, verder gaan is.
      * @param excText   De tekst waar we willen aantonen dat Q of A, stoppen is en afsluiten.
      * @return AScreenEntity Hierin zitten enkelen ATextEntities waar informatie in kan opgeslagen worden zoals een text.
@@ -327,10 +416,10 @@ public abstract class AFactory {
      * </ul>
      * De huidige score van de speler wordt hier getoond.
      * <p>
-     * Eveneens de high score wordt hier getoond dat uit het bestand highscore.txt.
+     * Eveneens de high score wordt hier getoond dat uit het bestand <i>highscore.txt</i>.
      *
-     * @param pos       positie
-     * @param titleText titel tekst
+     * @param pos       De Positie van het eind scherm. Deze zijn in game dimensies.
+     * @param titleText titel tekst.
      * @param enterText De tekst waar we willen aantonen dat enter, verder gaan is.
      * @param excText   De tekst waar we willen aantonen dat ecs, stoppen is.
      * @return AScreenEntity Hierin zitten enkelen ATextEntities waar informatie in kan opgeslagen worden zoals een text.
@@ -338,9 +427,11 @@ public abstract class AFactory {
     public abstract AScreenEntity getEndScreen(IPosition pos, String titleText, String enterText, String excText, String preScore, String preHighScore);
 
     /**
-     * De player input controller terug geven
+     * De player's zijn input controller.
+     * <p>
+     * Hierin wordt de player's zijn IInput controller doorgegeven en deze is afhankelijk van de graphics-systeem.
      *
-     * @return IInput
+     * @return IInput met de methods om acties uit te voeren op de player.
      */
     public abstract IInput getInput();
 
@@ -348,7 +439,7 @@ public abstract class AFactory {
      * Geeft de schaal factor van het graphics-systeem.
      * <p>
      * Wanneer we werken met een onafhankelijke graphics-systeem, is het noodzakelijk om te weten hoe
-     * de gameDimensions, gedefiniëerd in het bestand <i>game_config.txt</i>, vertaald worden naar het graphics-systeem.
+     * de gameDimensions, gedefinieerd in het bestand <i>game_config.txt</i>, vertaald worden naar het graphics-systeem.
      *
      * @return IDimension die de schalen bevat als width (breedte) en height (hoogte) schaal.
      */

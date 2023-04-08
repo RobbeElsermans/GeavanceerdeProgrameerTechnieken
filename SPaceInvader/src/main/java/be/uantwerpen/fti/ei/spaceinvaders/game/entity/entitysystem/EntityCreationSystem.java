@@ -3,7 +3,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.helper.Random;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABigEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABonusEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableType;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.StatisticsComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
@@ -31,14 +31,14 @@ public class EntityCreationSystem {
      * @param sc
      * @return
      */
-    public boolean bigEnemyCreation(List<ABigEnemyEntity> bee, List<StatisticsComponent> sc, AFactory gfx, IDimension gameDimention){
+    public boolean bigEnemyCreation(List<ABigEnemyEntity> bee, List<StatisticsComponent> sc, AFactory gfx, IDimension gameDimention, IDimension bigEnemyDimension){
         if (sc.stream().anyMatch(i -> (i.getShotsHits() % 5 == 0) && (i.getShotsHits() > 0)) && !hasFiredBigEnemy) {
             if (bee.size() == 0) {
                 velocity *= -1;
                 if (velocity > 0)
                     bee.add(gfx.getBigEnemyEntity(new Position(0, 1), 1, 2, velocity));
                 else
-                    bee.add(gfx.getBigEnemyEntity(new Position((int) (gameDimention.getWidth()-1), 1), 1, 2, velocity));
+                    bee.add(gfx.getBigEnemyEntity(new Position((int) (gameDimention.getWidth()-bigEnemyDimension.getWidth()), 1), 1, 2, velocity));
                 hasFiredBigEnemy = true;
                 return true;
             }
@@ -57,7 +57,7 @@ public class EntityCreationSystem {
      * @param sc
      * @return
      */
-    public boolean bonusCreation(List<ABonusEntity> be, List<StatisticsComponent> sc, AFactory gfx, IDimension gameDimention) {
+    public boolean bonusCreation(List<ABonusEntity> be, List<StatisticsComponent> sc, AFactory gfx, IDimension gameDimention, IDimension bonusDimension) {
         // Als er al een MOVE_SPEED bonus bestaat, niets doen.
         if (be.stream().noneMatch(i -> i.getCollectableComponent().getType() == CollectableType.BULLET_SPEED)) {
             //Heeft een speler shotHit van %10 bereikt? maak dan een bonus van bullet speed van 0.5 dus versnellen.

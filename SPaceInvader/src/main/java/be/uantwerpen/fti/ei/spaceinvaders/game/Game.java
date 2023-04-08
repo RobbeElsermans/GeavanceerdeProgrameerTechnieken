@@ -11,7 +11,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCreatio
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.StatisticsSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.EnemyShootSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.FromWhoBulletType;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.FromWhoBulletType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.GlobalShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.PlayerShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
@@ -488,13 +488,13 @@ public class Game {
                 enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth()*5,enemyDimension.getHeight()*2), 3, 1, 1));
 
  */
-/*
+
                 for (int i = 0; i < 100; i++) {
                     if ((enemyDimension.getWidth() * i + enemyDimension.getWidth()) <= gameSize.getHeight() && (enemyDimension.getHeight() * i + enemyDimension.getHeight()) <= gameSize.getHeight())
                         enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * i, enemyDimension.getHeight() * (i)), i % 2 + 1, 1, 1));
                 }
 
- */
+
                 //Neem 1/3 van het scherm vakjes
 
 
@@ -725,8 +725,10 @@ public class Game {
      */
     private void checkBorderCollisions() {
         //checkBorderCollisionPlayer
-        playerEntityList.forEach(i -> BorderCollisionSystem.checkBorderCollisionPlayer(borderCollision, i.getMovementComponent()));
-
+        if(inGameState != InGameStates.DEBUG)
+            playerEntityList.forEach(i -> BorderCollisionSystem.checkBorderCollisionPlayer(borderCollision, i.getMovementComponent()));
+        else
+            playerEntityList.forEach(i -> BorderCollisionSystem.checkBorderCollision(borderCollision, i.getMovementComponent()));
         //Check bullet collision player with game ends
         for (APlayerEntity player : playerEntityList) {
             for (ABulletEntity b : player.getShootingComponent().getBulletList()) {
@@ -825,9 +827,8 @@ public class Game {
                 bonusEntityList,
                 playerEntityList.stream().map(APlayerEntity::getStatisticsComponent).toList(),
                 gfxFactory,
-                new Dimension(
-                        this.gameSize.getWidth(),
-                        this.gameSize.getHeight())
+                this.gameSize,
+                this.bonusDimension
         ))
             soundSystem.playSoundOnce(SoundType.BONUS_SOUND);
     }
@@ -841,9 +842,8 @@ public class Game {
                 bigEnemyEntityList,
                 playerEntityList.stream().map(APlayerEntity::getStatisticsComponent).toList(),
                 gfxFactory,
-                new Dimension(
-                        this.gameSize.getWidth(),
-                        this.gameSize.getHeight())
+                gameSize,
+                bigEnemyDimension
         ))
             this.soundSystem.playSoundOnce(SoundType.BIG_ENEMY_SOUND);
     }

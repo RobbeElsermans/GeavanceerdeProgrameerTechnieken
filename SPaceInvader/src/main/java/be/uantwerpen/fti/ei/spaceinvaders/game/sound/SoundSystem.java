@@ -31,7 +31,7 @@ public class SoundSystem {
         if(soundExists(type)) {
             setFile(type);
 
-            this.soundComponent.getClip().start();
+            //this.soundComponent.getClip().start();
         }
     }
 
