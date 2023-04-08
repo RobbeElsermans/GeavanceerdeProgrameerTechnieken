@@ -1,6 +1,9 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een component dat informatie bevat in de vorm van een pretext en de effectieve informatie.
  * <p>
  * Deze component kan gebruikt worden om iets te laten zien aan een gebruiker.

@@ -1,12 +1,17 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller;
 
 /**
- * Interface die een player input bevat.
+ * Interface die een input bevat.
+ * <p>
+ * Met deze interface kunnen we iets bewegen.
  */
 public interface IInput {
     /**
-     * Als er één van de knoppen is ingedrukt, zal deze methode true geven. Anders false.
-     * @return  boolean
+     * Methode die kijkt ofdat een input beschikbaar is.
+     * <p>
+     * Wanneer een input available is, kunnen we dit checken door deze functie te gebruiken.
+     *
+     * @return True als er een input available is. Anders False.
      */
     boolean inputAvailable();
     /**

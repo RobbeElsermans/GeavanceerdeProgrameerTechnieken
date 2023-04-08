@@ -5,6 +5,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableCo
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een obstacle entiteit dat een statische entiteit is. Deze bevat enkel een positie, dimensie en een leven.
  * <p>
  * Het AObstacleEntity is een niet-beweegbaar entiteit dat kan gebruikt worden als schild door de speler.

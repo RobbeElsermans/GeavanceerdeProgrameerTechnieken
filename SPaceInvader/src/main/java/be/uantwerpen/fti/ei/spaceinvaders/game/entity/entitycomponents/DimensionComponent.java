@@ -6,6 +6,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een component dat een dimensie bevat in de vorm van IDimension. Het erft over van PositionComponent dus het heeft ook een positie.
  * <p>
  * Dit component kan gebruikt worden om iets een positie met een dimensie te geven.

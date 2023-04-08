@@ -9,6 +9,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import java.util.List;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een abstracte klasse voor een bonus.
  * <p>
  * Deze zorgt voor bonussen die de speler kan opnemen.

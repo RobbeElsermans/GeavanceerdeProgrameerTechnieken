@@ -4,6 +4,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een component dat een positie, dimensie, snelheid en versnelling bevat.
  * <p>
  * Deze component kan gebruikt worden wanneer iets kan bewegen.

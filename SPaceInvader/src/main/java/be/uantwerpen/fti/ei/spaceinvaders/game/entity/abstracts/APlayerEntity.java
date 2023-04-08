@@ -7,6 +7,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.Statistic
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een player entiteit dat overerft van livable & movable entiteit.
  * <p>
  * Wanneer men deze entity wilt implementeren, moet men de visualize methode overerven van IVisualize.

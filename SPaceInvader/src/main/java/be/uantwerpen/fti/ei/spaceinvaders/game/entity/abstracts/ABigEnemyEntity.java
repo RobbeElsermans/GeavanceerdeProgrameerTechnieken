@@ -9,6 +9,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import java.util.List;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een abstracte klasse van een big enemy entiteit. Deze big enemy entiteit kan bewegen en heeft een zeker leven.
  * <p>
  * De big enemy zal bij bepaalde evenementen, bovenaan het scherm overvliegen.

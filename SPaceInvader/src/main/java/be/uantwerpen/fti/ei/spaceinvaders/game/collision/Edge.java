@@ -1,6 +1,9 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.collision;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Hulp enum om te bepalen welke border collision er bekeken moet worden.
  *
  * @see BorderCollision BorderCollision

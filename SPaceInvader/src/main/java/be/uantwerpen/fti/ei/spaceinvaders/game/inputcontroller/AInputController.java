@@ -1,25 +1,19 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller;
+
 /**
  * Een abstracte classen die de input controller samen bundelt.
+ * <p>
+ * Deze klassen moet overgeërfd worden door een graphics-systeem zijn input controller.
+ *
+ * @see IInput
  */
 public abstract class AInputController implements IInput {
 
-    /**
+    /*
      * Interne variabelen om te kijken welke knoppen er ingedrukt zijn.
      */
     private boolean left, right, up, down, shoot, volup, voldown, esc, enter, quit = false;
 
-    /**
-     * Default constructor
-     */
-    public AInputController() {
-    }
-
-    /**
-     * Wanneer een input available is, kunnen we dit checken door deze functie te gebruiken.
-     * @return  True als er een input available is.
-     */
-    @Override
     public boolean inputAvailable() {
         return (isDown() || isEsc() || isLeft() || isRight() || isUp() || isVolDown() || isVolUp() || isShoot() || isEnter() || isQuit());
     }

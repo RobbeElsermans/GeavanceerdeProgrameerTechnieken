@@ -5,6 +5,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een abstracte implementatie van een bullet entiteit. Deze bullet entiteit kan bewegen en heeft een zeker leven.
  * <p>
  * Het leven van de bullet entiteit wordt gebruikt om schaden aan te richten aan een andere entiteit.

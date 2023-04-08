@@ -4,6 +4,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.helper.Random;
 
 /**
  * Dedicated ShootSysteem voor een enemy entiteit.
+ * @see GlobalShootSystem
  */
 public class EnemyShootSystem extends GlobalShootSystem {
     /**
@@ -12,7 +13,10 @@ public class EnemyShootSystem extends GlobalShootSystem {
     private int diff;
 
     /**
-     * Default constructor waarbij de parameters de default waarden krijgen.
+     * Default constructor waarbij:
+     * <ul>
+     *     <li>diff -> 1</li>
+     * </ul>
      */
     public EnemyShootSystem() {
         diff = 1;
@@ -20,6 +24,8 @@ public class EnemyShootSystem extends GlobalShootSystem {
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
+     * <p>
+     * Hoe groter diff genomen is, hoe frequenter een enemy kan schieten.
      *
      * @param diff duid de moeilijkheid aan. Hoe hoger, hoe moeilijker.
      */
@@ -29,10 +35,14 @@ public class EnemyShootSystem extends GlobalShootSystem {
 
     /**
      * Een functie die bepaald wanneer een enemy mag schieten.
-     * @return  True als de enemy mag schieten. Anders false.
+     * <p>
+     * Deze is random bepaald. De diff zal de maximale random waarde verlagen waardoor 
+     * de kans dat een gezochte waarde, vaker voorkomt.
+     * @return True als de enemy mag schieten. Anders false.
+     * @see Random#getRandom(int)
      */
     public boolean checkShoot() {
-        return Random.getRandom(2000/diff) == 3;
+        return Random.getRandom(2000 / diff) == 3;
     }
 
     public void setDiff(int diff) {

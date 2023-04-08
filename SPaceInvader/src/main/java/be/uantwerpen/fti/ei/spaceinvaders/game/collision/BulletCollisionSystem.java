@@ -4,6 +4,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.Dimension
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een bullet collision systeem waarbij elke collision van de bullet met een entiteit gecontroleerd wordt.
  *
  * @see EntityCollision

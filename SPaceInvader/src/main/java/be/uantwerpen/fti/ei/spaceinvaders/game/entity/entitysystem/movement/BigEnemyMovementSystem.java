@@ -4,6 +4,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
 import be.uantwerpen.fti.ei.spaceinvaders.game.helper.RoundEvenly;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een MovementSysteem dedicated voor een bigEnemy.
  */
 public class BigEnemyMovementSystem {

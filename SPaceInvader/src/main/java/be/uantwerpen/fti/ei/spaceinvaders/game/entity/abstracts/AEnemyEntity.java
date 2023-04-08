@@ -6,6 +6,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.ShootingC
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een abstracte implementatie van een enemy entiteit. Deze enemy entiteit kan bewegen en heeft een zeker leven.
  * De entiteit kan ook schieten.
  * <p>

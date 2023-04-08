@@ -5,6 +5,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.helper.RoundEvenly;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een GlobalMovementSysteem waarmee we overal heen kunnen gaan.
  * <p>
  * Om op eigen kracht te kunnen bewegen, hebben we een input nodig van de gebruiker.

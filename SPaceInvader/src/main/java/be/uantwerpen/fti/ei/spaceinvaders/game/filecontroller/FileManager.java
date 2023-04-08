@@ -7,18 +7,31 @@ import java.io.*;
 import java.util.Properties;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Help klassen die de functie krijgt om een bestand uit te lezen en hieruit parameters te halen en door te geven.
+ * Een FIle manager klasse die bepaalde parameters uit bestanden kan halen.
+ * <p>
+ * Als het bestand niet bestaat en het pad is geldig, wordt het bestand gecreëerd met daarin de default parameter waardes.
+ * Men kan zowel integer parameters als double parameters erin/uit halen.
+ * Als het bestand bestaat en de property niet, wordt deze property aan het bestaande bestand toegevoegd.
+ * <p>
+ * Als laatste is het mogelijk om een bestand te overschrijven met een property value.
  */
 public class FileManager {
-
     /**
-     * Een static methode die met behulp van de gegeven parameters, de parameter op te halen in het gegeven bestand.
+     * Een methode die met behulp van de gegeven parameters, de parameter op haalt in het gegeven bestand als integer.
+     * <p>
+     * Als het bestand niet bestaat en het pad is geldig, wordt het bestand gecreëerd met daarin de default parameter waardes.
+     * Men kan zowel integer parameters als double parameters erin/uit halen.
+     * <p>
+     * Als het bestand bestaat en de property niet, wordt deze property aan het bestaande bestand toegevoegd.
      *
      * @param propertyName De naam van de variabelen gedefinieerd in het bestand.
-     * @param location     De locatie van het bestand.
-     * @param defaultValue De standaard waarden voor moest het bestand of parameter niet bestaan.
-     * @return De gevraagde/ default parameter waarden.
-     * @description Als een bestand niet gevonden wordt en de locatie is geldig, zal er een nieuw bestand gemaakt worden en wordt de parameter hierin geplaatst met de default value.
+     * @param location     De locatie van het bestand + de bestandsnaam.
+     * @param defaultValue De standaard waarden, als integer, voor moest het bestand of parameter niet bestaan.
+     * @return int, De gevraagde/ default parameter waarden als integer.
      */
     public static int getSettingInteger(String propertyName, String location, int defaultValue) {
         int tempVal = defaultValue;
@@ -52,20 +65,21 @@ public class FileManager {
             //throw new RuntimeException(e);
             System.out.println("Er is een fout bestand pad meegegeven!");
         }
-
-
         return tempVal;
     }
 
     /**
-     * Een static methode die met behulp van de gegeven parameters, de parameter op te halen in het gegeven bestand.
+     * Een methode die met behulp van de gegeven parameters, de parameter op haalt in het gegeven bestand als double.
+     * <p>
+     * Als het bestand niet bestaat en het pad is geldig, wordt het bestand gecreëerd met daarin de default parameter waardes.
+     * Men kan zowel integer parameters als double parameters erin/uit halen.
+     * <p>
+     * Als het bestand bestaat en de property niet, wordt deze property aan het bestaande bestand toegevoegd.
      *
      * @param propertyName De naam van de variabelen gedefinieerd in het bestand.
-     * @param location     De locatie van het bestand.
-     * @param defaultValue De standaard waarden voor moest het bestand of parameter niet bestaan.
-     * @return De gevraagde/ default parameter waarden.
-     * @description Als een bestand niet gevonden wordt en de locatie is geldig,
-     * zal er een nieuw bestand gemaakt worden en wordt de parameter hierin geplaatst met de default value.
+     * @param location     De locatie van het bestand + de bestandsnaam.
+     * @param defaultValue De standaard waarden, als double, voor moest het bestand of parameter niet bestaan.
+     * @return double, De gevraagde/ default parameter waarden als double.
      */
     public static double getSettingDouble(String propertyName, String location, double defaultValue) {
         double tempVal = defaultValue;
@@ -104,30 +118,33 @@ public class FileManager {
     }
 
     /**
-     * Een static methode die met behulp van de gegeven parameters, de parameter op te halen in het gegeven bestand.
+     * Een methode die met behulp van de gegeven parameters, de parameter op haalt in het gegeven bestand als IDimension.
+     * <p>
+     * Als het bestand niet bestaat en het pad is geldig, wordt het bestand gecreëerd met daarin de default parameter waardes.
+     * Men kan zowel integer parameters als double parameters erin/uit halen.
+     * <p>
+     * Als het bestand bestaat en de property niet, wordt deze property aan het bestaande bestand toegevoegd.
      *
-     * @param propertyNameWidth     De naam van de width variabelen gedefinieerd in het bestand.
-     * @param propertyNameHeight    De naam van de height variabelen gedefinieerd in het bestand.
-     * @param location     De locatie van het bestand.
-     * @param defaultValue De standaard waarden voor moest het bestand of parameter niet bestaan als IDimension.
-     * @return De gevraagde/ default parameter waarden in IDimension formaat.
-     * @description Als een bestand niet gevonden wordt en de locatie is geldig,
-     * zal er een nieuw bestand gemaakt worden en wordt de parameter hierin geplaatst met de default value.
+     * @param propertyNameWidth  De naam van de width variabelen gedefinieerd in het bestand.
+     * @param propertyNameHeight De naam van de height variabelen gedefinieerd in het bestand.
+     * @param location           De locatie van het bestand.
+     * @param defaultValue       De standaard waarden voor moest het bestand of parameter niet bestaan als IDimension.
+     * @return IDimension, De gevraagde/ default parameter waarden in IDimension formaat.
      */
-    public static IDimension getSettingAsDimension(String propertyNameWidth,String propertyNameHeight, String location, IDimension defaultValue) {
+    public static IDimension getSettingAsDimension(String propertyNameWidth, String propertyNameHeight, String location, IDimension defaultValue) {
         double width = FileManager.getSettingDouble(propertyNameWidth, location, defaultValue.getWidth());
         double height = FileManager.getSettingDouble(propertyNameHeight, location, defaultValue.getHeight());
         return new Dimension(width, height);
     }
 
     /**
-     * Wijzig een bestand met een property.
+     * Een methode die met behulp van de gegeven parameters, een bestand kan overschrijven met de gegeven value.
      *
-     * @param propertyName De naam van de property.
-     * @param location     Het bestands-pad met de naam included.
-     * @param value De default value in string formaat.
+     * @param propertyName De naam van de variabelen gedefinieerd in het bestand.
+     * @param location     De locatie van het bestand + de bestandsnaam.
+     * @param value        De value die in het bestand wordt geschreven in string formaat.
      */
-    public static void propOverwrite(String propertyName, String location, String value) {
+    public static void overwriteFile(String propertyName, String location, String value) {
         try {
             String configString = propertyName + "=" + value + "\n";
 
@@ -142,13 +159,13 @@ public class FileManager {
     }
 
     /**
-     * Voeg een property toe aan een bestand.
+     * Voegt een property toe aan een bestand.
      *
-     * @param propertyName De naam van de property.
-     * @param location     Het bestands-pad met de naam included.
-     * @param defaultValue De default value in string formaat.
+     * @param propertyName De naam van de variabelen gedefinieerd in het bestand.
+     * @param location     De locatie van het bestand + de bestandsnaam.
+     * @param defaultValue De value in string formaat.
      */
-    protected static void createProp(String propertyName, String location, String defaultValue) {
+    private static void createProp(String propertyName, String location, String defaultValue) {
         try {
             String configString = propertyName + "=" + defaultValue + "\n";
 

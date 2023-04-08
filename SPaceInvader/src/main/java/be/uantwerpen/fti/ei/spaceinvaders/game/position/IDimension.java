@@ -1,17 +1,20 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.position;
 
+/**
+ * Interface die een dimensie bevat in breedte en hoogte.
+ */
 public interface IDimension {
     /**
-     * Geeft de breedte (width) terug van het object.
+     * Geeft de breedte (width) terug.
      *
-     * @return de breedte als integer.
+     * @return de breedte als double.
      */
     double getWidth();
 
     /**
-     * Geeft de hoogte (height) terug van het object.
+     * Geeft de hoogte (height) terug.
      *
-     * @return de hoogte als integer.
+     * @return de hoogte als double.
      */
     double getHeight();
 

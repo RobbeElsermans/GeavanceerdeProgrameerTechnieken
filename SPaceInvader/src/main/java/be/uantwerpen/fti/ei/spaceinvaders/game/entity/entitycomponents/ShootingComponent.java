@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een component dat kan schieten en dat een lijst van zijn schoten bijhoudt.
  *
  * @see ABulletEntity

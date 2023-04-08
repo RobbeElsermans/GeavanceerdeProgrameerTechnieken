@@ -3,6 +3,9 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een component dat collectable data bevat.
  * <p>
  * Deze component kan gebruikt worden wanneer we iets willen collecten. Zo kan een collectable enkele types aannemen.

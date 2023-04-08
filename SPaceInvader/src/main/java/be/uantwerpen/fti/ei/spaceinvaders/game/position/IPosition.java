@@ -1,5 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.position;
 
+/**
+ * Interface die een positie in x en y stelsel bevat.
+ */
 public interface IPosition {
     /**
      * Geeft de huidige x-waarden terug.

@@ -5,15 +5,20 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import java.util.List;
 
 /**
- * Een klasse die entiteiten kan opkuisen a.d.h.v. enkele parameters.
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
+ * Een klasse die entiteiten kan opkuisen a.d.h.v. parameters.
  */
 public class EntityCleanupSystem {
     /**
+     * Een methode dedicated voor het opkuisen van bullets.
+     * <p>
      * Wanneer een bullet een velocity heeft gekregen van 0 of een life van 0,
-     * dan is de bullet ergens gebotst en mag deze verwijderd worden.
+     * dan is de bullet ergens gebotst of ingeslagen en mag deze verwijderd worden.
      *
      * @param bulletEntityList De ABulletEntity lijst van de bullet entiteiten. Hierin worden de bullets bewaard.
-     * @return True als er een entiteit verwijderd is.
+     * @return True als er een entiteit verwijderd is. Anders false.
      */
     public static boolean cleanupBullets(List<ABulletEntity> bulletEntityList) {
         if (!bulletEntityList.isEmpty()) {
@@ -25,10 +30,12 @@ public class EntityCleanupSystem {
     }
 
     /**
+     * Een methode dedicated voor het opkuisen van enemy's.
+     * <p>
      * Wanneer een enemy een life heeft gekregen van 0, is deze dood en mag deze verwijderd worden.
      *
      * @param enemyEntityList De AEnemyEntity lijst van de enemy entiteiten. Hierin worden de enemy's bewaard.
-     * @return True als er een entiteit verwijderd is door een life = 0.
+     * @return True als er een entiteit verwijderd is. Anders false.
      */
     public static boolean cleanupEnemys(List<AEnemyEntity> enemyEntityList) {
         if (!enemyEntityList.isEmpty()) {
@@ -38,10 +45,12 @@ public class EntityCleanupSystem {
     }
 
     /**
+     * Een methode dedicated voor het opkuisen van obstakels.
+     * <p>
      * Wanneer een obstacle een life heeft gekregen van 0, is deze kapot en mag deze verwijderd worden.
      *
      * @param obstacleEntitieList De AObstacleEntity lijst van de obstacle entiteiten. Hierin worden de obstacles bewaard.
-     * @return True als er een entiteit verwijderd is door een life = 0.
+     * @return True als er een entiteit verwijderd is. Anders false.
      */
     public static boolean cleanupObstacles(List<AObstacleEntity> obstacleEntitieList) {
         if (!obstacleEntitieList.isEmpty()) {
@@ -51,10 +60,12 @@ public class EntityCleanupSystem {
     }
 
     /**
+     * Een methode dedicated voor het opkuisen van big enemy's.
+     * <p>
      * Wanneer een bonus een life heeft gekregen van 0, is deze dood en mag deze verwijderd worden.
      *
      * @param bonusEntityList De ABonusEntity lijst van de bonus entiteiten. Hierin worden de bonussen bewaard.
-     * @return True als er een entiteit verwijderd is door een life = 0.
+     * @return True als er een entiteit verwijderd is. Anders false.
      */
     public static boolean cleanupBigEnemy(List<ABigEnemyEntity> bonusEntityList) {
         if (!bonusEntityList.isEmpty()) {
@@ -65,10 +76,13 @@ public class EntityCleanupSystem {
     }
 
     /**
-     * Wanneer een bonus een life heeft gekregen van 0, is deze dood en mag deze verwijderd worden.
+     * Een methode dedicated voor het opkuisen van bonussen.
+     * <p>
+     * Wanneer een bonus een velocity heeft gekregen van 0 of collected is,
+     * dan is deze ergens gebotst of opgenomen door een entiteit en mag deze verwijderd worden.
      *
      * @param bonusEntityList De ABonusEntity lijst van de bonus entiteiten. Hierin worden de bonussen bewaard.
-     * @return True als er een entiteit verwijderd is door collected te worden.
+     * @return True als er een entiteit verwijderd is. Anders false.
      */
     public static boolean cleanupBonuses(List<ABonusEntity> bonusEntityList) {
         if (!bonusEntityList.isEmpty()) {

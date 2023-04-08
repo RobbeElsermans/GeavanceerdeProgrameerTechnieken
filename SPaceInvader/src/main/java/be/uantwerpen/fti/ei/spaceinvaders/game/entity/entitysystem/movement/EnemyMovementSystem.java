@@ -7,6 +7,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.helper.RoundEvenly;
 import java.util.List;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een MovementSysteem dedicated voor een Enemy.
  */
 public class EnemyMovementSystem {

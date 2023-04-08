@@ -2,15 +2,17 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.position;
 
 /**
  * Een positie klassen waarmee we een positie kunnen definiëren voor een entiteit.
- *
- * @implNote De coördinaten dat hier ingegeven worden,
- * zijn gekoppeld aan gameWidth en gameHeight die in het bestand game_config.txt staan.
+ * @see IPosition
  */
 public class Position implements IPosition {
     private double x, y;
 
     /**
-     * Default constructor die de default waardes voor x en y zet op 0.
+     * Default constructor waarbij:
+     * <ul>
+     *     <li>x -> 0</li>
+     *     <li>y -> 0</li>
+     * </ul>
      */
     public Position() {
         this.x = 0;
@@ -20,8 +22,8 @@ public class Position implements IPosition {
     /**
      * Overload constructor die een andere coördinaat kan meegeven.
      *
-     * @param x De x-waarde als integer.
-     * @param y De y-waarde als integer.
+     * @param x De x-waarde als double.
+     * @param y De y-waarde als double.
      */
     public Position(double x, double y) {
         setX(x);

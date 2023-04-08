@@ -4,6 +4,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.Dimension
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een klasse om rand collisions te detecteren tussen een positie met een dimensie.
  * <p>
  * De game dimensie wordt verkregen van het graphics-systeem. Hierdoor kan men de collision detecteren op graphics niveau.

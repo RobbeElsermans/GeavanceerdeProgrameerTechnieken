@@ -5,6 +5,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.PositionC
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een abstracte entiteit dat een tekst kan bevatten. Deze entiteit kan gebruikt worden om zaken te tonen op het scherm.
  * <p>
  * De ATextEntity zorgt voor text visualisatie met eventueel variabele informatie die elk moment kan wijzigen.

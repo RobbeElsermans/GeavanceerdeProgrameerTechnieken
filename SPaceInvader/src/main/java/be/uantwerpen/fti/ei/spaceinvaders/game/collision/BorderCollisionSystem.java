@@ -5,6 +5,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
 import java.util.List;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een collision systeem die de taak krijgt om de collisions met de graphics-systeem grenzen te checken en
  * hiermee de entiteit de correcte locatie en velocity toe kan geven zodat ze niet uit het veld verdwijnen.
  * <p>

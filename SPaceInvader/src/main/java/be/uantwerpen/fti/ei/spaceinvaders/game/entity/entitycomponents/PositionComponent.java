@@ -4,6 +4,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een component dat een positie bevat.
  */
 public class PositionComponent {

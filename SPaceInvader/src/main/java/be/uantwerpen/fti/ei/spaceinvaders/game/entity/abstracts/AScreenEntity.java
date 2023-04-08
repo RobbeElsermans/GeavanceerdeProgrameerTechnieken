@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een screen entity kan gebruikt worden om menu's te maken.
  * <p>
  * Een AScreenEntity bestaat uit een titel en 1 of meerdere ATextEntity's die zowel text en/of informatie kunnen afbeelden.

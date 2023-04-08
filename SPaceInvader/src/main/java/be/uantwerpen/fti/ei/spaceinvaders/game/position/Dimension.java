@@ -2,13 +2,18 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.position;
 
 /**
  * Een dimensie klassen waarmee we een dimensie kunnen definiëren voor een entiteit.
+ * @see IDimension
  */
 public class Dimension implements IDimension{
     private final double width;
     private final double height;
 
     /**
-     * Default constructor die de default waardes voor width en height zet als 1.
+     * Default constructor waarbij:
+     * <ul>
+     *     <li>width -> 1</li>
+     *     <li>height -> 1</li>
+     * </ul>
      */
     public Dimension() {
         this.width = 1;

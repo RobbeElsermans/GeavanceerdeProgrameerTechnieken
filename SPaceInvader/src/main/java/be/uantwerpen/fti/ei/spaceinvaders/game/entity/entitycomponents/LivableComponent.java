@@ -1,6 +1,9 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een component dat een leven bevat.
  * <p>
  * Deze component kan gebruikt worden wanneer iets een eindigende state heeft die zichzelf kan verhogen of verlagen.

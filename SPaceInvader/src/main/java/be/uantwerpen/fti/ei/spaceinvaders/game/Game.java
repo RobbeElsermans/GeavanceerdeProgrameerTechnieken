@@ -11,15 +11,15 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.EntityCreatio
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.StatisticsSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.EnemyShootSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.FromWhoBulletType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.GlobalShootSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.PlayerShootSystem;
-import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.FromWhoBulletType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
 
@@ -28,51 +28,63 @@ import java.util.List;
 
 /**
  * De overkoepelende klassen waar al de game mechanics in verwerkt zijn.
+ * <p>
+ * We kunnen de graphics-systeem meegeven zodat het spel zichzelf ook kan renderen.
+ * Het configuratiebestand <l>game_config.txt</l> is ook van belang.
  */
 public class Game {
     /**
      * Het level waarin het spel start.
+     * <p>
+     * Wordt gebruikt om te debuggen.
      */
-    public static final InGameStates START_GAME_STATE = InGameStates.DEBUG;
+    private static final InGameStates START_GAME_STATE = InGameStates.LEVEL_1;
     /**
      * Gebruikt een GFX-abstract factory om GFX en Game gescheiden te houden.
      */
-    protected AFactory gfxFactory;
+    private final AFactory gfxFactory;
     /**
      * Een lijst van speler entiteiten.
      */
-    List<APlayerEntity> playerEntityList = new ArrayList<>();
+    private List<APlayerEntity> playerEntityList = new ArrayList<>();
     /**
      * Een lijst van enemy entiteiten.
      */
-    List<AEnemyEntity> enemyEntityList = new ArrayList<>();
+    private List<AEnemyEntity> enemyEntityList = new ArrayList<>();
     /**
      * Een lijst van big enemy entiteiten.
      */
-    List<ABigEnemyEntity> bigEnemyEntityList = new ArrayList<>();
+    private List<ABigEnemyEntity> bigEnemyEntityList = new ArrayList<>();
     /**
      * Een lijst van bonus entiteiten.
      */
-    List<ABonusEntity> bonusEntityList = new ArrayList<>();
+    private List<ABonusEntity> bonusEntityList = new ArrayList<>();
     /**
      * Een lijst van obstacle entiteiten.
      */
-    List<AObstacleEntity> obstacleEntityList = new ArrayList<>();
+    private List<AObstacleEntity> obstacleEntityList = new ArrayList<>();
 
     /**
      * Text over het huidige leven van een speler
      */
-    List<ATextEntity> textLifeList = new ArrayList<>();
+    private List<ATextEntity> textLifeList = new ArrayList<>();
 
     /**
      * Text over de huidige punten van een speler
      */
-    List<ATextEntity> textPointsList = new ArrayList<>();
+    private List<ATextEntity> textPointsList = new ArrayList<>();
 
     /**
      * Een lijst van schermen.
+     * <p>
+     * Dit zal gedefiniëerd zijn als
+     * <ul>
+     *     <li>0 -> start scherm</li>
+     *     <li>1 -> pauzescherm</li>
+     *     <li>2 -> end scherm</li>
+     * </ul>
      */
-    List<AScreenEntity> screenEntityList = new ArrayList<>();
+    private List<AScreenEntity> screenEntityList = new ArrayList<>();
 
     /**
      * Een collision record die we gebruiken om de entiteiten binnenin het spelvlak te houden.
@@ -87,38 +99,60 @@ public class Game {
     private PlayerShootSystem playerShootSystem;
 
     /**
-     * Een enemy schiet systeem
+     * De schiet systemen
      */
     private EnemyShootSystem enemyShootSystem;
-
     private EntityCreationSystem entityCreationSystem;
 
+    /**
+     * sound systeem om het geluid aan te zetten.
+     */
     private SoundSystem soundSystem;
 
     /**
      * De game grootte.
-     *
-     * @implSpec komt mee in file.
+     * <p>
+     * Deze is te vinden in <i>game_config.txt</i>
      */
     private IDimension gameSize;
 
+    /**
+     * De tile dimensies van de entiteiten.
+     */
     private IDimension playerDimension, enemyDimension, obstacleDimension, bigEnemyDimension, bulletDimension, bonusDimension;
 
     /**
      * De genomen FPS (Frames per second).
+     * <p>
+     * Deze is te vinden in <i>game_config.txt</i>
      */
     private int fps = 40;
 
+    /**
+     * De huidige state van het spel.
+     */
     private GameStates gameState = GameStates.START_SCREEN;
+    /**
+     * De vorige state van game.
+     */
+    private GameStates prevGameState;
+    /**
+     * De huidige state inGame.
+     */
     private InGameStates inGameState = InGameStates.NO_GAME;
+    /**
+     * De vorige state van inGame.
+     */
     private InGameStates prevInGameState;
 
     /**
      * Overload constructor om het spel te initialiseren met de meegegeven parameters.
+     * <p>
+     * Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
+     * <p>
      *
      * @param aFactory   Een GFX-factory om de zaak te tonen.
      * @param configFile Het configuratiebestand waarin verschillende parameters staan.
-     * @implNote Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
     public Game(AFactory aFactory, String configFile) {
 
@@ -150,19 +184,7 @@ public class Game {
             render();
 
             switch (gameState) {
-                /*
-                 * Create startscreen van aFactory.
-                 *
-                 * Kijk of dat de input ENTER is.
-                 * Als ENTER, dan verder naar IN_GAME
-                 */
                 case START_SCREEN, PAUSED -> visualizeScreen();
-
-                /*
-                 * Do game mechanics.
-                 * Verschillende levels mogelijk.
-                 * Als level veranderd is, upgraden
-                 */
                 case IN_GAME -> {
 
                     //Als er nog geen spel gestart is geweest, doe dan de basis initialisatie.
@@ -184,19 +206,20 @@ public class Game {
 
                     //De values doorspelen naar endscherm.
                     if (playerEntityList.get(0).getStatisticsComponent().getScore() > FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)) {
-                        FileManager.propOverwrite("high_score", "src/main/resources/highScore.txt", String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
+                        FileManager.overwriteFile("high_score", "src/main/resources/highScore.txt", String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
                     }
 
                     screenEntityList.get(2).getTextEntityList().get(1).getInformationComponent().setInformation(String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
                     screenEntityList.get(2).getTextEntityList().get(2).getInformationComponent().setInformation(String.valueOf(FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)));
 
                     visualizeScreen();
-                    //Create endgame met highscore en mogelijkheid om opnieuw of af te sluiten.
-                    //isRunning = false;
                 }
+                default -> throw new IllegalStateException("Unexpected value: " + gameState);
             }
 
+
             checkGameInput(gfxFactory.getInput());
+            checkBackgroundMusic();
 
             //TIJD CONSTANT HOUDEN
             try {
@@ -210,12 +233,25 @@ public class Game {
                 throw new RuntimeException(e);
             }
             //TIJD CONSTANT HOUDEN
-
-            //DEBUG
-            //if(!playerEntitieList.isEmpty())
-            //    System.out.println(playerEntitieList.get(0).getMovementComponent().getSpeed());
-            //DEBUG
         }
+    }
+
+    private void checkBackgroundMusic() {
+
+        if((prevGameState == null || prevGameState == GameStates.START_SCREEN || prevGameState == GameStates.PAUSED || prevGameState == GameStates.END_GAME) && gameState == GameStates.IN_GAME){
+            this.soundSystem.playSoundLoop(SoundType.BACKGROUND_MUSIC);
+            System.out.println("1");
+        }
+        if(prevGameState == GameStates.IN_GAME && gameState == GameStates.PAUSED){
+            this.soundSystem.stopSoundLoop();
+            System.out.println("2");
+        }
+        if(prevGameState == GameStates.IN_GAME && gameState == GameStates.END_GAME){
+            this.soundSystem.stopSoundLoop();
+            System.out.println("3");
+        }
+
+        prevGameState = gameState;
     }
 
     /**
@@ -225,6 +261,9 @@ public class Game {
         gfxFactory.render();
     }
 
+    /**
+     * Verwijder al de entities.
+     */
     private void clearEntityLists() {
         //playerEntitieList = new ArrayList<>();
         enemyEntityList = new ArrayList<>();
@@ -247,8 +286,11 @@ public class Game {
 
         checkBorderCollisions();        // Checkt de entiteiten dat ze niet buiten de grenzen gaan en reageer gepast wanneer wel.
         checkBulletCollision();         // Checkt wanneer dat kogels ergens inslaan en reageer gepast.
+
+
         if (inGameState != InGameStates.DEBUG)
             checkEnemyToPlayerCollision();  // Checkt wanneer een enemy tegen de player aanbotst en reageer gepast.
+
         checkBonusToPlayerCollision();  // Checkt wanneer een bonus tegen een player en reageer gepast.
 
         updateText();   //Updates teksten met spelers statistics.
@@ -302,7 +344,8 @@ public class Game {
     }
 
     /**
-     * We initialiseren hiermee het spel. We laden alle objecten, die nodig zijn om het spel te spelen, in.
+     * We initialiseren hiermee het spel.
+     * We laden alle basis objecten, die nodig zijn om het spel te spelen, in.
      */
     private void baseInitialize() {
         // Systemen initialiseren
@@ -313,7 +356,7 @@ public class Game {
 
         this.entityCreationSystem = new EntityCreationSystem();
 
-        // Player & texten blijven bestaan.
+        // Player & texten zijn basis.
         playerEntityList = new ArrayList<>();
         textLifeList = new ArrayList<>();
         textPointsList = new ArrayList<>();
@@ -322,8 +365,6 @@ public class Game {
         clearEntityLists();
 
         //Create player
-        //playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameSize.getWidth() / 2, this.gameSize.getHeight() - 2), 3, 1.5, 1));
-        ////playerEntitieList.add(this.gfxFactory.getPlayerEntity(new Position(this.gameWidth / 2 + 10, this.gameHeight-1), 5, 2, 0.3));
         if (inGameState != InGameStates.DEBUG) {
             playerEntityList.add(
                     this.gfxFactory.getPlayerEntity(
@@ -352,12 +393,13 @@ public class Game {
     private void soundInitialize() {
         this.soundSystem = new SoundSystem();
 
-        //Voeg de geluidjes toe aan de soundcomponent in soundSystem.
+        //Voeg de geluidjes toe aan de soundComponent in soundSystem.
         this.soundSystem.getSoundComponent().addSound("/sound/explosion.wav", SoundType.PLAYER_DEAD_SOUND);
         this.soundSystem.getSoundComponent().addSound("/sound/invaderkilled.wav", SoundType.ENEMY_DEAD_SOUND);
         this.soundSystem.getSoundComponent().addSound("/sound/shoot.wav", SoundType.PLAYER_SHOOT_SOUND);
         this.soundSystem.getSoundComponent().addSound("/sound/ufo_lowpitch.wav", SoundType.BIG_ENEMY_SOUND);
         this.soundSystem.getSoundComponent().addSound("/sound/ufo_highpitch.wav", SoundType.BONUS_SOUND);
+        this.soundSystem.getSoundComponent().addSound("/sound/spaceinvaders.wav", SoundType.BACKGROUND_MUSIC);
     }
 
     private void screenInitialize() {
@@ -418,7 +460,6 @@ public class Game {
                 obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(playerDimension.getWidth(), this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 3), 5));
                 obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position((this.gameSize.getWidth()) / 2.0, this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 4), 5));
                 obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(this.gameSize.getWidth() - (playerDimension.getWidth() + obstacleDimension.getWidth()), this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 3), 5));
-
             }
             case LEVEL_2 -> {
                 this.enemyShootSystem.setDiff(10);
@@ -524,7 +565,7 @@ public class Game {
             //Als we in het startscherm staan en er wordt enter gedrukt.
             if (gameState == GameStates.START_SCREEN && input.isEnter()) {
                 gameState = GameStates.IN_GAME;     //Start game loop.
-                inGameState = START_GAME_STATE;   //STARTGAME
+                inGameState = START_GAME_STATE;     //STARTGAME
             }
 
             //Als we in het startscherm staan en er wordt esc gedrukt.
@@ -541,7 +582,7 @@ public class Game {
             if (gameState == GameStates.PAUSED && input.isEnter()) {
                 gameState = GameStates.IN_GAME;  //resume het spel
             }
-            //Als we in pausescherm staan en er wordt op enter gedrukt.
+            //Als we in pausescherm staan en er wordt op q/ a gedrukt.
             if (gameState == GameStates.PAUSED && input.isQuit()) {
                 System.exit(0);
             }
@@ -551,8 +592,8 @@ public class Game {
                 gameState = GameStates.IN_GAME;  //opnieuw
 
                 //Basic initialize zodat alles zichzelf reset.
+                this.prevInGameState = null;
                 inGameState = START_GAME_STATE;   //STARTGAME
-                prevInGameState = null;
             }
 
             //Als we in endScherm staan en er wordt op quit gedrukt.
@@ -622,7 +663,7 @@ public class Game {
                         //Als de bullet al gebruikt is, niet bijwerken in statistics.
                         if (bullet.getLivableComponent().getLife() > 0) {
                             StatisticsSystem.incrementDamageDone(player.getStatisticsComponent(), bullet.getLivableComponent());
-                            StatisticsSystem.incrementShotHit(player.getStatisticsComponent());
+                            StatisticsSystem.incrementShotHits(player.getStatisticsComponent());
                         }
                         //STATISTICS
 
@@ -668,7 +709,7 @@ public class Game {
                         GlobalShootSystem.damage(obstacle.getLivableComponent(), bullet.getLivableComponent());
 
                         //STATISTICS
-                        StatisticsSystem.incrementShotMiss(player.getStatisticsComponent());
+                        StatisticsSystem.incrementShotMissed(player.getStatisticsComponent());
                         //STATISTICS
                     }
                 }
@@ -683,7 +724,7 @@ public class Game {
 
                         //STATISTICS
                         if (bullet.getLivableComponent().getLife() > 0) {
-                            StatisticsSystem.incrementShotHit(player.getStatisticsComponent());
+                            StatisticsSystem.incrementShotHits(player.getStatisticsComponent());
                             StatisticsSystem.incrementDamageDone(player.getStatisticsComponent(), bigEnemy.getLivableComponent());
                             StatisticsSystem.incrementBigEnemyHit(player.getStatisticsComponent());
                         }
@@ -725,7 +766,7 @@ public class Game {
      */
     private void checkBorderCollisions() {
         //checkBorderCollisionPlayer
-        if(inGameState != InGameStates.DEBUG)
+        if (inGameState != InGameStates.DEBUG)
             playerEntityList.forEach(i -> BorderCollisionSystem.checkBorderCollisionPlayer(borderCollision, i.getMovementComponent()));
         else
             playerEntityList.forEach(i -> BorderCollisionSystem.checkBorderCollision(borderCollision, i.getMovementComponent()));
@@ -741,7 +782,7 @@ public class Game {
 
                 //STATISTICS
                 if (tempVelocityBullets != b.getMovementComponent().getVelocity()) {  //Als er een bullet stopt met bewegen dus ergens tegen botst
-                    StatisticsSystem.incrementShotMiss(player.getStatisticsComponent());
+                    StatisticsSystem.incrementShotMissed(player.getStatisticsComponent());
                 }
                 //STATISTICS
             }

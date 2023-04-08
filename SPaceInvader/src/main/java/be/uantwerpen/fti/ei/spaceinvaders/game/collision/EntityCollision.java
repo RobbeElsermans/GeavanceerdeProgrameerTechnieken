@@ -4,6 +4,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.Dimension
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 
 /**
+ * @author Robbe Elsermans
+ * @version 1.0
+ * <p>
  * Een globale collision klasse waarmee we kunnen detecteren dat 2 entiteiten elkaar aanraken of niet.
  *
  * @see DimensionComponent
