@@ -52,4 +52,12 @@ public class Position implements IPosition {
     public IPosition getPosition() {
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Position{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

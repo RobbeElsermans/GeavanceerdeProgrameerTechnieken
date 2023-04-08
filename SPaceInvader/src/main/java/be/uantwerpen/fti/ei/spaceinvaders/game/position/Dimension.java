@@ -39,4 +39,12 @@ public class Dimension implements IDimension{
     public IDimension getDimension() {
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "Dimension{" +
+                "width=" + width +
+                ", height=" + height +
+                '}';
+    }
 }

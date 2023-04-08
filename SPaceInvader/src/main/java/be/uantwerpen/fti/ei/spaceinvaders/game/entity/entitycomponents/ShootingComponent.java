@@ -1,12 +1,15 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Een component dat kan schieten en dat een lijst van zijn schoten bijhoudt.
+ *
+ * @see ABulletEntity
  */
 public class ShootingComponent {
     /**
@@ -20,7 +23,12 @@ public class ShootingComponent {
     private double speed;
 
     /**
-     * Default constructor die positie en dimensie op default zal plaatsen.
+     * Default constructor waarbij:
+     * <ul>
+     *     <li>speed  -> 2</li>
+     * </ul>
+     *
+     * @see ABulletEntity
      */
     public ShootingComponent() {
         this.bulletList = new ArrayList<>();
@@ -51,10 +59,12 @@ public class ShootingComponent {
             this.speed = speed;
     }
 
+
     @Override
     public String toString() {
         return "ShootingComponent{" +
                 "bulletList=" + bulletList.stream().map(ABulletEntity::toString) +
+                ", speed=" + speed +
                 '}';
     }
 }

@@ -1,47 +1,73 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 /**
- * Een component dat verschillende statistieke waardes bevat.
+ * Een component dat verschillende statistieke waardes bevat die gebruikt worden in het spel.
+ *
+ * @see be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.StatisticsSystem StatisticsSystem
  */
 public class StatisticsComponent {
     /**
      * De hoeveelheid damage dat het kreeg.
      */
-    private int damageTaken = 0;
+    private int damageTaken;
     /**
      * De hoeveelheid damage dat er uitgedeeld is.
      */
-    private int damageDone = 0;
+    private int damageDone;
     /**
      * De hoeveelheid levens genomen.
      */
-    private int livesTaken = 0;
+    private int livesTaken;
     /**
      * De hoeveelheid levens verloren.
      */
-    private int livesLose = 0;
+    private int livesLose;
     /**
      * De hoeveelheid schoten afgevuurd.
      */
-    private int shotsFired = 0;
+    private int shotsFired;
     /**
      * De hoeveelheid schoten er gemist zijn.
      */
-    private int shotsMissed = 0;
+    private int shotsMissed;
     /**
      * De hoeveelheid schoten dat raak waren.
      */
-    private int shotsHits = 0;
-
-    private int bigEnemyHit = 0;
+    private int shotsHits;
+    /**
+     * Hoeveelheid big enemy hits.
+     */
+    private int bigEnemyHit;
     /**
      * De score
      */
-    private int score = 0;
+    private int score;
+
     /**
-     * Default constructor.
+     * Default constructor waarbij:
+     * <ul>
+     *     <li>damageTaken -> 0</li>
+     *     <li>damageDone -> 0</li>
+     *     <li>livesTaken -> 0</li>
+     *     <li>livesLose -> 0</li>
+     *     <li>shotsFired -> 0</li>
+     *     <li>shotsMissed -> 0</li>
+     *     <li>shotsHits -> 0</li>
+     *     <li>bigEnemyHit -> 0</li>
+     *     <li>score -> 0</li>
+     *
+     * </ul>
      */
-    public StatisticsComponent(){
+    public StatisticsComponent() {
+        damageTaken = 0;
+        damageDone = 0;
+        livesTaken = 0;
+        livesLose = 0;
+        shotsFired = 0;
+        shotsMissed = 0;
+        shotsHits = 0;
+        bigEnemyHit = 0;
+        score = 0;
     }
 
     public int getDamageTaken() {
@@ -113,7 +139,7 @@ public class StatisticsComponent {
     }
 
     public void setScore(int score) {
-        this.score  = score;
+        this.score = score;
     }
 
     @Override
@@ -126,6 +152,7 @@ public class StatisticsComponent {
                 ", shotsFired=" + shotsFired +
                 ", shotsMissed=" + shotsMissed +
                 ", shotsHits=" + shotsHits +
+                ", bigEnemyHit=" + bigEnemyHit +
                 ", score=" + score +
                 '}';
     }

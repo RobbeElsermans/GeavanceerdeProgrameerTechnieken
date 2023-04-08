@@ -5,28 +5,37 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 
 /**
  * Een component dat een positie, dimensie, snelheid en versnelling bevat.
+ * <p>
+ * Deze component kan gebruikt worden wanneer iets kan bewegen.
+ * @see DimensionComponent
  */
 public class MovementComponent extends DimensionComponent {
-    /**
+    /*
      * De constante snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 2.
      */
     private double speed;
 
-    /**
+    /*
      * De snelheid waarmee de entiteit zichzelf voortbeweegt. Default is dit 1.
      */
     private double velocity;
-    /**
+    /*
      * De vorige velocity. Wordt aangepast wanneer we de velocity wijzigen.
      */
     private double prevVelocity;
-    /**
+    /*
      * De default velocity. Wordt gezet bij aanmaken component.
      */
     private final double defaultVelocity;
 
     /**
-     * Default constructor waarbij de parameters de default waarden krijgen.
+     * Default constructor waarbij:
+     * <ul>
+     *     <li>speed  -> 2</li>
+     *     <li>defaultVelocity  -> 1</li>
+     *     <li>velocity  -> 1</li>
+     * </ul>
+     * @see DimensionComponent#DimensionComponent()  DimensionComponent
      */
     public MovementComponent() {
         super();
@@ -57,6 +66,13 @@ public class MovementComponent extends DimensionComponent {
     public double getVelocity() {
         return velocity;
     }
+
+    /**
+     * Verander de velocity.
+     * <p>
+     * Wanneer de velocity gewijzigd wordt, plaatsen we de oude velocity in prevVelocity.
+     * @param velocity De nieuwe velocity.
+     */
     public void setVelocity(double velocity) {
         this.prevVelocity = this.velocity;
         this.velocity = velocity;
