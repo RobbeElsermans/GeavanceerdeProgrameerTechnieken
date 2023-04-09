@@ -162,8 +162,6 @@ public class GraphicsContext {
      * @param dimensions    De dimensie van het spel.
      */
     public void setGameDimensions(IDimension dimensions) {
-        //sizeWidth = (int)(screenWidth)/GameCellsX;
-        //sizeHeight = (int)(screenHeight)/GameCellsY;
         this.tileWidth = (int) ((screenSize.getWidth()) / dimensions.getWidth());
         this.tileHeight = (int) ((screenSize.getHeight()) / dimensions.getHeight());
 

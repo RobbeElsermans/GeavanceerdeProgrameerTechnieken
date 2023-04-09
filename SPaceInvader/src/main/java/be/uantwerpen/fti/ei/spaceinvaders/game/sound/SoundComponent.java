@@ -19,10 +19,11 @@ public class SoundComponent {
     private Clip clipShort;
     /*
      * Hierin kunnen we het loop geluidjes in laten afspelen.
+     * We nemen hier een aparte dedicated Clip zodat we deze clip kunnen tracken en dus ook afzetten.
      */
     private Clip clipLong;
     /*
-     * Een Map met key, value pairs waar de key het typen geluid voorstelt en de value de locatie van het bestand.
+     * Een Map met key, value pairs waar de key het soort geluid voorstelt en de value de locatie van het bestand.
      */
     //Bron: https://stackoverflow.com/questions/12669497/using-enum-as-key-for-map
     private final ThreadLocal<EnumMap<SoundType, URL>> sounds = new ThreadLocal<>();
@@ -40,7 +41,7 @@ public class SoundComponent {
      * Er kan maar 1 identiek typen bestaan in de database.
      *
      * @param filePath  De locatie van het geluidsbestand + de naam van het bestand.
-     * @param type      Het typen geluid gedefinieerd in SoundType.
+     * @param type      Het soort geluid gedefinieerd in SoundType.
      * @see SoundType
      */
     public void addSound(String filePath, SoundType type) {

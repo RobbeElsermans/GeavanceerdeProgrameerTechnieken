@@ -34,10 +34,10 @@ public class KeyboardInputController extends AInputController {
                 setShoot(true);
             }
             if (keycode == KeyEvent.VK_PLUS) {
-                setVolup(true);
+                setVolUp(true);
             }
             if (keycode == KeyEvent.VK_MINUS) {
-                setVoldown(true);
+                setVolDown(true);
             }
             if (keycode == KeyEvent.VK_ESCAPE) {
                 setEsc(true);
@@ -70,10 +70,10 @@ public class KeyboardInputController extends AInputController {
                 setShoot(false);
             }
             if (keycode == KeyEvent.VK_PLUS) {
-                setVolup(false);
+                setVolUp(false);
             }
             if (keycode == KeyEvent.VK_MINUS) {
-                setVoldown(false);
+                setVolDown(false);
             }
             if (keycode == KeyEvent.VK_ESCAPE) {
                 setEsc(false);

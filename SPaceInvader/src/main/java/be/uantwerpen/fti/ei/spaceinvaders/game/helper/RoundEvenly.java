@@ -12,7 +12,6 @@ import java.math.RoundingMode;
 /**
  * Een helper klasse die decimale waardes gaat afronden naar
  * integer waardes op een uniforme manier voor zowel positieve als negatieven getallen.
- *
  */
 public class RoundEvenly {
     /**
@@ -22,12 +21,13 @@ public class RoundEvenly {
      * <b>Voorbeeld</b>
      * <p>Gegeven -1.5 en 1.5. Deze getallen worden door (int) afgerond naar boven waardoor we -1 en 2 verkrijgen. </p>
      * <p>Een oplossing hiervoor is RoundingMode.DOWN</p>
-     * @param value
+     *
+     * @param value De waarde die naar een integer gebracht moet worden.
      * @return De integer value van de afgeronde waarde.
      * @see BigDecimal#setScale(int, RoundingMode)
      * @see RoundingMode
      */
-    public static int toInteger(double value){
+    public static int toInteger(double value) {
         BigDecimal temp = BigDecimal.valueOf(value);
         temp = temp.setScale(0, RoundingMode.DOWN);
 

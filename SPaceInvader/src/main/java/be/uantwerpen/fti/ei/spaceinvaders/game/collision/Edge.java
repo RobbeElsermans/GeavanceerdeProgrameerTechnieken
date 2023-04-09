@@ -28,7 +28,7 @@ public enum Edge {
 
     private final int value;
 
-    private Edge(int value) {
+    Edge(int value) {
         this.value = value;
     }
 

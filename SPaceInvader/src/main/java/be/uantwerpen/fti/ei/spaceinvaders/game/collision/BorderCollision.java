@@ -23,10 +23,10 @@ public record BorderCollision(IDimension gameDimensions) {
      * <p>
      * De lijst ziet er uit als volgt:
      * <ul>
-     *     <li>0 - TOPCOLLISION</li>
-     *     <li>1 - LEFTCOLLISION</li>
-     *     <li>2 - BOTTOMCOLLISION</li>
-     *     <li>3 - RIGHTCOLLISION</li>
+     *     <li>0 - TOP_COLLISION</li>
+     *     <li>1 - LEFT_COLLISION</li>
+     *     <li>2 - BOTTOM_COLLISION</li>
+     *     <li>3 - RIGHT_COLLISION</li>
      * </ul>
      * Wanneer een parameter true is, is er een botsing. False wanneer er geen botsing is.
      * Om makkelijk met deze functie te werken, kan gebruikt gemaakt worden van de Enum BorderCollisionType.

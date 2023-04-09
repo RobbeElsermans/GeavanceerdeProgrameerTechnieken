@@ -1,1 +1,1 @@
-high_score=540
+high_score=650

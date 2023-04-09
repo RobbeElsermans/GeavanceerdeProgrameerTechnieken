@@ -35,7 +35,7 @@ public class PlayerShootSystem extends GlobalShootSystem {
     /*
      * Ofdat we met een interval schieten of niet.
      */
-    boolean withInterval;
+    private final boolean withInterval;
 
     /**
      * Default constructor waarbij:

@@ -15,5 +15,6 @@ width_object_sprite=3.0
 height_object_sprite=2.0
 width_big_enemy_sprite=4.0
 height_big_enemy_sprite=2.0
+
 width_bonus_sprite=0.5
 height_bonus_sprite=0.5

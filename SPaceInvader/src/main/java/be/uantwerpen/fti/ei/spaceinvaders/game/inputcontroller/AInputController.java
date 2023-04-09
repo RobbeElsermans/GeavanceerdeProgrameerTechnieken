@@ -12,7 +12,7 @@ public abstract class AInputController implements IInput {
     /*
      * Interne variabelen om te kijken welke knoppen er ingedrukt zijn.
      */
-    private boolean left, right, up, down, shoot, volup, voldown, esc, enter, quit = false;
+    private boolean left, right, up, down, shoot, volUp, volDown, esc, enter, quit = false;
 
     public boolean inputAvailable() {
         return (isDown() || isEsc() || isLeft() || isRight() || isUp() || isVolDown() || isVolUp() || isShoot() || isEnter() || isQuit());
@@ -84,29 +84,29 @@ public abstract class AInputController implements IInput {
     }
 
     public boolean isVolUp() {
-        return volup;
+        return volUp;
     }
 
     /**
      * Zal de volup variabelen plaatsen op de mee gegeven state.
      *
-     * @param volup wat de nieuwe waarden wordt voor volup als boolean.
+     * @param volUp wat de nieuwe waarden wordt voor volup als boolean.
      */
-    protected void setVolup(boolean volup) {
-        this.volup = volup;
+    protected void setVolUp(boolean volUp) {
+        this.volUp = volUp;
     }
 
     public boolean isVolDown() {
-        return voldown;
+        return volDown;
     }
 
     /**
      * Zal de voldown variabelen plaatsen op de mee gegeven state.
      *
-     * @param voldown wat de nieuwe waarden wordt voor voldown als boolean.
+     * @param volDown wat de nieuwe waarden wordt voor voldown als boolean.
      */
-    protected void setVoldown(boolean voldown) {
-        this.voldown = voldown;
+    protected void setVolDown(boolean volDown) {
+        this.volDown = volDown;
     }
 
     public boolean isEsc() {

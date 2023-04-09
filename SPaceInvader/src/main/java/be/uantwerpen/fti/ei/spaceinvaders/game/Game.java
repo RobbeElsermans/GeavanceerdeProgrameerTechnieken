@@ -26,6 +26,8 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: bonus kwam niet op het scherm.
+
 /**
  * De overkoepelende klassen waar al de game mechanics in verwerkt zijn.
  * <p>
@@ -84,7 +86,7 @@ public class Game {
      *     <li>2 -> end scherm</li>
      * </ul>
      */
-    private List<AScreenEntity> screenEntityList = new ArrayList<>();
+    private final List<AScreenEntity> screenEntityList = new ArrayList<>();
 
     /**
      * Een collision record die we gebruiken om de entiteiten binnenin het spelvlak te houden.
@@ -105,7 +107,7 @@ public class Game {
     private EntityCreationSystem entityCreationSystem;
 
     /**
-     * sound systeem om het geluid aan te zetten.
+     * Sound systeem om het geluid aan te zetten.
      */
     private SoundSystem soundSystem;
 
@@ -119,7 +121,7 @@ public class Game {
     /**
      * De tile dimensies van de entiteiten.
      */
-    private IDimension playerDimension, enemyDimension, obstacleDimension, bigEnemyDimension, bulletDimension, bonusDimension;
+    private IDimension playerDimension, enemyDimension, obstacleDimension, bigEnemyDimension, bonusDimension;
 
     /**
      * De genomen FPS (Frames per second).
@@ -170,88 +172,75 @@ public class Game {
      * De start methoden zal het spel starten.
      */
     public void start() {
-        screenInitialize();
-        soundInitialize();
+        try{
+            screenInitialize();
+            soundInitialize();
 
-        while (true) {
-            //TIJD CONSTANT HOUDEN
-            double fpsIntervalNS = ((double) 1000000000 / fps);
-            double nextFpsIntervalNS = System.nanoTime() + fpsIntervalNS;
-            double remainingFpsIntervalTime = 0;
-            //TIJD CONSTANT HOUDEN
+            while (true) {
+                //TIJD CONSTANT HOUDEN
+                double FPS_INTERVAL_NS = ((double) 1000000000 / fps);
+                double nextFpsIntervalNS = System.nanoTime() + FPS_INTERVAL_NS;
+                double remainingFpsIntervalTime;
+                //TIJD CONSTANT HOUDEN
 
-            //render screen
-            render();
+                //render screen
+                render();
 
-            switch (gameState) {
-                case START_SCREEN, PAUSED -> visualizeScreen();
-                case IN_GAME -> {
+                switch (gameState) {
+                    case START_SCREEN, PAUSED -> visualizeScreen();
+                    case IN_GAME -> {
 
-                    //Als er nog geen spel gestart is geweest, doe dan de basis initialisatie.
-                    if (prevInGameState == null) {
-                        this.baseInitialize();
+                        //Als er nog geen spel gestart is geweest, doe dan de basis initialisatie.
+                        if (prevInGameState == null) {
+                            this.baseInitialize();
+                        }
+
+                        //Als het level veranderd is t.o.v. het vorige level dat bezig was, initialiseer dan het nieuwe level.
+                        if (prevInGameState != inGameState) {
+                            this.levelInitialize();
+                        }
+
+                        prevInGameState = inGameState;
+
+                        update();
+                        visualize();
                     }
+                    case END_GAME -> {
 
-                    //Als het level veranderd is t.o.v. het vorige level dat bezig was, initialiseer dan het nieuwe level.
-                    if (prevInGameState != inGameState) {
-                        this.levelInitialize();
+                        //De values doorspelen naar endscherm.
+                        if (playerEntityList.get(0).getStatisticsComponent().getScore() > FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)) {
+                            FileManager.overwriteFile("high_score", "src/main/resources/highScore.txt", String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
+                        }
+
+                        screenEntityList.get(2).getTextEntityList().get(1).getInformationComponent().setInformation(String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
+                        screenEntityList.get(2).getTextEntityList().get(2).getInformationComponent().setInformation(String.valueOf(FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)));
+
+                        visualizeScreen();
                     }
-
-                    prevInGameState = inGameState;
-
-                    update();
-                    visualize();
+                    default -> throw new IllegalStateException("Unexpected value: " + gameState);
                 }
-                case END_GAME -> {
 
-                    //De values doorspelen naar endscherm.
-                    if (playerEntityList.get(0).getStatisticsComponent().getScore() > FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)) {
-                        FileManager.overwriteFile("high_score", "src/main/resources/highScore.txt", String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
-                    }
 
-                    screenEntityList.get(2).getTextEntityList().get(1).getInformationComponent().setInformation(String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
-                    screenEntityList.get(2).getTextEntityList().get(2).getInformationComponent().setInformation(String.valueOf(FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)));
+                checkGameInput(gfxFactory.getInput());
+                checkBackgroundMusic();
 
-                    visualizeScreen();
+                //TIJD CONSTANT HOUDEN
+                try {
+                    remainingFpsIntervalTime = nextFpsIntervalNS - System.nanoTime();
+                    remainingFpsIntervalTime /= 1000000;
+                    if (remainingFpsIntervalTime > 0)
+                        Thread.sleep((long) remainingFpsIntervalTime); //Wachten zodat totale tijd FPS behaald wordt.
+
+                    nextFpsIntervalNS += FPS_INTERVAL_NS;
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
-                default -> throw new IllegalStateException("Unexpected value: " + gameState);
+                //TIJD CONSTANT HOUDEN
             }
-
-
-            checkGameInput(gfxFactory.getInput());
-            checkBackgroundMusic();
-
-            //TIJD CONSTANT HOUDEN
-            try {
-                remainingFpsIntervalTime = nextFpsIntervalNS - System.nanoTime();
-                remainingFpsIntervalTime /= 1000000;
-                if (remainingFpsIntervalTime > 0)
-                    Thread.sleep((long) remainingFpsIntervalTime); //Wachten zodat totale tijd FPS behaald wordt.
-
-                nextFpsIntervalNS += fpsIntervalNS;
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            //TIJD CONSTANT HOUDEN
         }
-    }
-
-    private void checkBackgroundMusic() {
-
-        if((prevGameState == null || prevGameState == GameStates.START_SCREEN || prevGameState == GameStates.PAUSED || prevGameState == GameStates.END_GAME) && gameState == GameStates.IN_GAME){
-            this.soundSystem.playSoundLoop(SoundType.BACKGROUND_MUSIC);
-            System.out.println("1");
+        catch (Exception e){
+            System.out.println("Er is iets onverwachts gebeurd!");
         }
-        if(prevGameState == GameStates.IN_GAME && gameState == GameStates.PAUSED){
-            this.soundSystem.stopSoundLoop();
-            System.out.println("2");
-        }
-        if(prevGameState == GameStates.IN_GAME && gameState == GameStates.END_GAME){
-            this.soundSystem.stopSoundLoop();
-            System.out.println("3");
-        }
-
-        prevGameState = gameState;
     }
 
     /**
@@ -339,7 +328,7 @@ public class Game {
         this.enemyDimension = FileManager.getSettingAsDimension("width_enemy", "height_enemy", configFile, new Dimension(1, 1));
         this.bigEnemyDimension = FileManager.getSettingAsDimension("width_big_enemy", "height_big_enemy", configFile, new Dimension(2, 1));
         this.obstacleDimension = FileManager.getSettingAsDimension("width_object", "height_object", configFile, new Dimension(2, 1));
-        this.bulletDimension = FileManager.getSettingAsDimension("width_bullet", "height_bullet", configFile, new Dimension(1, 1));
+        //this.bulletDimension = FileManager.getSettingAsDimension("width_bullet", "height_bullet", configFile, new Dimension(1, 1));
         this.bonusDimension = FileManager.getSettingAsDimension("width_bonus", "height_bonus", configFile, new Dimension(1, 1));
     }
 
@@ -487,8 +476,8 @@ public class Game {
 
                 //Stel nieuwe enemy van [2,0] tot [2,2] rekeninghoudend met zijn dimensies.
                 //Dimensie is 2x2.
-                //Dus als we coordinate [2,2] geven wordt dit in werkelijkheid -> [2,6] .
-                /**
+                //Dus als we coordinate [2,2] geven wordt dit in werkelijkheid -> [2,6].
+                /*
                  *   0 1 2 3 4 5 6 7 8 width
                  * 0 . . X X . . . . .
                  * 1 . . X X . . . . .
@@ -506,7 +495,7 @@ public class Game {
                 //Dimensie is 2x2.
                 // [1,2] tot [3, 2] is makkelijk.
                 // [2,3] is moeilijker omdat er al een object staat. We moeten coordinates opschuiven naar [2,4]
-                /**
+                /*
                  *   0 1 2 3 4 5 6 7 8
                  * 0 . . . . . . . . .
                  * 1 . . . . . . . . .
@@ -603,6 +592,26 @@ public class Game {
         }
     }
 
+    /**
+     * Checkt wanneer de achtergrondmuziek mag afgespeeld worden.
+     */
+    private void checkBackgroundMusic() {
+
+        if((prevGameState == null || prevGameState == GameStates.START_SCREEN || prevGameState == GameStates.PAUSED || prevGameState == GameStates.END_GAME) && gameState == GameStates.IN_GAME){
+            this.soundSystem.playSoundLoop(SoundType.BACKGROUND_MUSIC);
+            System.out.println("1");
+        }
+        if(prevGameState == GameStates.IN_GAME && gameState == GameStates.PAUSED){
+            this.soundSystem.stopSoundLoop();
+            System.out.println("2");
+        }
+        if(prevGameState == GameStates.IN_GAME && gameState == GameStates.END_GAME){
+            this.soundSystem.stopSoundLoop();
+            System.out.println("3");
+        }
+
+        prevGameState = gameState;
+    }
     /**
      * Checkt wanneer een enemy tegen de player aanbotst en reageer gepast.
      */
@@ -735,30 +744,6 @@ public class Game {
                 }
             }
         }
-/*
-        //Check for bullets from player to bonus
-        for (ABigEnemyEntity bonus : bonusEntityList) {
-            for (APlayerEntity player : playerEntitieList) {
-                for (ABulletEntity bullet : player.getShootingComponent().getBulletList()) {
-                    if (BulletCollisionSystem.bulletEntityCollision(bullet.getMovementComponent(), bonus.getMovementComponent())) {
-
-                        //STATISTICS
-                        if(bullet.getLivableComponent().getLife()>0)
-                            StatisticsSystem.incrementShotHit(player.getStatisticsComponent());
-                        //STATISTICS
-
-                        GlobalShootSystem.damage(bonus.getLivableComponent(), bullet.getLivableComponent());
-
-                        //Breng de bonus over
-                        if (bonus.getCollectableComponent().getType() == CollectableComponent.collectableType.life) {
-                            player.getLivableComponent().upLifeByAmount(bonus.getCollectableComponent().getValue());
-                        }
-                    }
-                }
-            }
-        }
-
- */
     }
 
     /**

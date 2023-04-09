@@ -7,7 +7,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller;
  */
 public interface IInput {
     /**
-     * Methode die kijkt ofdat een input beschikbaar is.
+     * Methode die kijkt of dat een input beschikbaar is.
      * <p>
      * Wanneer een input available is, kunnen we dit checken door deze functie te gebruiken.
      *

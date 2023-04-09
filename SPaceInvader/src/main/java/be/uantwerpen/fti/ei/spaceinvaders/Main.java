@@ -10,8 +10,9 @@ public class Main {
         //IDimension gameDimentions = new Dimension(20,20);
 
         /*
-         * Wanneer je console selecteer, zorg ervoor dat je in een leeg text editor staat met je cursor. De keyevents worden namelijk globaal genomen.
-         * Stel de FPS ook in met 1 i.p.v. 40.
+         * Wanneer je console selecteer, zorg ervoor dat je in een leeg text editor staat met je cursor.
+         * De keyevents worden namelijk globaal genomen.
+         * Stel de FPS ook in met 2 i.p.v. 40.
          *
          * De console heeft namelijk minder vakjes waarin we iets kunnen tekenen.
          */

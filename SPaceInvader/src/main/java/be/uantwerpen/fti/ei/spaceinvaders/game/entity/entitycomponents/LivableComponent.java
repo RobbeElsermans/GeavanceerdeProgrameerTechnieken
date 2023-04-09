@@ -10,7 +10,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
  */
 public class LivableComponent{
     /**
-     * Het leven van een leefbaar entiteit. Standaard is dit 1.
+     * Het leven van een leefbare entiteit. Standaard is dit 1.
      */
     private int life;
 

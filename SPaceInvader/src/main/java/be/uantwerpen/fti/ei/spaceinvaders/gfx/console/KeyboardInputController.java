@@ -10,8 +10,8 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
 /**
- * @implSpec Op ubuntu, login als xorg.
- * bron: https://github.com/go-vgo/robotgo/issues/304
+ * @description  Op ubuntu, login als xorg.
+ * bron: <a href="https://github.com/go-vgo/robotgo/issues/304">github</a>
  */
 public class KeyboardInputController extends AInputController {
 
@@ -53,10 +53,10 @@ public class KeyboardInputController extends AInputController {
                 setShoot(true);
             }
             if (keycode == NativeKeyEvent.VC_VOLUME_UP) {
-                setVolup(true);
+                setVolUp(true);
             }
             if (keycode == NativeKeyEvent.VC_VOLUME_DOWN) {
-                setVoldown(true);
+                setVolDown(true);
             }
             if (keycode == NativeKeyEvent.VC_ESCAPE) {
                 setEsc(true);
@@ -92,10 +92,10 @@ public class KeyboardInputController extends AInputController {
                 setShoot(false);
             }
             if (keycode == NativeKeyEvent.VC_VOLUME_UP) {
-                setVolup(false);
+                setVolUp(false);
             }
             if (keycode == NativeKeyEvent.VC_VOLUME_DOWN) {
-                setVoldown(false);
+                setVolDown(false);
             }
             if (keycode == NativeKeyEvent.VC_ESCAPE) {
                 setEsc(false);
@@ -103,7 +103,7 @@ public class KeyboardInputController extends AInputController {
             if (keycode == NativeKeyEvent.VC_ENTER) {
                 setEnter(false);
             }
-            //Ik heb azerty maar querty is ook een mogelijkheid.
+            //Ik heb azerty, maar querty is ook een mogelijkheid.
             if (keycode == NativeKeyEvent.VC_Q || keycode == NativeKeyEvent.VC_A) {
                 setQuit(false);
             }

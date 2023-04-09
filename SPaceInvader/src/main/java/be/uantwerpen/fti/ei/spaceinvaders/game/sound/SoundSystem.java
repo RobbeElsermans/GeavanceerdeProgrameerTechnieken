@@ -9,7 +9,7 @@ import java.net.URL;
  */
 public class SoundSystem {
 
-    SoundComponent soundComponent;
+    private final SoundComponent soundComponent;
 
     /**
      * Default constructor die interne variabelen initialiseert.
@@ -31,7 +31,7 @@ public class SoundSystem {
     }
 
     /**
-     * Speel muziek 1x af.
+     * Speel muziek 1 keer af.
      * <p>
      * Het typen bepaald welke track er afgespeeld wordt.
      *

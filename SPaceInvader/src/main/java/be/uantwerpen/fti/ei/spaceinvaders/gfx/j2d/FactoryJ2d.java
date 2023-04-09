@@ -19,7 +19,7 @@ public class FactoryJ2d extends AFactory {
 
     private GraphicsContext graphicsContext;
     private IInput keyboardInput;
-    private String configFile = "";
+    private final String configFile;
 
     /**
      * Initializeer Java2D met gegeven configuratie bestand.
@@ -131,7 +131,7 @@ public class FactoryJ2d extends AFactory {
         CollectableComponent collectableComponent = new CollectableComponent();
 
         //Selecteer typen at random a.d.h.v. de totale lengte van de enum
-        int temp = (int) (Random.getRandom(CollectableType.values().length-1));
+        int temp = Random.getRandom(CollectableType.values().length-1);
         if (temp == 0) {
             collectableComponent = new CollectableComponent(CollectableType.LIFE, (Random.getRandom(randValueRange)));
         } else if (temp == 1) {

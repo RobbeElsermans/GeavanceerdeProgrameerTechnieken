@@ -3,8 +3,8 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.console;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 
 public class GraphicsContext {
-    IDimension gameDimension;
-    String[][] gamePicture;
+    private final IDimension gameDimension;
+    private final String[][] gamePicture;
     public GraphicsContext(IDimension gameDimension){
         this.gameDimension = gameDimension;
 
