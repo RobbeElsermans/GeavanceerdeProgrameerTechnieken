@@ -30,6 +30,6 @@ width_object=3
 height_object=2
 width_big_enemy=4
 height_big_enemy=2
-width_bonus=2
+width_bonus=1
 height_bonus=1
 
