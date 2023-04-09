@@ -1,8 +1,8 @@
 package be.uantwerpen.fti.ei.spaceinvaders;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.Game;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.FactoryConsole;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.FactoryJ2d;
 
 public class Main {
@@ -18,7 +18,7 @@ public class Main {
          */
         //AFactory aFactory = new FactoryConsole();
         //Game game = new Game(aFactory, "src/main/resources/game_config.txt");
-        System.out.println(CollectableType.values().length);
+
         AFactory aFactory = new FactoryJ2d("src/main/resources/config/gfx_config.txt");
         Game game = new Game(aFactory, "src/main/resources/config/game_config.txt");
 
