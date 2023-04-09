@@ -175,7 +175,7 @@ public class Game {
      * De start methoden zal het spel starten.
      */
     public void start() {
-        try{
+        try {
             screenInitialize();
             soundInitialize();
 
@@ -224,8 +224,7 @@ public class Game {
                 checkBackgroundMusic();
                 this.gameStopWatch.delay();
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Er is iets onverwachts gebeurd!");
         }
     }
@@ -584,21 +583,19 @@ public class Game {
      */
     private void checkBackgroundMusic() {
 
-        if((prevGameState == null || prevGameState == GameStates.START_SCREEN || prevGameState == GameStates.PAUSED || prevGameState == GameStates.END_GAME) && gameState == GameStates.IN_GAME){
+        if ((prevGameState == null || prevGameState == GameStates.START_SCREEN || prevGameState == GameStates.PAUSED || prevGameState == GameStates.END_GAME) && gameState == GameStates.IN_GAME) {
             this.soundSystem.playSoundLoop(SoundType.BACKGROUND_MUSIC);
-            System.out.println("1");
         }
-        if(prevGameState == GameStates.IN_GAME && gameState == GameStates.PAUSED){
+        if (prevGameState == GameStates.IN_GAME && gameState == GameStates.PAUSED) {
             this.soundSystem.stopSoundLoop();
-            System.out.println("2");
         }
-        if(prevGameState == GameStates.IN_GAME && gameState == GameStates.END_GAME){
+        if (prevGameState == GameStates.IN_GAME && gameState == GameStates.END_GAME) {
             this.soundSystem.stopSoundLoop();
-            System.out.println("3");
         }
 
         prevGameState = gameState;
     }
+
     /**
      * Checkt wanneer een enemy tegen de player aanbotst en reageer gepast.
      */
