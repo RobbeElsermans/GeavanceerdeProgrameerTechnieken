@@ -26,8 +26,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
 import java.util.ArrayList;
 import java.util.List;
 
-//TODO: bonus kwam niet op het scherm.
-
 /**
  * De overkoepelende klassen waar al de game mechanics in verwerkt zijn.
  * <p>
