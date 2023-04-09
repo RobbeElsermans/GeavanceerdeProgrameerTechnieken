@@ -8,8 +8,10 @@ be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem
 be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.movement
 be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting
 be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces
+be.uantwerpen.fti.ei.spaceinvaders.game.entity.types
 be.uantwerpen.fti.ei.spaceinvaders.game.factory
 be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller
+be.uantwerpen.fti.ei.spaceinvaders.game.helper
 be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller
 be.uantwerpen.fti.ei.spaceinvaders.game.position
 be.uantwerpen.fti.ei.spaceinvaders.game.sound

@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * De overkoepelende klassen waar al de game mechanics in verwerkt zijn.
  * <p>
- * We kunnen de graphics-systeem meegeven zodat het spel zichzelf ook kan renderen.
+ * We moeten het graphics-systeem meegeven zodat het spel zichzelf ook kan renderen.
  * Het configuratiebestand <l>game_config.txt</l> is ook van belang.
  */
 public class Game {
@@ -128,6 +128,8 @@ public class Game {
      */
     private int fps = 40;
 
+    private final StopWatch gameStopWatch;
+
     /**
      * De huidige state van het spel.
      */
@@ -164,6 +166,9 @@ public class Game {
 
         //geeft game dimensions over aan factory
         this.gfxFactory.setupGameDimension(new Dimension(gameSize.getWidth(), gameSize.getHeight()));
+
+        //Maak de game timer aan met de genomen fps.
+        this.gameStopWatch = new StopWatch(fps);
     }
 
     /**
@@ -175,11 +180,7 @@ public class Game {
             soundInitialize();
 
             while (true) {
-                //TIJD CONSTANT HOUDEN
-                double FPS_INTERVAL_NS = ((double) 1000000000 / fps);
-                double nextFpsIntervalNS = System.nanoTime() + FPS_INTERVAL_NS;
-                double remainingFpsIntervalTime;
-                //TIJD CONSTANT HOUDEN
+                this.gameStopWatch.set();
 
                 //render screen
                 render();
@@ -221,19 +222,7 @@ public class Game {
 
                 checkGameInput(gfxFactory.getInput());
                 checkBackgroundMusic();
-
-                //TIJD CONSTANT HOUDEN
-                try {
-                    remainingFpsIntervalTime = nextFpsIntervalNS - System.nanoTime();
-                    remainingFpsIntervalTime /= 1000000;
-                    if (remainingFpsIntervalTime > 0)
-                        Thread.sleep((long) remainingFpsIntervalTime); //Wachten zodat totale tijd FPS behaald wordt.
-
-                    nextFpsIntervalNS += FPS_INTERVAL_NS;
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-                //TIJD CONSTANT HOUDEN
+                this.gameStopWatch.delay();
             }
         }
         catch (Exception e){
