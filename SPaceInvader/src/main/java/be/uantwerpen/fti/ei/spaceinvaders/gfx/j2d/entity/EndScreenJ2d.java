@@ -3,7 +3,6 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AScreenEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ATextEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.PositionComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 
 import java.util.List;
 

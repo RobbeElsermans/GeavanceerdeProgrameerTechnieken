@@ -6,11 +6,8 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import org.junit.Test;
 
-import java.util.List;
-
 import static org.junit.Assert.assertEquals;
-
-class BorderCollisionTest {
+public class BorderCollisionTest {
 
     @Test
     void testNoBorderCollision(){

@@ -1,7 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.collision;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.DimensionComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 
 /**
  * @author Robbe Elsermans

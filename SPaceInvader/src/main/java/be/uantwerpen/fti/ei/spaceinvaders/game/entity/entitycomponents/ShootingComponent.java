@@ -1,7 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
-import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 
 import java.util.ArrayList;
 import java.util.List;

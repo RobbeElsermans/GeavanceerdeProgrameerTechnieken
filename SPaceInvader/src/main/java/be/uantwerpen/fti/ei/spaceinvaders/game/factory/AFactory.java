@@ -229,7 +229,6 @@ public abstract class AFactory {
      *     <li>BULLET_SPEED</li> -> Kan de schietsnelheid van de entiteit veranderen.
      * </ul>
      * Deze bonussen worden afgegeven in EntityCreationSystem wanneer een bepaalde eigenschap voldaan is in StatisticsComponent.
-     * TODO: Nog in game_config.txt plaatsen en doorvoeren.
      * <p>
      * De dimensies van een entiteit worden gedefinieerd in het configuratiebestand <i>gfx_config.txt</i> van de GFX-library.
      * Deze dimensie mag niet groter zijn dan de dimensies gedefinieerd in <i>game_config.txt</i>. Mag wel kleiner zijn.
@@ -254,7 +253,6 @@ public abstract class AFactory {
      *     <li>BULLET_SPEED</li> -> Kan de schietsnelheid van de entiteit veranderen.
      * </ul>
      * Deze bonussen worden afgegeven in EntityCreationSystem wanneer een bepaalde eigenschap voldaan is in StatisticsComponent.
-     * TODO: Nog in game_config.txt plaatsen en doorvoeren.
      * <p>
      * De dimensies van een entiteit worden gedefinieerd in het configuratiebestand <i>gfx_config.txt</i> van de GFX-library.
      * Deze dimensie mag niet groter zijn dan de dimensies gedefinieerd in <i>game_config.txt</i>. Mag wel kleiner zijn.
@@ -286,7 +284,6 @@ public abstract class AFactory {
      *     <li>BULLET_SPEED</li> -> Kan de schietsnelheid van de entiteit veranderen.
      * </ul>
      * Deze bonussen worden afgegeven in EntityCreationSystem wanneer een bepaalde eigenschap voldaan is in StatisticsComponent.
-     * TODO: Nog in game_config.txt plaatsen en doorvoeren.
      * <p>
      * De <b>randValueRange</b> kan gebruikt worden om een random waarde door te voeren naar
      * CollectableComponent wat de value betreft van de collectable. Om de random te genereren is er
