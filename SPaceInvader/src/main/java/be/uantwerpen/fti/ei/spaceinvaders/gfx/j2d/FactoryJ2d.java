@@ -10,6 +10,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+import be.uantwerpen.fti.ei.spaceinvaders.game.sound.ASoundSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.*;
 
 import java.util.ArrayList;
@@ -247,6 +248,11 @@ public class FactoryJ2d extends AFactory {
     @Override
     public IInput getInput() {
         return this.keyboardInput;
+    }
+
+    @Override
+    public ASoundSystem getSoundSystem() {
+        return new SoundContext("");
     }
 
     @Override

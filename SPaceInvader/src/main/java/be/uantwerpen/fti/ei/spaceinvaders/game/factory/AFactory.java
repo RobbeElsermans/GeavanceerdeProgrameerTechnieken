@@ -8,6 +8,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+import be.uantwerpen.fti.ei.spaceinvaders.game.sound.ASoundSystem;
 
 import java.util.List;
 
@@ -429,8 +430,21 @@ public abstract class AFactory {
      * Hierin wordt de player's zijn IInput controller doorgegeven en deze is afhankelijk van de graphics-systeem.
      *
      * @return IInput met de methods om acties uit te voeren op de player.
-     */
+     * @see ASoundSystem
+     * @see be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType SoundType
+     * */
     public abstract IInput getInput();
+
+    /**
+     * Het geluid van het spel wordt gegenereerd door een soundSysteem dat afhankelijk is van de genomen gfx.
+     *
+     * De gameloop gebruikt de abstracte methodes van ASoundSystem en SoundType om een sound af te spelen.
+     *
+     * @return Een ASoundSysteem dat de game kan gebruiken om een sound aan te vragen.
+     * @see ASoundSystem
+     * @see be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType SoundType
+     */
+    public abstract ASoundSystem getSoundSystem();
 
     /**
      * Geeft de schaal factor van het graphics-systeem.

@@ -13,6 +13,10 @@ public enum SoundType {
      */
     BIG_ENEMY_SOUND,
     /**
+     * ENEMY_SHOOT_SOUND bevat een geluid dat gebruikt wordt wanneer een enemy schiet
+     */
+    ENEMY_SHOOT_SOUND,
+    /**
      * ENEMY_DEAD_SOUND bevat een geluid dat gebruikt wordt wanneer een enemy dood gaat.
      */
     ENEMY_DEAD_SOUND,

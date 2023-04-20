@@ -17,7 +17,7 @@ public class Main {
          * De console heeft namelijk minder vakjes waarin we iets kunnen tekenen.
          */
         //AFactory aFactory = new FactoryConsole();
-        //Game game = new Game(aFactory, "src/main/resources/game_config.txt");
+        //Game game = new Game(aFactory, "src/main/resources/config/game_config.txt");
 
         AFactory aFactory = new FactoryJ2d("src/main/resources/config/gfx_config.txt");
         Game game = new Game(aFactory, "src/main/resources/config/game_config.txt");

@@ -20,7 +20,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
-import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundSystem;
+import be.uantwerpen.fti.ei.spaceinvaders.game.sound.ASoundSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
 
 import java.util.ArrayList;
@@ -107,7 +107,7 @@ public class Game {
     /**
      * Sound systeem om het geluid aan te zetten.
      */
-    private SoundSystem soundSystem;
+    private ASoundSystem soundSystem;
 
     /**
      * De game grootte.
@@ -181,7 +181,6 @@ public class Game {
 
             while (true) {
                 this.gameStopWatch.set();
-
                 //render screen
                 render();
 
@@ -205,20 +204,11 @@ public class Game {
                         visualize();
                     }
                     case END_GAME -> {
-
-                        //De values doorspelen naar endscherm.
-                        if (playerEntityList.get(0).getStatisticsComponent().getScore() > FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)) {
-                            FileManager.overwriteFile("high_score", "src/main/resources/highScore.txt", String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
-                        }
-
-                        screenEntityList.get(2).getTextEntityList().get(1).getInformationComponent().setInformation(String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
-                        screenEntityList.get(2).getTextEntityList().get(2).getInformationComponent().setInformation(String.valueOf(FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)));
-
+                        setHighScore();
                         visualizeScreen();
                     }
                     default -> throw new IllegalStateException("Unexpected value: " + gameState);
                 }
-
 
                 checkGameInput(gfxFactory.getInput());
                 checkBackgroundMusic();
@@ -251,6 +241,7 @@ public class Game {
      * De update methoden zal al de objecten van het spel update.
      */
     private void update() {
+
         updateInGameStates();   // Updates in game states en game states.
 
         updateBullets();            // Updates kogels.
@@ -366,15 +357,7 @@ public class Game {
     }
 
     private void soundInitialize() {
-        this.soundSystem = new SoundSystem();
-
-        //Voeg de geluidjes toe aan de soundComponent in soundSystem.
-        this.soundSystem.getSoundComponent().addSound("/sound/explosion.wav", SoundType.PLAYER_DEAD_SOUND);
-        this.soundSystem.getSoundComponent().addSound("/sound/invaderkilled.wav", SoundType.ENEMY_DEAD_SOUND);
-        this.soundSystem.getSoundComponent().addSound("/sound/shoot.wav", SoundType.PLAYER_SHOOT_SOUND);
-        this.soundSystem.getSoundComponent().addSound("/sound/ufo_lowpitch.wav", SoundType.BIG_ENEMY_SOUND);
-        this.soundSystem.getSoundComponent().addSound("/sound/ufo_highpitch.wav", SoundType.BONUS_SOUND);
-        this.soundSystem.getSoundComponent().addSound("/sound/spaceinvaders.wav", SoundType.BACKGROUND_MUSIC);
+        this.soundSystem = gfxFactory.getSoundSystem();
     }
 
     private void screenInitialize() {
@@ -584,13 +567,13 @@ public class Game {
     private void checkBackgroundMusic() {
 
         if ((prevGameState == null || prevGameState == GameStates.START_SCREEN || prevGameState == GameStates.PAUSED || prevGameState == GameStates.END_GAME) && gameState == GameStates.IN_GAME) {
-            this.soundSystem.playSoundLoop(SoundType.BACKGROUND_MUSIC);
+            this.soundSystem.playBackgroundMusic(SoundType.BACKGROUND_MUSIC);
         }
         if (prevGameState == GameStates.IN_GAME && gameState == GameStates.PAUSED) {
-            this.soundSystem.stopSoundLoop();
+            this.soundSystem.stopBackgroundMusic(SoundType.BACKGROUND_MUSIC);
         }
         if (prevGameState == GameStates.IN_GAME && gameState == GameStates.END_GAME) {
-            this.soundSystem.stopSoundLoop();
+            this.soundSystem.stopBackgroundMusic(SoundType.BACKGROUND_MUSIC);
         }
 
         prevGameState = gameState;
@@ -823,7 +806,7 @@ public class Game {
 
         //De speler zijn leven is 0.
         if (playerEntityList.stream().map(APlayerEntity::getLivableComponent).anyMatch(i -> i.getLife() == 0)) {
-            soundSystem.playSoundOnce(SoundType.PLAYER_DEAD_SOUND);
+            soundSystem.playShortSound(SoundType.PLAYER_DEAD_SOUND);
             System.out.println("LOSE!");
             gameState = GameStates.END_GAME;
         }
@@ -840,7 +823,7 @@ public class Game {
                 this.gameSize,
                 this.bonusDimension
         ))
-            soundSystem.playSoundOnce(SoundType.BONUS_SOUND);
+            soundSystem.playShortSound(SoundType.BONUS_SOUND);
     }
 
     /**
@@ -854,8 +837,8 @@ public class Game {
                 gfxFactory,
                 gameSize,
                 bigEnemyDimension
-        ))
-            this.soundSystem.playSoundOnce(SoundType.BIG_ENEMY_SOUND);
+        ) && (enemyEntityList.size() == 1 && enemyEntityList.stream().anyMatch(i -> i.getMovementComponent().getVelocity() != 0)))
+            this.soundSystem.playShortSound(SoundType.BIG_ENEMY_SOUND);
     }
 
     /**
@@ -874,7 +857,7 @@ public class Game {
                         FromWhoBulletType.PLAYER);
 
                 //Voer sound uit
-                this.soundSystem.playSoundOnce(SoundType.PLAYER_SHOOT_SOUND);
+                this.soundSystem.playShortSound(SoundType.PLAYER_SHOOT_SOUND);
 
                 //STATISTICS
                 //houd bij hoe vaak een speler geschoten heeft.
@@ -888,6 +871,8 @@ public class Game {
             if (enemyShootSystem.checkShoot()) {
                 //Voer het schot uit.
                 GlobalShootSystem.fire(i.getMovementComponent(), i.getShootingComponent(), gfxFactory, FromWhoBulletType.ENEMY);
+                //Voer sound uit
+                this.soundSystem.playShortSound(SoundType.ENEMY_SHOOT_SOUND);
             }
         });
     }
@@ -939,7 +924,7 @@ public class Game {
 
         //Cleanup enemy's
         if (EntityCleanupSystem.cleanupEnemys(enemyEntityList)) {
-            soundSystem.playSoundOnce(SoundType.ENEMY_DEAD_SOUND);
+            soundSystem.playShortSound(SoundType.ENEMY_DEAD_SOUND);
         }
 
         //Cleanup obstacles
@@ -947,10 +932,20 @@ public class Game {
 
         //Cleanup BigEnemy
         if (EntityCleanupSystem.cleanupBigEnemy(bigEnemyEntityList)) {
-            soundSystem.playSoundOnce(SoundType.ENEMY_DEAD_SOUND);
+            soundSystem.playShortSound(SoundType.ENEMY_DEAD_SOUND);
         }
 
         //Cleanup bonuses
         EntityCleanupSystem.cleanupBonuses(bonusEntityList);
+    }
+
+    private void setHighScore() {
+        //De values doorspelen naar endscherm.
+        if (playerEntityList.get(0).getStatisticsComponent().getScore() > FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)) {
+            FileManager.overwriteFile("high_score", "src/main/resources/highScore.txt", String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
+        }
+
+        screenEntityList.get(2).getTextEntityList().get(1).getInformationComponent().setInformation(String.valueOf(playerEntityList.get(0).getStatisticsComponent().getScore()));
+        screenEntityList.get(2).getTextEntityList().get(2).getInformationComponent().setInformation(String.valueOf(FileManager.getSettingInteger("high_score", "src/main/resources/highScore.txt", 0)));
     }
 }

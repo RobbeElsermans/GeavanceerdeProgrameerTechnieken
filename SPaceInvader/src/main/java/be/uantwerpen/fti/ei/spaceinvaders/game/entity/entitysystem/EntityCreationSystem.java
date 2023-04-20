@@ -112,7 +112,7 @@ public class EntityCreationSystem {
             if (!hasFiredBonus0 && scl.stream().anyMatch(i -> (i.getShotsHits() % 10 == 0) && (i.getShotsHits() > 0))) {
                 //Wanneer de dimensie van bonus groter is dan 1 tile moeten we de random waarde inperken. Anders niet.
                 if (gameDimention.getWidth() * bonusDimension.getWidth() > gameDimention.getWidth()) {
-                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) (gameDimention.getWidth() - bonusDimension.getWidth())), 0), 2, 0.5, CollectableType.BULLET_SPEED, 0.5));
+                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) (gameDimention.getWidth() - bonusDimension.getWidth())), 0), 1, 1, CollectableType.BULLET_SPEED, 0.5));
                 } else {
                     bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) gameDimention.getWidth()), 0), 2, 0.5, CollectableType.BULLET_SPEED, 0.5));
                 }
@@ -127,9 +127,9 @@ public class EntityCreationSystem {
             if (!hasFiredBonus1 && scl.stream().anyMatch(i -> (i.getShotsMissed() % 20 == 0) && (i.getShotsMissed() > 0))) {
                 //Wanneer de dimensie van bonus groter is dan 1 tile moeten we de random waarde inperken. Anders niet.
                 if (gameDimention.getWidth() * bonusDimension.getWidth() > gameDimention.getWidth()) {
-                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) (gameDimention.getWidth() - bonusDimension.getWidth())), 0), 4, 0.5, CollectableType.BULLET_SPEED, -0.5));
+                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) (gameDimention.getWidth() - bonusDimension.getWidth())), 0), 2, 1, CollectableType.BULLET_SPEED, -0.5));
                 } else {
-                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) gameDimention.getWidth()), 0), 4, 0.5, CollectableType.BULLET_SPEED, -0.5));
+                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) gameDimention.getWidth()), 0), 1, 1, CollectableType.BULLET_SPEED, -0.5));
                 }
 
                 hasFiredBonus1 = true;
@@ -146,9 +146,9 @@ public class EntityCreationSystem {
             if (!hasFiredBonus2 && scl.stream().anyMatch(i -> (i.getDamageTaken() % 2 == 0) && (i.getDamageTaken() > 0))) {
                 //Wanneer de dimensie van bonus groter is dan 1 tile moeten we de random waarde inperken. Anders niet.
                 if (gameDimention.getWidth() * bonusDimension.getWidth() > gameDimention.getWidth()) {
-                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) (gameDimention.getWidth() - bonusDimension.getWidth())), 0), 2, 0.5, CollectableType.LIFE, 1));
+                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) (gameDimention.getWidth() - bonusDimension.getWidth())), 0), 1, 1, CollectableType.LIFE, 1));
                 } else {
-                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) gameDimention.getWidth()), 0), 2, 0.5, CollectableType.LIFE, 1));
+                    bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) gameDimention.getWidth()), 0), 1, 1, CollectableType.LIFE, 1));
                 }
 
                 hasFiredBonus2 = true;
@@ -162,9 +162,9 @@ public class EntityCreationSystem {
                 if (checkScore != scl.stream().map(StatisticsComponent::getScore).filter(score -> score % 100 == 0).toList().get(0)) {
                     //Wanneer de dimensie van bonus groter is dan 1 tile moeten we de random waarde inperken. Anders niet.
                     if (gameDimention.getWidth() * bonusDimension.getWidth() > gameDimention.getWidth()) {
-                        bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) (gameDimention.getWidth() - bonusDimension.getWidth())), 0), 4, 0.5, CollectableType.LIFE, 1));
+                        bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) (gameDimention.getWidth() - bonusDimension.getWidth())), 0), 2, 1, CollectableType.LIFE, 1));
                     } else {
-                        bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) gameDimention.getWidth()), 0), 4, 0.5, CollectableType.LIFE, 1));
+                        bel.add(gfx.getBonusEntity(new Position(Random.getRandom((int) gameDimention.getWidth()), 0), 2, 1, CollectableType.LIFE, 1));
                     }
 
                     hasFiredBonus3 = true;

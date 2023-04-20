@@ -9,7 +9,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
+import be.uantwerpen.fti.ei.spaceinvaders.game.sound.ASoundSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.entity.*;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.SoundContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -190,6 +192,12 @@ public class FactoryConsole extends AFactory {
     @Override
     public IInput getInput() {
         return this.keyboardInput;
+    }
+
+    @Override
+    public ASoundSystem getSoundSystem() {
+        //Zowel J2D als Console gebruiken hetzelfde sound systeem.
+        return new SoundContext("");
     }
 
     @Override

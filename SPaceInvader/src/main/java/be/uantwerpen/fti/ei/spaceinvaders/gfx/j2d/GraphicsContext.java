@@ -146,7 +146,7 @@ public class GraphicsContext {
             g2d.clearRect(0, 0, frame.getWidth(), frame.getHeight());
         }
         frame.repaint();
-        panel.repaint();
+        //panel.repaint();
     }
 
     private void doDrawing(Graphics g) {
