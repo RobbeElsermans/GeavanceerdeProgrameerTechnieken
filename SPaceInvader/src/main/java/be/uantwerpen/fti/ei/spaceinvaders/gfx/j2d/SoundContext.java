@@ -6,6 +6,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -15,26 +16,26 @@ public class SoundContext extends ASoundSystem {
      */
 
 
+    private Clip clipBonusSound;
+    private Clip clipEnemySound;
+    private Clip clipEnemyShootSound;
+    private Clip clipEnemyDeadSound;
+    private Clip clipPlayerShootSound;
+    private Clip clipPlayerDeadSound;
+    private Clip clipBackgroundMusic;
     private Clip clipShort;
     private Clip clipLoop;
-    /*
-     * Hierin kunnen we het loop geluidjes in laten afspelen.
-     * We nemen hier een aparte dedicated Clip zodat we deze clip kunnen tracken en dus ook afzetten.
-     */
-    private Clip clipBackgroundMusic;
     /*
      * Een Map met key, value pairs waar de key het soort geluid voorstelt en de value de locatie van het bestand.
      */
     //Bron: https://stackoverflow.com/questions/12669497/using-enum-as-key-for-map
-    private final ThreadLocal<EnumMap<SoundType, URL>> sounds = new ThreadLocal<>();
+    private final EnumMap<SoundType, URL> sounds = new EnumMap<>(SoundType.class);
 
     /**
      * Default constructor die interne variabelen initialiseert.
      */
     public SoundContext(String configFile) {
         //Initialize
-
-        this.sounds.set(new EnumMap<>(SoundType.class));
 
         //Probeer url van een config file te halen.
         addSound("/sound/explosion.wav", SoundType.PLAYER_DEAD_SOUND);
@@ -46,6 +47,11 @@ public class SoundContext extends ASoundSystem {
         addSound("/sound/spaceinvaders.wav", SoundType.BACKGROUND_MUSIC);
 
         //Laad de files in Clip
+        setFile(SoundType.PLAYER_SHOOT_SOUND);
+        setFile(SoundType.PLAYER_SHOOT_SOUND);
+        setFile(SoundType.PLAYER_SHOOT_SOUND);
+        setFile(SoundType.PLAYER_SHOOT_SOUND);
+        setFile(SoundType.PLAYER_SHOOT_SOUND);
         setFile(SoundType.PLAYER_SHOOT_SOUND);
     }
 
@@ -60,15 +66,11 @@ public class SoundContext extends ASoundSystem {
      */
     private void addSound(String filePath, SoundType type) {
         URL temp = getClass().getResource(filePath);
-        sounds.get().put(type, temp);
-    }
-
-    private EnumMap<SoundType, URL> getSounds() {
-        return sounds.get();
+        sounds.put(type, temp);
     }
 
     private URL getSoundUrl(SoundType type) {
-        return sounds.get().get(type);
+        return sounds.get(type);
     }
 
     /**
@@ -119,8 +121,16 @@ public class SoundContext extends ASoundSystem {
     @Override
     public void playShortSound(SoundType soundType) {
         if(soundExists(soundType)) {
-            //setFile(soundType);
-            clipShort.loop(0);
+            Thread t = new Thread(() -> {
+                try
+                {
+                    this.setFile(soundType);
+                }
+                finally {
+                    this.clipShort.loop(0);
+                }
+            });
+            t.start();
         }
     }
 
