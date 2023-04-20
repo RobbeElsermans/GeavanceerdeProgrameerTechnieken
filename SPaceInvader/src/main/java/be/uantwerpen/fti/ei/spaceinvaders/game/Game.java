@@ -187,7 +187,7 @@ public class Game {
                 switch (gameState) {
                     case START_SCREEN, PAUSED -> visualizeScreen();
                     case IN_GAME -> {
-
+                        visualize();
                         //Als er nog geen spel gestart is geweest, doe dan de basis initialisatie.
                         if (prevInGameState == null) {
                             this.baseInitialize();
@@ -201,7 +201,7 @@ public class Game {
                         prevInGameState = inGameState;
 
                         update();
-                        visualize();
+
                     }
                     case END_GAME -> {
                         setHighScore();

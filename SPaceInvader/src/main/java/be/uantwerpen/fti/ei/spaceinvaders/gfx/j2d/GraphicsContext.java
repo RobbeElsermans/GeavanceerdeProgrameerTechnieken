@@ -107,7 +107,7 @@ public class GraphicsContext {
                 doDrawing(g);
             }
         };
-
+        panel.setDoubleBuffered(true);
         frame.setFocusable(true);
         frame.add(panel);
         frame.setTitle("SpaceInvader");
@@ -142,7 +142,7 @@ public class GraphicsContext {
     public void render() {
 
         if (g2d != null) {
-            g2d.setBackground(new Color(0, 0, 0));
+            //g2d.setBackground(new Color(0, 0, 0));
             g2d.clearRect(0, 0, frame.getWidth(), frame.getHeight());
         }
         frame.repaint();
@@ -169,7 +169,7 @@ public class GraphicsContext {
         frame.setSize((int) screenSize.getWidth(), (int) (screenSize.getHeight() + 80));
         g2dimage = new BufferedImage(frame.getWidth(), frame.getHeight(), BufferedImage.TYPE_4BYTE_ABGR_PRE);
         g2d = g2dimage.createGraphics();
-        g2d.setBackground(new Color(255, 255, 255));
+        //g2d.setBackground(new Color(255, 255, 255));
         g2d.clearRect(0, 0, frame.getWidth(), frame.getHeight());
     }
 
