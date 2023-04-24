@@ -12,6 +12,14 @@ import java.awt.image.BufferedImage;
  * Beheert alles wat moet gebeuren met java2D.
  */
 public class GraphicsContext {
+
+    /**
+     * Bevat de sprites.
+     */
+    private SpriteLoader spriteLoader;
+    /**
+     * Bevat de gfx configuratie bestanden.
+     */
     private GfxConfig gfxConfig;
     /**
      * Het frame waarin alles wordt geplaatst.
@@ -87,6 +95,7 @@ public class GraphicsContext {
         frame.setVisible(true);
         setGameDimensions(gameDimension);
         setEntityDimensions(gameDimension);
+        spriteLoader = new SpriteLoader(gfxConfig); //Configureer de sprites.
     }
 
     /**
@@ -184,4 +193,8 @@ public class GraphicsContext {
     public int getTileHeight() {
         return tileHeight;
     }
+    public SpriteLoader getSpriteLoader() {
+        return spriteLoader;
+    }
+
 }

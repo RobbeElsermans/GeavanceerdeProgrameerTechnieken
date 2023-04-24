@@ -16,13 +16,12 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.Play
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.FromWhoBulletType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
-import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.GameConfig;
+import be.uantwerpen.fti.ei.spaceinvaders.game.helper.GameConfig;
 import be.uantwerpen.fti.ei.spaceinvaders.game.helper.GameStates;
 import be.uantwerpen.fti.ei.spaceinvaders.game.helper.InGameStates;
 import be.uantwerpen.fti.ei.spaceinvaders.game.helper.StopWatch;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
-import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.ASoundSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
@@ -163,15 +162,15 @@ public class Game {
      * <p>
      *
      * @param aFactory   Een GFX-factory om de zaak te tonen.
-     * @param configFile Het configuratiebestand waarin verschillende parameters staan.
+     * @param configFilePath Het configuratiebestand waarin verschillende parameters staan.
      */
-    public Game(AFactory aFactory, String configFile) {
+    public Game(AFactory aFactory, String configFilePath) {
 
         //get the gfxFactory
         this.gfxFactory = aFactory;
 
         //get the game settings
-        this.getSettings(configFile);
+        this.getSettings(configFilePath);
 
         //geeft game dimensions over aan factory
         this.gfxFactory.setupGameDimension(new Dimension(gameConfig.getGameSize().getWidth(), gameConfig.getGameSize().getHeight()));
@@ -303,10 +302,10 @@ public class Game {
     /**
      * Een methode die al de parameters ophaalt van het meegegeven bestand.
      *
-     * @param configFile De locatie van het configuratiebestand.
+     * @param configFilePath De locatie van het configuratiebestand.
      */
-    private void getSettings(String configFile) {
-        gameConfig = new GameConfig(configFile);
+    private void getSettings(String configFilePath) {
+        gameConfig = new GameConfig(configFilePath);
     }
 
     /**

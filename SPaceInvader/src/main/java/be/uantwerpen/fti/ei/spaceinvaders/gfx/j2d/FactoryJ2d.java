@@ -20,22 +20,22 @@ public class FactoryJ2d extends AFactory {
 
     private GraphicsContext graphicsContext;
     private IInput keyboardInput;
-    private final String configFile;
+    private final String configFilePath;
 
     /**
      * Initializeer Java2D met gegeven configuratie bestand.
      *
-     * @param configFile Deze bevat de locatie van het configuratiebestand.
+     * @param configFilePath Deze bevat de locatie van het configuratiebestand.
      * @description Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
-    public FactoryJ2d(String configFile) {
-        this.configFile = configFile;
+    public FactoryJ2d(String configFilePath) {
+        this.configFilePath = configFilePath;
     }
 
     @Override
     public void setupGameDimension(IDimension dimension) {
         super.setupGameDimension(dimension);
-        this.graphicsContext = new GraphicsContext(this.gameDimension, this.configFile);
+        this.graphicsContext = new GraphicsContext(this.gameDimension, this.configFilePath);
         this.keyboardInput = new KeyboardInputController(this.graphicsContext);
     }
 

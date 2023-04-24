@@ -3,6 +3,7 @@ height_console=400
 
 # Definieert hoe groot de sprite moet zijn t.o.v. 1 tile.
 # Mag niet groter zijn dan de size in game_config.txt. Kleiner mag wel.
+# Het is relatief t.o.v. 1 game panel in game_config.
 # Deze groottes bepalen de collision border.
 
 width_player_sprite=2.0

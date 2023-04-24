@@ -4,6 +4,9 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 
+/**
+ * De GfxConfig classen behoudt de configuratie waardes van Java2D graphics.
+ */
 public class GfxConfig {
     /**
      * De dimensie van het scherm.
@@ -38,6 +41,10 @@ public class GfxConfig {
      */
     private IDimension textDimention;
 
+    /**
+     * De constructor zal de waardes uit een bestand kunnen halen. Als het bestand niet bestaat, wordt dit met default parameters gedaan.
+     * @param configFilePath De locatie van het bestand.
+     */
     public GfxConfig(String configFilePath){
         this.screenSize = FileManager.getSettingAsDimension("width_console", "height_console", configFilePath, new Dimension(600, 400));
         this.playerDimension = FileManager.getSettingAsDimension("width_player_sprite", "height_player_sprite", configFilePath, new Dimension(1, 1));
