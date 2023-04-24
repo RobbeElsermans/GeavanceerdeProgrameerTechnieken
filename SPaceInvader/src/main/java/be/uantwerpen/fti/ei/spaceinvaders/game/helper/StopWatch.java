@@ -1,4 +1,4 @@
-package be.uantwerpen.fti.ei.spaceinvaders.game;
+package be.uantwerpen.fti.ei.spaceinvaders.game.helper;
 
 /**
  * Een klasse die een gegeven tijd wacht.

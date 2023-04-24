@@ -16,6 +16,10 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.shooting.Play
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.FromWhoBulletType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
+import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.GameConfig;
+import be.uantwerpen.fti.ei.spaceinvaders.game.helper.GameStates;
+import be.uantwerpen.fti.ei.spaceinvaders.game.helper.InGameStates;
+import be.uantwerpen.fti.ei.spaceinvaders.game.helper.StopWatch;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
@@ -114,19 +118,24 @@ public class Game {
      * <p>
      * Deze is te vinden in <i>game_config.txt</i>
      */
-    private IDimension gameSize;
+    //private IDimension gameSize;
 
     /**
      * De tile dimensies van de entiteiten.
      */
-    private IDimension playerDimension, enemyDimension, obstacleDimension, bigEnemyDimension, bonusDimension;
+    //private IDimension playerDimension, enemyDimension, obstacleDimension, bigEnemyDimension, bonusDimension;
 
     /**
      * De genomen FPS (Frames per second).
      * <p>
      * Deze is te vinden in <i>game_config.txt</i>
      */
-    private int fps = 40;
+    //private int fps = 40;
+
+    /**
+     * De configuratie van het spel.
+     */
+    private GameConfig gameConfig;
 
     private final StopWatch gameStopWatch;
 
@@ -165,10 +174,10 @@ public class Game {
         this.getSettings(configFile);
 
         //geeft game dimensions over aan factory
-        this.gfxFactory.setupGameDimension(new Dimension(gameSize.getWidth(), gameSize.getHeight()));
+        this.gfxFactory.setupGameDimension(new Dimension(gameConfig.getGameSize().getWidth(), gameConfig.getGameSize().getHeight()));
 
         //Maak de game timer aan met de genomen fps.
-        this.gameStopWatch = new StopWatch(fps);
+        this.gameStopWatch = new StopWatch(gameConfig.getFps());
     }
 
     /**
@@ -297,16 +306,7 @@ public class Game {
      * @param configFile De locatie van het configuratiebestand.
      */
     private void getSettings(String configFile) {
-        gameSize = FileManager.getSettingAsDimension("gameWidth", "gameHeight", configFile, new Dimension(30, 20));
-
-        this.fps = FileManager.getSettingInteger("fps", configFile, 40);
-
-        this.playerDimension = FileManager.getSettingAsDimension("width_player", "height_player", configFile, new Dimension(1, 1));
-        this.enemyDimension = FileManager.getSettingAsDimension("width_enemy", "height_enemy", configFile, new Dimension(1, 1));
-        this.bigEnemyDimension = FileManager.getSettingAsDimension("width_big_enemy", "height_big_enemy", configFile, new Dimension(2, 1));
-        this.obstacleDimension = FileManager.getSettingAsDimension("width_object", "height_object", configFile, new Dimension(2, 1));
-        //this.bulletDimension = FileManager.getSettingAsDimension("width_bullet", "height_bullet", configFile, new Dimension(1, 1));
-        this.bonusDimension = FileManager.getSettingAsDimension("width_bonus", "height_bonus", configFile, new Dimension(1, 1));
+        gameConfig = new GameConfig(configFile);
     }
 
     /**
@@ -315,7 +315,7 @@ public class Game {
      */
     private void baseInitialize() {
         // Systemen initialiseren
-        this.borderCollision = new BorderCollision(new Dimension(this.gameSize.getWidth() * gfxFactory.getScale().getWidth(), this.gameSize.getHeight() * gfxFactory.getScale().getHeight()));
+        this.borderCollision = new BorderCollision(new Dimension(gameConfig.getGameSize().getWidth() * gfxFactory.getScale().getWidth(), gameConfig.getGameSize().getHeight() * gfxFactory.getScale().getHeight()));
 
         this.playerShootSystem = new PlayerShootSystem();
         this.enemyShootSystem = new EnemyShootSystem(1);
@@ -334,7 +334,7 @@ public class Game {
         if (inGameState != InGameStates.DEBUG) {
             playerEntityList.add(
                     this.gfxFactory.getPlayerEntity(
-                            new Position(this.gameSize.getWidth() - playerDimension.getWidth() / 2, this.gameSize.getHeight() - playerDimension.getHeight()),
+                            new Position(gameConfig.getGameSize().getWidth() - gameConfig.getPlayerDimension().getWidth() / 2, gameConfig.getGameSize().getHeight() - gameConfig.getPlayerDimension().getHeight()),
                             3,
                             2,
                             1)
@@ -342,7 +342,7 @@ public class Game {
         } else {
             playerEntityList.add(
                     this.gfxFactory.getPlayerEntity(
-                            new Position(this.gameSize.getWidth() - playerDimension.getWidth() / 2, this.gameSize.getHeight() - playerDimension.getHeight()),
+                            new Position(gameConfig.getGameSize().getWidth() - gameConfig.getPlayerDimension().getWidth() / 2, gameConfig.getGameSize().getHeight() - gameConfig.getPlayerDimension().getHeight()),
                             3,
                             2,
                             1.5)
@@ -363,19 +363,19 @@ public class Game {
     private void screenInitialize() {
         //Create de schermen
         screenEntityList.add(gfxFactory.getStartScreen(
-                new Position(this.gameSize.getWidth() / 2 - 5, this.gameSize.getHeight() / 2 - 5),
+                new Position(gameConfig.getGameSize().getWidth() / 2 - 5, gameConfig.getGameSize().getHeight() / 2 - 5),
                 "Start",
                 "Enter om te starten",
                 "ESC om af te sluiten"));
 
         screenEntityList.add(gfxFactory.getPauseScreen(
-                new Position(this.gameSize.getWidth() / 2 - 5, this.gameSize.getHeight() / 2 - 5),
+                new Position(gameConfig.getGameSize().getWidth() / 2 - 5, gameConfig.getGameSize().getHeight() / 2 - 5),
                 "Pause",
                 "Enter om verder te spelen",
                 "Q/A om te stoppen"));
 
         screenEntityList.add(gfxFactory.getEndScreen(
-                new Position(this.gameSize.getWidth() / 2 - 5, this.gameSize.getHeight() / 2 - 5),
+                new Position(gameConfig.getGameSize().getWidth() / 2 - 5, gameConfig.getGameSize().getHeight() / 2 - 5),
                 "End",
                 "Enter om opnieuw te starten",
                 "Q/A om te stoppen",
@@ -400,45 +400,45 @@ public class Game {
 
             case LEVEL_1 -> {
                 //Create enemy
-                int shift = (int) ((int) this.gameSize.getWidth() / (3 * enemyDimension.getWidth()));
+                int shift = (int) ((int) gameConfig.getGameSize().getWidth() / (3 * gameConfig.getEnemyDimension().getWidth()));
                 for (int i = 0; i < shift; i++) {
                     if (i % 2 == 0) {
                         //Kijken of dat de coördinaat op het scherm past met de entiteit zijn grootte.
-                        if ((enemyDimension.getWidth() * i + enemyDimension.getWidth()) <= gameSize.getHeight() && (enemyDimension.getHeight() * i + enemyDimension.getHeight()) <= gameSize.getHeight()) {
+                        if ((gameConfig.getEnemyDimension().getWidth() * i + gameConfig.getEnemyDimension().getWidth()) <= gameConfig.getGameSize().getHeight() && (gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getEnemyDimension().getHeight()) <= gameConfig.getGameSize().getHeight()) {
 
-                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * i, enemyDimension.getHeight()), 2, 1, 1));
-                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * i, enemyDimension.getHeight() * 2), 3, 1, 1));
-                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * i, enemyDimension.getHeight() * 3), 2, 1, 1));
-                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * i, enemyDimension.getHeight() * 4), 1, 1, 1));
+                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight()), 2, 1, 1));
+                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * 2), 3, 1, 1));
+                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * 3), 2, 1, 1));
+                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * 4), 1, 1, 1));
                         }
                     }
                 }
 
                 //Create Obstacles
-                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(playerDimension.getWidth(), this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 3), 5));
-                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position((this.gameSize.getWidth()) / 2.0, this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 4), 5));
-                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(this.gameSize.getWidth() - (playerDimension.getWidth() + obstacleDimension.getWidth()), this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 3), 5));
+                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(gameConfig.getPlayerDimension().getWidth(), gameConfig.getGameSize().getHeight() - gameConfig.getObstacleDimension().getHeight() * 3), 5));
+                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position((gameConfig.getGameSize().getWidth()) / 2.0, gameConfig.getGameSize().getHeight() - gameConfig.getObstacleDimension().getHeight() * 4), 5));
+                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(gameConfig.getGameSize().getWidth() - (gameConfig.getPlayerDimension().getWidth() + gameConfig.getObstacleDimension().getWidth()), gameConfig.getGameSize().getHeight() - gameConfig.getObstacleDimension().getHeight() * 3), 5));
             }
             case LEVEL_2 -> {
                 this.enemyShootSystem.setDiff(10);
 
                 for (int i = 0; i < 4; i++) {
-                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * i, enemyDimension.getHeight() * i + gameSize.getHeight() / 8.0), i, 2, 1));
-                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * (10 - i), enemyDimension.getHeight() * i + gameSize.getHeight() / 8.0), i, 2, 1));
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), i, 2, 1));
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * (10 - i), gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), i, 2, 1));
                 }
 
-                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * 4, enemyDimension.getHeight() * 2 + gameSize.getHeight() / 8), 2, 2, 1));
-                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * 5, enemyDimension.getHeight() * 1 + gameSize.getHeight() / 8), 2, 2, 1));
-                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * 6, enemyDimension.getHeight() * 2 + gameSize.getHeight() / 8), 2, 2, 1));
+                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * 4, gameConfig.getEnemyDimension().getHeight() * 2 + gameConfig.getGameSize().getHeight() / 8), 2, 2, 1));
+                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * 5, gameConfig.getEnemyDimension().getHeight() * 1 + gameConfig.getGameSize().getHeight() / 8), 2, 2, 1));
+                enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * 6, gameConfig.getEnemyDimension().getHeight() * 2 + gameConfig.getGameSize().getHeight() / 8), 2, 2, 1));
 
                 //Create Obstacles
-                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(0, this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 3), 5));
-                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(this.obstacleDimension.getWidth() * 1, this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 4), 5));
+                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(0, gameConfig.getGameSize().getHeight() - gameConfig.getObstacleDimension().getHeight() * 3), 5));
+                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(gameConfig.getObstacleDimension().getWidth() * 1, gameConfig.getGameSize().getHeight() - gameConfig.getObstacleDimension().getHeight() * 4), 5));
 
-                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(this.gameSize.getWidth() / (2.0), this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 3), 5));
+                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(gameConfig.getGameSize().getWidth() / (2.0), gameConfig.getGameSize().getHeight() - gameConfig.getObstacleDimension().getHeight() * 3), 5));
 
-                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(this.gameSize.getWidth() - obstacleDimension.getWidth() * 1, this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 3), 5));
-                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(this.gameSize.getWidth() - obstacleDimension.getWidth() * 2, this.gameSize.getHeight() - this.obstacleDimension.getHeight() * 4), 5));
+                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(gameConfig.getGameSize().getWidth() - gameConfig.getObstacleDimension().getWidth() * 1, gameConfig.getGameSize().getHeight() - gameConfig.getObstacleDimension().getHeight() * 3), 5));
+                obstacleEntityList.add(gfxFactory.getObstacleEntity(new Position(gameConfig.getGameSize().getWidth() - gameConfig.getObstacleDimension().getWidth() * 2, gameConfig.getGameSize().getHeight() - gameConfig.getObstacleDimension().getHeight() * 4), 5));
 
             }
             case DEBUG -> {
@@ -489,8 +489,8 @@ public class Game {
  */
 
                 for (int i = 0; i < 100; i++) {
-                    if ((enemyDimension.getWidth() * i + enemyDimension.getWidth()) <= gameSize.getHeight() && (enemyDimension.getHeight() * i + enemyDimension.getHeight()) <= gameSize.getHeight())
-                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(enemyDimension.getWidth() * i, enemyDimension.getHeight() * (i)), i % 2 + 1, 1, 1));
+                    if ((gameConfig.getEnemyDimension().getWidth() * i + gameConfig.getEnemyDimension().getWidth()) <= gameConfig.getGameSize().getHeight() && (gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getEnemyDimension().getHeight()) <= gameConfig.getGameSize().getHeight())
+                        enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * (i)), i % 2 + 1, 1, 1));
                 }
 
 
@@ -820,8 +820,8 @@ public class Game {
                 bonusEntityList,
                 playerEntityList.stream().map(APlayerEntity::getStatisticsComponent).toList(),
                 gfxFactory,
-                this.gameSize,
-                this.bonusDimension
+                gameConfig.getGameSize(),
+                gameConfig.getBonusDimension()
         ))
             soundSystem.playShortSound(SoundType.BONUS_SOUND);
     }
@@ -835,8 +835,8 @@ public class Game {
                 bigEnemyEntityList,
                 playerEntityList.stream().map(APlayerEntity::getStatisticsComponent).toList(),
                 gfxFactory,
-                gameSize,
-                bigEnemyDimension
+                gameConfig.getGameSize(),
+                gameConfig.getBigEnemyDimension()
         ) && (enemyEntityList.size() == 1 && enemyEntityList.stream().anyMatch(i -> i.getMovementComponent().getVelocity() != 0)))
             this.soundSystem.playShortSound(SoundType.BIG_ENEMY_SOUND);
     }
