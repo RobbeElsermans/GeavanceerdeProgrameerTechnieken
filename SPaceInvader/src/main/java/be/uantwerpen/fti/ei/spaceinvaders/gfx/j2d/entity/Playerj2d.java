@@ -31,16 +31,14 @@ public class Playerj2d extends APlayerEntity {
         }
         //Use the gfx to draw onto the buffer
         //Graphics2D g2d = getGfx().getG2d();
-        BufferedImage playerImage = getGfx().getSpriteLoader().getSprite(EntityType.PLAYER).get(0);
-        BufferedImage after = new BufferedImage(playerImage.getWidth(), playerImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
-        AffineTransform at = new AffineTransform();
-        //Schaal de image
-        at.scale(gfx.getEnemyDimension().getWidth()/playerImage.getWidth(), gfx.getEnemyDimension().getHeight()/playerImage.getHeight());
+        SpriteLoader.SpriteData playerImageData = getGfx().getSpriteLoader().getSprite(EntityType.PLAYER).get(0);
         //Verplaats de image
-        at.translate(this.getMovementComponent().getX(),this.getMovementComponent().getY());
+        AffineTransform affineTransform = playerImageData.getAffineTransform();
+        affineTransform.translate(50,50);
+
 
         if (getGfx().getG2d() != null) {
-            getGfx().getG2d().drawImage(playerImage, at, null);
+            getGfx().getG2d().drawImage(playerImageData.getBufferedImage(), affineTransform, null);
             //getGfx().getG2d().setColor(new Color(50, 200, 200));
             //getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());
         }

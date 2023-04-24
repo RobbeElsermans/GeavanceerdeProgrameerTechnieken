@@ -11,11 +11,12 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpriteLoader {
-    private List<List<BufferedImage>> sprites;
+    private List<List<SpriteData>> sprites;
     public SpriteLoader(GfxConfig gfxConfig){
         sprites = new ArrayList<>();
 
@@ -28,7 +29,7 @@ public class SpriteLoader {
         }
 
         //split images and rescale
-        List<BufferedImage> tempList = new ArrayList<>();
+        List<SpriteData> tempList = new ArrayList<>();
         tempList.add(scaler(image.getSubimage(3, 4, 11, 9), gfxConfig.getEnemyDimension()));
         tempList.add(scaler(image.getSubimage(19, 4, 11, 9), gfxConfig.getEnemyDimension()));
         sprites.add(tempList);  //Enemy 1
@@ -57,11 +58,11 @@ public class SpriteLoader {
         sprites.add(tempList);  //Obstacle
 
         tempList = new ArrayList<>();
-        tempList.add(image.getSubimage(68,4,9,10));
+        tempList.add(scaler(image.getSubimage(68,4,9,10), gfxConfig.getEnemyDimension()));
         sprites.add(tempList);  //Player
     }
 
-    public List<BufferedImage> getSprite(EntityType entityType){
+    public List<SpriteData> getSprite(EntityType entityType){
         switch (entityType){
 
             case PLAYER -> {
@@ -94,14 +95,29 @@ public class SpriteLoader {
      * @param bufferedImage
      * @return
      */
-    private BufferedImage scaler(BufferedImage bufferedImage, IDimension scale){
+    private SpriteData scaler(BufferedImage bufferedImage, IDimension scale){
 
         int w = bufferedImage.getWidth();
         int h = bufferedImage.getHeight();
-        BufferedImage after = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         AffineTransform at = new AffineTransform();
         at.scale(scale.getWidth()/w, scale.getHeight()/h);
-        AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-        return scaleOp.filter(bufferedImage, after);
+        return new SpriteData(bufferedImage, at);
+    }
+
+    public class SpriteData{
+        private BufferedImage bufferedImage;
+        private AffineTransform affineTransform;
+        public SpriteData(BufferedImage bi, AffineTransform at){
+            bufferedImage = bi;
+            affineTransform = at;
+        }
+
+        public BufferedImage getBufferedImage() {
+            return bufferedImage;
+        }
+
+        public AffineTransform getAffineTransform() {
+            return affineTransform;
+        }
     }
 }
