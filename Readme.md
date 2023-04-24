@@ -7,24 +7,14 @@ Het bekende space invaders spel, gemaakt in java. Het spel bestaat uit 1 speler 
 Zowel de speler als de vijanden kunnen schieten. Wanneer de speler bepaalde acties heeft voltooit, krijgt hij hiervoor bonussen die de speler kan oprapen. Als de speler uitmundig bezig is, komt er zelfs een grootere vijand die zeer moeilijk te raken is! Maar wanneer de speler deze raakt, is het de moeite waard!
 
 ## Vijand
-Een vijand bevat 1 of meerdere levels. Het huidige leven van een vijand wordt aangegeven d.m.v. een kleur.
-
-Deze kleuren zijn:
-
-| Kleur                                      | levens         |
-| :-------------                             | :------------- |
-| <b style="color:rgb(255,0,100)"> rood</b>          | 1          |
-| <b style="color:rgb(255,128,0)">oranje</b>         | 2          |
-| <b style="color:rgb(255,255,100)">pastel geel</b>  | 3          |
-| <b style="color:rgb(128,255,100)">pastel groen</b> | 4          |
-| <b style="color:rgb(0,255,0)">groen</b>            | 5 en hoger |
+Een vijand bevat 1 of meerdere levels. Het huidige leven van een vijand wordt aangegeven d.m.v. een sprite.
 
 Een enemy zal op willekeurige basis een kogel afvuren. Hier is dus geen patroon in te vinden.
 
 Wanneer men een vijand raakt, krijgt de speler hier 10 punten voor.
 
 ## Speciale vijand
-De speciale vijand ( <b style="color:rgb(255,100,0)">oranje</b> kleur ) is een vijand die helemaal vanboven het spel zal rondzweven. Het is een vijand die zeer moeilijk te raken is. Deze heeft standaard een leven van 1 en is dus in 1 kogel dood.
+De speciale vijand is een vijand die helemaal vanboven het spel zal rondzweven. Het is een vijand die zeer moeilijk te raken is. Deze heeft standaard een leven van 1 en is dus in 1 kogel dood.
 
 Wanneer een speciale vijand tevoorschijn komt, zal dit altijd in de tegenovergestelde richting gebeuren. Wanneer bv. de vijand links tevoorschijn kwam, zal dit volgende keer rechts zijn.
 
@@ -36,16 +26,6 @@ Wanneer men nu zo'n speciale vijand kan raken, krijgt de speler hier 100 punten 
 Een obstakel is een vijlige plaats voor de speler. Hier kan de speler achter schuilen wanneer de vijanden te hard aan het schieten zijn of omdat de speler even moet uitrusten.
 
 Zo'n obstakel is natuurlijk niet gemaakt uit titanium en zal dus ook afzien wanneer er op geschoten wordt. Zowel de speler als de vijand zijn kogels, kunnen een obstakel kapot schieten.
-
-Het leven van zo'n obstakel wordt aangeduid met een kleur:
-
-| Kleur                                      | levens         |
-| :-------------                             | :------------- |
-| <b style="color:rgb(102,0,0)">donker rood</b>         | 1          |
-| <b style="color:rgb(102,51,0)">donker oranje</b>      | 2          |
-| <b style="color:rgb(102,102,100)">beige</b>           | 3          |
-| <b style="color:rgb(51,102,100)">donker turquoise</b> | 4          |
-| <b style="color:rgb(0,102,0)">donker groen</b>        | 5 en hoger |
 
 ## Bonus
 In het spel zijn er bonussen die kunnen vallen. Deze worden gegenereerd wanneer de speler bepaalde zaken heeft volbracht.
