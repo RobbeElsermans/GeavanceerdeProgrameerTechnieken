@@ -13,15 +13,15 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 public class Playerj2d extends APlayerEntity {
-    private GraphicsContext gfx;
+    private final GraphicsContext gfx;
     public Playerj2d(GraphicsContext gfx) {
         super();
-        this.setGfx(gfx);
+        this.gfx = gfx;
     }
 
     public Playerj2d(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(movementComponent, livableComponent);
-        this.setGfx(gfx);
+        this.gfx = gfx;
     }
 
     @Override
@@ -31,24 +31,11 @@ public class Playerj2d extends APlayerEntity {
         }
         //Use the gfx to draw onto the buffer
         //Graphics2D g2d = getGfx().getG2d();
-        SpriteLoader.SpriteData playerImageData = getGfx().getSpriteLoader().getSprite(EntityType.PLAYER).get(0);
-        //Verplaats de image
-        AffineTransform affineTransform = playerImageData.getAffineTransform();
-        affineTransform.translate(50,50);
+        BufferedImage image = gfx.getSpriteLoader().getSprite(EntityType.PLAYER).get(0);
+        AffineTransform affineTransform = SpriteLoader.scaler(image, gfx.getPlayerDimension(), getMovementComponent().getPosition());
 
-
-        if (getGfx().getG2d() != null) {
-            getGfx().getG2d().drawImage(playerImageData.getBufferedImage(), affineTransform, null);
-            //getGfx().getG2d().setColor(new Color(50, 200, 200));
-            //getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());
+        if (gfx.getG2d() != null) {
+            gfx.getG2d().drawImage(image, affineTransform, null);
         }
-    }
-
-    public GraphicsContext getGfx() {
-        return gfx;
-    }
-
-    public void setGfx(GraphicsContext gfx) {
-        this.gfx = gfx;
     }
 }

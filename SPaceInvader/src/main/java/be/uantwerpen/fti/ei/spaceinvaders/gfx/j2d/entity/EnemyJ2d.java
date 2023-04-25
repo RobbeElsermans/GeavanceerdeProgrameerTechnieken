@@ -5,8 +5,11 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AEnemyEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.SpriteLoader;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class EnemyJ2d extends AEnemyEntity {
     private GraphicsContext gfx;
@@ -28,6 +31,7 @@ public class EnemyJ2d extends AEnemyEntity {
         }
         //Use the gfx to draw onto the buffer
         //Graphics2D g2d = getGfx().getG2d();
+        /*
         if (getGfx().getG2d() != null) {
             //getGfx().getG2d().setColor(new Color(224, 17, 231));
             if (getLivableComponent().getLife() == 1)
@@ -41,6 +45,14 @@ public class EnemyJ2d extends AEnemyEntity {
             else
                 getGfx().getG2d().setColor(new Color(0, 255, 0));
             getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
+        }
+
+         */
+        BufferedImage image = gfx.getSpriteLoader().getSprite(EntityType.ENEMY).get(getLivableComponent().getLife()-1);
+        AffineTransform affineTransform = SpriteLoader.scaler(image, gfx.getEnemyDimension(), getMovementComponent().getPosition());
+
+        if (gfx.getG2d() != null) {
+            gfx.getG2d().drawImage(image, affineTransform, null);
         }
     }
 

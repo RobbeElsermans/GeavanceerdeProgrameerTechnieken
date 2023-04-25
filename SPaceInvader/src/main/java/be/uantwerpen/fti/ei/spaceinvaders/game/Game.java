@@ -41,7 +41,7 @@ public class Game {
      * <p>
      * Wordt gebruikt om te debuggen.
      */
-    private static final InGameStates START_GAME_STATE = InGameStates.LEVEL_1;
+    private static final InGameStates START_GAME_STATE = InGameStates.LEVEL_2;
     /**
      * Gebruikt een GFX-abstract factory om GFX en Game gescheiden te houden.
      */
@@ -406,7 +406,7 @@ public class Game {
                         if ((gameConfig.getEnemyDimension().getWidth() * i + gameConfig.getEnemyDimension().getWidth()) <= gameConfig.getGameSize().getHeight() && (gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getEnemyDimension().getHeight()) <= gameConfig.getGameSize().getHeight()) {
 
                             enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight()), 2, 1, 1));
-                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * 2), 3, 1, 1));
+                            enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * 2), 2, 1, 1));
                             enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * 3), 2, 1, 1));
                             enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * 4), 1, 1, 1));
                         }
@@ -422,8 +422,8 @@ public class Game {
                 this.enemyShootSystem.setDiff(10);
 
                 for (int i = 0; i < 4; i++) {
-                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), i, 2, 1));
-                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * (10 - i), gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), i, 2, 1));
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), (i%2)+1, 2, 1));
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * (10 - i), gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), (i%2)+1, 2, 1));
                 }
 
                 enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * 4, gameConfig.getEnemyDimension().getHeight() * 2 + gameConfig.getGameSize().getHeight() / 8), 2, 2, 1));
@@ -871,7 +871,7 @@ public class Game {
                 //Voer het schot uit.
                 GlobalShootSystem.fire(i.getMovementComponent(), i.getShootingComponent(), gfxFactory, FromWhoBulletType.ENEMY);
                 //Voer sound uit
-                this.soundSystem.playShortSound(SoundType.ENEMY_SHOOT_SOUND);
+                //this.soundSystem.playShortSound(SoundType.ENEMY_SHOOT_SOUND);
             }
         });
     }

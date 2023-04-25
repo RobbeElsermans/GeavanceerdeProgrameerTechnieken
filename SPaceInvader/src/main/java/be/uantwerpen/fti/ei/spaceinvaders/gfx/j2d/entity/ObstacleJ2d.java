@@ -4,8 +4,11 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.AObstacleEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.DimensionComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.SpriteLoader;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class ObstacleJ2d extends AObstacleEntity {
     private GraphicsContext gfx;
@@ -22,20 +25,18 @@ public class ObstacleJ2d extends AObstacleEntity {
 
     @Override
     public void visualize() {
-        //Use the gfx to draw onto the buffer
-        //Graphics2D g2d = getGfx().getG2d();
-        if (getGfx().getG2d() != null) {
-            if (getLivableComponent().getLife() == 1)
-                getGfx().getG2d().setColor(new Color(102, 0, 0));
-            else if (getLivableComponent().getLife() == 2)
-                getGfx().getG2d().setColor(new Color(102, 51, 0));
-            else if (getLivableComponent().getLife() == 3)
-                getGfx().getG2d().setColor(new Color(102, 102, 100));
-            else if (getLivableComponent().getLife() == 4)
-                getGfx().getG2d().setColor(new Color(51, 102, 100));
-            else
-                getGfx().getG2d().setColor(new Color(0, 102, 0));
-            getGfx().getG2d().fillRect((int) this.getDimensionComponent().getX(), (int) this.getDimensionComponent().getY(), this.getDimensionComponent().getWidth(), this.getDimensionComponent().getHeight());
+
+        BufferedImage image;
+        if(getLivableComponent().getLife() <= gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).size())
+            image = gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).get(getLivableComponent().getLife()-1);
+        else{
+            image = gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).get((gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).size()-1));
+        }
+
+        AffineTransform affineTransform = SpriteLoader.scaler(image, gfx.getObstacleDimension(), getDimensionComponent().getPosition());
+
+        if (gfx.getG2d() != null) {
+            gfx.getG2d().drawImage(image, affineTransform, null);
         }
     }
 

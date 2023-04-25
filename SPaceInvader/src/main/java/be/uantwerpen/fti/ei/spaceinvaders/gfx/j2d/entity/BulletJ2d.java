@@ -4,8 +4,11 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABulletEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.SpriteLoader;
 
 import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
 
 public class BulletJ2d extends ABulletEntity {
     private GraphicsContext gfx;
@@ -20,11 +23,22 @@ public class BulletJ2d extends ABulletEntity {
     }
     @Override
     public void visualize() {
-        //Use the gfx to draw onto the buffer
-        //Graphics2D g2d = getGfx().getG2d();
+
         if (getGfx().getG2d() != null) {
-            getGfx().getG2d().setColor(new Color(219, 15, 15));
-            getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
+            //Bullet dat naar boven gaat.
+            if(getMovementComponent().getVelocity() < 0) {
+                getGfx().getG2d().setColor(new Color(219, 15, 15));
+                getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
+            }
+            //bullet dat naar beneden gaat
+            else{
+                BufferedImage image = gfx.getSpriteLoader().getSprite(EntityType.BULLET_ENEMY).get((int) ((this.getMovementComponent().getY()/this.getMovementComponent().getSpeed()/10)%2));
+                AffineTransform affineTransform = SpriteLoader.scaler(image, gfx.getBulletDimension(), getMovementComponent().getPosition());
+
+                if (gfx.getG2d() != null) {
+                    gfx.getG2d().drawImage(image, affineTransform, null);
+                }
+            }
         }
     }
 

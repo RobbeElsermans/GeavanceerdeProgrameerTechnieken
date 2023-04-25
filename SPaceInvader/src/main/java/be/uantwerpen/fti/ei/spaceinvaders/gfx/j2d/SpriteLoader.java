@@ -1,6 +1,7 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.EntityType;
 
 import javax.imageio.ImageIO;
@@ -11,12 +12,11 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SpriteLoader {
-    private List<List<SpriteData>> sprites;
+    private List<List<BufferedImage>> sprites;
     public SpriteLoader(GfxConfig gfxConfig){
         sprites = new ArrayList<>();
 
@@ -29,40 +29,40 @@ public class SpriteLoader {
         }
 
         //split images and rescale
-        List<SpriteData> tempList = new ArrayList<>();
-        tempList.add(scaler(image.getSubimage(3, 4, 11, 9), gfxConfig.getEnemyDimension()));
-        tempList.add(scaler(image.getSubimage(19, 4, 11, 9), gfxConfig.getEnemyDimension()));
+        List<BufferedImage> tempList = new ArrayList<>();
+        tempList.add(image.getSubimage(3, 4, 11, 9));
+        tempList.add(image.getSubimage(19, 4, 11, 9));
         sprites.add(tempList);  //Enemy 1
 
         tempList = new ArrayList<>();
-        tempList.add(scaler(image.getSubimage(48,5,16,7), gfxConfig.getEnemyDimension()));
+        tempList.add(image.getSubimage(48,5,16,7));
         sprites.add(tempList); //BigEnemy
 
         tempList = new ArrayList<>();
-        tempList.add(scaler(image.getSubimage(39,5,1,6), gfxConfig.getEnemyDimension()));
+        tempList.add(image.getSubimage(39,5,1,6));
         sprites.add(tempList);  //Bullet Player
 
         tempList = new ArrayList<>();
-        tempList.add(scaler(image.getSubimage(38,21,3,7), gfxConfig.getEnemyDimension()));
-        tempList.add(scaler(image.getSubimage(87,21,3,7), gfxConfig.getEnemyDimension()));
+        tempList.add(image.getSubimage(38,21,3,7));
+        tempList.add(image.getSubimage(87,21,3,7));
         sprites.add(tempList);  //Bullet Enemy
 
         tempList = new ArrayList<>();
-        tempList.add(scaler(image.getSubimage(38,38,5,5), gfxConfig.getEnemyDimension()));
+        tempList.add(image.getSubimage(38,38,5,5));
         sprites.add(tempList);  //Bonus
 
         tempList = new ArrayList<>();
-        tempList.add(scaler(image.getSubimage(51,20,26,12), gfxConfig.getEnemyDimension()));   //1
-        tempList.add(scaler(image.getSubimage(51,36,26,12), gfxConfig.getEnemyDimension()));   //2
-        tempList.add(scaler(image.getSubimage(51,52,26,12), gfxConfig.getEnemyDimension()));   //3
+        tempList.add(image.getSubimage(51,52,26,12));   //3
+        tempList.add(image.getSubimage(51,36,26,12));   //2
+        tempList.add(image.getSubimage(51,20,26,12));   //1
         sprites.add(tempList);  //Obstacle
 
         tempList = new ArrayList<>();
-        tempList.add(scaler(image.getSubimage(68,4,9,10), gfxConfig.getEnemyDimension()));
+        tempList.add(image.getSubimage(68,4,9,10));
         sprites.add(tempList);  //Player
     }
 
-    public List<SpriteData> getSprite(EntityType entityType){
+    public List<BufferedImage> getSprite(EntityType entityType){
         switch (entityType){
 
             case PLAYER -> {
@@ -95,29 +95,14 @@ public class SpriteLoader {
      * @param bufferedImage
      * @return
      */
-    private SpriteData scaler(BufferedImage bufferedImage, IDimension scale){
+    public static AffineTransform scaler(BufferedImage bufferedImage, IDimension scale, IPosition position){
 
-        int w = bufferedImage.getWidth();
-        int h = bufferedImage.getHeight();
         AffineTransform at = new AffineTransform();
-        at.scale(scale.getWidth()/w, scale.getHeight()/h);
-        return new SpriteData(bufferedImage, at);
-    }
 
-    public class SpriteData{
-        private BufferedImage bufferedImage;
-        private AffineTransform affineTransform;
-        public SpriteData(BufferedImage bi, AffineTransform at){
-            bufferedImage = bi;
-            affineTransform = at;
-        }
-
-        public BufferedImage getBufferedImage() {
-            return bufferedImage;
-        }
-
-        public AffineTransform getAffineTransform() {
-            return affineTransform;
-        }
+        //Verplaats de image
+        at.translate(position.getX(),position.getY());
+        //Schaal de image
+        at.scale(scale.getWidth()/bufferedImage.getWidth(), scale.getHeight()/bufferedImage.getHeight());
+        return  at;
     }
 }
