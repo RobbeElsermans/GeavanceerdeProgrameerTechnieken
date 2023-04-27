@@ -32,7 +32,7 @@ public class TextC extends ATextEntity {
 
             }
         }
-        if(getInformationComponent()!= null) {
+        if (getInformationComponent() != null) {
             for (int c : this.getInformationComponent().getInformation().chars().toArray()) {
                 try {
                     gfx.getGamePicture()[(int) this.getPositionComponent().getY()][(int) this.getPositionComponent().getX() + counter] = Character.toString(c);

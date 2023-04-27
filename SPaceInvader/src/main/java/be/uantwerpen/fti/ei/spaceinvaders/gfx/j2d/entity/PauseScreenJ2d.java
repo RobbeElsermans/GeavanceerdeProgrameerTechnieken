@@ -9,6 +9,7 @@ import java.util.List;
 
 public class PauseScreenJ2d extends AScreenEntity {
     private GraphicsContext gfx;
+
     /**
      * Default constructor waarbij de parameters de default waarden krijgen.
      */
@@ -30,7 +31,7 @@ public class PauseScreenJ2d extends AScreenEntity {
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param positionComponent De positie en dimensie van de entiteit.
-     * @param textEntityList  De tekst lijsten die de informatie bevatten.
+     * @param textEntityList    De tekst lijsten die de informatie bevatten.
      */
     public PauseScreenJ2d(PositionComponent positionComponent, List<ATextEntity> textEntityList, GraphicsContext gfx) {
         super(positionComponent, textEntityList);

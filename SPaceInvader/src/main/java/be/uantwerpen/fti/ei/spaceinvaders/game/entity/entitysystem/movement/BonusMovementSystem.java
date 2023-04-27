@@ -18,6 +18,6 @@ public class BonusMovementSystem {
      * @see RoundEvenly#toInteger(double)
      */
     public static void move(MovementComponent mc) {
-        mc.setY(mc.getY() +  RoundEvenly.toInteger(mc.getSpeed()*mc.getVelocity()));
+        mc.setY(mc.getY() + RoundEvenly.toInteger(mc.getSpeed() * mc.getVelocity()));
     }
 }

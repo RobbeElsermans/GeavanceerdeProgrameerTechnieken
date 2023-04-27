@@ -14,16 +14,17 @@ public class StopWatch {
 
     /**
      * Overload constructor die de fps zal instellen.
-     * @param fps   De Frames Per Seconds dat men wilt bereiken.
+     *
+     * @param fps De Frames Per Seconds dat men wilt bereiken.
      */
-    public StopWatch(int fps){
+    public StopWatch(int fps) {
         this.FPS_INTERVAL_NS = 1000000000 / fps;
     }
 
     /**
      * Start de aftelling.
      */
-    public void set(){
+    public void set() {
         nextFpsIntervalNS = System.nanoTime() + FPS_INTERVAL_NS;
     }
 
@@ -34,7 +35,7 @@ public class StopWatch {
      * <p>
      * Wanneer de aftelling al gedaan is, zal de functie niets uitvoeren.
      */
-    public void delay(){
+    public void delay() {
         try {
             long remainingFpsIntervalTime = nextFpsIntervalNS - System.nanoTime();
             remainingFpsIntervalTime /= 1000000;//van ns naar ms.

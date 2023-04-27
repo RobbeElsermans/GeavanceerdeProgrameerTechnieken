@@ -26,8 +26,7 @@ public class PlayerC extends APlayerEntity {
             for (int width = 1; width <= this.getMovementComponent().getWidth(); width++) {
                 try {
                     gfx.getGamePicture()[(int) (this.getMovementComponent().getY() + height)][(int) (this.getMovementComponent().getX() + width)] = "=";
-                }
-                catch (IndexOutOfBoundsException e){
+                } catch (IndexOutOfBoundsException e) {
                     //niets doen
                 }
             }

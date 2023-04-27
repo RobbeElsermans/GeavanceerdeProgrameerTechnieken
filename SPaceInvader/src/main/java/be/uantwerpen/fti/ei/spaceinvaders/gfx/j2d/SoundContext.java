@@ -6,15 +6,12 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
 import javax.sound.sampled.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class SoundContext extends ASoundSystem {
     /*
      * Hierin kunnen we het tijdelijke geluidjes in laten afspelen.
      */
-
 
     private Clip clipBonusSound;
     private Clip clipEnemySound;
@@ -60,8 +57,8 @@ public class SoundContext extends ASoundSystem {
      * <p>
      * Er kan maar 1 identiek typen bestaan in de database.
      *
-     * @param filePath  De locatie van het geluidsbestand + de naam van het bestand.
-     * @param type      Het soort geluid gedefinieerd in SoundType.
+     * @param filePath De locatie van het geluidsbestand + de naam van het bestand.
+     * @param type     Het soort geluid gedefinieerd in SoundType.
      * @see SoundType
      */
     private void addSound(String filePath, SoundType type) {
@@ -92,11 +89,10 @@ public class SoundContext extends ASoundSystem {
                         e.getLine().close();
                     }
                 });
-                if(type == SoundType.BACKGROUND_MUSIC){
+                if (type == SoundType.BACKGROUND_MUSIC) {
                     clipLoop = tempClip;
                     clipLoop.open(audioInputStream);
-                }
-                else{
+                } else {
                     clipShort = tempClip;
                     clipShort.open(audioInputStream);
                 }
@@ -111,6 +107,7 @@ public class SoundContext extends ASoundSystem {
 
     /**
      * Checkt of dat het geluid al bestaat of niet.
+     *
      * @param type Het typen sound dat we willen bekijken.
      * @return True als het bestaat. Anders false.
      */
@@ -120,13 +117,11 @@ public class SoundContext extends ASoundSystem {
 
     @Override
     public void playShortSound(SoundType soundType) {
-        if(soundExists(soundType)) {
+        if (soundExists(soundType)) {
             Thread t = new Thread(() -> {
-                try
-                {
+                try {
                     this.setFile(soundType);
-                }
-                finally {
+                } finally {
                     this.clipShort.loop(0);
                 }
             });

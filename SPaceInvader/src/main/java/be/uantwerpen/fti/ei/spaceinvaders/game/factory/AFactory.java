@@ -2,12 +2,12 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.factory;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
+import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.ASoundSystem;
 
 import java.util.List;
@@ -432,12 +432,12 @@ public abstract class AFactory {
      * @return IInput met de methods om acties uit te voeren op de player.
      * @see ASoundSystem
      * @see be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType SoundType
-     * */
+     */
     public abstract IInput getInput();
 
     /**
      * Het geluid van het spel wordt gegenereerd door een soundSysteem dat afhankelijk is van de genomen gfx.
-     *
+     * <p>
      * De gameloop gebruikt de abstracte methodes van ASoundSystem en SoundType om een sound af te spelen.
      *
      * @return Een ASoundSysteem dat de game kan gebruiken om een sound aan te vragen.

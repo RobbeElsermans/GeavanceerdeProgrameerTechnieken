@@ -7,15 +7,18 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.PositionC
 import java.util.List;
 
 public class EndScreenC extends AScreenEntity {
-    public EndScreenC(){
+    public EndScreenC() {
 
     }
+
     public EndScreenC(PositionComponent positionComponent) {
         super(positionComponent);
     }
+
     public EndScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities) {
         super(positionComponent, textEntities);
     }
+
     @Override
     public void visualize() {
         this.getTextEntityList().forEach(ATextEntity::visualize);

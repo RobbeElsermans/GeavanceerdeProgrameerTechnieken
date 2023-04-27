@@ -3,12 +3,12 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.console;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
+import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
+import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
-import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
-import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.ASoundSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.entity.*;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.SoundContext;
@@ -77,7 +77,7 @@ public class FactoryConsole extends AFactory {
 
     @Override
     public AObstacleEntity getObstacleEntity(IPosition position, int life) {
-        DimensionComponent dimensionComponent = new DimensionComponent(position, new Dimension(2,1));
+        DimensionComponent dimensionComponent = new DimensionComponent(position, new Dimension(2, 1));
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new ObstacleC(dimensionComponent, livableComponent, graphicsContext);

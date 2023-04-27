@@ -2,9 +2,10 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.position;
 
 /**
  * Een dimensie klassen waarmee we een dimensie kunnen definiëren voor een entiteit.
+ *
  * @see IDimension
  */
-public class Dimension implements IDimension{
+public class Dimension implements IDimension {
     private final double width;
     private final double height;
 
@@ -22,8 +23,9 @@ public class Dimension implements IDimension{
 
     /**
      * Overload constructor die een andere dimensie kan meegeven.
-     * @param width     De breedte als integer.
-     * @param height    De hoogte als integer.
+     *
+     * @param width  De breedte als integer.
+     * @param height De hoogte als integer.
      */
     public Dimension(double width, double height) {
         this.width = width;

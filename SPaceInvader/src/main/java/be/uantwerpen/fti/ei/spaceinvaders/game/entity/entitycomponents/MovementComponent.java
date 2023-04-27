@@ -38,6 +38,7 @@ public class MovementComponent extends DimensionComponent {
      *     <li>defaultVelocity  -> 1</li>
      *     <li>velocity  -> 1</li>
      * </ul>
+     *
      * @see DimensionComponent#DimensionComponent()  DimensionComponent
      */
     public MovementComponent() {
@@ -54,18 +55,21 @@ public class MovementComponent extends DimensionComponent {
      * @param dimension De dimensie van de entiteit.
      * @param speed     De snelheid waarmee de entiteit zich verplaatst.
      */
-    public MovementComponent(IPosition position, IDimension dimension, double speed,double velocity) {
+    public MovementComponent(IPosition position, IDimension dimension, double speed, double velocity) {
         super(position, dimension);
         this.setSpeed(speed);
         this.defaultVelocity = velocity;
         this.setVelocity(velocity);
     }
+
     public double getSpeed() {
         return speed;
     }
+
     public void setSpeed(double speed) {
         this.speed = speed;
     }
+
     public double getVelocity() {
         return velocity;
     }
@@ -74,16 +78,19 @@ public class MovementComponent extends DimensionComponent {
      * Verander de velocity.
      * <p>
      * Wanneer de velocity gewijzigd wordt, plaatsen we de oude velocity in prevVelocity.
+     *
      * @param velocity De nieuwe velocity.
      */
     public void setVelocity(double velocity) {
         this.prevVelocity = this.velocity;
         this.velocity = velocity;
     }
-    public double getPrevVelocity(){
+
+    public double getPrevVelocity() {
         return this.prevVelocity;
     }
-    public double getDefaultVelocity(){
+
+    public double getDefaultVelocity() {
         return this.defaultVelocity;
     }
 

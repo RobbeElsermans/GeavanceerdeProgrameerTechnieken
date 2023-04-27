@@ -27,7 +27,7 @@ public class StartScreenJ2d extends AScreenEntity {
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param positionComponent De positie en dimensie van de entiteit.
-     * @param textEntityList  De tekst lijsten die de informatie bevatten.
+     * @param textEntityList    De tekst lijsten die de informatie bevatten.
      */
     public StartScreenJ2d(PositionComponent positionComponent, List<ATextEntity> textEntityList) {
         super(positionComponent, textEntityList);

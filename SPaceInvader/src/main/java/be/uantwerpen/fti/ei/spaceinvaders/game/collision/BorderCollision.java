@@ -4,14 +4,13 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.Dimension
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 
 /**
+ * @param gameDimensions Het graphics-systeem dimensies.
  * @author Robbe Elsermans
  * @version 1.0
  * <p>
  * Een klasse om rand collisions te detecteren tussen een positie met een dimensie.
  * <p>
  * De game dimensie wordt verkregen van het graphics-systeem. Hierdoor kan men de collision detecteren op graphics niveau.
- *
- * @param gameDimensions Het graphics-systeem dimensies.
  */
 public record BorderCollision(IDimension gameDimensions) {
     /**
@@ -36,25 +35,24 @@ public record BorderCollision(IDimension gameDimensions) {
      *
      * @param dc positie en dimensie van de entiteit
      * @return List<Boolean> met formaat [TOPCOLLISION, LEFTCOLLISION, BOTTOMCOLLISION, RIGHTCOLLISION]
-     *
      * @see Edge
      */
     public Boolean[] checkBorderCollision(DimensionComponent dc) {
         Boolean[] temp = new Boolean[Edge.values().length];
 
         //Als links boven hoek tegen de bovenkant komt, geef dan true. Anders false.
-        temp[Edge.TOP.getValue()]= dc.getY() < 0;
+        temp[Edge.TOP.getValue()] = dc.getY() < 0;
 
         //Als links boven hoek tegen de linkse kant komt, geef dan true. Anders false.
-        temp[Edge.LEFT.getValue()]= dc.getX() < 0;
+        temp[Edge.LEFT.getValue()] = dc.getX() < 0;
 
         //Als recht onder hoek tegen de onderkant komt, geef dan true. Anders false.
         //Hierbij moeten de dimensies bij
-        temp[Edge.BOTTOM.getValue()]= dc.getY() + dc.getHeight() > this.gameDimensions.getHeight();
+        temp[Edge.BOTTOM.getValue()] = dc.getY() + dc.getHeight() > this.gameDimensions.getHeight();
 
         //Als recht onder hoek tegen de rechterkant komt, geef dan true. Anders false.
         //Hierbij moeten de dimensies bij
-        temp[Edge.RIGHT.getValue()]= dc.getX() + dc.getWidth() > this.gameDimensions.getWidth();
+        temp[Edge.RIGHT.getValue()] = dc.getX() + dc.getWidth() > this.gameDimensions.getWidth();
 
         return temp;
     }

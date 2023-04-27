@@ -2,8 +2,8 @@ package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.ABonusEntity;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.CollectableComponent;
-import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementComponent;
+import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 
 import java.awt.*;

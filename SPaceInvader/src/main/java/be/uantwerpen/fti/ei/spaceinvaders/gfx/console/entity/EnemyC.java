@@ -8,24 +8,25 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 
 public class EnemyC extends AEnemyEntity {
     private final GraphicsContext gfx;
-    public EnemyC(GraphicsContext gfx){
+
+    public EnemyC(GraphicsContext gfx) {
         this.gfx = gfx;
     }
+
     public EnemyC(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(movementComponent, livableComponent);
         this.gfx = gfx;
     }
+
     @Override
     public void visualize() {
         getShootingComponent().getBulletList().forEach(ABulletEntity::visualize);
 
-        for (int height = 1; height <= this.getMovementComponent().getHeight(); height++)
-        {
+        for (int height = 1; height <= this.getMovementComponent().getHeight(); height++) {
             for (int width = 1; width <= this.getMovementComponent().getWidth(); width++) {
                 try {
                     gfx.getGamePicture()[(int) (this.getMovementComponent().getY() + height)][(int) (this.getMovementComponent().getX() + width)] = "V";
-                }
-                catch (IndexOutOfBoundsException ignored){
+                } catch (IndexOutOfBoundsException ignored) {
 
                 }
             }

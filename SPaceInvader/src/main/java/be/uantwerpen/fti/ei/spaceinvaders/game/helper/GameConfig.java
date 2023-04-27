@@ -3,6 +3,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.helper;
 import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
+
 /**
  * De GameConfig classen behoudt de configuratie waardes van Game.
  */
@@ -27,9 +28,10 @@ public class GameConfig {
 
     /**
      * De constructor zal de waardes uit een bestand kunnen halen. Als het bestand niet bestaat, wordt dit met default parameters gedaan.
+     *
      * @param configFilePath De locatie van het bestand.
      */
-    public GameConfig(String configFilePath){
+    public GameConfig(String configFilePath) {
         gameSize = FileManager.getSettingAsDimension("gameWidth", "gameHeight", configFilePath, new Dimension(30, 20));
 
         this.fps = FileManager.getSettingInteger("fps", configFilePath, 40);

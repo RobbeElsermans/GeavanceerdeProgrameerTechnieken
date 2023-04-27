@@ -5,7 +5,6 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.collision;
  * @version 1.0
  * <p>
  * Hulp enum om te bepalen welke border collision er bekeken moet worden.
- *
  * @see BorderCollision BorderCollision
  */
 public enum Edge {
@@ -34,6 +33,7 @@ public enum Edge {
 
     /**
      * Verkrijg de integer value van een enum.
+     *
      * @return De integer value van de enum.
      */
     public int getValue() {

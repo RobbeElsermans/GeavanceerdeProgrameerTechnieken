@@ -7,13 +7,12 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.SpriteLoader;
 
-import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 
 public class Playerj2d extends APlayerEntity {
     private final GraphicsContext gfx;
+
     public Playerj2d(GraphicsContext gfx) {
         super();
         this.gfx = gfx;

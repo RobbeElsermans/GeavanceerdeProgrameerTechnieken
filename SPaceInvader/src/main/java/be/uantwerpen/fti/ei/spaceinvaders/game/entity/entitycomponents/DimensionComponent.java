@@ -15,7 +15,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
  * @see IPosition
  * @see PositionComponent
  */
-public class DimensionComponent extends PositionComponent{
+public class DimensionComponent extends PositionComponent {
     /**
      * De dimensie van een entiteit. Default is dit (1,1).
      */
@@ -26,6 +26,7 @@ public class DimensionComponent extends PositionComponent{
      * <ul>
      *     <li>dimentions  -> [1,1]</li>
      * </ul>
+     *
      * @see PositionComponent#PositionComponent()  PositionComponent
      * @see Dimension#Dimension()  Dimension
      */
@@ -33,6 +34,7 @@ public class DimensionComponent extends PositionComponent{
         super();
         this.dimentions = new Dimension();
     }
+
     public DimensionComponent(IDimension dimentions) {
         super();
         this.dimentions = dimentions;
@@ -47,15 +49,15 @@ public class DimensionComponent extends PositionComponent{
         return (int) this.dimentions.getWidth();
     }
 
-    public int getHeight(){
+    public int getHeight() {
         return (int) this.dimentions.getHeight();
     }
-    public IDimension getDimension()
-    {
+
+    public IDimension getDimension() {
         return this.dimentions.getDimension();
     }
-    public void setDimension(IDimension dimension)
-    {
+
+    public void setDimension(IDimension dimension) {
         this.dimentions = dimension;
     }
 

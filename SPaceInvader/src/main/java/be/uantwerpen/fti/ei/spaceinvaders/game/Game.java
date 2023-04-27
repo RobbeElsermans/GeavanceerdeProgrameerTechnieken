@@ -161,7 +161,7 @@ public class Game {
      * Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      * <p>
      *
-     * @param aFactory   Een GFX-factory om de zaak te tonen.
+     * @param aFactory       Een GFX-factory om de zaak te tonen.
      * @param configFilePath Het configuratiebestand waarin verschillende parameters staan.
      */
     public Game(AFactory aFactory, String configFilePath) {
@@ -422,8 +422,8 @@ public class Game {
                 this.enemyShootSystem.setDiff(10);
 
                 for (int i = 0; i < 4; i++) {
-                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), (i%2)+1, 2, 1));
-                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * (10 - i), gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), (i%2)+1, 2, 1));
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * i, gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), (i % 2) + 1, 2, 1));
+                    enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * (10 - i), gameConfig.getEnemyDimension().getHeight() * i + gameConfig.getGameSize().getHeight() / 8.0), (i % 2) + 1, 2, 1));
                 }
 
                 enemyEntityList.add(this.gfxFactory.getEnemyEntity(new Position(gameConfig.getEnemyDimension().getWidth() * 4, gameConfig.getEnemyDimension().getHeight() * 2 + gameConfig.getGameSize().getHeight() / 8), 2, 2, 1));

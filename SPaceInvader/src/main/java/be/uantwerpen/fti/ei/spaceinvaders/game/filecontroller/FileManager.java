@@ -2,6 +2,8 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
+import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 
 import java.io.*;
 import java.util.Properties;
@@ -135,6 +137,26 @@ public class FileManager {
         double width = FileManager.getSettingDouble(propertyNameWidth, location, defaultValue.getWidth());
         double height = FileManager.getSettingDouble(propertyNameHeight, location, defaultValue.getHeight());
         return new Dimension(width, height);
+    }
+
+    /**
+     * Een methode die met behulp van de gegeven parameters, de parameter op haalt in het gegeven bestand als IPosition.
+     * <p>
+     * Als het bestand niet bestaat en het pad is geldig, wordt het bestand gecreëerd met daarin de default parameter waardes.
+     * Men kan zowel integer parameters als double parameters erin/uit halen.
+     * <p>
+     * Als het bestand bestaat en de property niet, wordt deze property aan het bestaande bestand toegevoegd.
+     *
+     * @param propertyNameX De naam van de x-positie variabelen gedefinieerd in het bestand.
+     * @param propertyNameY De naam van de y-positie variabelen gedefinieerd in het bestand.
+     * @param location      De locatie van het bestand.
+     * @param defaultValue  De standaard waarden voor moest het bestand of parameter niet bestaan als IPosition.
+     * @return IPosition, De gevraagde/ default parameter waarden in IPosition formaat.
+     */
+    public static IPosition getSettingAsPosition(String propertyNameX, String propertyNameY, String location, IPosition defaultValue) {
+        double width = FileManager.getSettingDouble(propertyNameX, location, defaultValue.getX());
+        double height = FileManager.getSettingDouble(propertyNameY, location, defaultValue.getY());
+        return new Position(width, height);
     }
 
     /**

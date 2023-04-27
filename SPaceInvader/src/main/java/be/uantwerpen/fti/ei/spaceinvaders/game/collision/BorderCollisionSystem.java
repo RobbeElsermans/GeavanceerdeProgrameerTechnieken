@@ -14,7 +14,6 @@ import java.util.List;
  * De methodes zijn static omdat ze geen waardes moeten opslaan.
  * <p>
  * We gaan ervan uit dat de coördinaten van het spel, in de links boven hoek starten op [0,0].
- *
  * @see BorderCollision
  * @see Edge
  * @see MovementComponent

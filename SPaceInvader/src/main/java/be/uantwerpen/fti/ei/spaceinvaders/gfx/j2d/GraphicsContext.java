@@ -1,6 +1,5 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 
@@ -131,7 +130,7 @@ public class GraphicsContext {
     /**
      * Past de gegeven dimensies aan, aan de hoogte en breedte van het scherm.
      *
-     * @param dimensions    De dimensie van het spel.
+     * @param dimensions De dimensie van het spel.
      */
     public void setGameDimensions(IDimension dimensions) {
         this.tileWidth = (int) ((gfxConfig.getScreenSize().getWidth()) / dimensions.getWidth());
@@ -148,7 +147,7 @@ public class GraphicsContext {
     /**
      * Past de gegeven dimensies van de entiteiten aan a.d.h.v. de gegeven game dimensie.
      *
-     * @param dimensions    De dimensie van het spel.
+     * @param dimensions De dimensie van het spel.
      */
     public void setEntityDimensions(IDimension dimensions) {
         int sizeWidth = (int) (gfxConfig.getScreenSize().getWidth() / dimensions.getWidth());
@@ -193,6 +192,7 @@ public class GraphicsContext {
     public int getTileHeight() {
         return tileHeight;
     }
+
     public SpriteLoader getSpriteLoader() {
         return spriteLoader;
     }

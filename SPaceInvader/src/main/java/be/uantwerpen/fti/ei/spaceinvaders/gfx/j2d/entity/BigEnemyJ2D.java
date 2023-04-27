@@ -6,13 +6,13 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.SpriteLoader;
 
-import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
 public class BigEnemyJ2D extends ABigEnemyEntity {
 
     private GraphicsContext gfx;
+
     public BigEnemyJ2D(GraphicsContext gfx) {
         super();
         this.setGfx(gfx);
@@ -22,6 +22,7 @@ public class BigEnemyJ2D extends ABigEnemyEntity {
         super(movementComponent, livableComponent);
         this.gfx = gfx;
     }
+
     @Override
     public void visualize() {
 

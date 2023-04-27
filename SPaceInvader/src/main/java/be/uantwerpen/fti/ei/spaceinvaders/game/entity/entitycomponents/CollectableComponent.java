@@ -10,7 +10,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
  * <p>
  * Deze component kan gebruikt worden wanneer we iets willen collecten. Zo kan een collectable enkele types aannemen.
  * Samenhangend met dit typen, is er ook een waarde aan vast gekoppeld.
- *
  * @see CollectableType
  */
 public class CollectableComponent {
@@ -50,7 +49,6 @@ public class CollectableComponent {
     }
 
     /**
-     *
      * @return Geeft het geselecteerde typen terug.
      */
     public CollectableType getType() {
@@ -58,7 +56,6 @@ public class CollectableComponent {
     }
 
     /**
-     *
      * @return De value van de collectable
      */
     public double getValue() {
@@ -67,6 +64,7 @@ public class CollectableComponent {
 
     /**
      * Geeft de waarde terug en zal hiermee de value gelijk stellen aan 0. Hierdoor weet een systeem dat de collectable genomen is.
+     *
      * @return De value van de collectable
      */
     public double takeValue() {

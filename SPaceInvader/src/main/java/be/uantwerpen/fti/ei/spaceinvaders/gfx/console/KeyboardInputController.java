@@ -10,29 +10,27 @@ import com.github.kwhat.jnativehook.keyboard.NativeKeyEvent;
 import com.github.kwhat.jnativehook.keyboard.NativeKeyListener;
 
 /**
- * @description  Op ubuntu, login als xorg.
+ * @description Op ubuntu, login als xorg.
  * bron: <a href="https://github.com/go-vgo/robotgo/issues/304">github</a>
  */
 public class KeyboardInputController extends AInputController {
 
-    public KeyboardInputController(){
+    public KeyboardInputController() {
         try {
-        			GlobalScreen.registerNativeHook();
-        		}
-        		catch (NativeHookException ex) {
-        			System.err.println("There was a problem registering the native hook.");
-        			System.err.println(ex.getMessage());
+            GlobalScreen.registerNativeHook();
+        } catch (NativeHookException ex) {
+            System.err.println("There was a problem registering the native hook.");
+            System.err.println(ex.getMessage());
 
-        			System.exit(1);
-        		}
+            System.exit(1);
+        }
 
-        		GlobalScreen.addNativeKeyListener(new KeyboardAdapter());
+        GlobalScreen.addNativeKeyListener(new KeyboardAdapter());
     }
 
     class KeyboardAdapter implements NativeKeyListener {
         public void nativeKeyPressed(NativeKeyEvent e) {
             //System.out.println("Key Pressed: " + NativeKeyEvent.getKeyText(e.getKeyCode()));
-
 
 
             int keycode = e.getKeyCode();

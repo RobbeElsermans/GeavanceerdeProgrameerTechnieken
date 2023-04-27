@@ -14,7 +14,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
  * <p>
  * Wanneer men deze entity wilt implementeren, moet men de visualize methode overerven van IVisualize.
  * Deze methode wordt gebruikt om de entiteit af te beelden.
- *
  * @see IVisualize
  */
 public abstract class ATextEntity implements IVisualize {

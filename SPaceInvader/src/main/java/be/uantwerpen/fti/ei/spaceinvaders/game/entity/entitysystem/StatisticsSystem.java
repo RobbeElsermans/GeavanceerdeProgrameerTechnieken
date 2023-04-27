@@ -9,7 +9,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.Statistic
  * @version 1.0
  * <p>
  * Systeem dat de statistieken bijhoud en onderhoud.
- *
  * @see StatisticsComponent
  */
 public class StatisticsSystem {

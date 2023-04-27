@@ -21,7 +21,7 @@ fps=40
 # Het is een integer waarde.
 
 width_player=2
-height_player=2
+height_player=3
 width_enemy=2
 height_enemy=2
 width_bullet=1

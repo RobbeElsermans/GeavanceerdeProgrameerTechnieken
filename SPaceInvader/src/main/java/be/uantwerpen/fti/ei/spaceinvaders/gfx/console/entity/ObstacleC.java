@@ -7,22 +7,23 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 
 public class ObstacleC extends AObstacleEntity {
     private final GraphicsContext gfx;
-    public ObstacleC(GraphicsContext gfx){
+
+    public ObstacleC(GraphicsContext gfx) {
         this.gfx = gfx;
     }
+
     public ObstacleC(DimensionComponent dimensionComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(dimensionComponent, livableComponent);
         this.gfx = gfx;
     }
+
     @Override
     public void visualize() {
-        for (int height = 1; height <= this.getDimensionComponent().getHeight(); height++)
-        {
-            for (int width = 1; width <= this.getDimensionComponent().getWidth(); width++){
+        for (int height = 1; height <= this.getDimensionComponent().getHeight(); height++) {
+            for (int width = 1; width <= this.getDimensionComponent().getWidth(); width++) {
                 try {
                     gfx.getGamePicture()[(int) (this.getDimensionComponent().getY() + height)][(int) (this.getDimensionComponent().getX() + width)] = "-";
-                }
-                catch (IndexOutOfBoundsException ignored){
+                } catch (IndexOutOfBoundsException ignored) {
 
                 }
             }

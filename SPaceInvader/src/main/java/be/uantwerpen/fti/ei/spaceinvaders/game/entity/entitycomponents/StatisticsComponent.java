@@ -5,7 +5,6 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
  * @version 1.0
  * <p>
  * Een component dat verschillende statistieke waardes bevat die gebruikt worden in het spel.
- *
  * @see be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitysystem.StatisticsSystem StatisticsSystem
  */
 public class StatisticsComponent {

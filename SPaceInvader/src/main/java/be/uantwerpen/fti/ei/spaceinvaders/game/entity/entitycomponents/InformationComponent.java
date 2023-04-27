@@ -9,9 +9,10 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
  * Deze component kan gebruikt worden om iets te laten zien aan een gebruiker.
  * Hier is een preInfoText die statisch is. En de information tekst die de variabele tekst bevat.
  */
-public class InformationComponent{
+public class InformationComponent {
     private final String preInfoText;
     private String information;
+
     /**
      * Default constructor waarbij:
      * <ul>
@@ -19,10 +20,11 @@ public class InformationComponent{
      *     <li>information  -> ""</li>
      * </ul>
      */
-    public InformationComponent(){
+    public InformationComponent() {
         this.preInfoText = "";
         this.information = "";
     }
+
     /**
      * Overload constructor waarbij we een preInfoText kunnen meegeven.
      * <ul>
@@ -30,10 +32,11 @@ public class InformationComponent{
      *     <li>information  -> ""</li>
      * </ul>
      */
-    public InformationComponent(String preText){
+    public InformationComponent(String preText) {
         this.preInfoText = preText;
         this.information = "";
     }
+
     /**
      * Overload constructor waarbij we een preInfoText en een information kunnen meegeven.
      * <ul>
@@ -41,7 +44,7 @@ public class InformationComponent{
      *     <li>information  -> text</li>
      * </ul>
      */
-    public InformationComponent(String preText, String text){
+    public InformationComponent(String preText, String text) {
         this.preInfoText = preText;
         this.information = text;
     }
@@ -49,9 +52,11 @@ public class InformationComponent{
     public String getInformation() {
         return information;
     }
+
     public void setInformation(String information) {
         this.information = information;
     }
+
     public String getPreInfoText() {
         return preInfoText;
     }
@@ -60,6 +65,7 @@ public class InformationComponent{
      * Voegt preInfoText en information tekst samen.
      * <p>
      * Er wordt niets tussen beiden geplaatst.
+     *
      * @return Een concatenatie van preInfoText en information.
      */
     public String getInfoText() {

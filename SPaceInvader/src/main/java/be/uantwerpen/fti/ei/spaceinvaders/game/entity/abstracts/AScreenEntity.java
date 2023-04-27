@@ -16,7 +16,6 @@ import java.util.List;
  * <p>
  * Wanneer men deze entity wilt implementeren, moet men de visualize methode overerven van IVisualize.
  * Deze methode wordt gebruikt om de entiteit af te beelden.
- *
  * @see IVisualize
  * @see ATextEntity
  */

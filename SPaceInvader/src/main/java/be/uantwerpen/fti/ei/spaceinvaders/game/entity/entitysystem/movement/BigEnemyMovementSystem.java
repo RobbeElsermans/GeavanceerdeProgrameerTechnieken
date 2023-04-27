@@ -19,6 +19,6 @@ public class BigEnemyMovementSystem {
      * @see RoundEvenly#toInteger(double)
      */
     public static void move(MovementComponent mc) {
-        mc.setX(mc.getX() + RoundEvenly.toInteger(mc.getSpeed()*mc.getVelocity()));
+        mc.setX(mc.getX() + RoundEvenly.toInteger(mc.getSpeed() * mc.getVelocity()));
     }
 }

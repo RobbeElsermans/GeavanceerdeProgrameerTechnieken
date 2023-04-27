@@ -2,6 +2,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.position;
 
 /**
  * Een positie klassen waarmee we een positie kunnen definiëren voor een entiteit.
+ *
  * @see IPosition
  */
 public class Position implements IPosition {

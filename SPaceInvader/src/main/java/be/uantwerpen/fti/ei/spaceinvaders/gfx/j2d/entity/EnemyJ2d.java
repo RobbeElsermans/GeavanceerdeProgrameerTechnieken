@@ -7,7 +7,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.MovementC
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.SpriteLoader;
 
-import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -48,7 +47,7 @@ public class EnemyJ2d extends AEnemyEntity {
         }
 
          */
-        BufferedImage image = gfx.getSpriteLoader().getSprite(EntityType.ENEMY).get(getLivableComponent().getLife()-1);
+        BufferedImage image = gfx.getSpriteLoader().getSprite(EntityType.ENEMY).get(getLivableComponent().getLife() - 1);
         AffineTransform affineTransform = SpriteLoader.scaler(image, gfx.getEnemyDimension(), getMovementComponent().getPosition());
 
         if (gfx.getG2d() != null) {

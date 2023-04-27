@@ -10,7 +10,6 @@ import java.util.List;
  * @version 1.0
  * <p>
  * Een component dat kan schieten en dat een lijst van zijn schoten bijhoudt.
- *
  * @see ABulletEntity
  */
 public class ShootingComponent {
@@ -39,9 +38,10 @@ public class ShootingComponent {
 
     /**
      * Een functie dat schiet.
-     * @param bulletEntity  De kogel die wordt afgeschoten.
+     *
+     * @param bulletEntity De kogel die wordt afgeschoten.
      */
-    public void shoot(ABulletEntity bulletEntity){
+    public void shoot(ABulletEntity bulletEntity) {
         this.bulletList.add(bulletEntity);
         this.speed = 2;
     }
@@ -55,7 +55,7 @@ public class ShootingComponent {
     }
 
     public void setSpeed(double speed) {
-        if(speed < 1)
+        if (speed < 1)
             this.speed = 1;
         else
             this.speed = speed;

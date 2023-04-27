@@ -2,6 +2,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.helper;
 
 /**
  * De verschillende states dat een IN_GAME state kan doorlopen.
+ *
  * @see GameStates
  */
 public enum InGameStates {

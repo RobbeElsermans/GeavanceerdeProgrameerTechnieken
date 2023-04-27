@@ -18,7 +18,6 @@ import java.util.List;
  * Deze klassen behandeld het creëren van entiteiten die d.m.v. parameters in het spel gecreëerd worden.
  * Meer bepaald entiteiten BigEnemy en Bonus.
  * Door middel van de StatisticsComponent, weet de functie wat er gecreëerd moet worden.
- *
  * @see ABigEnemyEntity
  * @see ABonusEntity
  * @see StatisticsComponent

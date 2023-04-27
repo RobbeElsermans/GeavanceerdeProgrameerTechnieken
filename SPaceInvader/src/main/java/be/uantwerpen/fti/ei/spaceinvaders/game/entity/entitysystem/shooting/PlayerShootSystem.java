@@ -66,6 +66,7 @@ public class PlayerShootSystem extends GlobalShootSystem {
      * Zal kijken of dat er geschoten moet worden of niet d.m.v. een IInput.
      * <p>
      * Wanneer <b>withInterval</b> true is, gaan we met een interval werken. Anders niet.
+     *
      * @param input De input controller van de entiteit.
      * @return True als er geschoten mag worden. Anders false.
      */

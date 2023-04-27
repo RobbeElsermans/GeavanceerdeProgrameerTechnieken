@@ -6,7 +6,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.LivableCo
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GraphicsContext;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.SpriteLoader;
 
-import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 
@@ -27,10 +26,10 @@ public class ObstacleJ2d extends AObstacleEntity {
     public void visualize() {
 
         BufferedImage image;
-        if(getLivableComponent().getLife() <= gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).size())
-            image = gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).get(getLivableComponent().getLife()-1);
-        else{
-            image = gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).get((gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).size()-1));
+        if (getLivableComponent().getLife() <= gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).size())
+            image = gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).get(getLivableComponent().getLife() - 1);
+        else {
+            image = gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).get((gfx.getSpriteLoader().getSprite(EntityType.OBSTACLE).size() - 1));
         }
 
         AffineTransform affineTransform = SpriteLoader.scaler(image, gfx.getObstacleDimension(), getDimensionComponent().getPosition());

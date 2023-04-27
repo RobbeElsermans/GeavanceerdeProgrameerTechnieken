@@ -12,7 +12,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
  * <p>
  * Om op eigen kracht te kunnen bewegen, hebben we een input nodig van de gebruiker.
  * Deze kan gevormd worden door AInputController wat een IInput is.
- *
  * @see be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.AInputController AInputController
  * @see IInput
  */

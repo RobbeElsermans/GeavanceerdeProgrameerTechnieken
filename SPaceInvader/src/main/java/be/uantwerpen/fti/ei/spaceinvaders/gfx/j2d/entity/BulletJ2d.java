@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 
 public class BulletJ2d extends ABulletEntity {
     private GraphicsContext gfx;
+
     public BulletJ2d(GraphicsContext gfx) {
         super();
         this.setGfx(gfx);
@@ -21,18 +22,19 @@ public class BulletJ2d extends ABulletEntity {
         super(movementComponent, livableComponent);
         this.gfx = gfx;
     }
+
     @Override
     public void visualize() {
 
         if (getGfx().getG2d() != null) {
             //Bullet dat naar boven gaat.
-            if(getMovementComponent().getVelocity() < 0) {
+            if (getMovementComponent().getVelocity() < 0) {
                 getGfx().getG2d().setColor(new Color(219, 15, 15));
                 getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
             }
             //bullet dat naar beneden gaat
-            else{
-                BufferedImage image = gfx.getSpriteLoader().getSprite(EntityType.BULLET_ENEMY).get((int) ((this.getMovementComponent().getY()/this.getMovementComponent().getSpeed()/10)%2));
+            else {
+                BufferedImage image = gfx.getSpriteLoader().getSprite(EntityType.BULLET_ENEMY).get((int) ((this.getMovementComponent().getY() / this.getMovementComponent().getSpeed() / 10) % 2));
                 AffineTransform affineTransform = SpriteLoader.scaler(image, gfx.getBulletDimension(), getMovementComponent().getPosition());
 
                 if (gfx.getG2d() != null) {

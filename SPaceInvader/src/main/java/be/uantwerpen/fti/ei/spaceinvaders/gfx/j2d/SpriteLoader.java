@@ -5,10 +5,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.entity.EntityType;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,12 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Een klasse om de sprites te laden in een lijst. Deze lijst wordt dan weer gebruikt om de verschillende sprites te tonen.
- * */
+ * Een klasse om de sprites te laden in een lijst. Deze lijst wordt dan weer gebruikt om de verschillende sprites te tonen in gfxLibrary.
+ * Het is dedicated voor java2D.
+ */
 public class SpriteLoader {
+    // Een lijst van een lijst van sprites.
     private List<List<BufferedImage>> sprites;
 
-    public SpriteLoader(GfxConfig gfxConfig){
+    /**
+     * Overload constructor die de graphics Configuraties nodig heeft.
+     * <p>
+     * De Constructor zal alle sprites uit de sprite foto nemen en lokaal opslaan.
+     */
+    public SpriteLoader(GfxConfig gfxConfig) {
         sprites = new ArrayList<>();
 
         //Get image
@@ -32,42 +36,59 @@ public class SpriteLoader {
             throw new RuntimeException(e);
         }
 
-        //split images and rescale
+        //split images
+        imageSplitter(image, gfxConfig);
+    }
+
+    /**
+     * De imageSplitter zal de gegeven BufferedImage splitten met de gegeven gfxConfig
+     *
+     * @param image
+     */
+    private void imageSplitter(BufferedImage image, GfxConfig gfxConfig) {
+
         List<BufferedImage> tempList = new ArrayList<>();
-        tempList.add(image.getSubimage(3, 4, 11, 9));
-        tempList.add(image.getSubimage(19, 4, 11, 9));
+        tempList.add(image.getSubimage((int) gfxConfig.getEnemy1Sprite1Pos().getX(), (int) gfxConfig.getEnemy1Sprite1Pos().getY(), (int) gfxConfig.getEnemy1Sprite1Dim().getWidth(), (int) gfxConfig.getEnemy1Sprite1Dim().getHeight()));
+        tempList.add(image.getSubimage((int) gfxConfig.getEnemy1Sprite2Pos().getX(), (int) gfxConfig.getEnemy1Sprite2Pos().getY(), (int) gfxConfig.getEnemy1Sprite2Dim().getWidth(), (int) gfxConfig.getEnemy1Sprite2Dim().getHeight()));
         sprites.add(tempList);  //Enemy 1
 
         tempList = new ArrayList<>();
-        tempList.add(image.getSubimage(48,5,16,7));
+        tempList.add(image.getSubimage((int) gfxConfig.getBigEnemy1Sprite1Pos().getX(), (int) gfxConfig.getBigEnemy1Sprite1Pos().getY(), (int) gfxConfig.getBigEnemy1Sprite1Dim().getWidth(), (int) gfxConfig.getBigEnemy1Sprite1Dim().getHeight()));
         sprites.add(tempList); //BigEnemy
 
         tempList = new ArrayList<>();
-        tempList.add(image.getSubimage(39,5,1,6));
+        tempList.add(image.getSubimage((int) gfxConfig.getBulletPlayer1Sprite1Pos().getX(), (int) gfxConfig.getBulletPlayer1Sprite1Pos().getY(), (int) gfxConfig.getBulletPlayer1Sprite1Dim().getWidth(), (int) gfxConfig.getBulletPlayer1Sprite1Dim().getHeight()));
         sprites.add(tempList);  //Bullet Player
 
         tempList = new ArrayList<>();
-        tempList.add(image.getSubimage(38,21,3,7));
-        tempList.add(image.getSubimage(87,21,3,7));
+        tempList.add(image.getSubimage((int) gfxConfig.getBulletEnemy1Sprite1Pos().getX(), (int) gfxConfig.getBulletEnemy1Sprite1Pos().getY(), (int) gfxConfig.getBulletEnemy1Sprite1Dim().getWidth(), (int) gfxConfig.getBulletEnemy1Sprite1Dim().getHeight()));
+        tempList.add(image.getSubimage((int) gfxConfig.getBulletEnemy1Sprite2Pos().getX(), (int) gfxConfig.getBulletEnemy1Sprite2Pos().getY(), (int) gfxConfig.getBulletEnemy1Sprite2Dim().getWidth(), (int) gfxConfig.getBulletEnemy1Sprite2Dim().getHeight()));
         sprites.add(tempList);  //Bullet Enemy
 
         tempList = new ArrayList<>();
-        tempList.add(image.getSubimage(38,38,5,5));
+        tempList.add(image.getSubimage((int) gfxConfig.getBonus1Sprite1Pos().getX(), (int) gfxConfig.getBonus1Sprite1Pos().getY(), (int) gfxConfig.getBonus1Sprite1Dim().getWidth(), (int) gfxConfig.getBonus1Sprite1Dim().getHeight()));
         sprites.add(tempList);  //Bonus
 
         tempList = new ArrayList<>();
-        tempList.add(image.getSubimage(51,52,26,12));   //3
-        tempList.add(image.getSubimage(51,36,26,12));   //2
-        tempList.add(image.getSubimage(51,20,26,12));   //1
+        tempList.add(image.getSubimage((int) gfxConfig.getObstacle1Sprite1Pos().getX(), (int) gfxConfig.getObstacle1Sprite1Pos().getY(), (int) gfxConfig.getObstacle1Sprite1Dim().getWidth(), (int) gfxConfig.getObstacle1Sprite1Dim().getHeight()));   //3
+        tempList.add(image.getSubimage((int) gfxConfig.getObstacle1Sprite2Pos().getX(), (int) gfxConfig.getObstacle1Sprite2Pos().getY(), (int) gfxConfig.getObstacle1Sprite2Dim().getWidth(), (int) gfxConfig.getObstacle1Sprite2Dim().getHeight()));   //2
+        tempList.add(image.getSubimage((int) gfxConfig.getObstacle1Sprite3Pos().getX(), (int) gfxConfig.getObstacle1Sprite3Pos().getY(), (int) gfxConfig.getObstacle1Sprite3Dim().getWidth(), (int) gfxConfig.getObstacle1Sprite3Dim().getHeight()));   //1
         sprites.add(tempList);  //Obstacle
 
         tempList = new ArrayList<>();
-        tempList.add(image.getSubimage(68,4,9,10));
+        tempList.add(image.getSubimage((int) gfxConfig.getPlayer1Sprite1Pos().getX(), (int) gfxConfig.getPlayer1Sprite1Pos().getY(), (int) gfxConfig.getPlayer1Sprite1Dim().getWidth(), (int) gfxConfig.getPlayer1Sprite1Dim().getHeight()));
         sprites.add(tempList);  //Player
     }
 
-    public List<BufferedImage> getSprite(EntityType entityType){
-        switch (entityType){
+    /**
+     * Vraag de lijst van sprites op voor een specifiel entity typen
+     *
+     * @param entityType Het typen entiteit dat wordt gevraagd.
+     * @return Een lijst met al de sprites van de gevraagde entiteit.
+     * @see EntityType
+     */
+    public List<BufferedImage> getSprite(EntityType entityType) {
+        switch (entityType) {
 
             case PLAYER -> {
                 return sprites.get(6);
@@ -94,19 +115,22 @@ public class SpriteLoader {
         return new ArrayList<>();
     }
 
+    // Bron: https://stackoverflow.com/questions/4216123/how-to-scale-a-bufferedimage/4216635#4216635
+
     /**
-     * https://stackoverflow.com/questions/4216123/how-to-scale-a-bufferedimage/4216635#4216635
-     * @param bufferedImage
-     * @return
+     * Een static methode die een sprite zal schalen en op een positie zal plaatsen.
+     *
+     * @param bufferedImage De sprite als BufferedImage
+     * @return Een AffineTransform die specifiek zijn voor de verkregen BufferedImage.
      */
-    public static AffineTransform scaler(BufferedImage bufferedImage, IDimension scale, IPosition position){
+    public static AffineTransform scaler(BufferedImage bufferedImage, IDimension scale, IPosition position) {
 
         AffineTransform at = new AffineTransform();
 
         //Verplaats de image
-        at.translate(position.getX(),position.getY());
+        at.translate(position.getX(), position.getY());
         //Schaal de image
-        at.scale(scale.getWidth()/bufferedImage.getWidth(), scale.getHeight()/bufferedImage.getHeight());
-        return  at;
+        at.scale(scale.getWidth() / bufferedImage.getWidth(), scale.getHeight() / bufferedImage.getHeight());
+        return at;
     }
 }
