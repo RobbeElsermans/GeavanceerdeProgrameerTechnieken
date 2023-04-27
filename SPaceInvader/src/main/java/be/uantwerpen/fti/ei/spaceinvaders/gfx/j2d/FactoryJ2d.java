@@ -252,7 +252,7 @@ public class FactoryJ2d extends AFactory {
 
     @Override
     public ASoundSystem getSoundSystem() {
-        return new SoundContext("");
+        return new SoundContext(configFilePath);
     }
 
     @Override

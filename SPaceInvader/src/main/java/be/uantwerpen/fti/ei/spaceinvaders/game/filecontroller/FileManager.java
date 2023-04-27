@@ -44,7 +44,7 @@ public class FileManager {
             tempVal = Integer.parseInt(prop.getProperty(propertyName));
 
         } catch (FileNotFoundException e) {
-            System.out.println("Het bestand bestaat niet! Het wordt aangemaakt met default value.");
+            System.out.println("Het bestand \"" + location + "\" bestaat niet! Het wordt aangemaakt met default value: \"" + defaultValue+"\"");
             try {
                 File file = new File(location);
                 file.createNewFile();
@@ -61,7 +61,7 @@ public class FileManager {
             }
         } catch (NumberFormatException ex) {
             //throw new NumberFormatException("De opgegeven propertyName is niet geldig! Default value wordt gebruikt.");
-            System.out.println("De opgegeven propertyName is niet geldig! Default value wordt gebruikt");
+            System.out.println("De opgegeven propertyName \""+propertyName+"\" is niet geldig! Default value \""+defaultValue+"\" wordt gebruikt");
             createProp(propertyName, location, String.valueOf(defaultValue));
         } catch (IOException e) {
             //throw new RuntimeException(e);
@@ -92,7 +92,7 @@ public class FileManager {
             tempVal = Double.parseDouble(prop.getProperty(propertyName));
 
         } catch (FileNotFoundException e) {
-            System.out.println("Het bestand bestaat niet! Het wordt aangemaakt met default value.");
+            System.out.println("Het bestand \"" + location + "\" bestaat niet! Het wordt aangemaakt met default value: \"" + defaultValue+"\"");
             try {
                 File file = new File(location);
                 file.createNewFile();
@@ -109,7 +109,59 @@ public class FileManager {
             }
         } catch (NullPointerException ex) {
             //throw new NumberFormatException("De opgegeven propertyName is niet geldig! Default value wordt gebruikt.");
-            System.out.println("De opgegeven propertyName is niet geldig! Default value wordt gebruikt");
+            System.out.println("De opgegeven propertyName \""+propertyName+"\" is niet geldig! Default value \""+defaultValue+"\" wordt gebruikt");
+            createProp(propertyName, location, String.valueOf(defaultValue));
+        } catch (IOException e) {
+            //throw new RuntimeException(e);
+            System.out.println("Er is een fout bestand pad meegegeven!");
+        }
+
+        return tempVal;
+    }
+
+    /**
+     * Een methode die met behulp van de gegeven parameters, de parameter op haalt in het gegeven bestand als string.
+     * <p>
+     * Als het bestand niet bestaat en het pad is geldig, wordt het bestand gecreëerd met daarin de default parameter waardes.
+     * <p>
+     * Als het bestand bestaat en de property niet, wordt deze property aan het bestaande bestand toegevoegd.
+     *
+     * @param propertyName De naam van de variabelen gedefinieerd in het bestand.
+     * @param location     De locatie van het bestand + de bestandsnaam.
+     * @param defaultValue De standaard waarden, als string, voor moest het bestand of parameter niet bestaan.
+     * @return double, De gevraagde/ default parameter waarden als string.
+     */
+    public static String getSettingString(String propertyName, String location, String defaultValue) {
+        String tempVal = defaultValue;
+        try {
+            FileInputStream configuration = new FileInputStream(location);
+            Properties prop = new Properties();
+            prop.load(configuration);
+            tempVal = prop.getProperty(propertyName);
+            if (tempVal == null) {
+                tempVal = defaultValue;
+                throw new NullPointerException();
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Het bestand \"" + location + "\" bestaat niet! Het wordt aangemaakt met default value: \"" + defaultValue+"\"");
+            try {
+                File file = new File(location);
+                file.createNewFile();
+
+                String configString = propertyName + "=" + tempVal + "\n";
+
+                FileWriter fileWriter = new FileWriter(location);
+                fileWriter.append(configString);
+                fileWriter.close();
+
+            } catch (IOException ex) {
+                //throw new RuntimeException(ex);
+                System.out.println("Er is een fout bestand pad meegegeven!");
+            }
+        } catch (NullPointerException ex) {
+            //throw new NumberFormatException("De opgegeven propertyName is niet geldig! Default value wordt gebruikt.");
+            System.out.println("De opgegeven propertyName \""+propertyName+"\" is niet geldig! Default value \""+defaultValue+"\" wordt gebruikt");
             createProp(propertyName, location, String.valueOf(defaultValue));
         } catch (IOException e) {
             //throw new RuntimeException(e);

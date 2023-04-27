@@ -70,3 +70,14 @@ width_obstacle_1_sprite_2=26.0
 height_obstacle_1_sprite_2=12.0
 width_obstacle_1_sprite_3=26.0
 height_obstacle_1_sprite_3=12.0
+
+
+# geluid bestand locaties
+
+sound_player_dead=/sound/explosion.wav
+sound_enemy_dead=/sound/invaderkilled.wav
+sound_player_shoot=/sound/shoot.wav
+sound_enemy_shoot=/sound/shoot.wav
+sound_big_enemy_sound=/sound/ufo_lowpitch.wav
+sound_bonus_sound=/sound/ufo_highpitch.wav
+sound_background_music=/sound/spaceinvaders.wav

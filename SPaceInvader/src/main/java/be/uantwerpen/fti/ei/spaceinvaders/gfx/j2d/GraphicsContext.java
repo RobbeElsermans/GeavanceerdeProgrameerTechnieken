@@ -15,7 +15,7 @@ public class GraphicsContext {
     /**
      * Bevat de sprites.
      */
-    private SpriteLoader spriteLoader;
+    private final SpriteLoader spriteLoader;
     /**
      * Bevat de gfx configuratie bestanden.
      */
@@ -55,10 +55,6 @@ public class GraphicsContext {
 
     public JFrame getFrame() {
         return frame;
-    }
-
-    public IDimension getGameDimension() {
-        return this.gameDimension;
     }
 
     /**

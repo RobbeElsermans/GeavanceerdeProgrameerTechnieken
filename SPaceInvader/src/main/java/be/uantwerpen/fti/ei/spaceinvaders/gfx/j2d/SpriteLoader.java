@@ -18,7 +18,7 @@ import java.util.List;
  */
 public class SpriteLoader {
     // Een lijst van een lijst van sprites.
-    private List<List<BufferedImage>> sprites;
+    private final List<List<BufferedImage>> sprites;
 
     /**
      * Overload constructor die de graphics Configuraties nodig heeft.
@@ -43,7 +43,7 @@ public class SpriteLoader {
     /**
      * De imageSplitter zal de gegeven BufferedImage splitten met de gegeven gfxConfig
      *
-     * @param image
+     * @param image BufferImage
      */
     private void imageSplitter(BufferedImage image, GfxConfig gfxConfig) {
 

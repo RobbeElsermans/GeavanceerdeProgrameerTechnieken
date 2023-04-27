@@ -836,7 +836,7 @@ public class Game {
                 gfxFactory,
                 gameConfig.getGameSize(),
                 gameConfig.getBigEnemyDimension()
-        ) && (enemyEntityList.size() == 1 && enemyEntityList.stream().anyMatch(i -> i.getMovementComponent().getVelocity() != 0)))
+        ) && (enemyEntityList.size() >= 1 && enemyEntityList.stream().anyMatch(i -> i.getMovementComponent().getVelocity() != 0)))
             this.soundSystem.playShortSound(SoundType.BIG_ENEMY_SOUND);
     }
 

@@ -1,5 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
 
+import be.uantwerpen.fti.ei.spaceinvaders.game.filecontroller.FileManager;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.ASoundSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
 
@@ -12,14 +13,6 @@ public class SoundContext extends ASoundSystem {
     /*
      * Hierin kunnen we het tijdelijke geluidjes in laten afspelen.
      */
-
-    private Clip clipBonusSound;
-    private Clip clipEnemySound;
-    private Clip clipEnemyShootSound;
-    private Clip clipEnemyDeadSound;
-    private Clip clipPlayerShootSound;
-    private Clip clipPlayerDeadSound;
-    private Clip clipBackgroundMusic;
     private Clip clipShort;
     private Clip clipLoop;
     /*
@@ -29,27 +22,18 @@ public class SoundContext extends ASoundSystem {
     private final EnumMap<SoundType, URL> sounds = new EnumMap<>(SoundType.class);
 
     /**
-     * Default constructor die interne variabelen initialiseert.
+     * De overload constructor die de geluiden buffert
+     * @param configFile De locatie van het gfx_config bestand. Hierin worden de locaties van de geluiden bewaard.
      */
     public SoundContext(String configFile) {
-        //Initialize
-
-        //Probeer url van een config file te halen.
-        addSound("/sound/explosion.wav", SoundType.PLAYER_DEAD_SOUND);
-        addSound("/sound/invaderkilled.wav", SoundType.ENEMY_DEAD_SOUND);
-        addSound("/sound/shoot.wav", SoundType.PLAYER_SHOOT_SOUND);
-        addSound("/sound/shoot.wav", SoundType.ENEMY_SHOOT_SOUND);
-        addSound("/sound/ufo_lowpitch.wav", SoundType.BIG_ENEMY_SOUND);
-        addSound("/sound/ufo_highpitch.wav", SoundType.BONUS_SOUND);
-        addSound("/sound/spaceinvaders.wav", SoundType.BACKGROUND_MUSIC);
-
-        //Laad de files in Clip
-        setFile(SoundType.PLAYER_SHOOT_SOUND);
-        setFile(SoundType.PLAYER_SHOOT_SOUND);
-        setFile(SoundType.PLAYER_SHOOT_SOUND);
-        setFile(SoundType.PLAYER_SHOOT_SOUND);
-        setFile(SoundType.PLAYER_SHOOT_SOUND);
-        setFile(SoundType.PLAYER_SHOOT_SOUND);
+        //Haal de muziek locaties uit het gfx_config bestand
+        addSound(FileManager.getSettingString("sound_player_dead", configFile, "/sound/explosion.wav"), SoundType.PLAYER_DEAD_SOUND);
+        addSound(FileManager.getSettingString("sound_enemy_dead", configFile, "/sound/invaderkilled.wav"), SoundType.ENEMY_DEAD_SOUND);
+        addSound(FileManager.getSettingString("sound_player_shoot", configFile, "/sound/shoot.wav"), SoundType.PLAYER_SHOOT_SOUND);
+        addSound(FileManager.getSettingString("sound_enemy_shoot", configFile, "/sound/shoot.wav"), SoundType.ENEMY_SHOOT_SOUND);
+        addSound(FileManager.getSettingString("sound_big_enemy_sound", configFile, "/sound/ufo_lowpitch.wav"), SoundType.BIG_ENEMY_SOUND);
+        addSound(FileManager.getSettingString("sound_bonus_sound", configFile, "/sound/ufo_highpitch.wav"), SoundType.BONUS_SOUND);
+        addSound(FileManager.getSettingString("sound_background_music", configFile, "/sound/spaceinvaders.wav"), SoundType.BACKGROUND_MUSIC);
     }
 
     /**
@@ -102,7 +86,6 @@ public class SoundContext extends ASoundSystem {
                 e.printStackTrace();
             }
         }
-
     }
 
     /**
