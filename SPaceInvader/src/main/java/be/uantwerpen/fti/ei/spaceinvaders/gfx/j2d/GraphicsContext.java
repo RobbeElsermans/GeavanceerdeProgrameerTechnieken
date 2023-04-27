@@ -193,4 +193,7 @@ public class GraphicsContext {
         return spriteLoader;
     }
 
+    public GfxConfig getGfxSetting() {
+        return gfxConfig;
+    }
 }

@@ -1,7 +1,8 @@
-package be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d;
+package be.uantwerpen.fti.ei.spaceinvaders.gfx.console;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.ASoundSystem;
 import be.uantwerpen.fti.ei.spaceinvaders.game.sound.SoundType;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GfxConfig;
 
 import javax.sound.sampled.*;
 import java.io.IOException;

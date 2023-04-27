@@ -2,6 +2,7 @@ package be.uantwerpen.fti.ei.spaceinvaders;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.Game;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
+import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.FactoryConsole;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.FactoryJ2d;
 
 public class Main {
@@ -15,7 +16,7 @@ public class Main {
          *
          * De console heeft namelijk minder vakjes waarin we iets kunnen tekenen.
          */
-        //AFactory aFactory = new FactoryConsole();
+        //AFactory aFactory = new FactoryConsole("src/main/resources/config/gfx_config.txt");
         //Game game = new Game(aFactory, "src/main/resources/config/game_config.txt");
 
         AFactory aFactory = new FactoryJ2d("src/main/resources/config/gfx_config.txt");

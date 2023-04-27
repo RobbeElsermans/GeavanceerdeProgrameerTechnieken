@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class ConsoleGFXTest {
     @Test
     void testConsoleClear() {
-        AFactory gfxFac = new FactoryConsole();
+        AFactory gfxFac = new FactoryConsole("");
         gfxFac.setupGameDimension(new Dimension(5, 5));
 
         AEnemyEntity enemy = gfxFac.getEnemyEntity();

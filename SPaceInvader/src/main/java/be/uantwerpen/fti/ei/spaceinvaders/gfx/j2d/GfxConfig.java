@@ -44,6 +44,11 @@ public class GfxConfig {
     private IDimension textDimention;
 
     /**
+     * De plaats van de sprite foto
+     */
+    private String spritePicture;
+
+    /**
      * De dimensies van de sprites
      */
     private IDimension enemy1Sprite1Dim, enemy1Sprite2Dim, bigEnemy1Sprite1Dim, bulletPlayer1Sprite1Dim, bulletEnemy1Sprite1Dim, bulletEnemy1Sprite2Dim, bonus1Sprite1Dim, obstacle1Sprite1Dim, obstacle1Sprite2Dim, obstacle1Sprite3Dim, player1Sprite1Dim;
@@ -51,6 +56,11 @@ public class GfxConfig {
      * De posities van de sprites
      */
     private IPosition enemy1Sprite1Pos, enemy1Sprite2Pos, bigEnemy1Sprite1Pos, bulletPlayer1Sprite1Pos, bulletEnemy1Sprite1Pos, bulletEnemy1Sprite2Pos, bonus1Sprite1Pos, obstacle1Sprite1Pos, obstacle1Sprite2Pos, obstacle1Sprite3Pos, player1Sprite1Pos;
+
+    /**
+     * De locaties van het geluid
+     */
+    private String soundPlayerDead, soundEnemyDead, soundPlayerShoot, soundEnemyShoot, soundBigEnemyPopup, soundBonusPopup, soundBackgroundMusic;
 
     /**
      * De constructor zal de waardes uit een bestand kunnen halen. Als het bestand niet bestaat, wordt dit met default parameters gedaan.
@@ -69,6 +79,9 @@ public class GfxConfig {
         this.objectDimension = FileManager.getSettingAsDimension("width_object", "height_object", configFilePath, new Dimension(5, 2));
         this.bigEnemyDimension = FileManager.getSettingAsDimension("width_big_enemy", "height_big_enemy", configFilePath, new Dimension(4, 2));
         this.bonusDimension = FileManager.getSettingAsDimension("width_bonus", "height_bonus", configFilePath, new Dimension(0.5, 0.5));
+
+        // De sprite foto
+        this.spritePicture = FileManager.getSettingString("sprite_picture", configFilePath, "/sprite/SpaceInvaders.png");
 
         // verkrijg de sprite posities
         this.player1Sprite1Pos = FileManager.getSettingAsPosition("x_player_1_sprite_1", "y_player_1_sprite_1", configFilePath, new Position(68, 4));
@@ -96,6 +109,14 @@ public class GfxConfig {
         this.obstacle1Sprite2Dim = FileManager.getSettingAsDimension("width_obstacle_1_sprite_2", "height_obstacle_1_sprite_2", configFilePath, new Dimension(26, 12));
         this.obstacle1Sprite3Dim = FileManager.getSettingAsDimension("width_obstacle_1_sprite_3", "height_obstacle_1_sprite_3", configFilePath, new Dimension(26, 12));
 
+        // De geluiden importeren
+        this.soundBackgroundMusic = FileManager.getSettingString("sound_background_music", configFilePath, "/sound/spaceinvaders.wav");
+        this.soundBonusPopup = FileManager.getSettingString("sound_bonus_popup", configFilePath, "/sound/ufo_highpitch.wav");
+        this.soundBigEnemyPopup = FileManager.getSettingString("sound_big_enemy_popup", configFilePath, "/sound/ufo_lowpitch.wav");
+        this.soundEnemyDead = FileManager.getSettingString("sound_enemy_dead", configFilePath, "/sound/invaderkilled.wav");
+        this.soundEnemyShoot = FileManager.getSettingString("sound_enemy_shoot", configFilePath, "/sound/shoot.wav");
+        this.soundPlayerDead = FileManager.getSettingString("sound_player_dead", configFilePath, "/sound/explosion.wav");
+        this.soundPlayerShoot = FileManager.getSettingString("sound_player_shoot", configFilePath, "/sound/shoot.wav");
     }
 
     public IDimension getScreenSize() {
@@ -248,5 +269,37 @@ public class GfxConfig {
 
     public IPosition getPlayer1Sprite1Pos() {
         return player1Sprite1Pos;
+    }
+
+    public String getSpritePicture() {
+        return spritePicture;
+    }
+
+    public String getSoundPlayerDead() {
+        return soundPlayerDead;
+    }
+
+    public String getSoundEnemyDead() {
+        return soundEnemyDead;
+    }
+
+    public String getSoundPlayerShoot() {
+        return soundPlayerShoot;
+    }
+
+    public String getSoundEnemyShoot() {
+        return soundEnemyShoot;
+    }
+
+    public String getSoundBigEnemyPopup() {
+        return soundBigEnemyPopup;
+    }
+
+    public String getSoundBonusPopup() {
+        return soundBonusPopup;
+    }
+
+    public String getSoundBackgroundMusic() {
+        return soundBackgroundMusic;
     }
 }

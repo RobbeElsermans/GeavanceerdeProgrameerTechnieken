@@ -333,7 +333,7 @@ public class Game {
         if (inGameState != InGameStates.DEBUG) {
             playerEntityList.add(
                     this.gfxFactory.getPlayerEntity(
-                            new Position(gameConfig.getGameSize().getWidth() - gameConfig.getPlayerDimension().getWidth() / 2, gameConfig.getGameSize().getHeight() - gameConfig.getPlayerDimension().getHeight()),
+                            new Position((gameConfig.getGameSize().getWidth() - gameConfig.getPlayerDimension().getWidth()) / 2, gameConfig.getGameSize().getHeight() - gameConfig.getPlayerDimension().getHeight()),
                             3,
                             2,
                             1)

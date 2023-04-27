@@ -19,16 +19,24 @@ import java.util.List;
 public class FactoryConsole extends AFactory {
 
     private final IInput keyboardInput;
+    private final String configFilePath;
     private GraphicsContext graphicsContext;
 
-    public FactoryConsole() {
+    /**
+     * Initializeer Java2D met gegeven configuratie bestand.
+     *
+     * @param configFilePath Deze bevat de locatie van het configuratiebestand.
+     * @description Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
+     */
+    public FactoryConsole(String configFilePath) {
+        this.configFilePath = configFilePath;
         this.keyboardInput = new KeyboardInputController();
     }
 
     @Override
     public void setupGameDimension(IDimension dimension) {
         super.setupGameDimension(dimension);
-        this.graphicsContext = new GraphicsContext(dimension);
+        this.graphicsContext = new GraphicsContext(this.gameDimension, configFilePath);
     }
 
     @Override
@@ -197,7 +205,7 @@ public class FactoryConsole extends AFactory {
     @Override
     public ASoundSystem getSoundSystem() {
         //Zowel J2D als Console gebruiken hetzelfde sound systeem.
-        return new SoundContext("");
+        return new SoundContext(graphicsContext.getGfxSetting());
     }
 
     @Override
