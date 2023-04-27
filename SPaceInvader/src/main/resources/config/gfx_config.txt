@@ -6,7 +6,7 @@ height_console=400
 # Het is relatief t.o.v. 1 game panel in game_config.
 # Deze groottes bepalen de collision border.
 
-width_player_sprite=2.0
+width_player_sprite=3.0
 height_player_sprite=1.5
 width_enemy_sprite=2
 height_enemy_sprite=2
@@ -16,6 +16,5 @@ width_object_sprite=5.0
 height_object_sprite=2.0
 width_big_enemy_sprite=4.0
 height_big_enemy_sprite=2.0
-
 width_bonus_sprite=0.5
 height_bonus_sprite=0.5

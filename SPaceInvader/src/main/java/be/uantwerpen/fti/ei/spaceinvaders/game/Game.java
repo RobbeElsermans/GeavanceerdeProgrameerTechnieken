@@ -41,7 +41,7 @@ public class Game {
      * <p>
      * Wordt gebruikt om te debuggen.
      */
-    private static final InGameStates START_GAME_STATE = InGameStates.LEVEL_2;
+    private static final InGameStates START_GAME_STATE = InGameStates.LEVEL_1;
     /**
      * Gebruikt een GFX-abstract factory om GFX en Game gescheiden te houden.
      */

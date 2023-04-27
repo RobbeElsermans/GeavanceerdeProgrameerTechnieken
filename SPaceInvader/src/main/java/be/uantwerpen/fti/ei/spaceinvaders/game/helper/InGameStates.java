@@ -1,7 +1,5 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.helper;
 
-import be.uantwerpen.fti.ei.spaceinvaders.game.helper.GameStates;
-
 /**
  * De verschillende states dat een IN_GAME state kan doorlopen.
  * @see GameStates

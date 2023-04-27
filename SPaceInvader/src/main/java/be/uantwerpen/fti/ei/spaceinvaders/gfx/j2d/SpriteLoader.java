@@ -15,8 +15,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Een klasse om de sprites te laden in een lijst. Deze lijst wordt dan weer gebruikt om de verschillende sprites te tonen.
+ * */
 public class SpriteLoader {
     private List<List<BufferedImage>> sprites;
+
     public SpriteLoader(GfxConfig gfxConfig){
         sprites = new ArrayList<>();
 
