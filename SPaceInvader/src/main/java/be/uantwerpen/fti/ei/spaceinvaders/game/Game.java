@@ -191,7 +191,7 @@ public class Game {
                 this.gameStopWatch.set();
                 //render screen
                 render();
-
+                //visualize();
                 switch (gameState) {
                     case START_SCREEN, PAUSED -> visualizeScreen();
                     case IN_GAME -> {

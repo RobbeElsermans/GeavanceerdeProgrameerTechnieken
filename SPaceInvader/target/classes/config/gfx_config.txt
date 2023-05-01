@@ -81,3 +81,6 @@ sound_enemy_shoot=/sound/shoot.wav
 sound_big_enemy_sound=/sound/ufo_lowpitch.wav
 sound_bonus_sound=/sound/ufo_highpitch.wav
 sound_background_music=/sound/spaceinvaders.wav
+sprite_picture=/sprite/SpaceInvaders.png
+sound_bonus_popup=/sound/ufo_highpitch.wav
+sound_big_enemy_popup=/sound/ufo_lowpitch.wav

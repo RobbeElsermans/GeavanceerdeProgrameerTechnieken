@@ -32,7 +32,7 @@ public class SoundContext extends ASoundSystem {
         addSound(gfxConfig.getSoundPlayerShoot(), SoundType.PLAYER_SHOOT_SOUND);
         addSound(gfxConfig.getSoundEnemyShoot(), SoundType.ENEMY_SHOOT_SOUND);
         addSound(gfxConfig.getSoundBigEnemyPopup(), SoundType.BIG_ENEMY_SOUND);
-        addSound(gfxConfig.getSoundBigEnemyPopup(), SoundType.BONUS_SOUND);
+        addSound(gfxConfig.getSoundBonusPopup(), SoundType.BONUS_SOUND);
         addSound(gfxConfig.getSoundBackgroundMusic(), SoundType.BACKGROUND_MUSIC);
     }
 
