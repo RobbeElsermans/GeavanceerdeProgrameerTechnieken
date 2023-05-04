@@ -51,20 +51,6 @@ public interface IInput {
     boolean isShoot();
 
     /**
-     * Is de knop volume up ingedrukt geef dan true terug.
-     *
-     * @return boolean
-     */
-    boolean isVolUp();
-
-    /**
-     * Is de knop volume down ingedrukt geef dan true terug.
-     *
-     * @return boolean
-     */
-    boolean isVolDown();
-
-    /**
      * Is de knop escape ingedrukt geef dan true terug.
      *
      * @return boolean

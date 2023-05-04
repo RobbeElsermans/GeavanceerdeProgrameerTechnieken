@@ -13,11 +13,6 @@ import java.awt.image.BufferedImage;
 public class BulletJ2d extends ABulletEntity {
     private GraphicsContext gfx;
 
-    public BulletJ2d(GraphicsContext gfx) {
-        super();
-        this.setGfx(gfx);
-    }
-
     public BulletJ2d(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(movementComponent, livableComponent);
         this.gfx = gfx;

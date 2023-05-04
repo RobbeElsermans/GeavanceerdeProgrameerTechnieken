@@ -15,16 +15,6 @@ public class LivableComponent {
     private int life;
 
     /**
-     * Default constructor waarbij:
-     * <ul>
-     *     <li>life  -> 1</li>
-     * </ul>
-     */
-    public LivableComponent() {
-        this.life = 1;
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param life Het leven van de entiteit.
@@ -38,24 +28,10 @@ public class LivableComponent {
     }
 
     /**
-     * We vermeerderen het leven met 1.
-     */
-    public void upLife() {
-        this.life += 1;
-    }
-
-    /**
      * We sommeren amount met het huidige leven.
      */
     public void upLifeByAmount(int amount) {
         this.life += amount;
-    }
-
-    /**
-     * We verminderen het leven met 1.
-     */
-    public void downLife() {
-        this.life -= 1;
     }
 
     /**

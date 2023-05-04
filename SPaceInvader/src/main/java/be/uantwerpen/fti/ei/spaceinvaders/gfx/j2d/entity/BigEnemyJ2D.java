@@ -13,11 +13,6 @@ public class BigEnemyJ2D extends ABigEnemyEntity {
 
     private GraphicsContext gfx;
 
-    public BigEnemyJ2D(GraphicsContext gfx) {
-        super();
-        this.setGfx(gfx);
-    }
-
     public BigEnemyJ2D(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(movementComponent, livableComponent);
         this.gfx = gfx;
@@ -32,10 +27,6 @@ public class BigEnemyJ2D extends ABigEnemyEntity {
         if (gfx.getG2d() != null) {
             gfx.getG2d().drawImage(image, affineTransform, null);
         }
-    }
-
-    public GraphicsContext getGfx() {
-        return gfx;
     }
 
     public void setGfx(GraphicsContext gfx) {

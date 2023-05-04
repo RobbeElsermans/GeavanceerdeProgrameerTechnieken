@@ -12,14 +12,9 @@ import java.awt.image.BufferedImage;
 public class ObstacleJ2d extends AObstacleEntity {
     private GraphicsContext gfx;
 
-    public ObstacleJ2d(GraphicsContext gfx) {
-        super();
-        this.setGfx(gfx);
-    }
-
     public ObstacleJ2d(DimensionComponent dimensionComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(dimensionComponent, livableComponent);
-        this.setGfx(gfx);
+        this.gfx = gfx;
     }
 
     @Override
@@ -37,13 +32,5 @@ public class ObstacleJ2d extends AObstacleEntity {
         if (gfx.getG2d() != null) {
             gfx.getG2d().drawImage(image, affineTransform, null);
         }
-    }
-
-    public GraphicsContext getGfx() {
-        return gfx;
-    }
-
-    public void setGfx(GraphicsContext gfx) {
-        this.gfx = gfx;
     }
 }

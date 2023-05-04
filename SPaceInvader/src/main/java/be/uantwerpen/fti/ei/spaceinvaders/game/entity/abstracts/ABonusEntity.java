@@ -37,19 +37,6 @@ public abstract class ABonusEntity implements IVisualize {
     private final CollectableComponent collectableComponent;
 
     /**
-     * Default constructor waarbij de parameters de default waarden krijgen.
-     * <p>
-     * De default parameters zijn terug te vinden in MovementComponent en CollectableComponent.
-     *
-     * @see MovementComponent
-     * @see CollectableComponent
-     */
-    public ABonusEntity() {
-        this.movementComponent = new MovementComponent();
-        this.collectableComponent = new CollectableComponent();
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param movementComponent    De locatie en dimensie van de entiteit (in graphics-coordinates) met zijn snelheid en versnelling.

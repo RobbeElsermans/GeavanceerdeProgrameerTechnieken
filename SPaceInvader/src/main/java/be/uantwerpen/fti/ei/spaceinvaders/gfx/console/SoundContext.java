@@ -23,6 +23,7 @@ public class SoundContext extends ASoundSystem {
 
     /**
      * De overload constructor die de geluiden buffert
+     *
      * @param gfxConfig Het configuratie object.
      * @see GfxConfig
      */
@@ -47,7 +48,7 @@ public class SoundContext extends ASoundSystem {
      * @see SoundType
      */
     private void addSound(String filePath, SoundType type) {
-        if(filePath != null) {
+        if (filePath != null) {
             URL temp = getClass().getResource(filePath);
             sounds.put(type, temp);
         }
@@ -118,7 +119,7 @@ public class SoundContext extends ASoundSystem {
     @Override
     public void playBackgroundMusic(SoundType soundType) {
         //reset de vorige loop sound
-        stopBackgroundMusic(soundType);
+        stopBackgroundMusic();
 
         if (soundExists(soundType)) {
             setFile(soundType);
@@ -127,7 +128,7 @@ public class SoundContext extends ASoundSystem {
     }
 
     @Override
-    public void stopBackgroundMusic(SoundType soundType) {
+    public void stopBackgroundMusic() {
         if (clipLoop != null)
             clipLoop.stop();
     }

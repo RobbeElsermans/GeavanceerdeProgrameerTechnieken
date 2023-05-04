@@ -8,10 +8,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 public class BigEnemyC extends ABigEnemyEntity {
     private final GraphicsContext gfx;
 
-    public BigEnemyC(GraphicsContext gfx) {
-        this.gfx = gfx;
-    }
-
     public BigEnemyC(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(movementComponent, livableComponent);
         this.gfx = gfx;

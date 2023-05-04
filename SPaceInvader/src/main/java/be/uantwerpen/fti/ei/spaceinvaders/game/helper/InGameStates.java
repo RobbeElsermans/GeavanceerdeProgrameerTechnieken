@@ -19,10 +19,6 @@ public enum InGameStates {
      */
     LEVEL_2,
     /**
-     * boss level is bezig.
-     */
-    BOSS_LEVEL,
-    /**
      * debug level is bezig.
      */
     DEBUG

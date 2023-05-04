@@ -32,23 +32,6 @@ public class MovementComponent extends DimensionComponent {
     private final double defaultVelocity;
 
     /**
-     * Default constructor waarbij:
-     * <ul>
-     *     <li>speed  -> 2</li>
-     *     <li>defaultVelocity  -> 1</li>
-     *     <li>velocity  -> 1</li>
-     * </ul>
-     *
-     * @see DimensionComponent#DimensionComponent()  DimensionComponent
-     */
-    public MovementComponent() {
-        super();
-        this.setSpeed(2);
-        this.defaultVelocity = 1;
-        this.setVelocity(1);
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param position  De positie van de entiteit.

@@ -8,22 +8,6 @@ import java.util.List;
 
 public class EndScreenJ2d extends AScreenEntity {
     /**
-     * Default constructor waarbij de parameters de default waarden krijgen.
-     */
-    public EndScreenJ2d() {
-        super();
-    }
-
-    /**
-     * Overload constructor die de entiteit andere parameter waardes kan geven.
-     *
-     * @param positionComponent De positie en dimensie van de entiteit.
-     */
-    public EndScreenJ2d(PositionComponent positionComponent) {
-        super(positionComponent);
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param positionComponent De positie en dimensie van de entiteit.

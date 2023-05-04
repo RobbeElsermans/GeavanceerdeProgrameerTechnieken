@@ -30,7 +30,7 @@ public class SpriteLoader {
         sprites = new ArrayList<>();
 
         //Get image
-        BufferedImage image = null;
+        BufferedImage image;
         try {
             image = ImageIO.read(new File("src/main/resources/sprite/SpaceInvaders.png"));
         } catch (IOException e) {

@@ -13,11 +13,6 @@ import java.awt.image.BufferedImage;
 public class EnemyJ2d extends AEnemyEntity {
     private GraphicsContext gfx;
 
-    public EnemyJ2d(GraphicsContext gfx) {
-        super();
-        this.setGfx(gfx);
-    }
-
     public EnemyJ2d(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(movementComponent, livableComponent);
         this.gfx = gfx;
@@ -28,35 +23,13 @@ public class EnemyJ2d extends AEnemyEntity {
         for (ABulletEntity aBulletEntity : getShootingComponent().getBulletList()) {
             aBulletEntity.visualize();
         }
-        //Use the gfx to draw onto the buffer
-        //Graphics2D g2d = getGfx().getG2d();
-        /*
-        if (getGfx().getG2d() != null) {
-            //getGfx().getG2d().setColor(new Color(224, 17, 231));
-            if (getLivableComponent().getLife() == 1)
-                getGfx().getG2d().setColor(new Color(255, 0, 0));
-            else if (getLivableComponent().getLife() == 2)
-                getGfx().getG2d().setColor(new Color(255, 128, 0));
-            else if (getLivableComponent().getLife() == 3)
-                getGfx().getG2d().setColor(new Color(255, 255, 100));
-            else if (getLivableComponent().getLife() == 4)
-                getGfx().getG2d().setColor(new Color(128, 255, 100));
-            else
-                getGfx().getG2d().setColor(new Color(0, 255, 0));
-            getGfx().getG2d().fillRect((int) this.getMovementComponent().getX(), (int) this.getMovementComponent().getY(), this.getMovementComponent().getWidth(), this.getMovementComponent().getHeight());    //De vorige frame nog verwijderen
-        }
 
-         */
         BufferedImage image = gfx.getSpriteLoader().getSprite(EntityType.ENEMY).get(getLivableComponent().getLife() - 1);
         AffineTransform affineTransform = SpriteLoader.scaler(image, gfx.getEnemyDimension(), getMovementComponent().getPosition());
 
         if (gfx.getG2d() != null) {
             gfx.getG2d().drawImage(image, affineTransform, null);
         }
-    }
-
-    public GraphicsContext getGfx() {
-        return gfx;
     }
 
     public void setGfx(GraphicsContext gfx) {

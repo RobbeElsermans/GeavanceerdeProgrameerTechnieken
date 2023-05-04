@@ -9,11 +9,6 @@ import java.awt.*;
 public class TextJ2d extends ATextEntity {
     private final GraphicsContext gfx;
 
-    public TextJ2d(GraphicsContext gfx) {
-        super();
-        this.gfx = gfx;
-    }
-
     public TextJ2d(PositionComponent positionComponent, String preText, GraphicsContext gfx) {
         super(positionComponent, preText);
         this.gfx = gfx;

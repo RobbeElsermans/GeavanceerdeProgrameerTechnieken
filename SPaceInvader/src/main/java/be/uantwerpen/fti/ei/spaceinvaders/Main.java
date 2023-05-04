@@ -2,7 +2,6 @@ package be.uantwerpen.fti.ei.spaceinvaders;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.Game;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
-import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.FactoryConsole;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.FactoryJ2d;
 
 public class Main {

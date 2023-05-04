@@ -14,16 +14,6 @@ public class EnemyShootSystem extends GlobalShootSystem {
     private int diff;
 
     /**
-     * Default constructor waarbij:
-     * <ul>
-     *     <li>diff -> 1</li>
-     * </ul>
-     */
-    public EnemyShootSystem() {
-        diff = 1;
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      * <p>
      * Hoe groter diff genomen is, hoe frequenter een enemy kan schieten.

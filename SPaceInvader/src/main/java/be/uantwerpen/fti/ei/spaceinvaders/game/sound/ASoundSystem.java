@@ -7,7 +7,7 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.sound;
  */
 public abstract class ASoundSystem {
     /**
-     * Speel een geluid één keer af.
+     * Speel een geluid, één keer af.
      *
      * @param soundType Het typen geluid. Moet in de implementatie opgeslagen en verwerkt worden.
      */
@@ -22,8 +22,6 @@ public abstract class ASoundSystem {
 
     /**
      * Speel een geluid oneindig keer af.
-     *
-     * @param soundType Het typen geluid. Moet in de implementatie opgeslagen en verwerkt worden.
      */
-    public abstract void stopBackgroundMusic(SoundType soundType);
+    public abstract void stopBackgroundMusic();
 }

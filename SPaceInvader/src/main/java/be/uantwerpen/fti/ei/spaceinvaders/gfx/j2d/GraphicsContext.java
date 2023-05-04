@@ -37,10 +37,6 @@ public class GraphicsContext {
      */
     private Graphics2D g2d;             // always draw in this one
     /**
-     * De game dimensies meegegeven vanuit Game.
-     */
-    private final IDimension gameDimension;   //game dimensions
-    /**
      * De game dimensie in pixels per vak.
      */
     private int tileWidth;
@@ -67,7 +63,6 @@ public class GraphicsContext {
     public GraphicsContext(IDimension gameDimension, String configFile) {
         //get settings from file
         getSettings(configFile);
-        this.gameDimension = gameDimension;
 
         frame = new JFrame();
 

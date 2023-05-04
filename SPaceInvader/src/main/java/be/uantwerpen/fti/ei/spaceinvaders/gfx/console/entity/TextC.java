@@ -7,10 +7,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 public class TextC extends ATextEntity {
     private final GraphicsContext gfx;
 
-    public TextC(GraphicsContext gfx) {
-        this.gfx = gfx;
-    }
-
     public TextC(PositionComponent positionComponent, String preText, GraphicsContext gfx) {
         super(positionComponent, preText);
         this.gfx = gfx;

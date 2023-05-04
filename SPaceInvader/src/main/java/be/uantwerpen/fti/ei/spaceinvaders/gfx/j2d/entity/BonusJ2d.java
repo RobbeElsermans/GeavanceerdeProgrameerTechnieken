@@ -11,11 +11,6 @@ import java.awt.*;
 public class BonusJ2d extends ABonusEntity {
     private GraphicsContext gfx;
 
-    public BonusJ2d(GraphicsContext gfx) {
-        super();
-        this.setGfx(gfx);
-    }
-
     public BonusJ2d(MovementComponent movementComponent, CollectableComponent collectableComponent, GraphicsContext gfx) {
         super(movementComponent, collectableComponent);
         this.gfx = gfx;

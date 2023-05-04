@@ -41,23 +41,6 @@ public abstract class APlayerEntity implements IVisualize {
     private final ShootingComponent shootingComponent;
 
     /**
-     * Default constructor waarbij de parameters de default waarden krijgen.
-     * <p>
-     * De default parameters zijn terug te vinden in MovementComponent, LivableComponent, ShootingComponent, StatisticsComponent.
-     *
-     * @see MovementComponent
-     * @see LivableComponent
-     * @see ShootingComponent
-     * @see StatisticsComponent
-     */
-    public APlayerEntity() {//Insert de input
-        this.movementComponent = new MovementComponent();
-        this.livableComponent = new LivableComponent();
-        this.statisticsComponent = new StatisticsComponent();
-        this.shootingComponent = new ShootingComponent();
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param movementComponent De locatie en dimensie van de entiteit (in graphics-coordinates) met zijn snelheid en versnelling.

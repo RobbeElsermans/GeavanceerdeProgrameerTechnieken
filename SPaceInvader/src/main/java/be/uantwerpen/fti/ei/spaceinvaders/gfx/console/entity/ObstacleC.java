@@ -8,10 +8,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 public class ObstacleC extends AObstacleEntity {
     private final GraphicsContext gfx;
 
-    public ObstacleC(GraphicsContext gfx) {
-        this.gfx = gfx;
-    }
-
     public ObstacleC(DimensionComponent dimensionComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(dimensionComponent, livableComponent);
         this.gfx = gfx;

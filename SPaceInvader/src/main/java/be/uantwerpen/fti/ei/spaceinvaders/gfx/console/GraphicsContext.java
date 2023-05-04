@@ -4,7 +4,7 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
 import be.uantwerpen.fti.ei.spaceinvaders.gfx.j2d.GfxConfig;
 
 public class GraphicsContext {
-    private IDimension gameDimension;
+    private final IDimension gameDimension;
     private final String[][] gamePicture;
     /**
      * Bevat de gfx configuratie bestanden.
@@ -58,6 +58,7 @@ public class GraphicsContext {
     public String[][] getGamePicture() {
         return gamePicture;
     }
+
     public GfxConfig getGfxSetting() {
         return gfxConfig;
     }

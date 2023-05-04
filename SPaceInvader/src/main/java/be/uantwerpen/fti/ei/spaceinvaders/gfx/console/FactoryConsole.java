@@ -40,21 +40,11 @@ public class FactoryConsole extends AFactory {
     }
 
     @Override
-    public APlayerEntity getPlayerEntity() {
-        return new PlayerC(graphicsContext);
-    }
-
-    @Override
     public APlayerEntity getPlayerEntity(IPosition position, int life, double speed, double velocity) {
         MovementComponent movementComponent = new MovementComponent(position, new Dimension(), speed, velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new PlayerC(movementComponent, livableComponent, graphicsContext);
-    }
-
-    @Override
-    public AEnemyEntity getEnemyEntity() {
-        return new EnemyC(graphicsContext);
     }
 
     @Override
@@ -66,21 +56,11 @@ public class FactoryConsole extends AFactory {
     }
 
     @Override
-    public ABulletEntity getBulletEntity() {
-        return new BulletC(graphicsContext);
-    }
-
-    @Override
     public ABulletEntity getBulletEntity(IPosition position, int life, double speed, double velocity) {
         MovementComponent movementComponent = new MovementComponent(position, new Dimension(), speed, velocity);
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new BulletC(movementComponent, livableComponent, graphicsContext);
-    }
-
-    @Override
-    public AObstacleEntity getObstacleEntity() {
-        return new ObstacleC(graphicsContext);
     }
 
     @Override
@@ -92,11 +72,6 @@ public class FactoryConsole extends AFactory {
     }
 
     @Override
-    public ABigEnemyEntity getBigEnemyEntity() {
-        return new BigEnemyC(graphicsContext);
-    }
-
-    @Override
     public ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, double speed, double velocity) {
         MovementComponent movementComponent = new MovementComponent(position, new Dimension(), speed, velocity);
         LivableComponent livableComponent = new LivableComponent(life);
@@ -105,33 +80,11 @@ public class FactoryConsole extends AFactory {
     }
 
     @Override
-    public ABonusEntity getBonusEntity() {
-        return new BonusC(graphicsContext);
-    }
-
-    @Override
     public ABonusEntity getBonusEntity(IPosition position, double speed, double velocity, CollectableType type, double value) {
         MovementComponent movementComponent = new MovementComponent(position, new Dimension(), speed, velocity);
         CollectableComponent collectableComponent = new CollectableComponent(type, value);
 
         return new BonusC(movementComponent, collectableComponent, graphicsContext);
-    }
-
-    @Override
-    public ABonusEntity getRandomBonusEntity(IPosition position, double speed, double velocity, int randValueRange) {
-        return null;
-    }
-
-    @Override
-    public ATextEntity getTextEntity() {
-        return new TextC(graphicsContext);
-    }
-
-    @Override
-    public ATextEntity getTextEntity(IPosition pos, String preText) {
-        PositionComponent positionComponent = new PositionComponent(pos);
-
-        return new TextC(positionComponent, preText, graphicsContext);
     }
 
     @Override

@@ -27,19 +27,6 @@ public abstract class ATextEntity implements IVisualize {
     private final InformationComponent informationComponent;
 
     /**
-     * Default constructor waarbij de parameters de default waarden krijgen.
-     * <p>
-     * De default parameters zijn terug te vinden in PositionComponent en InformationComponent.
-     *
-     * @see PositionComponent
-     * @see InformationComponent
-     */
-    public ATextEntity() {
-        this.positionComponent = new PositionComponent();
-        this.informationComponent = new InformationComponent();
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param positionComponent De locatie (in graphics-coordinates) van de entiteit.

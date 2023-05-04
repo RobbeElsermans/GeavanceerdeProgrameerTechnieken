@@ -36,16 +36,6 @@ public class ShootingComponent {
         this.speed = 2;
     }
 
-    /**
-     * Een functie dat schiet.
-     *
-     * @param bulletEntity De kogel die wordt afgeschoten.
-     */
-    public void shoot(ABulletEntity bulletEntity) {
-        this.bulletList.add(bulletEntity);
-        this.speed = 2;
-    }
-
     public List<ABulletEntity> getBulletList() {
         return bulletList;
     }

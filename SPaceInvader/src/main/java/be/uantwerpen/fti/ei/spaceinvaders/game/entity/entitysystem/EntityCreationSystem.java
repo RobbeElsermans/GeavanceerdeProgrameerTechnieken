@@ -74,7 +74,7 @@ public class EntityCreationSystem {
     /**
      * Creëert een Bonus als er aan bepaalde condities voldaan is.
      * <p>
-     * Er bestaat maar van elk bonus typen, 1 entiteit in het spel.
+     * Er bestaat maar, van elk bonus typen, 1 entiteit in het spel.
      * Wanneer er een bonus spawn gebeurd, zal deze (op random locatie)
      * naar beneden vallen vanaf de bovenkant van het spel.
      * <p>

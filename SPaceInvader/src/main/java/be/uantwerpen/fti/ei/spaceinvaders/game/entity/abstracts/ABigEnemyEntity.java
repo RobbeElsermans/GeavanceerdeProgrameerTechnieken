@@ -37,19 +37,6 @@ public abstract class ABigEnemyEntity implements IVisualize {
     private final LivableComponent livableComponent;
 
     /**
-     * Default constructor waarbij de parameters de default waarden krijgen.
-     * <p>
-     * De default parameters zijn terug te vinden in MovementComponent en LivableComponent.
-     *
-     * @see MovementComponent
-     * @see LivableComponent
-     */
-    public ABigEnemyEntity() {
-        this.movementComponent = new MovementComponent();
-        this.livableComponent = new LivableComponent();
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param movementComponent De locatie en dimensie van de entiteit (in graphics-coordinates) met zijn snelheid en versnelling.

@@ -62,7 +62,7 @@ public abstract class AInputController implements IInput {
     }
 
     /**
-     * Zal de right variabelen plaatsen op de mee gegeven state.
+     * Zal de "right" variabelen plaatsen op de mee gegeven state.
      *
      * @param right wat de nieuwe waarden wordt voor right als boolean.
      */

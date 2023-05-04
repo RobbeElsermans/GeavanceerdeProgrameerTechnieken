@@ -9,10 +9,6 @@ public class BulletC extends ABulletEntity {
 
     private final GraphicsContext gfx;
 
-    public BulletC(GraphicsContext gfx) {
-        this.gfx = gfx;
-    }
-
     public BulletC(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(movementComponent, livableComponent);
         this.gfx = gfx;

@@ -3,7 +3,6 @@ package be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.PositionComponent;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.interfaces.IVisualize;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,29 +30,6 @@ public abstract class AScreenEntity implements IVisualize {
     private final List<ATextEntity> textEntityList;
 
     /**
-     * Default constructor waarbij de parameters de default waarden krijgen.
-     * <p>
-     * De default parameters zijn terug te vinden in PositionComponent.
-     *
-     * @see PositionComponent
-     */
-    public AScreenEntity() {
-        this.positionComponent = new PositionComponent();
-        this.textEntityList = new ArrayList<>();
-    }
-
-    /**
-     * Overload constructor die de entiteit andere parameter waardes kan geven.
-     *
-     * @param positionComponent De locatie (in graphics-coordinates) van de entiteit.
-     * @see PositionComponent
-     */
-    public AScreenEntity(PositionComponent positionComponent) {
-        this.positionComponent = positionComponent;
-        this.textEntityList = new ArrayList<>();
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param positionComponent De positie en dimensie van de entiteit.
@@ -65,23 +41,9 @@ public abstract class AScreenEntity implements IVisualize {
     }
 
     /**
-     * @return De positionComponent van de entiteit.
-     */
-    public PositionComponent getStaticComponent() {
-        return positionComponent;
-    }
-
-    /**
      * @return De textEntityList van het scherm entiteit.
      */
     public List<ATextEntity> getTextEntityList() {
         return textEntityList;
-    }
-
-    /**
-     * @param textEntity Een extra textEntity die getoond moet worden.
-     */
-    public void addTextEntity(ATextEntity textEntity) {
-        this.textEntityList.add(textEntity);
     }
 }

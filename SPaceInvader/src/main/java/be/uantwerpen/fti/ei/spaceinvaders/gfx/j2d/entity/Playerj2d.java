@@ -13,11 +13,6 @@ import java.awt.image.BufferedImage;
 public class Playerj2d extends APlayerEntity {
     private final GraphicsContext gfx;
 
-    public Playerj2d(GraphicsContext gfx) {
-        super();
-        this.gfx = gfx;
-    }
-
     public Playerj2d(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(movementComponent, livableComponent);
         this.gfx = gfx;

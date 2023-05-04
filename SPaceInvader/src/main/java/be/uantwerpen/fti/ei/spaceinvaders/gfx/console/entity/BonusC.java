@@ -8,10 +8,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 public class BonusC extends ABonusEntity {
     private final GraphicsContext gfx;
 
-    public BonusC(GraphicsContext gfx) {
-        this.gfx = gfx;
-    }
-
     public BonusC(MovementComponent movementComponent, CollectableComponent collectableComponent, GraphicsContext gfx) {
         super(movementComponent, collectableComponent);
         this.gfx = gfx;

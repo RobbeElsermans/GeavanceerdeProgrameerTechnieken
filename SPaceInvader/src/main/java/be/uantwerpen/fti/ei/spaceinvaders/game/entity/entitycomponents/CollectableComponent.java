@@ -23,20 +23,6 @@ public class CollectableComponent {
     private double value;
 
     /**
-     * Default constructor waarbij:
-     * <ul>
-     *     <li>type  -> LIFE</li>
-     *     <li>value -> 1</li>
-     * </ul>
-     *
-     * @see CollectableType
-     */
-    public CollectableComponent() {
-        this.type = CollectableType.LIFE;
-        this.value = 1;
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param type  Een specifiek type van collectableType.

@@ -7,9 +7,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.PositionC
 import java.util.List;
 
 public class StartScreenC extends AScreenEntity {
-    public StartScreenC(PositionComponent positionComponent) {
-        super(positionComponent);
-    }
 
     public StartScreenC(PositionComponent positionComponent, List<ATextEntity> textEntities) {
         super(positionComponent, textEntities);

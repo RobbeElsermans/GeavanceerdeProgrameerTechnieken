@@ -1,7 +1,6 @@
 package be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents;
 
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IPosition;
-import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
 
 /**
  * @author Robbe Elsermans
@@ -11,19 +10,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.position.Position;
  */
 public class PositionComponent {
     private final IPosition position;
-
-    /**
-     * Default constructor waarbij:
-     * <ul>
-     *     <li>position  -> [0,0]</li>
-     * </ul>
-     *
-     * @see IPosition
-     * @see PositionComponent#PositionComponent()  PositionComponent
-     */
-    public PositionComponent() {
-        this.position = new Position(0, 0);
-    }
 
     /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.

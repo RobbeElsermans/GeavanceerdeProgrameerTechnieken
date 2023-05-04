@@ -14,18 +14,6 @@ public class InformationComponent {
     private String information;
 
     /**
-     * Default constructor waarbij:
-     * <ul>
-     *     <li>preInfoText  -> ""</li>
-     *     <li>information  -> ""</li>
-     * </ul>
-     */
-    public InformationComponent() {
-        this.preInfoText = "";
-        this.information = "";
-    }
-
-    /**
      * Overload constructor waarbij we een preInfoText kunnen meegeven.
      * <ul>
      *     <li>preInfoText  -> preText</li>

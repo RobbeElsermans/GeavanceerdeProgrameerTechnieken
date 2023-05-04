@@ -18,15 +18,12 @@ public class EntityCleanupSystem {
      * dan is de bullet ergens gebotst of ingeslagen en mag deze verwijderd worden.
      *
      * @param bulletEntityList De ABulletEntity lijst van de bullet entiteiten. Hierin worden de bullets bewaard.
-     * @return True als er een entiteit verwijderd is. Anders false.
      */
-    public static boolean cleanupBullets(List<ABulletEntity> bulletEntityList) {
+    public static void cleanupBullets(List<ABulletEntity> bulletEntityList) {
         if (!bulletEntityList.isEmpty()) {
             bulletEntityList.removeIf(b -> b.getMovementComponent().getVelocity() == 0);  //Als de entiteit ergens is tegen gebotst.
             bulletEntityList.removeIf(b -> b.getLivableComponent().getLife() == 0);       //Als de entiteit ergens is ingeslagen.
-            return true;
         }
-        return false;
     }
 
     /**
@@ -50,13 +47,11 @@ public class EntityCleanupSystem {
      * Wanneer een obstacle een life heeft gekregen van 0, is deze kapot en mag deze verwijderd worden.
      *
      * @param obstacleEntitieList De AObstacleEntity lijst van de obstacle entiteiten. Hierin worden de obstacles bewaard.
-     * @return True als er een entiteit verwijderd is. Anders false.
      */
-    public static boolean cleanupObstacles(List<AObstacleEntity> obstacleEntitieList) {
+    public static void cleanupObstacles(List<AObstacleEntity> obstacleEntitieList) {
         if (!obstacleEntitieList.isEmpty()) {
-            return obstacleEntitieList.removeIf(b -> b.getLivableComponent().getLife() == 0);       //Als de entiteit geen leven meer heeft.
+            obstacleEntitieList.removeIf(b -> b.getLivableComponent().getLife() == 0);       //Als de entiteit geen leven meer heeft.
         }
-        return false;
     }
 
     /**
@@ -82,13 +77,11 @@ public class EntityCleanupSystem {
      * dan is deze ergens gebotst of opgenomen door een entiteit en mag deze verwijderd worden.
      *
      * @param bonusEntityList De ABonusEntity lijst van de bonus entiteiten. Hierin worden de bonussen bewaard.
-     * @return True als er een entiteit verwijderd is. Anders false.
      */
-    public static boolean cleanupBonuses(List<ABonusEntity> bonusEntityList) {
+    public static void cleanupBonuses(List<ABonusEntity> bonusEntityList) {
         if (!bonusEntityList.isEmpty()) {
             bonusEntityList.removeIf(b -> b.getMovementComponent().getVelocity() == 0);         //Als de entiteit ergens is tegen gebotst.
-            return bonusEntityList.removeIf(b -> b.getCollectableComponent().getValue() == 0);  //Als de entiteit collected is.
+            bonusEntityList.removeIf(b -> b.getCollectableComponent().getValue() == 0);  //Als de entiteit collected is.
         }
-        return false;
     }
 }

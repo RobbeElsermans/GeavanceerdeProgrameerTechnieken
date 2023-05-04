@@ -4,7 +4,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.game.entity.abstracts.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.entitycomponents.*;
 import be.uantwerpen.fti.ei.spaceinvaders.game.entity.types.CollectableType;
 import be.uantwerpen.fti.ei.spaceinvaders.game.factory.AFactory;
-import be.uantwerpen.fti.ei.spaceinvaders.game.helper.Random;
 import be.uantwerpen.fti.ei.spaceinvaders.game.inputcontroller.IInput;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.Dimension;
 import be.uantwerpen.fti.ei.spaceinvaders.game.position.IDimension;
@@ -40,11 +39,6 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public APlayerEntity getPlayerEntity() {
-        return new Playerj2d(this.graphicsContext);
-    }
-
-    @Override
     public APlayerEntity getPlayerEntity(IPosition position, int life, double speed, double velocity) {
 
         //Schaal a.d.h.v. de game dimentions
@@ -55,11 +49,6 @@ public class FactoryJ2d extends AFactory {
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new Playerj2d(movementComponent, livableComponent, graphicsContext);
-    }
-
-    @Override
-    public AEnemyEntity getEnemyEntity() {
-        return new EnemyJ2d(this.graphicsContext);
     }
 
     @Override
@@ -75,11 +64,6 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public ABulletEntity getBulletEntity() {
-        return new BulletJ2d(graphicsContext);
-    }
-
-    @Override
     public ABulletEntity getBulletEntity(IPosition position, int life, double speed, double velocity) {
 
         MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBulletDimension(), speed, velocity);
@@ -88,10 +72,6 @@ public class FactoryJ2d extends AFactory {
         return new BulletJ2d(movementComponent, livableComponent, graphicsContext);
     }
 
-    @Override
-    public AObstacleEntity getObstacleEntity() {
-        return new ObstacleJ2d(graphicsContext);
-    }
 
     @Override
     public AObstacleEntity getObstacleEntity(IPosition position, int life) {
@@ -103,11 +83,6 @@ public class FactoryJ2d extends AFactory {
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new ObstacleJ2d(dimensionComponent, livableComponent, graphicsContext);
-    }
-
-    @Override
-    public ABonusEntity getBonusEntity() {
-        return new BonusJ2d(graphicsContext);
     }
 
     @Override
@@ -123,31 +98,6 @@ public class FactoryJ2d extends AFactory {
     }
 
     @Override
-    public ABonusEntity getRandomBonusEntity(IPosition position, double speed, double velocity, int randValueRange) {
-        //Schaal a.d.h.v. de game dimentions
-        position.setX(position.getX() * this.graphicsContext.getTileWidth());
-        position.setY(position.getY() * this.graphicsContext.getTileHeight());
-
-        MovementComponent movementComponent = new MovementComponent(position, this.graphicsContext.getBonusDimension(), speed, velocity);
-        CollectableComponent collectableComponent = new CollectableComponent();
-
-        //Selecteer typen at random a.d.h.v. de totale lengte van de enum
-        int temp = Random.getRandom(CollectableType.values().length - 1);
-        if (temp == 0) {
-            collectableComponent = new CollectableComponent(CollectableType.LIFE, (Random.getRandom(randValueRange)));
-        } else if (temp == 1) {
-            collectableComponent = new CollectableComponent(CollectableType.BULLET_SPEED, (Random.getRandom(randValueRange)));
-        }
-        return new BonusJ2d(movementComponent, collectableComponent, graphicsContext);
-    }
-
-    @Override
-    public ABigEnemyEntity getBigEnemyEntity() {
-        return new BigEnemyJ2D(graphicsContext);
-    }
-
-
-    @Override
     public ABigEnemyEntity getBigEnemyEntity(IPosition position, int life, double speed, double velocity) {
         //Schaal a.d.h.v. de game dimentions
         position.setX(position.getX() * this.graphicsContext.getTileWidth());
@@ -157,22 +107,6 @@ public class FactoryJ2d extends AFactory {
         LivableComponent livableComponent = new LivableComponent(life);
 
         return new BigEnemyJ2D(movementComponent, livableComponent, graphicsContext);
-    }
-
-    @Override
-    public ATextEntity getTextEntity() {
-        return new TextJ2d(graphicsContext);
-    }
-
-    @Override
-    public ATextEntity getTextEntity(IPosition pos, String preText) {
-        //Schaal a.d.h.v. de game dimentions
-        pos.setX(pos.getX() * this.graphicsContext.getTileWidth());
-        pos.setY(pos.getY() * this.graphicsContext.getTileHeight());
-
-        PositionComponent positionComponent = new PositionComponent(pos);
-
-        return new TextJ2d(positionComponent, preText, graphicsContext);
     }
 
     @Override

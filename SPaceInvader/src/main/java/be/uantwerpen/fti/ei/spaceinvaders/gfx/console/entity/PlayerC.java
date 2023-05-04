@@ -9,10 +9,6 @@ import be.uantwerpen.fti.ei.spaceinvaders.gfx.console.GraphicsContext;
 public class PlayerC extends APlayerEntity {
     private final GraphicsContext gfx;
 
-    public PlayerC(GraphicsContext gfx) {
-        this.gfx = gfx;
-    }
-
     public PlayerC(MovementComponent movementComponent, LivableComponent livableComponent, GraphicsContext gfx) {
         super(movementComponent, livableComponent);
         this.gfx = gfx;

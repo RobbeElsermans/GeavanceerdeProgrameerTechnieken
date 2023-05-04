@@ -46,21 +46,47 @@ public class GfxConfig {
     /**
      * De plaats van de sprite foto
      */
-    private String spritePicture;
+    private final String spritePicture;
 
     /**
      * De dimensies van de sprites
      */
-    private IDimension enemy1Sprite1Dim, enemy1Sprite2Dim, bigEnemy1Sprite1Dim, bulletPlayer1Sprite1Dim, bulletEnemy1Sprite1Dim, bulletEnemy1Sprite2Dim, bonus1Sprite1Dim, obstacle1Sprite1Dim, obstacle1Sprite2Dim, obstacle1Sprite3Dim, player1Sprite1Dim;
+    private final IDimension enemy1Sprite1Dim;
+    private final IDimension enemy1Sprite2Dim;
+    private final IDimension bigEnemy1Sprite1Dim;
+    private final IDimension bulletPlayer1Sprite1Dim;
+    private final IDimension bulletEnemy1Sprite1Dim;
+    private final IDimension bulletEnemy1Sprite2Dim;
+    private final IDimension bonus1Sprite1Dim;
+    private final IDimension obstacle1Sprite1Dim;
+    private final IDimension obstacle1Sprite2Dim;
+    private final IDimension obstacle1Sprite3Dim;
+    private final IDimension player1Sprite1Dim;
     /**
      * De posities van de sprites
      */
-    private IPosition enemy1Sprite1Pos, enemy1Sprite2Pos, bigEnemy1Sprite1Pos, bulletPlayer1Sprite1Pos, bulletEnemy1Sprite1Pos, bulletEnemy1Sprite2Pos, bonus1Sprite1Pos, obstacle1Sprite1Pos, obstacle1Sprite2Pos, obstacle1Sprite3Pos, player1Sprite1Pos;
+    private final IPosition enemy1Sprite1Pos;
+    private final IPosition enemy1Sprite2Pos;
+    private final IPosition bigEnemy1Sprite1Pos;
+    private final IPosition bulletPlayer1Sprite1Pos;
+    private final IPosition bulletEnemy1Sprite1Pos;
+    private final IPosition bulletEnemy1Sprite2Pos;
+    private final IPosition bonus1Sprite1Pos;
+    private final IPosition obstacle1Sprite1Pos;
+    private final IPosition obstacle1Sprite2Pos;
+    private final IPosition obstacle1Sprite3Pos;
+    private final IPosition player1Sprite1Pos;
 
     /**
      * De locaties van het geluid
      */
-    private String soundPlayerDead, soundEnemyDead, soundPlayerShoot, soundEnemyShoot, soundBigEnemyPopup, soundBonusPopup, soundBackgroundMusic;
+    private final String soundPlayerDead;
+    private final String soundEnemyDead;
+    private final String soundPlayerShoot;
+    private final String soundEnemyShoot;
+    private final String soundBigEnemyPopup;
+    private final String soundBonusPopup;
+    private final String soundBackgroundMusic;
 
     /**
      * De constructor zal de waardes uit een bestand kunnen halen. Als het bestand niet bestaat, wordt dit met default parameters gedaan.

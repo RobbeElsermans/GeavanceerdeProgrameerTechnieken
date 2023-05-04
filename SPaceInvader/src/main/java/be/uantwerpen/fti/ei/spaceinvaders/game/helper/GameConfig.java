@@ -13,18 +13,22 @@ public class GameConfig {
      * <p>
      * Deze is te vinden in <i>game_config.txt</i>
      */
-    private IDimension gameSize;
+    private final IDimension gameSize;
 
     /**
      * De tile dimensies van de entiteiten.
      */
-    private IDimension playerDimension, enemyDimension, obstacleDimension, bigEnemyDimension, bonusDimension;
+    private final IDimension playerDimension;
+    private final IDimension enemyDimension;
+    private final IDimension obstacleDimension;
+    private final IDimension bigEnemyDimension;
+    private final IDimension bonusDimension;
     /**
      * De genomen FPS (Frames per second).
      * <p>
      * Deze is te vinden in <i>game_config.txt</i>
      */
-    private int fps = 40;
+    private final int fps;
 
     /**
      * De constructor zal de waardes uit een bestand kunnen halen. Als het bestand niet bestaat, wordt dit met default parameters gedaan.

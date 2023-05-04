@@ -28,19 +28,6 @@ public abstract class AObstacleEntity implements IVisualize {
     private final LivableComponent livableComponent;
 
     /**
-     * Default constructor waarbij de parameters de default waarden krijgen.
-     * <p>
-     * De default parameters zijn terug te vinden in DimensionComponent, LivableComponent.
-     *
-     * @see DimensionComponent
-     * @see LivableComponent
-     */
-    public AObstacleEntity() {
-        this.dimensionComponent = new DimensionComponent();
-        this.livableComponent = new LivableComponent();
-    }
-
-    /**
      * Overload constructor die de entiteit andere parameter waardes kan geven.
      *
      * @param dimensionComponent De locatie en dimensie van de entiteit (in graphics-coordinates).
