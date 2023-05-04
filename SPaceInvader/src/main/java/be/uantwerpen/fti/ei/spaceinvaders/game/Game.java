@@ -140,7 +140,6 @@ public class Game {
      * Overload constructor om het spel te initialiseren met de meegegeven parameters.
      * <p>
      * Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
-     * <p>
      *
      * @param aFactory       Een GFX-factory om de zaak te tonen.
      * @param configFilePath Het configuratiebestand waarin verschillende parameters staan.

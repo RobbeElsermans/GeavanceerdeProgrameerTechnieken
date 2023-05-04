@@ -24,9 +24,10 @@ public class FactoryConsole extends AFactory {
 
     /**
      * Initializeer Java2D met gegeven configuratie bestand.
+     * <p>
+     * Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      *
      * @param configFilePath Deze bevat de locatie van het configuratiebestand.
-     * @description Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
     public FactoryConsole(String configFilePath) {
         this.configFilePath = configFilePath;

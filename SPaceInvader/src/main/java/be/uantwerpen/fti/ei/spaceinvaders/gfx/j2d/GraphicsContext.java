@@ -55,10 +55,11 @@ public class GraphicsContext {
 
     /**
      * Overload constructor om een GraphicsContext aan te maken met gegeven parameters.
+     * <p>
+     * Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      *
      * @param gameDimension De game dimensie gegeven door Game.
      * @param configFile    Het configuratiebestand waarin verschillende properties staan die we gebruiken.
-     * @implNote Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
     public GraphicsContext(IDimension gameDimension, String configFile) {
         //get settings from file
@@ -90,9 +91,10 @@ public class GraphicsContext {
 
     /**
      * Een methode die al de parameters ophaalt van het meegegeven bestand.
+     * <p>
+     * Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      *
      * @param configFilePath De locatie van het configuratiebestand.
-     * @description Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
     private void getSettings(String configFilePath) {
         gfxConfig = new GfxConfig(configFilePath);

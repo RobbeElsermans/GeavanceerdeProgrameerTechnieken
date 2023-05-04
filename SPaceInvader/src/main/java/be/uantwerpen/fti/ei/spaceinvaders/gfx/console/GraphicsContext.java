@@ -47,9 +47,10 @@ public class GraphicsContext {
 
     /**
      * Een methode die al de parameters ophaalt van het meegegeven bestand.
+     * <p>
+     * Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      *
      * @param configFilePath De locatie van het configuratiebestand.
-     * @description Als het configuratie bestand niet bestaat in het opgegeven pad, zal dit zichzelf genereren met default waarden.
      */
     private void getSettings(String configFilePath) {
         gfxConfig = new GfxConfig(configFilePath);
